@@ -1,0 +1,24 @@
+[
+{"id":"OOINC", "Obiettivo":"Oggetto", "Centro1":"Inchiostro", "Centro2":"Inchiostro", "Requisito":"2", "Punti":"2"},
+{"id":"OOPER", "Obiettivo":"Oggetto", "Centro1":"Pergamena", "Centro2":"Pergamena", "Requisito":"2", "Punti":"2"},
+{"id":"OOPIU", "Obiettivo":"Oggetto", "Centro1":"Piuma", "Centro2":"Piuma", "Requisito":"2", "Punti":"2"},
+{"id":"OOIPP", "Obiettivo":"Oggetto", "Centro1":"Inchiostro", "Centro2":"Pergamena", "Centro3":"Piuma", "Requisito":"3", "Punti":"3"},
+
+{"id":"ORANI", "Obiettivo":"Risorsa", "Risorsa":"Regno_Animale", "Centro1":"Regno_Animale", "Centro2":"Regno_Animale", "Centro3":"Regno_Animale", "Requisito":"3", "Punti":"3"},
+{"id":"ORFUN", "Obiettivo":"Risorsa", "Risorsa":"Regno_Funghi", "Centro1":"Regno_Funghi", "Centro2":"Regno_Funghi", "Centro3":"Regno_Funghi", "Requisito":"3", "Punti":"3"},
+{"id":"ORINS", "Obiettivo":"Risorsa", "Risorsa":"Regno_Insetti", "Centro1":"Regno_Insetti", "Centro2":"Regno_Insetti", "Centro3":"Regno_Insetti", "Requisito":"3", "Punti":"3"},
+{"id":"ORVEG", "Obiettivo":"Risorsa", "Risorsa":"Regno_Vegetale", "Centro1":"Regno_Vegetale", "Centro2":"Regno_Vegetale", "Centro3":"Regno_Vegetale", "Requisito":"3", "Punti":"3"},
+
+{"id":"ODFUN", "Obiettivo":"Disposizione", "Risorsa":"Regno_Funghi", "Angoli1":"ADX-BSX", "Angoli2":"ADX-BSX", "Punti":"2"},
+{"id":"ODANI", "Obiettivo":"Disposizione", "Risorsa":"Regno_Animale", "Angoli1":"ADX-BSX", "Angoli2":"ADX-BSX", "Punti":"2"},
+{"id":"ODVEG", "Obiettivo":"Disposizione", "Risorsa":"Regno_Vegetale", "Angoli1":"ASX-BDX", "Angoli2":"ASX-BDX", "Punti":"2"},
+{"id":"ODINS", "Obiettivo":"Disposizione", "Risorsa":"Regno_Insetti", "Angoli1":"ASX-BDX", "Angoli2":"ASX-BDX", "Punti":"2"},
+
+{"id":"ODRV1", "Obiettivo":"Disposizione", "Risorsa":"Regno_Funghi", "Regno_carta1":"Regno_Funghi", "Regno_carta2":"Regno_Funghi", "Regno_carta3":"Regno_Vegetale", "Requisito":"FFV", "Punti":"3"},
+{"id":"ODVV1", "Obiettivo":"Disposizione", "Risorsa":"Regno_Vegetale", "Regno_carta1":"Regno_Vegetale", "Regno_carta2":"Regno_Vegetale", "Regno_carta3":"Regno_Insetti", "Requisito":"VVI", "Punti":"3"},
+{"id":"ODRV1", "Obiettivo":"Disposizione", "Risorsa":"Regno_Animale", "Regno_carta1":"Regno_Animale", "Regno_carta2":"Regno_Animale", "Regno_carta3":"Regno_Funghi", "Requisito":"AAF", "Punti":"3"},
+{"id":"ODRV1", "Obiettivo":"Disposizione", "Risorsa":"Regno_Insetti", "Regno_carta1":"Regno_Insetti", "Regno_carta2":"Regno_Insetti", "Regno_carta3":"Regno_Animale", "Requisito":"IIA", "Punti":"3"}
+
+]
+
+

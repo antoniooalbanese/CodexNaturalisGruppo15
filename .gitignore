@@ -1,0 +1,5 @@
+target/
+*.launch
+.cache-main
+.scala_dependencies
+.worksheet
