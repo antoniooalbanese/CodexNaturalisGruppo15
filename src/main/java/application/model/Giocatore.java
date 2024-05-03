@@ -72,7 +72,7 @@ public class Giocatore {
 		this.punteggio = 0;
 		this.mano = null;
 		this.board = null;
-}
+	}
 	
 	/**
 	 * Questo metodo ritorna l'id del giocatore.
