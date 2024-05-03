@@ -7,10 +7,6 @@ import java.util.ArrayList;
  */
 public class CartaIniziale extends Carta{
 	/**
-	 * Questo attributo descrive a quale dei 4 regni appartiene la carta iniziale.
-	 */
-	private Regno regno;
-	/**
 	 * Attributo che descrive la risorsa o le risorse che si trovano al centro 
 	 * della carta nel caso in cui si mostri il retro di quest'ultima.
 	 */
