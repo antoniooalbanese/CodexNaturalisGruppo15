@@ -41,6 +41,16 @@ public class CampoDiGioco {
 	 */
 	private ArrayList<CartaObiettivo> obiettivo = new ArrayList<CartaObiettivo>(2);
 	
+	/**
+	 * Costruttore della classe.
+	 * @param giocatore
+	 * @param mazzoR
+	 * @param risorsa
+	 * @param mazzoO
+	 * @param oro
+	 * @param mazzoOb
+	 * @param obiettivo
+	 */
 	public CampoDiGioco(ArrayList<Giocatore> giocatore, MazzoRisorsa mazzoR,
 						ArrayList<CartaRisorsa> risorsa, MazzoOro mazzoO,
 						ArrayList<CartaOro> oro, MazzoObiettivo mazzoOb,
