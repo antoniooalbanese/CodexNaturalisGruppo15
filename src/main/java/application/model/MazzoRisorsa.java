@@ -18,8 +18,10 @@ public class MazzoRisorsa {
 		this.mazzo = mazzo;
 	}
 	
+	
 	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.
 	 */
+	
 }

@@ -9,7 +9,6 @@
     {"id": "RBLU08", "Risorsa":"Regno_Animale", "ADX":"Regno_Animale", "BDX":"Pergamena", "BSX":"AngoloNascosto", "ASX":"Regno_Vegetale" },
     {"id": "RBLU09", "Risorsa":"Regno_Animale", "ADX":"Regno_Insetti", "BDX":"Regno_Animale",  "BSX":"Inchiostro", "ASX":"AngoloNascosto" },
     {"id": "RBLU10", "Risorsa":"Regno_Animale", "ADX":"AngoloNascosto", "BDX":"Regno_Funghi",  "BSX":"Regno_Animale", "ASX":"Piuma" },
-
     {"id": "RVRD01", "Risorsa":"Regno_Vegetale", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"Regno_Vegetale", "ASX":"vuoto", "Punti":"1" },
     {"id": "RVRD02", "Risorsa":"Regno_Vegetale", "ADX":"Regno_Vegetale", "BDX":"vuoto", "BSX":"vuoto", "ASX":"AngoloNascosto", "Punti":"1" },
     {"id": "RVRD03", "Risorsa":"Regno_Vegetale", "ADX":"vuoto",  "BDX":"vuoto", "BSX":"Regno_Vegetale", "ASX":"AngoloNascosto", "Punti":"1" },
@@ -20,7 +19,6 @@
     {"id": "RVRD08", "Risorsa":"Regno_Vegetale", "ADX":"Regno_Insetti",  "BDX":"Regno_Vegetale", "BSX":"Piuma", "ASX":"AngoloNascosto" },
     {"id": "RVRD09", "Risorsa":"Regno_Vegetale", "ADX":"AngoloNascosto",  "BDX":"Regno_Animale", "BSX":"Regno_Vegetale", "ASX":"Pergamena" },
     {"id": "RVRD10", "Risorsa":"Regno_Vegetale", "ADX":"Regno_Vegetale",  "BDX":"Inchiostro", "BSX":"AngoloNascosto", "ASX":"Regno_Funghi"},
-    
     {"id": "RVL01", "Risorsa":"Regno_Insetti", "ADX":"vuoto", "BDX":"Regno_Insetti", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"1" },
     {"id": "RVL02", "Risorsa":"Regno_Insetti", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"Regno_Insetti", "Punti":"1" },
     {"id": "RVL03", "Risorsa":"Regno_Insetti", "ADX":"Regno_Insetti", "BDX":"vuoto", "BSX":"vuoto", "ASX":"AngoloNascosto", "Punti":"1" },
@@ -31,7 +29,6 @@
     {"id": "RVL08", "Risorsa":"Regno_Insetti", "ADX":"Piuma", "BDX":"Regno_Insetti", "BSX":"Regno_Animale", "ASX":"AngoloNascosto" },
     {"id": "RVL09", "Risorsa":"Regno_Insetti", "ADX":"Regno_Insetti",  "BDX":"Regno_Funghi", "BSX":"AngoloNascosto", "ASX":"Pergamena" },
     {"id": "RVL10", "Risorsa":"Regno_Insetti", "ADX":"Regno_Vegetale", "BDX":"AngoloNascosto", "BSX":"Inchiostro", "ASX":"Regno_Insetti" },
-
     {"id": "RRSS01", "Risorsa":"Regno_Funghi", "ADX":"Regno_Funghi",  "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"1" },
     {"id": "RRSS02", "Risorsa":"Regno_Funghi", "ADX":"vuoto", "BDX":"vuoto", "BSX":"Regno_Funghi", "ASX":"AngoloNascosto", "Punti":"1" },
     {"id": "RRSS03", "Risorsa":"Regno_Funghi", "ADX":"AngoloNascosto",  "BDX":"vuoto", "BSX":"vuoto", "ASX":"Regno_Funghi", "Punti":"1" },
@@ -47,5 +44,4 @@
     {"id":"RRVRD", "Risorsa":"Regno_Vegetale","Centro":"Regno_Vegetale","ADX":"vuoto",  "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto" },
     {"id":"RRVL", "Risorsa":"Regno_Insetti","Centro":"Regno_Insetti","ADX":"vuoto",  "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto" },
     {"id":"RRRSS", "Risorsa":"Regno_Funghi","Centro":"Regno_Funghi","ADX":"vuoto",  "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto" }
-
 ]
