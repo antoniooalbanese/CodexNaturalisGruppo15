@@ -34,7 +34,7 @@ public class MazzoOro {
         ArrayList<CartaOro> oro = new ArrayList<CartaOro>();
 
         try (FileReader reader = new FileReader(filename)){
-            Type listType = new TypeToken<ArrayList<CartaRisorsa>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<CartaOro>>(){}.getType();
             oro = gson.fromJson(reader, listType);
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class MazzoOro {
         return oro;
 	}
 
-	}
+}
 	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.
