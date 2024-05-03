@@ -47,3 +47,5 @@ public class Angolo {
 		this.link = link;
 	}
 }
+
+//ciao
