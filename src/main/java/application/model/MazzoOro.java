@@ -42,9 +42,10 @@ public class MazzoOro {
         
         return oro;
 	}
-
-}
+	
 	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.
 	 */
+}
+	
