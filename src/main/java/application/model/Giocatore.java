@@ -56,4 +56,30 @@ public class Giocatore {
 		this.board = board;
 	}
 	
+	/**
+	 * Costruttore della classe Giocatore quando il giocatore inizia la partita.
+	 * @param id
+	 * @param nick
+	 * @param pedina
+	 * @param inizio
+	 */
+	public Giocatore(String id, String nick, Pedina pedina,
+			 Pedina inizio) {
+		this.id = id;
+		this.nick = nick;
+		this.pedina = pedina;
+		this.inizio = inizio;
+		this.punteggio = 0;
+		this.mano = null;
+		this.board = null;
+}
+	
+	/**
+	 * Questo metodo ritorna l'id del giocatore.
+	 * @return
+	 */
+	public String getId() {
+		return this.id;
+	}
+	
 }
