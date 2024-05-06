@@ -56,4 +56,5 @@ public class Board {
 		this.num_ris = null;
 		this.num_ogg = null;
 	}
+	
 }
