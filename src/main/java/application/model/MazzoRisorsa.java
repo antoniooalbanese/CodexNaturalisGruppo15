@@ -15,12 +15,17 @@ public class MazzoRisorsa {
 	 * Lista di carte risorsa.
 	 */
 	ArrayList<CartaRisorsa> mazzo = new ArrayList<CartaRisorsa>(40);
+	/**
+	 * Numero di carte rimamenti nel mazzo risorsa.
+	 */
+	private int rimanenti;
 	
 	/**
 	 * Costruttore della classe, inizializzando il mazzo vuoto.
 	 */
 	public MazzoRisorsa(ArrayList<CartaRisorsa> mazzo) {
 		this.mazzo = null;
+		this.rimanenti = 40;
 	}
 
 	/**

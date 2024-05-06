@@ -8,10 +8,6 @@ import java.util.ArrayList;
  */
 public class Board {
 	/**
-	 * Identificativo del giocatore a cui è associata la board.
-	 */
-	private String id;
-	/**
 	 * Carta iniziale posseduta e piazzata da un giocatore.
 	 */
 	private CartaIniziale centro;
@@ -28,22 +24,36 @@ public class Board {
 	 * il giocatore soddisfa dona a quest'ultimo i punti indicata sulla carta. 
 	 */
 	private CartaObiettivo obiettivo;
+	/**
+	 * Numero di turni giocati dal giocatore.
+	 */
+	private int turno;
+	/**
+	 * Punteggio attribuito al giocatore.
+	 */
+	private int punteggio;
+	/**
+	 * Lista contenente il numero di ogni risorsa presente sulla board. 
+	 */
+	private ArrayList<Integer> num_ris = new ArrayList<Integer>();
+	/**
+	 * Lista contenente il numero di ogni oggetto presente sulla board. 
+	 */
+	private ArrayList<Integer> num_ogg = new ArrayList<Integer>();
 	
 	/**
 	 * Costruttore della classe.
-	 * @param id
 	 * @param centro
-	 * @param risorsa
-	 * @param oro
 	 * @param obiettivo
 	 */
-	public Board(String id, CartaIniziale centro, 
-				 ArrayList<CartaRisorsa> risorsa, ArrayList<CartaOro> oro,
-				 CartaObiettivo obiettivo) {
-		this.id = id;
+	public Board(CartaIniziale centro, CartaObiettivo obiettivo) {
 		this.centro = centro;
-		this.risorsa = risorsa;
-		this.oro = oro;
+		this.risorsa = null;
+		this.oro = null;
 		this.obiettivo = obiettivo;
+		this.turno = 0;
+		this.punteggio = 0;
+		this.num_ris = null;
+		this.num_ogg = null;
 	}
 }

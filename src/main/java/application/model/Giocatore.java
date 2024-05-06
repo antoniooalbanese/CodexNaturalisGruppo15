@@ -14,10 +14,6 @@ public class Giocatore {
 	 */
 	private String nick;
 	/**
-	 * Punteggio attribuito al giocatore.
-	 */
-	private int punteggio;
-	/**
 	 * Pedina del colore scelto dal giocatore.
 	 */
 	private Pedina pedina;
@@ -34,28 +30,7 @@ public class Giocatore {
 	 * sul campo di gioco.
 	 */
 	private Board board;
-	
-	/**
-	 * Costruttore della classe.
-	 * @param id
-	 * @param nick
-	 * @param punteggio
-	 * @param pedina
-	 * @param inizio
-	 * @param mano
-	 * @param board
-	 */
-	public Giocatore(String id, String nick, int punteggio, Pedina pedina,
-					 Pedina inizio, Mano mano, Board board) {
-		this.id = id;
-		this.nick = nick;
-		this.punteggio = punteggio;
-		this.pedina = pedina;
-		this.inizio = inizio;
-		this.mano = mano;
-		this.board = board;
-	}
-	
+		
 	/**
 	 * Costruttore della classe Giocatore quando il giocatore inizia la partita.
 	 * @param id
@@ -69,7 +44,6 @@ public class Giocatore {
 		this.nick = nick;
 		this.pedina = pedina;
 		this.inizio = inizio;
-		this.punteggio = 0;
 		this.mano = null;
 		this.board = null;
 	}
