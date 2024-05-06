@@ -19,15 +19,11 @@ public class Obiettivo {
 	 */
 	private ArrayList<Oggetto> oggetto = new ArrayList<Oggetto>();
 	/**
-	 * Matrice contenente la disposizione, quando questa è una diagonale, che 
-	 * deve essere soddisfatta per raggiungere l'obiettivo.
+	 * Matrice contenente la disposizione che deve essere soddisfatta 
+	 * per raggiungere l'obiettivo.
 	 */
-	private Regno[][] diag = new Regno[3][3];
-	/**
-	 * Matrice contenente la disposizione, quando questa è una "elle", che 
-	 * deve essere soddisfatta per raggiungere l'obiettivo.
-	 */
-	private Regno[][] elle = new Regno[3][2];
+	private Regno[][] disposizione = new Regno[3][3];
+
 	
 	/**
 	 * Costruttore della classe quando l'obiettivo da raggiungere riguarda il 
@@ -39,8 +35,7 @@ public class Obiettivo {
 		this.tipo = tipo;
 		this.risorsa = risorsa;
 		this.oggetto = null;
-		this.diag = null;
-		this.elle = null;
+		this.disposizione = null;
 	}
 	
 	/**
@@ -53,8 +48,7 @@ public class Obiettivo {
 		this.tipo = tipo;
 		this.risorsa = null;
 		this.oggetto = oggetto;
-		this.diag = null;
-		this.elle = null;
+		this.disposizione = null;
 	}
 	
 	/**
@@ -64,12 +58,11 @@ public class Obiettivo {
 	 * @param tipo
 	 * @param diag
 	 */
-	public Obiettivo(TipoObiettivo tipo, Regno[][] diag) {
+	public Obiettivo(TipoObiettivo tipo, Regno[][] disposizione) {
 		this.tipo = tipo;
 		this.risorsa = null;
 		this.oggetto = null;
-		this.diag = diag;
-		this.elle = null;
+		this.disposizione = disposizione;
 	}
 
 }
