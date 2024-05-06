@@ -52,7 +52,7 @@ public class Punto {
 	
 	/**
 	 * Costruttore della classe quando il tipo di punteggio è del tipo che viene 
-	 * assegnato controllando il numero di un determianto oggetto.
+	 * assegnato controllando la quantità di un determinato oggetto.
 	 * @param tipo
 	 * @param somma
 	 * @param oggetto
