@@ -9,7 +9,7 @@
 {"id":"ORINS", "Obiettivo":"Risorsa", "Risorsa":"Regno_Insetti", "Centro1":"Regno_Insetti", "Centro2":"Regno_Insetti", "Centro3":"Regno_Insetti", "Requisito":"3", "Punti":"3"},
 {"id":"ORVEG", "Obiettivo":"Risorsa", "Risorsa":"Regno_Vegetale", "Centro1":"Regno_Vegetale", "Centro2":"Regno_Vegetale", "Centro3":"Regno_Vegetale", "Requisito":"3", "Punti":"3"},
 
-{"id":"ODFUN", "Obiettivo":"Disposizione", "Risorsa":"Regno_Funghi", "Angoli1":"ADX-BSX", "Angoli2":"ADX-BSX", "Punti":"2"},
+{"id":"ODFUN", "tipo":"DISPOSIZIONE","disposizione":[["null","null","FUNGHI"],["null","FUNGHI","null"],["FUNGHI","null","null"]], "punto":"2"},
 {"id":"ODANI", "Obiettivo":"Disposizione", "Risorsa":"Regno_Animale", "Angoli1":"ADX-BSX", "Angoli2":"ADX-BSX", "Punti":"2"},
 {"id":"ODVEG", "Obiettivo":"Disposizione", "Risorsa":"Regno_Vegetale", "Angoli1":"ASX-BDX", "Angoli2":"ASX-BDX", "Punti":"2"},
 {"id":"ODINS", "Obiettivo":"Disposizione", "Risorsa":"Regno_Insetti", "Angoli1":"ASX-BDX", "Angoli2":"ASX-BDX", "Punti":"2"},
