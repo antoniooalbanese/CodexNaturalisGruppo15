@@ -64,5 +64,9 @@ public class Obiettivo {
 		this.oggetto = null;
 		this.disposizione = disposizione;
 	}
+	
+	public Regno[][] getDisposizione() {
+		return this.disposizione;
+	}
 
 }
