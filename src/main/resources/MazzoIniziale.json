@@ -1,14 +1,14 @@
 [
-	{"id":"IF01", "centro":"INSETTI","ADX":"VEGETALE","BDX":"VUOTO","BSX":"INSETTI","ASX":"VUOTO"},
-	{"id":"IF02", "centro":"FUNGHI","ADX":"VUOTO","BDX":"FUNGHI","BSX":"VUOTO","ASX":"ANIMALE"},
-	{"id":"IF03", "centro":["VEGETALE","FUNGHI"],"ADX":"VUOTO","BDX":"VUOTO","BSX":"VUOTO","ASX":"VUOTO"},
-	{"id":"IF04", "centro":["ANIMALE","INSETTI"],"ADX":"VUOTO","BDX":"VUOTO","BSX":"VUOTO","ASX":"VUOTO"},
-	{"id":"IF05", "centro":["ANIMALE","INSETTI","VEGETALE"],"ADX":"VUOTO","BDX":"NASCOSTO","BSX":"NASCOSTO","ASX":"VUOTO"},
-	{"id":"IF06", "centro":["VEGETALE","ANIMALE","FUNGHI"],"ADX":"VEGETALE","BDX":"VUOTO","BSX":"INSETTI","ASX":"VUOTO"},
-	{"id":"IR01", "centro":"null","ADX":"VEGETALE","BDX":"ANIMALE","BSX":"INSETTI","ASX":"FUNGHI"},
-	{"id":"IR02", "centro":"null","ADX":"ANIMALE","BDX":"INSETTI","BSX":"FUNGHI","ASX":"VEGETALE"},
-	{"id":"IR03", "centro":"null","ADX":"ANIAMLE","BDX":"VEGETALE","BSX":"FUNGHI","ASX":"INSETTI"},
-	{"id":"IR04", "centro":"null","ADX":"INSETTI","BDX":"FUNGHI","BSX":"ANIMALE","ASX":"VEGETALE"},
-	{"id":"IR05", "centro":"null","ADX":"FUNGHI","BDX":"ANIMALE","BSX":"VEGETALE","ASX":"INSETTI"},
-	{"id":"IR06", "centro":"null","ADX":"ANIMALE","BDX":"INSETTI","BSX":"VEGETALE","ASX":"FUNGHI"}
+	{"id":"IF001", "centro":"INSETTI","ADX":"VEGETALE","BDX":"VUOTO","BSX":"INSETTI","ASX":"VUOTO"},
+	{"id":"IF002", "centro":"FUNGHI","ADX":"VUOTO","BDX":"FUNGHI","BSX":"VUOTO","ASX":"ANIMALE"},
+	{"id":"IF003", "centro":["VEGETALE","FUNGHI"],"ADX":"VUOTO","BDX":"VUOTO","BSX":"VUOTO","ASX":"VUOTO"},
+	{"id":"IF004", "centro":["ANIMALE","INSETTI"],"ADX":"VUOTO","BDX":"VUOTO","BSX":"VUOTO","ASX":"VUOTO"},
+	{"id":"IF005", "centro":["ANIMALE","INSETTI","VEGETALE"],"ADX":"VUOTO","BDX":"NASCOSTO","BSX":"NASCOSTO","ASX":"VUOTO"},
+	{"id":"IF006", "centro":["VEGETALE","ANIMALE","FUNGHI"],"ADX":"VEGETALE","BDX":"VUOTO","BSX":"INSETTI","ASX":"VUOTO"},
+	{"id":"IR001", "centro":"null","ADX":"VEGETALE","BDX":"ANIMALE","BSX":"INSETTI","ASX":"FUNGHI"},
+	{"id":"IR002", "centro":"null","ADX":"ANIMALE","BDX":"INSETTI","BSX":"FUNGHI","ASX":"VEGETALE"},
+	{"id":"IR003", "centro":"null","ADX":"ANIAMLE","BDX":"VEGETALE","BSX":"FUNGHI","ASX":"INSETTI"},
+	{"id":"IR004", "centro":"null","ADX":"INSETTI","BDX":"FUNGHI","BSX":"ANIMALE","ASX":"VEGETALE"},
+	{"id":"IR005", "centro":"null","ADX":"FUNGHI","BDX":"ANIMALE","BSX":"VEGETALE","ASX":"INSETTI"},
+	{"id":"IR006", "centro":"null","ADX":"ANIMALE","BDX":"INSETTI","BSX":"VEGETALE","ASX":"FUNGHI"}
 ]
