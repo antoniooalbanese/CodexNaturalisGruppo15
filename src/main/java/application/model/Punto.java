@@ -14,10 +14,6 @@ public class Punto {
 	 */
 	private int somma;
 	/**
-	 * Contatore che indica il numero di angoli coperti dalla carta;
-	 */
-	private Boolean coperto;
-	/**
 	 * Attributo che indica l'oggetto da contare per ottenere il punteggio della 
 	 * carta.
 	 */
@@ -25,28 +21,14 @@ public class Punto {
 	
 	/**
 	 * Costruttore della classe quando il tipo di punteggio è del tipo che viene 
-	 * assegnato immediatamente senza dover fare controlli.
+	 * assegnato immediatamente senza dover fare controlli oppure quando è del tipo
+	 * che viene assegnato controllando il numero di angoli coperti dalla carta.
 	 * @param tipo
 	 * @param somma
 	 */
 	public Punto(TipoPunto tipo, int somma) {
 		this.tipo = tipo;
 		this.somma = somma;
-		this.coperto = false;
-		this.oggetto = null;
-	}
-	
-	/**
-	 * Costruttore della classe quando il tipo di punteggio è del tipo che viene 
-	 * assegnato controllando il numero di angoli coperti dalla carta. 
-	 * @param tipo
-	 * @param somma
-	 * @param coperto
-	 */
-	public Punto(TipoPunto tipo, int somma, Boolean coperto) {
-		this.tipo = tipo;
-		this.somma = somma;
-		this.coperto = coperto;
 		this.oggetto = null;
 	}
 	
@@ -60,7 +42,6 @@ public class Punto {
 	public Punto(TipoPunto tipo, int somma, Oggetto oggetto) {
 		this.tipo = tipo;
 		this.somma = somma;
-		this.coperto = false;
 		this.oggetto = oggetto;
 	}
 }

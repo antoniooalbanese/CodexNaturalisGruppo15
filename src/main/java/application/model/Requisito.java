@@ -10,7 +10,7 @@ public class Requisito {
 	 * Lista di risorse di cui è necessaria la presenza sulla propria board di
 	 * gioco per piazzare una determinata carta.
 	 */
-	private ArrayList<Regno> risorsa = new ArrayList<Regno>(5);
+	private ArrayList<Regno> risorsa = new ArrayList<Regno>();
 	
 	/**
 	 * Costruttore della classe.
