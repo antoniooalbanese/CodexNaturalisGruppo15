@@ -1,53 +1,1470 @@
 [
-{"id":"OVL01", "Oro":"Regno_Funghi", "ADX":"vuoto", "BDX":"Piuma", "BSX":"vuoto", "ASX":"AngoloNascosto", "Punti":"1 piuma", "Requisiti":"xxx"},
-{"id":"OVL02", "Oro":"Regno_Funghi", "ADX":"Inchiostro", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"1 inchiostro", "Requisiti":"xxx"},
-{"id":"OVL03", "Oro":"Regno_Funghi", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"pergamena", "Punti":"1 pergamena", "Requisiti":"xxx"},
-{"id":"OVL04", "Oro":"Regno_Funghi", "ADX":"vuoto", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OVL05", "Oro":"Regno_Funghi", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OVL06", "Oro":"Regno_Funghi", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OVL07", "Oro":"Regno_Funghi", "ADX":"AngoloNascosto", "BDX":"AngoloNascosto", "BSX":"Inchiostro", "ASX":"vuoto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OVL08", "Oro":"Regno_Funghi", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"AngoloNascosto", "ASX":"Piuma", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OVL09", "Oro":"Regno_Funghi", "ADX":"Pergamena", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"AngoloNascosto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OVL10", "Oro":"Regno_Funghi", "ADX":"AngoloNascosto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"5", "Requisiti":"xxx"},
-
-{"id":"OVR01", "Oro":"Regno_Vegetale", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"Piuma", "Punti":"1 piuma", "Requisiti":"xxx"},
-{"id":"OVR02", "Oro":"Regno_Vegetale", "ADX":"Pergamena", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"1 pergamena", "Requisiti":"xxx"},
-{"id":"OVR03", "Oro":"Regno_Vegetale", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"Inchiostro", "ASX":"vuoto", "Punti":"1 inchiostro", "Requisiti":"xxx"},
-{"id":"OVR04", "Oro":"Regno_Vegetale", "ADX":"vuoto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"AngoloNascosto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OVR05", "Oro":"Regno_Vegetale", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OVR06", "Oro":"Regno_Vegetale", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OVR07", "Oro":"Regno_Vegetale", "ADX":"AngoloNascosto", "BDX":"AngoloNascosto", "BSX":"Piuma", "ASX":"vuoto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OVR08", "Oro":"Regno_Vegetale", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"AngoloNascosto", "ASX":"Pergamena", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OVR09", "Oro":"Regno_Vegetale", "ADX":"Inchiostro", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"AngoloNascosto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OVR10", "Oro":"Regno_Vegetale", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"5", "Requisiti":"xxx"},
-
-{"id":"ORS01", "Oro":"Regno_Animale", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"Inchiostro", "Punti":"1 inchiostro", "Requisiti":"xxx"},
-{"id":"ORS02", "Oro":"Regno_Animale", "ADX":"vuoto", "BDX":"Pergamena", "BSX":"vuoto", "ASX":"AngoloNascosto", "Punti":"1 pergamena", "Requisiti":"xxx"},
-{"id":"ORS03", "Oro":"Regno_Animale", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"Piuma", "ASX":"vuoto", "Punti":"1 piuma", "Requisiti":"xxx"},
-{"id":"ORS04", "Oro":"Regno_Animale", "ADX":"vuoto", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"ORS05", "Oro":"Regno_Animale", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"ORS06", "Oro":"Regno_Animale", "ADX":"vuoto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"AngoloNascosto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"ORS07", "Oro":"Regno_Animale", "ADX":"AngoloNascosto", "BDX":"AngoloNascosto", "BSX":"Pergamena", "ASX":"vuoto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"ORS08", "Oro":"Regno_Animale", "ADX":"Inchiostro", "BDX":"AngoloNascosto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"ORS09", "Oro":"Regno_Animale", "ADX":"vuoto", "BDX":"Piuma", "BSX":"AngoloNascosto", "ASX":"AngoloNascosto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"ORS10", "Oro":"Regno_Animale", "ADX":"vuoto", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"AngoloNascosto", "Punti":"5", "Requisiti":"xxx"},
-
-{"id":"OBL01", "Oro":"Regno_Insetti", "ADX":"Piuma", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"1 piuma", "Requisiti":"xxx"},
-{"id":"OBL02", "Oro":"Regno_Insetti", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"Pergamena", "ASX":"vuoto", "Punti":"1 pergamena", "Requisiti":"xxx"},
-{"id":"OBL03", "Oro":"Regno_Insetti", "ADX":"vuoto", "BDX":"Inchiostro", "BSX":"vuoto", "ASX":"AngoloNascosto", "Punti":"1 inchiostro", "Requisiti":"xxx"},
-{"id":"OBL04", "Oro":"Regno_Insetti", "ADX":"vuoto", "BDX":"vuoto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OBL05", "Oro":"Regno_Insetti", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OBL06", "Oro":"Regno_Insetti", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"2 angolo coperto", "Requisiti":"xxx"},
-{"id":"OBL07", "Oro":"Regno_Insetti", "ADX":"AngoloNascosto", "BDX":"AngoloNascosto", "BSX":"vuoto", "ASX":"Inchiostro", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OBL08", "Oro":"Regno_Insetti", "ADX":"Pergamena", "BDX":"AngoloNascosto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OBL09", "Oro":"Regno_Insetti", "ADX":"AngoloNascosto", "BDX":"vuoto", "BSX":"Piuma", "ASX":"AngoloNascosto", "Punti":"3", "Requisiti":"xxx"},
-{"id":"OBL10", "Oro":"Regno_Insetti", "ADX":"vuoto", "BDX":"AngoloNascosto", "BSX":"AngoloNascosto", "ASX":"vuoto", "Punti":"5", "Requisiti":"xxx"},
-
-{"id":"ROVLO", "Oro":"Regno_Funghi", "Centro":"Regno_Funghi", "ADX":"vuoto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"0"},
-{"id":"ROVRD", "Oro":"Regno_Vegetale", "Centro":"Regno_Vegetale","ADX":"vuoto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"0"},
-{"id":"RORSS", "Oro":"Regno_Animale", "Centro":"Regno_Animale","ADX":"vuoto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"0"},
-{"id":"ROBLU", "Oro":"Regno_Insetti", "Centro":"Regno_Insetti","ADX":"vuoto", "BDX":"vuoto", "BSX":"vuoto", "ASX":"vuoto", "Punti":"0"}
-
+    {
+        "id": "ORS01",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BDX",
+                "oggetto": "PIUMA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PIUMA"
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "ORS02",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "OGGETTO",
+                "pos": "ADX",
+                "oggetto": "INCHIOSTRO"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "INCHIOSTRO"
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "ORS03",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "ASX",
+                "oggetto": "PERGAMENA"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PERGAMENA"
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "ORS04",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "ORS05",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "ORS06",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "ORS07",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BSX",
+                "oggetto": "INCHIOSTRO"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "ORS08",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "ASX",
+                "oggetto": "PIUMA"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "ORS09",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "OGGETTO",
+                "pos": "ADX",
+                "oggetto": "PERGAMENA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OVL10",
+        "regno": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 5
+        },
+        "requisito": {
+            "risorsa": [
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OVR01",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "ASX",
+                "oggetto": "PIUMA"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PIUMA"
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "OVR02",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "OGGETTO",
+                "pos": "ADX",
+                "oggetto": "PERGAMENA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PERGAMENA"
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OVR03",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BSX",
+                "oggetto": "INCHIOSTRO"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "INCHIOSTRO"
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OVR04",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "OVR05",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OVR06",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OVR07",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BSX",
+                "oggetto": "PIUMA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OVR08",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "ASX",
+                "oggetto": "PERGAMENA"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OVR09",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "OGGETTO",
+                "pos": "ADX",
+                "oggetto": "INCHIOSTRO"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OVR10",
+        "regno": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 5
+        },
+        "requisito": {
+            "risorsa": [
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OBL01",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "ASX",
+                "oggetto": "INCHIOSTRO"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "INCHIOSTRO"
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "OBL02",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BDX",
+                "oggetto": "PERGAMENA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PERGAMENA"
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OBL03",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BSX",
+                "oggetto": "PIUMA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PIUMA"
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OBL04",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "OBL05",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OBL06",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OBL07",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BSX",
+                "oggetto": "PERGAMENA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OBL08",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "OGGETTO",
+                "pos": "ADX",
+                "oggetto": "INCHIOSTRO"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OBL09",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BDX",
+                "oggetto": "PIUMA"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OBL10",
+        "regno": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 5
+        },
+        "requisito": {
+            "risorsa": [
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OVL01",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BSX",
+                "oggetto": "PERGAMENA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PERGAMENA"
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OVL02",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BDX",
+                "oggetto": "INCHIOSTRO"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "INCHIOSTRO"
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OVL03",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "OGGETTO",
+                "pos": "ADX",
+                "oggetto": "PIUMA"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "OGGETTO",
+            "somma": 1,
+            "oggetto": "PIUMA"
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OVL04",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "INSETTI",
+                "ANIMALE"
+            ]
+        }
+    },
+    {
+        "id": "OVL05",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "INSETTI",
+                "FUNGHI"
+            ]
+        }
+    },
+    {
+        "id": "OVL06",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "ANGOLO",
+            "somma": 2
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "INSETTI",
+                "VEGETALE"
+            ]
+        }
+    },
+    {
+        "id": "OVL07",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "BSX",
+                "oggetto": "PIUMA"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "OVL08",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "OGGETTO",
+                "pos": "ADX",
+                "oggetto": "PERGAMENA"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "OVL09",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "NASCOSTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "OGGETTO",
+                "pos": "ASX",
+                "oggetto": "INCHIOSTRO"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 3
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "OVL10",
+        "regno": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "NASCOSTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ],
+        "punto": {
+            "tipo": "IMMEDIATO",
+            "somma": 5
+        },
+        "requisito": {
+            "risorsa": [
+                "INSETTI",
+                "INSETTI",
+                "INSETTI",
+                "INSETTI",
+                "INSETTI"
+            ]
+        }
+    },
+    {
+        "id": "RORSS",
+        "regno": "FUNGHI",
+        "centro": "FUNGHI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ]
+    },
+    {
+        "id": "ROVRO",
+        "regno": "VEGETALE",
+        "centro": "VEGETALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ]
+    },
+    {
+        "id": "ROBLO",
+        "regno": "ANIMALE",
+        "centro": "ANIMALE",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ]
+    },
+    {
+        "id": "ROVLO",
+        "regno": "INSETTI",
+        "centro": "INSETTI",
+        "angoli": [
+            {
+                "tipo": "VUOTO",
+                "pos": "ADX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BDX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "BSX"
+            },
+            {
+                "tipo": "VUOTO",
+                "pos": "ASX"
+            }
+        ]
+    }
 ]
-
-
