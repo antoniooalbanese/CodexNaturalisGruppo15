@@ -14,11 +14,11 @@ public class Board {
 	/**
 	 * Insieme di carte risorsa piazzate da un giocatore.
 	 */
-	private ArrayList<CartaRisorsa> risorsa = new ArrayList<CartaRisorsa>(40);
+	private ArrayList<CartaRisorsa> risorsa;
 	/**
 	 * Insieme di carte oro piazzate da un giocatore.
 	 */
-	private ArrayList<CartaOro> oro = new ArrayList<CartaOro>(40);
+	private ArrayList<CartaOro> oro;
 	/**
 	 * Carta obiettivo che rappresenta l'obiettivo personale che se 
 	 * il giocatore soddisfa dona a quest'ultimo i punti indicata sulla carta. 
@@ -35,11 +35,11 @@ public class Board {
 	/**
 	 * Lista contenente il numero di ogni risorsa presente sulla board. 
 	 */
-	private ArrayList<Integer> num_ris = new ArrayList<Integer>();
+	private ArrayList<Integer> numRis;
 	/**
 	 * Lista contenente il numero di ogni oggetto presente sulla board. 
 	 */
-	private ArrayList<Integer> num_ogg = new ArrayList<Integer>();
+	private ArrayList<Integer> numOgg;
 	
 	/**
 	 * Costruttore della classe.
@@ -48,13 +48,9 @@ public class Board {
 	 */
 	public Board(CartaIniziale centro, CartaObiettivo obiettivo) {
 		this.centro = centro;
-		this.risorsa = null;
-		this.oro = null;
 		this.obiettivo = obiettivo;
 		this.turno = 0;
 		this.punteggio = 0;
-		this.num_ris = null;
-		this.num_ogg = null;
 	}
 	
 }

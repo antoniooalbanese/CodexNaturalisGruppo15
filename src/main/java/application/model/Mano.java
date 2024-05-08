@@ -10,11 +10,11 @@ public class Mano {
 	/**
 	 * Attributo che rappresenta le carte risorsa in mano al giocatore.
 	 */
-	ArrayList<CartaRisorsa> risorsa = new ArrayList<CartaRisorsa>(4);
+	ArrayList<CartaRisorsa> risorsa = new ArrayList<CartaRisorsa>();
 	/**
 	 * Attributo che rappresenta le carte oro in mano al giocatore.
 	 */
-	ArrayList<CartaOro> oro = new ArrayList<CartaOro>(4);
+	ArrayList<CartaOro> oro = new ArrayList<CartaOro>();
 	
 	/**
 	 * Costruttore della classe.

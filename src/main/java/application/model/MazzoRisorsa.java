@@ -1,10 +1,9 @@
 package application.model;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import com.google.gson.Gson;
+import java.util.List;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -14,37 +13,27 @@ public class MazzoRisorsa {
 	/**
 	 * Lista di carte risorsa.
 	 */
-	ArrayList<CartaRisorsa> mazzo = new ArrayList<CartaRisorsa>(40);
+	private ArrayList<CartaRisorsa> mazzo;
 	/**
 	 * Numero di carte rimamenti nel mazzo risorsa.
 	 */
 	private int rimanenti;
 	
 	/**
-	 * Costruttore della classe, inizializzando il mazzo vuoto.
+	 * Costruttore della classe.
 	 */
-	public MazzoRisorsa(ArrayList<CartaRisorsa> mazzo) {
-		this.mazzo = null;
+	public MazzoRisorsa() {
 		this.rimanenti = 40;
 	}
 
 	/**
-	 * Metodo per caricare il mazzo delle carte risorsa partendo dal file json MazzoRisorsa.json.
-	 * @return
+	 * Metodo che carica il contenuto del file json contenente le carte risorsa
+	 * nel mazzo delle carte risorsa.
+	 * @throws JsonSyntaxException
+	 * @throws IOException
 	 */
-	public ArrayList<CartaRisorsa> loadMazzoR(){
-		Gson gson = new Gson();
-		String filename = "MazzoRisorsa.json";
-        ArrayList<CartaRisorsa> risorsa = new ArrayList<CartaRisorsa>();
-
-        try (FileReader reader = new FileReader(filename)){
-            Type listType = new TypeToken<ArrayList<CartaRisorsa>>(){}.getType();
-           risorsa = gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return risorsa;
+	public void load() throws JsonSyntaxException, IOException{
+		this.mazzo = JsonHelper.loadJson("MazzoRisorsa.json",  new TypeToken<List<CartaRisorsa>>(){}.getType());
 	}
 	
 	/**

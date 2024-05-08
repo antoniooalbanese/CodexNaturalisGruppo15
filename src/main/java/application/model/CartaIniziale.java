@@ -10,7 +10,7 @@ public class CartaIniziale extends Carta{
 	 * Attributo che descrive la risorsa o le risorse che si trovano al centro 
 	 * della carta nel caso in cui si mostri il retro di quest'ultima.
 	 */
-	private ArrayList<Regno> centro = new ArrayList<Regno>(3);
+	private ArrayList<Regno> centro = new ArrayList<Regno>();
 	/**
 	 * Questa ArrayList contiene i 4 angoli presenti nella carta seguendo la 
 	 * seguente logica degli indici:
@@ -19,7 +19,7 @@ public class CartaIniziale extends Carta{
 	 * indice 2: angolo in basso a sinistra;
 	 * indice 3: angolo in alto a sinistra.
 	 */
-	private ArrayList<Angolo> angoli = new ArrayList<Angolo>(4);
+	private ArrayList<Angolo> angoli = new ArrayList<Angolo>();
 	
 	/**
 	 * Questo è il costruttore della classe nel caso in cui si mostri

@@ -1,11 +1,10 @@
 package application.model;
 
 import java.util.ArrayList;
-import com.google.gson.Gson;
+import java.util.List;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 /**
  * Questa classe rappresenta il mazzo delle carte oro.
@@ -14,37 +13,26 @@ public class MazzoOro {
 	/**
 	 * Lista di carte oro.
 	 */
-	ArrayList<CartaOro> mazzo = new ArrayList<CartaOro>(40);
+	private ArrayList<CartaOro> mazzo;
 	/**
 	 * Numero di carte rimamenti nel mazzo oro.
 	 */
 	private int rimanenti;
 	
 	/**
-	 * Costruttore della classe, inizializzando il mazzo vuoto.
+	 * Costruttore della classe.
 	 */
-	public MazzoOro(ArrayList<CartaOro> mazzo) {
-		this.mazzo = null;
+	public MazzoOro() {
 		this.rimanenti = 40;
 	}
-	
 	/**
-	 * Metodo per caricare il mazzo delle carte oro partendo dal file json MazzoOro.json.
-	 * @return
+	 * Metodo che carica il contenuto del file json contenente le carte oro
+	 * nel mazzo delle carte oro.
+	 * @throws JsonSyntaxException
+	 * @throws IOException
 	 */
-	public ArrayList<CartaOro> loadMazzoO(){
-		Gson gson = new Gson();
-		String filename = "MazzoOro.json";
-        ArrayList<CartaOro> oro = new ArrayList<CartaOro>();
-
-        try (FileReader reader = new FileReader(filename)){
-            Type listType = new TypeToken<ArrayList<CartaOro>>(){}.getType();
-            oro = gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return oro;
+	public void load() throws JsonSyntaxException, IOException{
+		this.mazzo = JsonHelper.loadJson("MazzoOro.json",  new TypeToken<List<CartaOro>>(){}.getType());
 	}
 	
 	/**

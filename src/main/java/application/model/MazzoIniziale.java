@@ -1,10 +1,9 @@
 package application.model;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import com.google.gson.Gson;
+import java.util.List;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -14,32 +13,16 @@ public class MazzoIniziale {
 	/**
 	 * Lista di carte iniziali.
 	 */
-	ArrayList<CartaIniziale> mazzo = new ArrayList<CartaIniziale>(6);
+	private ArrayList<CartaIniziale> mazzo;
 	
 	/**
-	 * Costruttore della classe, inizializzando il mazzo vuoto.
+	 * Metodo che carica il contenuto del file json contenente le carte iniziali
+	 * nel mazzo delle carte iniziali.
+	 * @throws JsonSyntaxException
+	 * @throws IOException
 	 */
-	public MazzoIniziale(ArrayList<CartaIniziale> mazzo) {
-		this.mazzo = null;
-	}
-	
-	/**
-	 * Metodo per caricare il mazzo delle carte iniziali partendo dal file json MazzoIniziale.json.
-	 * @return
-	 */
-	public ArrayList<CartaIniziale> loadMazzoI(){
-		Gson gson = new Gson();
-		String filename = "MazzoIniziale.json";
-        ArrayList<CartaIniziale> iniziale = new ArrayList<CartaIniziale>();
-
-        try (FileReader reader = new FileReader(filename)){
-            Type listType = new TypeToken<ArrayList<CartaIniziale>>(){}.getType();
-           iniziale = gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return iniziale;
+	public void load() throws JsonSyntaxException, IOException{
+		this.mazzo = JsonHelper.loadJson("MazzoIniziale.json",  new TypeToken<List<CartaIniziale>>(){}.getType());
 	}
 	
 	/**

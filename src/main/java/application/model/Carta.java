@@ -16,14 +16,14 @@ public abstract class Carta {
 	 * il proprio fronte, mentre, settata a False, indica che la carta 
 	 * mostra il proprio retro.
 	 */
-	private Boolean fronte;
+	private boolean fronte;
 	
 	/**
 	 * Questo è il costruttore della classe.
 	 * @param id
 	 * @param fronte
 	 */
-	public Carta (String id, Boolean fronte) {
+	public Carta (String id, boolean fronte) {
 		this.id = id;
 		this.fronte = fronte;
 	}

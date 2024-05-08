@@ -28,7 +28,7 @@ public class CartaObiettivo extends Carta{
 		this.obiettivo = obiettivo;
 		this.punto = punto;
 	}
-	
+
 	/**QUESTA CLASSE E' DA RIGUARDARE.
 	 * TUTTO DIPENDE DA COME SI STRUTTURA LA CLASSE OBIETTIVO.
 	 * HO IL DUBBIO CHE SI DEBBANO FARE 3 CLASSI

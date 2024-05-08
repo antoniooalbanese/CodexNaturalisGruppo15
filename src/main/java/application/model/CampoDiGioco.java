@@ -11,7 +11,7 @@ public class CampoDiGioco {
 	/**
 	 * Lista dei giocatori che partecipano alla partita.
 	 */
-	private ArrayList<Giocatore> giocatore = new ArrayList<Giocatore>(4);
+	private ArrayList<Giocatore> giocatore = new ArrayList<Giocatore>();
 	/**
 	 * Mazzo contenente le carte risorsa non ancora pescate da nessun giocatore.
 	 */
@@ -20,7 +20,7 @@ public class CampoDiGioco {
 	 * Lista delle due carte risorsa visibili ai giocatori che questi possono
 	 * scegliere di pescare.
 	 */
-	private ArrayList<CartaRisorsa> risorsa = new ArrayList<CartaRisorsa>(2);
+	private ArrayList<CartaRisorsa> risorsa = new ArrayList<CartaRisorsa>();
 	/**
 	 * Mazzo contenente le carte oro non ancora pescate da nessun giocatore.
 	 */
@@ -29,7 +29,7 @@ public class CampoDiGioco {
 	 * Lista delle due carte oro visibili ai giocatori che questi possono
 	 * scegliere di pescare.
 	 */
-	private ArrayList<CartaOro> oro = new ArrayList<CartaOro>(2);
+	private ArrayList<CartaOro> oro = new ArrayList<CartaOro>();
 	/**
 	 * Mazzo contenente le carte obiettivo non ancora pescate da nessun 
 	 * giocatore.
@@ -39,7 +39,7 @@ public class CampoDiGioco {
 	 * Lista delle due carte obiettivo visibili ai giocatori che questi possono
 	 * scegliere di pescare.
 	 */
-	private ArrayList<CartaObiettivo> obiettivo = new ArrayList<CartaObiettivo>(2);
+	private ArrayList<CartaObiettivo> obiettivo = new ArrayList<CartaObiettivo>();
 	
 	/**
 	 * Costruttore della classe.
