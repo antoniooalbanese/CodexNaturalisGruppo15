@@ -7,16 +7,13 @@ import application.controller.Controller;
  */
 public class Model {
 	private CampoDiGioco campo;
-	private Controller controller;
 	
 	/**
 	 * Costruttore della classe.
 	 * @param campo
-	 * @param controller
 	 */
-	public Model(CampoDiGioco campo, Controller controller) {
+	public Model(CampoDiGioco campo) {
 		this.campo = campo;
-		this.controller = controller;
 	}
 	
 }
