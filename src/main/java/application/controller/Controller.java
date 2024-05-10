@@ -42,6 +42,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * Metodo che ottiene il numero dei giocatori.
+	 */
 	public void getPlayersNumber() {
 		num = view.getPlayersNumberMessage();
 	}
