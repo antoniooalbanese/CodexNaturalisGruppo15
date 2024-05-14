@@ -1,8 +1,11 @@
 package application.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import application.model.Pedina;
 
 /**
  * Classe che rappresenta l'interfaccia di output e input utilizzata dai giocatori.
@@ -19,15 +22,17 @@ public class View {
 	 */
 	public boolean startMessage() {
 		System.out.println("CODEX NATURALIS\n");
+		System.out.println("Benvenuti!!! Volete giocare? (SI/NO)");
 		
 		while(true) {
 			try {
-				System.out.println("Benvenuti!!! Volete giocare? (SI/NO)");
 				String res = SCANNER.nextLine();
 				if(res.equalsIgnoreCase("NO")) {
 					return false;
-				}else {
+				}else if(res.equalsIgnoreCase("SI")){
 					return true;
+				}else {
+					throw new Exception();
 				}
 			} catch(Exception e){
 				System.out.println("Risposta non ammessa, riprova con SI o NO");
@@ -50,7 +55,6 @@ public class View {
 		int giocatori;
 		
 		while(true) {
-
 			try {
 				giocatori = SCANNER.nextInt();
 				if(giocatori < 2 || giocatori > 4) {
@@ -67,6 +71,86 @@ public class View {
 			}
 		}
 	
+	}
+	
+	/**
+	 * Metodo che chiede il nickname del giocatore.
+	 * @param n
+	 * @return
+	 * @throws Exception 
+	 */
+	public String getNick(int n) {
+		System.out.println("Inserire il nickname del giocatore " + n +":");
+		String giocatore = SCANNER.nextLine();
+		
+		while(true) {
+			System.out.println("Quindi il nickname del giocatore " + n +" è " + giocatore + "?");
+			try {
+				String ris = SCANNER.nextLine();
+				if(ris.equalsIgnoreCase("NO")) {
+					System.out.println("Allora qual è il tuo nickname?");
+					giocatore = SCANNER.nextLine();
+				}else if(ris.equalsIgnoreCase("SI")){
+					return giocatore;
+				}else {
+					throw new IOException();
+				}
+			} catch(IOException e){
+				System.out.println("Risposta non ammessa, riprova con SI o NO");
+			} 
+		}
+	}
+	
+	/**
+	 * Metodo che chiede al giocatore la pedina scelta. 
+	 * @param n
+	 * @return
+	 */
+	public Pedina getPedina(int n, ArrayList<Pedina> ped) {
+		System.out.print("Quale pedina scegli giocatore " + n + " ");
+		for(int i = 0; i < ped.size() - 1; i++) {
+			System.out.print(ped.get(i) + ", ");
+		}
+		System.out.println(ped.get(ped.size() - 1));
+		String pedina;
+		Pedina colore = null;
+		pedina = SCANNER.nextLine().toUpperCase();
+		
+		
+		while(true) {
+			System.out.println("Quindi la pedina scelta dal giocatore " + n + " è " + pedina + "?");
+			try {
+				String ris = SCANNER.nextLine();
+				if(ris.equalsIgnoreCase("NO")) {
+					System.out.println("Allora qual è la pedina che scegli?");
+				}else if(ris.equalsIgnoreCase("SI")){
+					try {
+						switch (pedina) {
+						case "ROSSO":
+							return colore.ROSSO;
+						case "BLU":
+							return colore.BLU;
+						case "VERDE":
+							return colore.VERDE;
+						case "GIALLO":
+							return colore.GIALLO;
+						default:
+							throw new Exception();
+						}
+					}catch(IOException e) {
+						System.out.println("Risposta non ammessa, riprova con ROSSO, BLU, VERDE o GIALLO");
+					}
+				}else {
+					throw new Exception();
+				}
+			} catch(Exception e){
+				System.out.println("Risposta non ammessa, riprova con SI o NO");
+			}
+		}	
+	}
+	
+	public void retry() {
+		System.out.println("La pedina è già stata scelta");
 	}
 
 }

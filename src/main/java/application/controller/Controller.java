@@ -1,6 +1,10 @@
 package application.controller;
 
+import java.util.ArrayList;
+
+import application.model.Giocatore;
 import application.model.Model;
+import application.model.Pedina;
 import application.view.View;
 
 /**
@@ -45,7 +49,41 @@ public class Controller {
 	/**
 	 * Metodo che ottiene il numero dei giocatori.
 	 */
-	public void getPlayersNumber() {
+	public int getPlayersNumber() {
 		num = view.getPlayersNumberMessage();
+		return num;
+	}
+	
+	/**
+	 * Matodo che inizializza i giocatori ad inizio gioco.
+	 * @param num
+	 * @return
+	 */
+	public ArrayList<Giocatore> initializePlayers(int num) {
+		ArrayList<Pedina> rimanenti = new ArrayList<Pedina>();
+		rimanenti.add(Pedina.ROSSO);
+		rimanenti.add(Pedina.BLU);
+		rimanenti.add(Pedina.VERDE);
+		rimanenti.add(Pedina.GIALLO);
+		ArrayList<Giocatore> player = new ArrayList<Giocatore>();
+		
+		for (int i = 0; i < num; i++) {
+			String nick = view.getNick(i + 1);
+			Pedina pedina;
+			while(true) {
+				pedina = view.getPedina(i + 1, rimanenti);
+				if(!rimanenti.contains(pedina)) {
+					view.retry();
+				}else {
+					break;
+				}
+			}
+			rimanenti.remove(pedina);
+			String id = String.valueOf(i + 1);
+			Giocatore gio = new Giocatore(id, nick, pedina);
+			player.add(gio);
+		}
+		
+		return player;
 	}
 }

@@ -1,6 +1,9 @@
 package application;
 
+import java.util.ArrayList;
+
 import application.controller.Controller;
+import application.model.Giocatore;
 import application.model.Model;
 import application.view.View;
 
@@ -13,8 +16,11 @@ public class Application {
 		View view = new View();
 		Model model = new Model(null);
 		Controller controller = new Controller(model,view);
+		int num;
+		ArrayList<Giocatore> giocatori;
 		
 		controller.startGame();
-		controller.getPlayersNumber();
+		num = controller.getPlayersNumber();
+		giocatori = controller.initializePlayers(num);
 	}
 }

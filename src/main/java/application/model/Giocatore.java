@@ -36,14 +36,12 @@ public class Giocatore {
 	 * @param id
 	 * @param nick
 	 * @param pedina
-	 * @param inizio
 	 */
-	public Giocatore(String id, String nick, Pedina pedina,
-			 Pedina inizio) {
+	public Giocatore(String id, String nick, Pedina pedina) {
 		this.id = id;
 		this.nick = nick;
 		this.pedina = pedina;
-		this.inizio = inizio;
+		this.inizio = null;
 		this.mano = null;
 		this.board = null;
 	}
