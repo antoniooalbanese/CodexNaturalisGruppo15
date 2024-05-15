@@ -19,9 +19,20 @@ public abstract class Carta {
 	private boolean fronte;
 	
 	/**
-	 * Questo è il costruttore della classe.
+	 * Questo è il costruttore della classe nel caso in cui la carta sia mostrata 
+	 * sul fronte.
 	 * @param id
-	 * @param fronte
+	 */
+	public Carta (String id) {
+		this.id = id;
+		this.fronte = true;
+	}
+	
+
+	/**
+	 * Questo è il costruttore della classe nel caso in cui la carta sia mostrata 
+	 * sul retro.
+	 * @param id
 	 */
 	public Carta (String id, boolean fronte) {
 		this.id = id;

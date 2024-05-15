@@ -11,9 +11,13 @@ import com.google.gson.reflect.TypeToken;
  */
 public class MazzoRisorsa {
 	/**
-	 * Lista di carte risorsa.
+	 * Lista di carte risorsa mostrate sul fronte.
 	 */
-	private ArrayList<CartaRisorsa> mazzo;
+	private ArrayList<CartaRisorsa> mazzoFronte;
+	/**
+	 * Lista di carte risorsa mostrate sul retro.
+	 */
+	private ArrayList<CartaRisorsa> mazzoRetro;
 	/**
 	 * Numero di carte rimamenti nel mazzo risorsa.
 	 */
@@ -33,7 +37,15 @@ public class MazzoRisorsa {
 	 * @throws IOException
 	 */
 	public void load() throws JsonSyntaxException, IOException{
-		this.mazzo = JsonHelper.loadJson("MazzoRisorsa.json",  new TypeToken<List<CartaRisorsa>>(){}.getType());
+		ArrayList<CartaRisorsa> mazzo = JsonHelper.loadJson("MazzoRisorsa.json",  new TypeToken<List<CartaRisorsa>>(){}.getType());
+		
+		for(int i = 0; i < mazzo.size() - 4; i++) {
+			this.mazzoFronte.add(mazzo.get(i));
+		}
+		
+		for(int i = 40; i < mazzo.size(); i++) {
+			this.mazzoRetro.add(mazzo.get(i));
+		}
 	}
 	
 	/**

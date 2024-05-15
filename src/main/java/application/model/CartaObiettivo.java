@@ -24,7 +24,7 @@ public class CartaObiettivo extends Carta{
 	 */
 	public CartaObiettivo(String id, Boolean fronte, Obiettivo obiettivo,
 						  int punto) {
-		super(id, fronte);
+		super(id);
 		this.obiettivo = obiettivo;
 		this.punto = punto;
 	}

@@ -11,9 +11,13 @@ import com.google.gson.reflect.TypeToken;
  */
 public class MazzoIniziale {
 	/**
-	 * Lista di carte iniziali.
+	 * Lista di carte iniziali mostrate sul fronte.
 	 */
-	private ArrayList<CartaIniziale> mazzo;
+	private ArrayList<CartaIniziale> mazzoFronte;
+	/**
+	 * Lista di carte iniziali mostrate sul retro.
+	 */
+	private ArrayList<CartaIniziale> mazzoRetro;
 	
 	/**
 	 * Metodo che carica il contenuto del file json contenente le carte iniziali
@@ -22,7 +26,15 @@ public class MazzoIniziale {
 	 * @throws IOException
 	 */
 	public void load() throws JsonSyntaxException, IOException{
-		this.mazzo = JsonHelper.loadJson("MazzoIniziale.json",  new TypeToken<List<CartaIniziale>>(){}.getType());
+		ArrayList <CartaIniziale> mazzo = JsonHelper.loadJson("MazzoIniziale.json",  new TypeToken<List<CartaIniziale>>(){}.getType());
+		
+		for(int i = 0; i < mazzo.size() - 6; i++) {
+			this.mazzoFronte.add(mazzo.get(i));
+		}
+		
+		for(int i = 6; i < mazzo.size(); i++) {
+			this.mazzoRetro.add(mazzo.get(i));
+		}
 	}
 	
 	/**

@@ -55,7 +55,7 @@ public class Controller {
 	}
 	
 	/**
-	 * Matodo che inizializza i giocatori ad inizio gioco.
+	 * Metodo che inizializza i giocatori ad inizio gioco.
 	 * @param num
 	 * @return
 	 */
@@ -85,5 +85,9 @@ public class Controller {
 		}
 		
 		return player;
+	}
+	
+	public void initializeField() {
+		
 	}
 }

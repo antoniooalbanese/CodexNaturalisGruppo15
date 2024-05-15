@@ -11,9 +11,13 @@ import java.io.IOException;
  */
 public class MazzoOro {
 	/**
-	 * Lista di carte oro.
+	 * Lista di carte oro mostrate sul fronte.
 	 */
-	private ArrayList<CartaOro> mazzo;
+	private ArrayList<CartaOro> mazzoFronte;
+	/**
+	 * Lista di carte oro mostrate sul retro.
+	 */
+	private ArrayList<CartaOro> mazzoRetro;
 	/**
 	 * Numero di carte rimamenti nel mazzo oro.
 	 */
@@ -32,7 +36,15 @@ public class MazzoOro {
 	 * @throws IOException
 	 */
 	public void load() throws JsonSyntaxException, IOException{
-		this.mazzo = JsonHelper.loadJson("MazzoOro.json",  new TypeToken<List<CartaOro>>(){}.getType());
+		ArrayList<CartaOro> mazzo = JsonHelper.loadJson("MazzoOro.json",  new TypeToken<List<CartaOro>>(){}.getType());
+	
+		for(int i = 0; i < mazzo.size() - 4; i++) {
+			this.mazzoFronte.add(mazzo.get(i));
+		}
+		
+		for(int i = 40; i < mazzo.size(); i++) {
+			this.mazzoRetro.add(mazzo.get(i));
+		}
 	}
 	
 	/**

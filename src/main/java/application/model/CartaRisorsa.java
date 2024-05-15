@@ -39,9 +39,9 @@ public class CartaRisorsa extends Carta {
 	 * @param angoli
 	 * @param punto
 	 */
-	public CartaRisorsa(String id, Boolean fronte, Regno regno,
-						ArrayList<Angolo> angoli, Punto punto) {
-		super(id, fronte);
+	public CartaRisorsa(String id, Regno regno, ArrayList<Angolo> angoli,
+						Punto punto) {
+		super(id);
 		this.regno = regno;
 		this.centro = null;
 		this.angoli = angoli;
@@ -57,9 +57,9 @@ public class CartaRisorsa extends Carta {
 	 * @param centro
 	 * @param angoli
 	 */
-	public CartaRisorsa(String id, Boolean fronte, Regno regno, Regno centro,
+	public CartaRisorsa(String id, Regno regno, Regno centro,
 						ArrayList<Angolo> angoli) {
-		super(id, fronte);
+		super(id, false);
 		this.regno = regno;
 		this.centro = centro;
 		this.angoli = angoli;

@@ -25,13 +25,12 @@ public class CartaIniziale extends Carta{
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il fronte della carta.
 	 * @param id
-	 * @param fronte
 	 * @param centro
 	 * @param angoli
 	 */
-	public CartaIniziale(String id, Boolean fronte, Regno regno, 
-						 ArrayList<Regno> centro,ArrayList<Angolo> angoli) {
-		super(id, fronte);
+	public CartaIniziale(String id, Regno regno, ArrayList<Regno> centro,
+						 ArrayList<Angolo> angoli) {
+		super(id);
 		this.centro = centro;
 		this.angoli = angoli;
 	}
@@ -45,7 +44,7 @@ public class CartaIniziale extends Carta{
 	 */
 	public CartaIniziale(String id, Boolean fronte, Regno regno,
 						ArrayList<Angolo> angoli) {
-		super(id, fronte);
+		super(id, false);
 		this.centro = null;
 		this.angoli = angoli;
 	}

@@ -21,6 +21,8 @@ public class Application {
 		
 		controller.startGame();
 		num = controller.getPlayersNumber();
+		controller.initializeFielda();
 		giocatori = controller.initializePlayers(num);
+		
 	}
 }
