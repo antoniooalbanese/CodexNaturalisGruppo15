@@ -1,8 +1,16 @@
 package application.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import com.google.gson.JsonSyntaxException;
+
+import application.model.Carta;
+import application.model.CartaRisorsa;
 import application.model.Giocatore;
+import application.model.MazzoRisorsa;
 import application.model.Model;
 import application.model.Pedina;
 import application.view.View;
@@ -87,7 +95,26 @@ public class Controller {
 		return player;
 	}
 	
-	public void initializeField() {
+	public void mescola(ArrayList<Carta> mazzo){
+		Collections.shuffle(mazzo);
+	}
+	
+	
+	public CartaRisorsa estrai(){
+		CartaRisorsa carta = new mazzo.get(0);
+		this.mazzo.remove(0);
+		return carta;
+	}
+	
+	 
+	public CartaRisorsa getCarta(int i){
+		return this.mazzo.get(i);
 		
+	}
+	public void initializeField() throws JsonSyntaxException, IOException {
+		MazzoRisorsa mazzoRisorsa = new MazzoRisorsa();
+		mazzoRisorsa.load();
+		mazzoRisorsa.mescola();
+		mazzoRisorsa.estrai();
 	}
 }
