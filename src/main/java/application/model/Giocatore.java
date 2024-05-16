@@ -54,4 +54,8 @@ public class Giocatore {
 		return this.id;
 	}
 	
+	public Mano getMano() {
+        return this.mano;
+    }
+	
 }

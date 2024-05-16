@@ -109,6 +109,12 @@ public class Controller {
 		return carta;
 	}
 	
+	public Carta pesca(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
+		Carta carta = mazzo.get(0);
+		giocatore.getMano().getRisorsa().add((CartaRisorsa) carta);
+		giocatore.getMano().getOro().add((CartaOro) carta);
+		return carta;
+	}
 	/**
 	 * Metodo utilizzato per ottenere una carta in una determinata posizione. 
 	 * @param i
