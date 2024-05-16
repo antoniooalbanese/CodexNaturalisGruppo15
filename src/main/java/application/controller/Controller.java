@@ -87,7 +87,6 @@ public class Controller {
 		return player;
 	}
 	
-	
 	public void initializeField() {
 		
 	}
