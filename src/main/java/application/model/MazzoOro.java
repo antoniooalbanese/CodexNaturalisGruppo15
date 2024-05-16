@@ -27,6 +27,8 @@ public class MazzoOro {
 	 * Costruttore della classe.
 	 */
 	public MazzoOro() {
+		this.mazzoFronte = new ArrayList<>();
+        this.mazzoRetro = new ArrayList<>();
 		this.rimanenti = 40;
 	}
 	/**
