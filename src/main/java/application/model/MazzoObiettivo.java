@@ -25,6 +25,15 @@ public class MazzoObiettivo {
 	public void load() throws JsonSyntaxException, IOException{
 		this.mazzo = JsonHelper.loadJson("MazzoObiettivo.json",  new TypeToken<List<CartaObiettivo>>(){}.getType());
 	}
+	
+	/**
+	 * Metodo che ritorna il mazzo obiettivo visto sul fronte.
+	 * @return
+	 */
+	public ArrayList<CartaObiettivo> getMazzoFronte() {
+		return this.mazzo;
+	}
+	
 	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.

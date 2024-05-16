@@ -1,6 +1,9 @@
 package application;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.google.gson.JsonSyntaxException;
 
 import application.controller.Controller;
 import application.model.Giocatore;
@@ -12,17 +15,15 @@ import application.view.View;
  */
 public class Application {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws JsonSyntaxException, IOException {
 		View view = new View();
 		Model model = new Model(null);
 		Controller controller = new Controller(model,view);
-		int num;
-		ArrayList<Giocatore> giocatori;
 		
 		controller.startGame();
-		num = controller.getPlayersNumber();
+		controller.getPlayersNumber();
+		controller.initializePlayers();
 		controller.initializeField();
-		giocatori = controller.initializePlayers(num);
 		
 	}
 }

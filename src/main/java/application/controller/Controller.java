@@ -3,12 +3,18 @@ package application.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
 
+import application.model.CampoDiGioco;
 import application.model.Carta;
+import application.model.CartaOro;
 import application.model.CartaRisorsa;
 import application.model.Giocatore;
+import application.model.MazzoIniziale;
+import application.model.MazzoObiettivo;
+import application.model.MazzoOro;
 import application.model.MazzoRisorsa;
 import application.model.Model;
 import application.model.Pedina;
@@ -56,9 +62,8 @@ public class Controller {
 	/**
 	 * Metodo che ottiene il numero dei giocatori.
 	 */
-	public int getPlayersNumber() {
+	public void getPlayersNumber() {
 		num = view.getPlayersNumberMessage();
-		return num;
 	}
 	
 	/**
@@ -66,13 +71,13 @@ public class Controller {
 	 * @param num
 	 * @return
 	 */
-	public ArrayList<Giocatore> initializePlayers(int num) {
+	public void initializePlayers() {
+		this.model.initCampo();
 		ArrayList<Pedina> rimanenti = new ArrayList<Pedina>();
 		rimanenti.add(Pedina.ROSSO);
 		rimanenti.add(Pedina.BLU);
 		rimanenti.add(Pedina.VERDE);
 		rimanenti.add(Pedina.GIALLO);
-		ArrayList<Giocatore> player = new ArrayList<Giocatore>();
 		
 		for (int i = 0; i < num; i++) {
 			String nick = view.getNick(i + 1);
@@ -88,35 +93,57 @@ public class Controller {
 			rimanenti.remove(pedina);
 			String id = String.valueOf(i + 1);
 			Giocatore gio = new Giocatore(id, nick, pedina);
-			player.add(gio);
+			this.model.getCampo().addPlayer(gio);
 		}
 		
-		return player;
 	}
 	
-	public void mescola(ArrayList<Carta> mazzo){
-		Collections.shuffle(mazzo);
-	}
-	
-	
-	public CartaRisorsa estrai(){
-		CartaRisorsa carta = new mazzo.get(0);
-		this.mazzo.remove(0);
+	/**
+	 * Metodo per estarre le carte del mazzo.
+	 * @param mazzo
+	 * @return
+	 */
+	public Carta estrai(ArrayList<? extends Carta> mazzo){
+		Carta carta = mazzo.get(0);
+		mazzo.remove(0);
 		return carta;
 	}
 	
-	 
-	public CartaRisorsa getCarta(int i){
-		return this.mazzo.get(i);
-		
+	/**
+	 * Metodo utilizzato per ottenere una carta in una determinata posizione. 
+	 * @param i
+	 * @param mazzo
+	 * @return
+	 */
+	public Carta getCarta(int i, ArrayList<Carta> mazzo){
+		return mazzo.get(i);
 	}
 	
+	/**
+	 * Metodo utilizzato per inizializzare il campo da gioco.
+	 * @throws IOException 
+	 * @throws JsonSyntaxException 
+	 */
 	public void initializeField() throws JsonSyntaxException, IOException {
-		MazzoRisorsa mazzoRisorsa = new MazzoRisorsa();
-		mazzoRisorsa.load();
-		mazzoRisorsa.mescola();
-		mazzoRisorsa.estrai();
+		MazzoRisorsa mazzoR = new MazzoRisorsa();
+		ArrayList<CartaRisorsa> downR = new ArrayList <CartaRisorsa>();
+		MazzoOro mazzoO = new MazzoOro();
+		ArrayList<CartaOro> downO = new ArrayList <CartaOro>();
+		
+		mazzoR.load();
+		Collections.shuffle(mazzoR.getMazzoFronte());
+		downR.add((CartaRisorsa) this.estrai(mazzoR.getMazzoFronte()));
+		downR.add((CartaRisorsa) this.estrai(mazzoR.getMazzoFronte()));
+		
+		mazzoO.load();
+		Collections.shuffle(mazzoO.getMazzoFronte());
+		downO.add((CartaOro) this.estrai(mazzoO.getMazzoFronte()));
+		downO.add((CartaOro) this.estrai(mazzoO.getMazzoFronte()));
+		
+		this.model.getCampo().setMazzoR(mazzoR);
+		this.model.getCampo().setRisorsa(downR);
+		this.model.getCampo().setMazzoO(mazzoO);
+		this.model.getCampo().setOro(downO);
 	}
 		
-	}
 }

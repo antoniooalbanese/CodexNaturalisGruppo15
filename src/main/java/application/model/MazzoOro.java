@@ -48,6 +48,22 @@ public class MazzoOro {
 	}
 	
 	/**
+	 * Metodo che ritorna il mazzo oro visto sul fronte.
+	 * @return
+	 */
+	public ArrayList<CartaOro> getMazzoFronte() {
+		return this.mazzoFronte;
+	}
+	
+	/**
+	 * Metodo che ritorna il mazzo oro visto sul retro.
+	 * @return
+	 */
+	public ArrayList<CartaOro> getMazzoRetro() {
+		return this.mazzoRetro;
+	}
+	
+	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.
 	 */

@@ -38,6 +38,22 @@ public class MazzoIniziale {
 	}
 	
 	/**
+	 * Metodo che ritorna il mazzo iniziale visto sul fronte.
+	 * @return
+	 */
+	public ArrayList<CartaIniziale> getMazzoFronte() {
+		return this.mazzoFronte;
+	}
+	
+	/**
+	 * Metodo che ritorna il mazzo iniziale visto sul retro.
+	 * @return
+	 */
+	public ArrayList<CartaIniziale> getMazzoRetro() {
+		return this.mazzoRetro;
+	}
+	
+	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.
 	 */

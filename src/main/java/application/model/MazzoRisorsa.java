@@ -49,6 +49,22 @@ public class MazzoRisorsa {
 	}
 	
 	/**
+	 * Metodo che ritorna il mazzo risorsa visto sul fronte.
+	 * @return
+	 */
+	public ArrayList<CartaRisorsa> getMazzoFronte() {
+		return this.mazzoFronte;
+	}
+	
+	/**
+	 * Metodo che ritorna il mazzo risorsa visto sul retro.
+	 * @return
+	 */
+	public ArrayList<CartaRisorsa> getMazzoRetro() {
+		return this.mazzoRetro;
+	}
+	
+	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.
 	 */
