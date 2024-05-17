@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import application.model.CartaIniziale;
 import application.model.Pedina;
 
 /**
@@ -149,8 +150,22 @@ public class View {
 		}	
 	}
 	
+	/**
+	 * Metodo che avvisa l'utente che la pedina da lui selezionata è già stata
+	 * scelta.
+	 */
 	public void retry() {
 		System.out.println("La pedina è già stata scelta");
 	}
-
+	
+	/**
+	 * Metodo che chiede all'utente se intende piazzare la carta iniziale mostrando
+	 * il fronte oppure mostrando il retro.
+	 * @param fronte
+	 * @param retro
+	 * @return
+	 */
+	public boolean chooseStartCard(CartaIniziale fronte, CartaIniziale retro) {
+		return true;
+	}
 }

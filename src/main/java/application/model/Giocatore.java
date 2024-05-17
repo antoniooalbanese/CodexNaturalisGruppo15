@@ -54,8 +54,28 @@ public class Giocatore {
 		return this.id;
 	}
 	
+	/**
+	 * Metodo che ritorna la mano del giocatore.
+	 * @return
+	 */
 	public Mano getMano() {
         return this.mano;
     }
+	
+	/**
+	 * Metodo che inizializza la board del giocatore.
+	 * @param card
+	 */
+	public void initBoard(CartaIniziale card) {
+		this.board = new Board(card);
+	}
+	
+	/**
+	 * Metodo che ritorna la board del giocatore.
+	 * @return
+	 */
+	public Board getBoard() {
+		return this.board;
+	}
 	
 }

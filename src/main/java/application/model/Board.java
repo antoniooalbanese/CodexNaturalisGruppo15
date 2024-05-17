@@ -44,11 +44,9 @@ public class Board {
 	/**
 	 * Costruttore della classe.
 	 * @param centro
-	 * @param obiettivo
 	 */
-	public Board(CartaIniziale centro, CartaObiettivo obiettivo) {
+	public Board(CartaIniziale centro) {
 		this.centro = centro;
-		this.obiettivo = obiettivo;
 		this.turno = 0;
 		this.punteggio = 0;
 	}

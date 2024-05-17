@@ -38,4 +38,12 @@ public abstract class Carta {
 		this.id = id;
 		this.fronte = fronte;
 	}
+	
+	/**
+	 * Metodo che ritorna l'id della carta.
+	 * @return
+	 */
+	public String getId() {
+		return this.id;
+	}
 }

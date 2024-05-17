@@ -1,6 +1,9 @@
 package application.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.google.gson.JsonSyntaxException;
 
 import application.controller.Controller;
 
@@ -13,11 +16,16 @@ public class Model {
 	 */
 	private CampoDiGioco campo;
 	/**
-	 * Costruttore della classe.
-	 * @param campo
+	 * Attributo che rappresenta il mazzo contenente le carte iniziali.
 	 */
-	public Model(CampoDiGioco campo) {
-		this.campo = campo;
+	private MazzoIniziale mazzoI = new MazzoIniziale();
+	
+	/**
+	 * Costruttore della classe.
+	 */
+	public Model() throws JsonSyntaxException, IOException {
+		this.campo = null;
+		mazzoI.load();
 	}
 	
 	/**
@@ -34,4 +42,13 @@ public class Model {
 	public void initCampo() {
 		this.campo = new CampoDiGioco();
 	}
+	
+	/**
+	 * Metodo che ritorna il il mazzo iniziale.
+	 * @return
+	 */
+	public MazzoIniziale getMazzoIniziale() {
+		return this.mazzoI;
+	}
+	
 }

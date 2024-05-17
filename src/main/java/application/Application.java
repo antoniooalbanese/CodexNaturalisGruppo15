@@ -17,13 +17,14 @@ public class Application {
 	
 	public static void main(String[] args) throws JsonSyntaxException, IOException {
 		View view = new View();
-		Model model = new Model(null);
+		Model model = new Model();
 		Controller controller = new Controller(model,view);
 		
 		controller.startGame();
 		controller.getPlayersNumber();
 		controller.initializePlayers();
 		controller.initializeField();
+		controller.giveStartCards();
 		
 	}
 }

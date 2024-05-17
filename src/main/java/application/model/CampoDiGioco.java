@@ -41,7 +41,6 @@ public class CampoDiGioco {
 	 */
 	private ArrayList<CartaObiettivo> obiettivo = new ArrayList<CartaObiettivo>();
 	
-	
 	/**
 	 * Metodo che ritorna la lista dei giocatori che giocano la partita.
 	 * @return

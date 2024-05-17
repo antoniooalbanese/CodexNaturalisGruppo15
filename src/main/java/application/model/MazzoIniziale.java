@@ -54,6 +54,22 @@ public class MazzoIniziale {
 	}
 	
 	/**
+	 * Metodo che ritorna la il retro di una carta.
+	 * @param carta
+	 * @return
+	 */
+	public CartaIniziale getRetroCarta(CartaIniziale carta) {
+		String id = carta.getId();
+		String last = id.substring(2);
+		
+		for(int i = 0; i < mazzoRetro.size(); i++) {
+			if(this.mazzoRetro.get(i).getId().contains(last)){
+				return this.mazzoRetro.get(i);
+			}
+		}
+		return null;
+	}
+	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.
 	 */

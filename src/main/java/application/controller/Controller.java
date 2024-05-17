@@ -9,6 +9,7 @@ import com.google.gson.JsonSyntaxException;
 
 import application.model.CampoDiGioco;
 import application.model.Carta;
+import application.model.CartaIniziale;
 import application.model.CartaOro;
 import application.model.CartaRisorsa;
 import application.model.Giocatore;
@@ -23,7 +24,7 @@ import application.view.View;
 /**
  * Classe che gestisce l'andamento del gioco e l'interazione tra model e view.
  */
-public class Controller {
+public class Controller  {
 	/**
 	 * Attributo che rappresenta un'istanza del modello del gioco.
 	 */
@@ -70,8 +71,11 @@ public class Controller {
 	 * Metodo che inizializza i giocatori ad inizio gioco.
 	 * @param num
 	 * @return
+	 * @throws IOException 
+	 * @throws JsonSyntaxException 
 	 */
-	public void initializePlayers() {
+	public void initializePlayers() throws JsonSyntaxException, IOException {
+		this.model = new Model();
 		this.model.initCampo();
 		ArrayList<Pedina> rimanenti = new ArrayList<Pedina>();
 		rimanenti.add(Pedina.ROSSO);
@@ -109,12 +113,6 @@ public class Controller {
 		return carta;
 	}
 	
-	public Carta pesca(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
-		Carta carta = mazzo.get(0);
-		giocatore.getMano().getRisorsa().add((CartaRisorsa) carta);
-		giocatore.getMano().getOro().add((CartaOro) carta);
-		return carta;
-	}
 	/**
 	 * Metodo utilizzato per ottenere una carta in una determinata posizione. 
 	 * @param i
@@ -150,6 +148,51 @@ public class Controller {
 		this.model.getCampo().setRisorsa(downR);
 		this.model.getCampo().setMazzoO(mazzoO);
 		this.model.getCampo().setOro(downO);
+	}
+
+	/**
+	 * Metodo che distribuisce le carte iniziali ai giocatori.
+	 * @throws JsonSyntaxException
+	 * @throws IOException
+	 */
+	public void giveStartCards() throws JsonSyntaxException, IOException {
+		Collections.shuffle(this.model.getMazzoIniziale().getMazzoFronte());
+		for(int i = 0; i < this.num; i++) {
+			CartaIniziale carta = (CartaIniziale) this.estrai(this.model.getMazzoIniziale().getMazzoFronte());
+			if(view.chooseStartCard(carta, this.model.getMazzoIniziale().getRetroCarta(carta))) {
+				this.model.getCampo().getGiocatore().get(i).initBoard(carta);
+			}else {
+				this.model.getCampo().getGiocatore().get(i).initBoard(this.model.getMazzoIniziale().getRetroCarta(carta));
+			}
+			
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * METODO DA RIGUARDARE QUANDO SI ARRIVERA' A IMPLEMENTARE IL TURNO DEL
+	 * GIOCATORE.
+	 * @param giocatore
+	 * @param mazzo
+	 * @return
+	 */
+	
+	public Carta pesca(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
+		Carta carta = mazzo.get(0);
+		giocatore.getMano().getRisorsa().add((CartaRisorsa) carta);
+		giocatore.getMano().getOro().add((CartaOro) carta);
+		return carta;
 	}
 		
 }

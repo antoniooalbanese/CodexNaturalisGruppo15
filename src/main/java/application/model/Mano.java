@@ -25,12 +25,20 @@ public class Mano {
 		this.risorsa = risorsa;
 		this.oro = oro;
 	}
-
+	
+	/**
+	 * Metodo che ritorna le carte risorsa in mano al giocatore.
+	 * @return
+	 */
 	public ArrayList<CartaRisorsa> getRisorsa() {
-		return risorsa;
+		return this.risorsa;
 	}
-
+	
+	/**
+	 * Metodo che ritorna le carte oro in mano al giocatore.
+	 * @return
+	 */
 	public ArrayList<CartaOro> getOro() {
-		return oro;
+		return this.oro;
 	}
 }
