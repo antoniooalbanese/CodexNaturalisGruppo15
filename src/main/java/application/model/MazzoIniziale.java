@@ -13,11 +13,11 @@ public class MazzoIniziale {
 	/**
 	 * Lista di carte iniziali mostrate sul fronte.
 	 */
-	private ArrayList<CartaIniziale> mazzoFronte;
+	private ArrayList<CartaIniziale> mazzoFronte = new ArrayList<CartaIniziale>();
 	/**
 	 * Lista di carte iniziali mostrate sul retro.
 	 */
-	private ArrayList<CartaIniziale> mazzoRetro;
+	private ArrayList<CartaIniziale> mazzoRetro = new ArrayList<CartaIniziale>();
 	
 	/**
 	 * Metodo che carica il contenuto del file json contenente le carte iniziali
