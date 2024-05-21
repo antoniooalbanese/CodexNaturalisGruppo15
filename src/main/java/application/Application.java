@@ -16,6 +16,9 @@ public class Application {
 		Model model = new Model();
 		Controller controller = new Controller(model,view);
 		
+		/**
+		 * Metodi che inizializzano la partita.
+		 */
 		controller.startGame();
 		controller.getPlayersNumber();
 		controller.initializePlayers();
@@ -23,6 +26,11 @@ public class Application {
 		controller.giveStartCards();
 		controller.giveObjectiveCards();
 		controller.chooseFirstPlayer();
+		
+		/**
+		 * Metodi che gestiscono la partita.
+		 */
+		controller.playGame();
 		
 	}
 }

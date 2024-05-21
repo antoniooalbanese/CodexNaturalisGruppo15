@@ -23,7 +23,7 @@ public class View {
 	 * Metodo che stampa il messaggio di inizio del gioco.
 	 * @return
 	 */
-	public boolean startMessage() {
+	public boolean welcomeMessage() {
 		System.out.println("CODEX NATURALIS\n");
 		System.out.println("Benvenuti!!! Volete giocare? (SI/NO)");
 		
@@ -225,7 +225,6 @@ public class View {
 	 * @param ordine
 	 */
 	public void showNewOrder(ArrayList<Giocatore> ordine) {
-		
 		String nuovoOrdine = "";
 		
 		for (int i=0; i < ordine.size(); i++) {
@@ -234,6 +233,22 @@ public class View {
 		}
 		
 		System.out.println("\nQuesto è l'ordine di gioco:\n\n" + nuovoOrdine);
+		
+	}
+	
+	/**
+	 * Metodo che mostra in output il messaggio di fine dei preparativi ed inizio
+	 * della partita vera e propria.
+	 */
+	public void startMessage() {
+		System.out.println("I PREPARATIVI SONO TERMINATI");
+		System.out.println("CHE LA PARTITA ABBIA INIZIO");
+	}
+	
+	/**
+	 * Metodo che mostra in output le board dei giocatori.
+	 */
+	public void showBoard() {
 		
 	}
 }

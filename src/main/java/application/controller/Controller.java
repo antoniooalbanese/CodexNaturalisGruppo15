@@ -55,7 +55,7 @@ public class Controller  {
 	 */
 	public void startGame(){
 		
-		if(!view.startMessage()) {
+		if(!view.welcomeMessage()) {
 			view.endMessage();
 			System.exit(0);
 		}
@@ -205,13 +205,37 @@ public class Controller  {
 		view.showNewOrder(this.model.getCampo().getGiocatore());
 	}
 	
+	/**
+	 * Metodo che gestisce l'andamento della partita.
+	 */
+	public void playGame() {
+		view.startMessage();
+		
+		while(!this.isGameOver()) {
+			for(int i = 0; i < num; i++) {
+				view.showBoard();
+				this.posiziona();
+				this.pesca(null, null);
+			}
+		}
+	}
 	
+	/**
+	 * Metodo che controlla se si sono verificate le condizioni per terminare la
+	 * partita, ossia che almeno un giocatore abbia raggiunto o superato 20 punti 
+	 * con il solo posizionamento delle carte.
+	 * @return
+	 */
+	public boolean isGameOver() {
+		return true;
+	}
 	
-	
-	
-	
-	
-	
+	/**
+	 * Metodo che gestisce il posizionamento delle carte sulla board.
+	 */
+	public void posiziona() {
+		
+	}
 	
 	/**
 	 * METODO DA RIGUARDARE QUANDO SI ARRIVERA' A IMPLEMENTARE IL TURNO DEL
@@ -220,7 +244,6 @@ public class Controller  {
 	 * @param mazzo
 	 * @return
 	 */
-	
 	public Carta pesca(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
 		Carta carta = mazzo.get(0);
 		giocatore.getMano().getRisorsa().add((CartaRisorsa) carta);
