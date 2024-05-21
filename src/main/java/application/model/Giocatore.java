@@ -55,6 +55,14 @@ public class Giocatore {
 	}
 	
 	/**
+	 * Questo metodo ritorna il nickname del giocatore.
+	 * @return
+	 */
+	public String getNick() {
+		return this.nick;
+	}
+	
+	/**
 	 * Metodo che ritorna la mano del giocatore.
 	 * @return
 	 */

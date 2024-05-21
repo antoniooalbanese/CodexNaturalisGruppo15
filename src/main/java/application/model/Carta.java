@@ -52,5 +52,9 @@ public abstract class Carta {
 		return fronte;
 	}
 	
+	public void setFronte(boolean fronte) {
+		this.fronte = fronte;
+	}
+	
 	public abstract String showCard();
 }

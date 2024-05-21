@@ -29,10 +29,12 @@ public class MazzoIniziale {
 		ArrayList <CartaIniziale> mazzo = JsonHelper.loadJson("MazzoIniziale.json",  new TypeToken<List<CartaIniziale>>(){}.getType());
 		
 		for(int i = 0; i < mazzo.size() - 6; i++) {
+			mazzo.get(i).setFronte(true);
 			this.mazzoFronte.add(mazzo.get(i));
 		}
 		
 		for(int i = 6; i < mazzo.size(); i++) {
+			mazzo.get(i).setFronte(false);
 			this.mazzoRetro.add(mazzo.get(i));
 		}
 	}

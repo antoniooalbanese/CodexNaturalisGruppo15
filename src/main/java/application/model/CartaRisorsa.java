@@ -66,7 +66,52 @@ public class CartaRisorsa extends Carta {
 		this.punto = null;
 	}
 	
+	
+	
+	public Regno getRegno() {
+		return regno;
+	}
+
+	public void setRegno(Regno regno) {
+		this.regno = regno;
+	}
+
+	public Regno getCentro() {
+		return centro;
+	}
+
+	public void setCentro(Regno centro) {
+		this.centro = centro;
+	}
+
+	public ArrayList<Angolo> getAngoli() {
+		return angoli;
+	}
+
+	public void setAngoli(ArrayList<Angolo> angoli) {
+		this.angoli = angoli;
+	}
+
+	public Punto getPunto() {
+		return punto;
+	}
+
+	public void setPunto(Punto punto) {
+		this.punto = punto;
+	}
+
 	public String showCard() {
-		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", regno = " +regno+ ", centro" + centro + ", angoli = " + angoli + ", punti = " + punto + "}";
+	String ang = "";
+		
+		for(int i =0;i<4;i++) { 
+			ang += "\n       " + angoli.get(i).showAngolo();
+		}
+		
+		if(this.getFronte()==true) {
+			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang + "\n   " + "Punti: " + getPunto().showPunto();
+		} else {
+			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;
+		}
+
 	}
 }

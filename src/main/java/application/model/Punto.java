@@ -44,4 +44,48 @@ public class Punto {
 		this.somma = somma;
 		this.oggetto = oggetto;
 	}
+
+	public TipoPunto getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoPunto tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getSomma() {
+		return somma;
+	}
+
+	public void setSomma(int somma) {
+		this.somma = somma;
+	}
+
+	public Oggetto getOggetto() {
+		return oggetto;
+	}
+
+	public void setOggetto(Oggetto oggetto) {
+		this.oggetto = oggetto;
+	}
+	
+	public String showPunto() {
+		String riga = null;
+		
+		switch(getTipo()) {
+		
+		case IMMEDIATO: 
+			riga = String.valueOf(getSomma());
+			break;
+		case ANGOLO:
+			riga = String.valueOf(getSomma()) + " per ogni angolo coperto da questa carta";
+			break;
+		case OGGETTO:
+			riga = String.valueOf(getSomma()) + " per ogni oggetto del tipo: " + getOggetto() + " presenti sulla tua board";
+			break;
+		}
+		
+		return riga;
+		
+	}
 }

@@ -50,7 +50,19 @@ public class CartaIniziale extends Carta{
 	}
 	
 	public String showCard() {
-		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", centro" + centro + ", angoli = " + angoli + "}";
+		
+		String ang = "";
+		
+		for(int i =0;i<4;i++) { 
+			ang += "\n       " + angoli.get(i).showAngolo();
+		}
+		
+		if(this.getFronte()==true) {
+			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang;
+		} else {
+			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   "  + "\n   " + "Angoli: " + ang;
+		}
+
 	}
 
 }
