@@ -115,39 +115,31 @@ public class View {
 		System.out.println(ped.get(ped.size() - 1));
 		String pedina;
 		Pedina colore = null;
-		pedina = SCANNER.nextLine().toUpperCase();
-		
 		
 		while(true) {
-			System.out.println("Quindi la pedina scelta dal giocatore " + n + " è " + pedina + "?");
 			try {
-				String ris = SCANNER.nextLine();
-				if(ris.equalsIgnoreCase("NO")) {
-					System.out.println("Allora qual è la pedina che scegli?");
-				}else if(ris.equalsIgnoreCase("SI")){
-					try {
-						switch (pedina) {
-						case "ROSSO":
-							return colore.ROSSO;
-						case "BLU":
-							return colore.BLU;
-						case "VERDE":
-							return colore.VERDE;
-						case "GIALLO":
-							return colore.GIALLO;
-						default:
-							throw new Exception();
-						}
-					}catch(IOException e) {
-						System.out.println("Risposta non ammessa, riprova con ROSSO, BLU, VERDE o GIALLO");
-					}
-				}else {
+				pedina = SCANNER.nextLine().toUpperCase();
+				switch (pedina) {
+				case "ROSSO":
+					colore = Pedina.ROSSO;
+					return colore;
+				case "BLU":
+					colore = Pedina.BLU;
+					return colore;
+				case "VERDE":
+					colore = Pedina.VERDE;
+					return colore;
+				case "GIALLO":
+					colore = Pedina.GIALLO;
+					return colore;
+				default:
 					throw new Exception();
 				}
-			} catch(Exception e){
-				System.out.println("Risposta non ammessa, riprova con SI o NO");
+			}catch(Exception e) {
+				System.out.println("Risposta non ammessa, riprova con ROSSO, BLU, VERDE o GIALLO");
 			}
-		}	
+		}
+
 	}
 	
 	/**
@@ -167,5 +159,5 @@ public class View {
 	 */
 	public boolean chooseStartCard(CartaIniziale fronte, CartaIniziale retro) {
 		return true;
-	}
+	}	
 }
