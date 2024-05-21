@@ -43,6 +43,5 @@ public class JsonHelper {
 			return GSON.fromJson(reader, type);
 			}
 		}
-		
 	}
 }

@@ -74,48 +74,90 @@ public class CartaOro extends Carta{
 		this.requisito = null;
 	}
 	
-	
-	
+	/**
+	 * Metodo che ritorna il regno a cui appartiene la carta oro
+	 * @return
+	 */
 	public Regno getRegno() {
 		return regno;
 	}
-
+	
+	/**
+	 * Metodo che modifica il regno a cui appartiene la carta oro.
+	 * @param regno
+	 */
 	public void setRegno(Regno regno) {
 		this.regno = regno;
 	}
-
+	
+	/**
+	 * Metodo che ritorna il tipo della risorsa nel centro della carta oro.
+	 * @return
+	 */
 	public Regno getCentro() {
 		return centro;
 	}
-
+	
+	/**
+	 * Metodo che modifica il tipo della risorsa nel centro della carta oro.
+	 * @param centro
+	 */
 	public void setCentro(Regno centro) {
 		this.centro = centro;
 	}
-
+	
+	/**
+	 * Metodo che ritorna la lista di angoli della carta oro.
+	 * @return
+	 */
 	public ArrayList<Angolo> getAngoli() {
 		return angoli;
 	}
-
+	
+	/**
+	 * Metodo che modifica la lista di angoli della carta oro.
+	 * @param angoli
+	 */
 	public void setAngoli(ArrayList<Angolo> angoli) {
 		this.angoli = angoli;
 	}
 
+	/**
+	 * Metodo che ritorna i punti assegnati dalla carta oro al suo posizionamento.
+	 * @return
+	 */
 	public Punto getPunto() {
 		return punto;
 	}
-
+	
+	/**
+	 * Metodo che modifica i punti asseganti dalla carta oro al suo posizionamento.
+	 * @param punto
+	 */
 	public void setPunto(Punto punto) {
 		this.punto = punto;
 	}
-
+	
+	/**
+	 * Metodo che ritorna il requisito di posizionamento della carta oro.
+	 * @return
+	 */
 	public Requisito getRequisito() {
 		return requisito;
 	}
-
+	
+	/**
+	 * Metodo che modifica il requisito di posizionamento della carta oro.
+	 * @param requisito
+	 */
 	public void setRequisito(Requisito requisito) {
 		this.requisito = requisito;
 	}
-
+	
+	/**
+	 * Metodo che permette di mostrare tutte le informazioni di una carta oro.
+	 * @return
+	 */
 	public String showCard() {
 	String ang = "";
 		

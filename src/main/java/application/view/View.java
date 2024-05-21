@@ -35,9 +35,9 @@ public class View {
 				}else if(res.equalsIgnoreCase("SI")){
 					return true;
 				}else {
-					throw new Exception();
+					throw new IOException();
 				}
-			} catch(Exception e){
+			} catch(IOException e){
 				System.out.println("Risposta non ammessa, riprova con SI o NO");
 			}
 		}
@@ -135,9 +135,9 @@ public class View {
 					colore = Pedina.GIALLO;
 					return colore;
 				default:
-					throw new Exception();
+					throw new IOException();
 				}
-			}catch(Exception e) {
+			}catch(IOException e) {
 				System.out.println("Risposta non ammessa, riprova con ROSSO, BLU, VERDE o GIALLO");
 			}
 		}
@@ -185,6 +185,14 @@ public class View {
 		
 	}	
 	
+	/**
+	 * Metodo che chiede all'utente quale delle due carte obiettivo che ha ricevuto
+	 * intende tenere e quale invece intende scartare.
+	 * @param gio
+	 * @param obi1
+	 * @param obi2
+	 * @return
+	 */
 	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) {
 		
 		System.out.println("\nQueste sono le due carte obiettivo del giocatore " + gio + ":" );
@@ -212,6 +220,10 @@ public class View {
 		
 	}
 	
+	/**
+	 * Metodo che mostra qual è l'ordine di gioco che i giocatori dovranno seguire.
+	 * @param ordine
+	 */
 	public void showNewOrder(ArrayList<Giocatore> ordine) {
 		
 		String nuovoOrdine = "";

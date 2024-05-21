@@ -66,40 +66,76 @@ public class CartaRisorsa extends Carta {
 		this.punto = null;
 	}
 	
-	
-	
+	/**
+	 * Metodo che ritorna il regno a cui appartiene la carta risorsa.
+	 * @return
+	 */
 	public Regno getRegno() {
 		return regno;
 	}
-
+	
+	/**
+	 * Metodo che modifica il regno a cui appartiene la carta risorsa.
+	 * @param regno
+	 */
 	public void setRegno(Regno regno) {
 		this.regno = regno;
 	}
-
+	
+	/**
+	 * Metodo che ritorna il tipo di risorsa a cui appartiene il centro della 
+	 * carta risorsa.
+	 * @return
+	 */
 	public Regno getCentro() {
 		return centro;
 	}
-
+	
+	/**
+	 * Metodo che modifica il tipo di risorsa a cui appartiene il centro della 
+	 * carta risorsa.
+	 * @param centro
+	 */
 	public void setCentro(Regno centro) {
 		this.centro = centro;
 	}
-
+	
+	/**
+	 * Metodo che ritorna la lista di angoli della carta risorsa.
+	 * @return
+	 */
 	public ArrayList<Angolo> getAngoli() {
 		return angoli;
 	}
-
+	
+	/**
+	 * Metodo che modifica la lista di angoli della carta risorsa.
+	 * @param angoli
+	 */
 	public void setAngoli(ArrayList<Angolo> angoli) {
 		this.angoli = angoli;
 	}
-
+	
+	/**
+	 * Metodo che ritorna i punti assegnati al posizionamento della carta risorsa.
+	 * @return
+	 */
 	public Punto getPunto() {
 		return punto;
 	}
-
+	
+	/**
+	 * Metodo che modifica i punti assegnati al posizionamento della carta risorsa.
+	 * @param punto
+	 */
 	public void setPunto(Punto punto) {
 		this.punto = punto;
 	}
-
+	
+	/**
+	 * Metodo che permette di mostrare tutte le informazioni di una carta risorsa.
+	 * @return
+	 */
 	public String showCard() {
 	String ang = "";
 		

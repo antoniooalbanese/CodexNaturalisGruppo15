@@ -65,38 +65,81 @@ public class Obiettivo {
 		this.disposizione = disposizione;
 	}
 
+	/**
+	 * Metodo che ritorna il tipo di obiettivo.
+	 * @return
+	 */
 	public TipoObiettivo getTipo() {
 		return tipo;
 	}
-
+	
+	/**
+	 * Metodo che modifica il tipo di obiettivo.
+	 * @param tipo
+	 */
 	public void setTipo(TipoObiettivo tipo) {
 		this.tipo = tipo;
 	}
-
+	
+	/**
+	 * Metodo che ritorna il tipo di risorsa richiesta per il raggiungimento 
+	 * dell'obiettivo.
+	 * @return
+	 */
 	public Regno getRisorsa() {
 		return risorsa;
 	}
 
+	/**
+	 * Metodo che modifica il tipo di risorsa richiesta per il raggiungimento 
+	 * dell'obiettivo.
+	 * @param risorsa
+	 */
 	public void setRisorsa(Regno risorsa) {
 		this.risorsa = risorsa;
 	}
-
+	
+	/**
+	 * Metodo che ritorna i tipi di oggetti richiesti per il raggiungimento 
+	 * dell'obiettivo. 
+	 * @return
+	 */
 	public ArrayList<Oggetto> getOggetto() {
 		return oggetto;
 	}
 
+	/**
+	 * Metodo che modifica i tipi di oggetti richiesti per il raggiungimento 
+	 * dell'obiettivo.
+	 * @param oggetto
+	 */
 	public void setOggetto(ArrayList<Oggetto> oggetto) {
 		this.oggetto = oggetto;
 	}
 
+	/**
+	 * Metodo che ritorna la disposizione da soddisfare per il raggiungimento
+	 * dell'obiettivo.
+	 * @return
+	 */
 	public Regno[][] getDisposizione() {
 		return disposizione;
 	}
-
+	
+	/**
+	 * Metodo che modifica la disposizione da soddisfare per il raggiungimento
+	 * dell'obiettivo.
+	 * @param disposizione
+	 */
 	public void setDisposizione(Regno[][] disposizione) {
 		this.disposizione = disposizione;
 	}
 	
+	/**
+	 * Metodo che ritorna tutte le informazioni riguardanti un obiettivo sotto
+	 * forma di stringa.
+	 * @return
+	 */
 	public String showObiettivo() {
 		
 		String obi = " punti per ";
@@ -143,6 +186,4 @@ public class Obiettivo {
 		
 		return obi;
 	}
-	
-
 }

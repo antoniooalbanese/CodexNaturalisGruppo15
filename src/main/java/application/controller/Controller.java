@@ -70,7 +70,6 @@ public class Controller  {
 	
 	/**
 	 * Metodo che inizializza i giocatori ad inizio gioco.
-	 * @param num
 	 * @return
 	 * @throws IOException 
 	 * @throws JsonSyntaxException 
@@ -168,6 +167,12 @@ public class Controller  {
 		}	
 	}
 	
+	/**
+	 * Metodo che estrae sul banco le due carte obiettivo generali e 
+	 * distribuisce le carte obiettivo segrete ai vari giocatori.
+	 * @throws JsonSyntaxException
+	 * @throws IOException
+	 */
 	public void giveObjectiveCards() throws JsonSyntaxException, IOException {
 		MazzoObiettivo mazzoOb = new MazzoObiettivo();
 		ArrayList<CartaObiettivo> downOb = new ArrayList<CartaObiettivo>();
@@ -191,6 +196,9 @@ public class Controller  {
 		}
 	}
 	
+	/**
+	 * Metodo che sceglie l'ordine dei giocatori.
+	 */
 	public void chooseFirstPlayer() {
 		Collections.shuffle(this.model.getCampo().getGiocatore());
 		view.showNewOrder(this.model.getCampo().getGiocatore());

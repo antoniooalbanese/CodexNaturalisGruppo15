@@ -40,28 +40,44 @@ public class CartaObiettivo extends Carta{
 	 * IL RETRO AVRA' IL SOLO SCOPO DI MOSTRARE LA CARTA COPERTA.
 	 */
 
-
-
+	/**
+	 * Metodo che ritorna l'obiettivo contenuto nella carta.
+	 * @return
+	 */
 	public Obiettivo getObiettivo() {
 		return obiettivo;
 	}
 
-
+	/**
+	 * Metodo che modifica l'obiettivo contenuto nella carta.
+	 * @param obiettivo
+	 */
 	public void setObiettivo(Obiettivo obiettivo) {
 		this.obiettivo = obiettivo;
 	}
 
-
+	/**
+	 * Metodo che ritorna i punti dati dalla carta obiettivo in caso di
+	 * raggiungimento dell'obiettivo. 
+	 * @return
+	 */
 	public int getPunto() {
 		return punto;
 	}
 
-
+	/**
+	 * Metodo che ritorna i punti dati dalla carta obiettivo in caso di
+	 * raggiungimento dell'obiettivo.
+	 * @param punto
+	 */
 	public void setPunto(int punto) {
 		this.punto = punto;
 	}
 	
-	
+	/**
+	 * Metodo che permette di mostrare tutte le informazioni di una carta obiettivo.
+	 * @return
+	 */
 	public String showCard() {
 		return "\nCarta Obiettivo:\n   " + "ID: " + getId() + "\n   " + "Punti: " + getPunto() + getObiettivo().showObiettivo();
 

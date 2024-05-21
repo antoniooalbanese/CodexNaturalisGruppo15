@@ -47,14 +47,27 @@ public abstract class Carta {
 		return this.id;
 	}
 
-	
+	/**
+	 * Metodo che ritorna il booleano che indica se la carta è mostrata sul fronte
+	 * o sul retro.
+	 * @return
+	 */
 	public boolean getFronte() {
 		return fronte;
 	}
 	
+	/**
+	 * Metodo che modifica il booleano che indica se la carta è mostrata sul fronte
+	 * o sul retro.
+	 * @param fronte
+	 */
 	public void setFronte(boolean fronte) {
 		this.fronte = fronte;
 	}
 	
+	/**
+	 * Metodo astratto che permette di mostrare tutte le informazioni di una carta.
+	 * @return
+	 */
 	public abstract String showCard();
 }

@@ -49,6 +49,10 @@ public class CartaIniziale extends Carta{
 		this.angoli = angoli;
 	}
 	
+	/**
+	 * Metodo che permette di mostrare tutte le informazioni di una carta iniziale.
+	 * @return
+	 */
 	public String showCard() {
 		
 		String ang = "";
