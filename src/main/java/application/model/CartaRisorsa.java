@@ -65,4 +65,8 @@ public class CartaRisorsa extends Carta {
 		this.angoli = angoli;
 		this.punto = null;
 	}
+	
+	public String showCard() {
+		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", regno = " +regno+ ", centro" + centro + ", angoli = " + angoli + ", punti = " + punto + "}";
+	}
 }

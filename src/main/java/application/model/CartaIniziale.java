@@ -49,5 +49,8 @@ public class CartaIniziale extends Carta{
 		this.angoli = angoli;
 	}
 	
+	public String showCard() {
+		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", centro" + centro + ", angoli = " + angoli + "}";
+	}
 
 }

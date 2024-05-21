@@ -38,4 +38,8 @@ public class CartaObiettivo extends Carta{
 	 * INOLTRE BISOGNA FARE SIA UN COSTRUTTORE PER IL FRONTE CHE PER IL RETRO.
 	 * IL RETRO AVRA' IL SOLO SCOPO DI MOSTRARE LA CARTA COPERTA.
 	 */
+	
+	public String showCard() {
+		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", obiettivo = " +obiettivo+ ", punti = " + punto + "}";
+	}
 }

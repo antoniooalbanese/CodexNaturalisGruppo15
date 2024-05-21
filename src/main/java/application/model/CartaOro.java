@@ -73,4 +73,8 @@ public class CartaOro extends Carta{
 		this.punto = null;
 		this.requisito = null;
 	}
+	
+	public String showCard() {
+		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", regno = " +regno+ ", centro" + centro + ", angoli = " + angoli + ", punti = " + punto + ", requisito= "+ requisito + "}";
+	}
 }

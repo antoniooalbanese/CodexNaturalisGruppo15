@@ -46,4 +46,11 @@ public abstract class Carta {
 	public String getId() {
 		return this.id;
 	}
+
+
+	public boolean getFronte() {
+		return fronte;
+	}
+	
+	public abstract String showCard();
 }
