@@ -159,8 +159,9 @@ public class Controller  {
 		Collections.shuffle(this.model.getMazzoIniziale().getMazzoFronte());
 		for(int i = 0; i < this.num; i++) {
 			CartaIniziale carta = (CartaIniziale) this.estrai(this.model.getMazzoIniziale().getMazzoFronte());
-			if(view.chooseStartCard(carta, this.model.getMazzoIniziale().getRetroCarta(carta))) {
+			if(view.chooseStartCard(this.model.getCampo().getGiocatore().get(i).getNick(),carta , this.model.getMazzoIniziale().getRetroCarta(carta))) {
 				this.model.getCampo().getGiocatore().get(i).initBoard(carta);
+				System.out.println(carta.showCard());
 			}else {
 				this.model.getCampo().getGiocatore().get(i).initBoard(this.model.getMazzoIniziale().getRetroCarta(carta));
 			}

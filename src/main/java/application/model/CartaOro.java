@@ -74,7 +74,61 @@ public class CartaOro extends Carta{
 		this.requisito = null;
 	}
 	
+	
+	
+	public Regno getRegno() {
+		return regno;
+	}
+
+	public void setRegno(Regno regno) {
+		this.regno = regno;
+	}
+
+	public Regno getCentro() {
+		return centro;
+	}
+
+	public void setCentro(Regno centro) {
+		this.centro = centro;
+	}
+
+	public ArrayList<Angolo> getAngoli() {
+		return angoli;
+	}
+
+	public void setAngoli(ArrayList<Angolo> angoli) {
+		this.angoli = angoli;
+	}
+
+	public Punto getPunto() {
+		return punto;
+	}
+
+	public void setPunto(Punto punto) {
+		this.punto = punto;
+	}
+
+	public Requisito getRequisito() {
+		return requisito;
+	}
+
+	public void setRequisito(Requisito requisito) {
+		this.requisito = requisito;
+	}
+
 	public String showCard() {
-		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", regno = " +regno+ ", centro" + centro + ", angoli = " + angoli + ", punti = " + punto + ", requisito= "+ requisito + "}";
+	String ang = "";
+		
+		for(int i =0;i<4;i++) { 
+			ang += "\n       " + angoli.get(i).showAngolo();
+		}
+		
+		if(this.getFronte()==true) {
+			return "\nCarta Oro:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + 
+					"\n   " + "Angoli: " + ang + "Punti: " + getPunto().showPunto() + "\n   " + "Requisito di piazzamento: " + getRequisito().showRequisito();
+		} else {
+			return "\nCarta Oro:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;
+		}
+
 	}
 }

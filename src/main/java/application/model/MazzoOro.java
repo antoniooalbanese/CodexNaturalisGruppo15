@@ -41,10 +41,12 @@ public class MazzoOro {
 		ArrayList<CartaOro> mazzo = JsonHelper.loadJson("MazzoOro.json",  new TypeToken<List<CartaOro>>(){}.getType());
 	
 		for(int i = 0; i < mazzo.size() - 4; i++) {
+			mazzo.get(i).setFronte(true);
 			this.mazzoFronte.add(mazzo.get(i));
 		}
 		
 		for(int i = 40; i < mazzo.size(); i++) {
+			mazzo.get(i).setFronte(false);
 			this.mazzoRetro.add(mazzo.get(i));
 		}
 	}

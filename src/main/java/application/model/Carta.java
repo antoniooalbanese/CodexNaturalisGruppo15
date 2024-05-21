@@ -47,18 +47,14 @@ public abstract class Carta {
 		return this.id;
 	}
 
-	/**
-	 * Metodo che ritorna il verso della carta, se è TRUE è il fronte, se è FALSE
-	 * è il retro.
-	 * @return
-	 */
+	
 	public boolean getFronte() {
 		return fronte;
 	}
 	
-	/**
-	 * Metodo che mostra tutti gli attributi della carta in forma di stringa.
-	 * @return
-	 */
+	public void setFronte(boolean fronte) {
+		this.fronte = fronte;
+	}
+	
 	public abstract String showCard();
 }

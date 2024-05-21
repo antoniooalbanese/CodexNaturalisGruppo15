@@ -28,6 +28,7 @@ public class CartaObiettivo extends Carta{
 		this.obiettivo = obiettivo;
 		this.punto = punto;
 	}
+	
 
 	/**QUESTA CLASSE E' DA RIGUARDARE.
 	 * TUTTO DIPENDE DA COME SI STRUTTURA LA CLASSE OBIETTIVO.
@@ -38,8 +39,31 @@ public class CartaObiettivo extends Carta{
 	 * INOLTRE BISOGNA FARE SIA UN COSTRUTTORE PER IL FRONTE CHE PER IL RETRO.
 	 * IL RETRO AVRA' IL SOLO SCOPO DI MOSTRARE LA CARTA COPERTA.
 	 */
+
+
+
+	public Obiettivo getObiettivo() {
+		return obiettivo;
+	}
+
+
+	public void setObiettivo(Obiettivo obiettivo) {
+		this.obiettivo = obiettivo;
+	}
+
+
+	public int getPunto() {
+		return punto;
+	}
+
+
+	public void setPunto(int punto) {
+		this.punto = punto;
+	}
+	
 	
 	public String showCard() {
-		return "CartaOro{" + "id = " + getId() + ", fronte = " + getFronte() + ", obiettivo = " +obiettivo+ ", punti = " + punto + "}";
+		return "\nCarta Obiettivo:\n   " + "ID: " + getId() + "\n   " + "Punti: " + getPunto() + getObiettivo().showObiettivo();
+
 	}
 }

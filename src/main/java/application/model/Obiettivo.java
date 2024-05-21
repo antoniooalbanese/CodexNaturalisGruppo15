@@ -65,4 +65,82 @@ public class Obiettivo {
 		this.disposizione = disposizione;
 	}
 
+	public TipoObiettivo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoObiettivo tipo) {
+		this.tipo = tipo;
+	}
+
+	public Regno getRisorsa() {
+		return risorsa;
+	}
+
+	public void setRisorsa(Regno risorsa) {
+		this.risorsa = risorsa;
+	}
+
+	public ArrayList<Oggetto> getOggetto() {
+		return oggetto;
+	}
+
+	public void setOggetto(ArrayList<Oggetto> oggetto) {
+		this.oggetto = oggetto;
+	}
+
+	public Regno[][] getDisposizione() {
+		return disposizione;
+	}
+
+	public void setDisposizione(Regno[][] disposizione) {
+		this.disposizione = disposizione;
+	}
+	
+	public String showObiettivo() {
+		
+		String obi = " punti per ";
+		String ogg = "";
+		String mat = "";
+		
+		for (int i =0; i <oggetto.size(); i++) {
+			ogg += oggetto.get(i);
+			if (i==oggetto.size()-1) {
+				break;
+			}
+			ogg+= ", ";
+		}
+		
+		/** DA RICONTROLLARE SOPRATUTTO RIEMPIMENTO MATRICE E SPAZIO DEDICATO ALLE CELLE PER IL RIEMPIMENTO
+		 * 
+		 */
+		
+		for (int j=0; j<3; j++) {
+			for (int k=0; k<3; k++) {
+				
+				mat += disposizione [j][k];
+	
+				if (k==2) {
+					mat += "\n";
+				}
+			}
+		}
+		
+		switch (getTipo()) {
+		
+		case RISORSA:
+			obi += "3 risorse del tipo " + getRisorsa();
+			break;
+		case OGGETTO:
+			obi += "ogni gruppo di oggetti del tipo " + ogg;
+			break;
+		case DISPOSIZIONE:
+			obi += "ogni disposizione del tipo:\n   " + mat;
+			break;
+		}
+		
+		return obi;
+	}
+	
+
 }
