@@ -1,12 +1,8 @@
 package application;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import com.google.gson.JsonSyntaxException;
-
 import application.controller.Controller;
-import application.model.Giocatore;
 import application.model.Model;
 import application.view.View;
 
