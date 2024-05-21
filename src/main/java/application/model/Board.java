@@ -50,5 +50,71 @@ public class Board {
 		this.turno = 0;
 		this.punteggio = 0;
 	}
+
+	public CartaIniziale getCentro() {
+		return centro;
+	}
+
+	public void setCentro(CartaIniziale centro) {
+		this.centro = centro;
+	}
+
+	public ArrayList<CartaRisorsa> getRisorsa() {
+		return risorsa;
+	}
+
+	public void setRisorsa(ArrayList<CartaRisorsa> risorsa) {
+		this.risorsa = risorsa;
+	}
+
+	public ArrayList<CartaOro> getOro() {
+		return oro;
+	}
+
+	public void setOro(ArrayList<CartaOro> oro) {
+		this.oro = oro;
+	}
+
+	public CartaObiettivo getObiettivo() {
+		return obiettivo;
+	}
+
+	public void setObiettivo(CartaObiettivo obiettivo) {
+		this.obiettivo = obiettivo;
+	}
+
+	public int getTurno() {
+		return turno;
+	}
+
+	public void setTurno(int turno) {
+		this.turno = turno;
+	}
+
+	public int getPunteggio() {
+		return punteggio;
+	}
+
+	public void setPunteggio(int punteggio) {
+		this.punteggio = punteggio;
+	}
+
+	public ArrayList<Integer> getNumRis() {
+		return numRis;
+	}
+
+	public void setNumRis(ArrayList<Integer> numRis) {
+		this.numRis = numRis;
+	}
+
+	public ArrayList<Integer> getNumOgg() {
+		return numOgg;
+	}
+
+	public void setNumOgg(ArrayList<Integer> numOgg) {
+		this.numOgg = numOgg;
+	}
+	
+	
 	
 }

@@ -103,28 +103,9 @@ public class Obiettivo {
 		String ogg = "";
 		String mat = "";
 		
-		for (int i =0; i <oggetto.size(); i++) {
-			ogg += oggetto.get(i);
-			if (i==oggetto.size()-1) {
-				break;
-			}
-			ogg+= ", ";
-		}
-		
 		/** DA RICONTROLLARE SOPRATUTTO RIEMPIMENTO MATRICE E SPAZIO DEDICATO ALLE CELLE PER IL RIEMPIMENTO
 		 * 
 		 */
-		
-		for (int j=0; j<3; j++) {
-			for (int k=0; k<3; k++) {
-				
-				mat += disposizione [j][k];
-	
-				if (k==2) {
-					mat += "\n";
-				}
-			}
-		}
 		
 		switch (getTipo()) {
 		
@@ -132,9 +113,29 @@ public class Obiettivo {
 			obi += "3 risorse del tipo " + getRisorsa();
 			break;
 		case OGGETTO:
+			for (int i =0; i <oggetto.size(); i++) {
+				ogg += oggetto.get(i);
+				if (i==oggetto.size()-1) {
+					break;
+				}
+				ogg+= ", ";
+			}
 			obi += "ogni gruppo di oggetti del tipo " + ogg;
 			break;
 		case DISPOSIZIONE:
+			for (int j=0; j<3; j++) {
+				for (int k=0; k<3; k++) {
+					if(disposizione [j][k]==null) {
+						mat += "      ";
+					}else {
+						mat += disposizione [j][k];
+					}
+					
+					if (k==2) {
+						mat += "\n";
+					}
+				}
+			}
 			obi += "ogni disposizione del tipo:\n   " + mat;
 			break;
 		}

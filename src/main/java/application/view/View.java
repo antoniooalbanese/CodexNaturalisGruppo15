@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import application.model.CartaIniziale;
+import application.model.CartaObiettivo;
 import application.model.Giocatore;
 import application.model.Pedina;
 
@@ -183,4 +184,31 @@ public class View {
 		}
 		
 	}	
+	
+	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) {
+		
+		System.out.println("\nQueste sono le due carte obiettivo del giocatore " + gio + ":" );
+		System.out.println("\nCARTA 1:");
+		System.out.println(obi1.showCard());
+		System.out.println("\nCARTA 2:");
+		System.out.println(obi2.showCard());
+		System.out.println("\n" + "Quale carta vuoi scegliere? (1/2)");
+		
+		while(true) {
+			try {
+				String ris = SCANNER.nextLine();
+				if(ris.equalsIgnoreCase("1")) {
+					return true;
+				} else if (ris.equalsIgnoreCase("2")) {
+					return false;
+				} else {
+					throw new IOException();
+				}
+			}catch(IOException e) {
+				System.out.println("Risposta non valida, riprova con 1 o 2");
+			}
+		}
+		
+		
+	}
 }

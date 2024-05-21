@@ -10,6 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import application.model.CampoDiGioco;
 import application.model.Carta;
 import application.model.CartaIniziale;
+import application.model.CartaObiettivo;
 import application.model.CartaOro;
 import application.model.CartaRisorsa;
 import application.model.Giocatore;
@@ -161,15 +162,33 @@ public class Controller  {
 			CartaIniziale carta = (CartaIniziale) this.estrai(this.model.getMazzoIniziale().getMazzoFronte());
 			if(view.chooseStartCard(this.model.getCampo().getGiocatore().get(i).getNick(),carta , this.model.getMazzoIniziale().getRetroCarta(carta))) {
 				this.model.getCampo().getGiocatore().get(i).initBoard(carta);
-				System.out.println(carta.showCard());
 			}else {
 				this.model.getCampo().getGiocatore().get(i).initBoard(this.model.getMazzoIniziale().getRetroCarta(carta));
 			}
-			
-			
+		}	
+	}
+	
+	public void giveObjectiveCards() throws JsonSyntaxException, IOException {
+		MazzoObiettivo mazzoOb = new MazzoObiettivo();
+		ArrayList<CartaObiettivo> downOb = new ArrayList<CartaObiettivo>();
+		mazzoOb.load();
+		Collections.shuffle(mazzoOb.getMazzoFronte());
+		downOb.add((CartaObiettivo) this.estrai(mazzoOb.getMazzoFronte()));
+		downOb.add((CartaObiettivo) this.estrai(mazzoOb.getMazzoFronte()));
+		this.model.getCampo().setMazzoOb(mazzoOb);
+		this.model.getCampo().setObiettivo(downOb);
+		
+		for(int i=0; i<num; i++) {
+			CartaObiettivo carta1 = (CartaObiettivo) this.estrai(this.model.getCampo().getMazzoOb().getMazzoFronte());
+			CartaObiettivo carta2 = (CartaObiettivo) this.estrai(this.model.getCampo().getMazzoOb().getMazzoFronte());
+			if(view.chooseObjectiveCard(this.model.getCampo().getGiocatore().get(i).getNick(),carta1,carta2)) {
+				this.model.getCampo().getGiocatore().get(i).getBoard().setObiettivo(carta1);
+				this.model.getCampo().getMazzoOb().getMazzoFronte().add(carta2);
+			}else {
+				this.model.getCampo().getGiocatore().get(i).getBoard().setObiettivo(carta2);
+				this.model.getCampo().getMazzoOb().getMazzoFronte().add(carta1);	
+			}
 		}
-		
-		
 	}
 	
 	
