@@ -201,6 +201,7 @@ public class Controller  {
 	 */
 	public void chooseFirstPlayer() {
 		Collections.shuffle(this.model.getCampo().getGiocatore());
+		this.model.getCampo().getGiocatore().get(0).setInizio();
 		view.showNewOrder(this.model.getCampo().getGiocatore());
 	}
 	

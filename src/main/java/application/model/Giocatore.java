@@ -18,9 +18,10 @@ public class Giocatore {
 	 */
 	private Pedina pedina;
 	/**
-	 * Pedina nera data al giocatore che inizia la partita.
+	 * Attributo che indica se si è in possesso della pedina nera data al giocatore 
+	 * che inizia la partita.
 	 */
-	private Pedina inizio;
+	private boolean inizio;
 	/**
 	 * Attributo che rappresenta la mano del giocatore.
 	 */
@@ -41,7 +42,7 @@ public class Giocatore {
 		this.id = id;
 		this.nick = nick;
 		this.pedina = pedina;
-		this.inizio = null;
+		this.inizio = false;
 		this.mano = null;
 		this.board = null;
 	}
@@ -86,4 +87,10 @@ public class Giocatore {
 		return this.board;
 	}
 	
+	/**
+	 * Metodo che modifica il possesso della pedina nera.
+	 */
+	public void setInizio() {
+		this.inizio = true;
+	}
 }
