@@ -211,4 +211,17 @@ public class View {
 		
 		
 	}
+	
+	public void showNewOrder(ArrayList<Giocatore> ordine) {
+		
+		String nuovoOrdine = "";
+		
+		for (int i=0; i < ordine.size(); i++) {
+			nuovoOrdine += "    " + (i+1) + "." + ordine.get(i).getNick();
+			nuovoOrdine += "\n";
+		}
+		
+		System.out.println("\nQuesto è l'ordine di gioco:\n\n" + nuovoOrdine);
+		
+	}
 }

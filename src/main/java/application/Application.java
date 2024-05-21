@@ -22,6 +22,7 @@ public class Application {
 		controller.initializeField();
 		controller.giveStartCards();
 		controller.giveObjectiveCards();
+		controller.chooseFirstPlayer();
 		
 	}
 }

@@ -191,6 +191,10 @@ public class Controller  {
 		}
 	}
 	
+	public void chooseFirstPlayer() {
+		Collections.shuffle(this.model.getCampo().getGiocatore());
+		view.showNewOrder(this.model.getCampo().getGiocatore());
+	}
 	
 	
 	
