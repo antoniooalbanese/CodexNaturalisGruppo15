@@ -24,47 +24,6 @@ public class Obiettivo {
 	 */
 	private Regno[][] disposizione = new Regno[3][3];
 
-	
-	/**
-	 * Costruttore della classe quando l'obiettivo da raggiungere riguarda il 
-	 * conteggio di un determinato tipo di risorse.
-	 * @param tipo
-	 * @param risorsa
-	 */
-	public Obiettivo(TipoObiettivo tipo, Regno risorsa) {
-		this.tipo = tipo;
-		this.risorsa = risorsa;
-		this.oggetto = null;
-		this.disposizione = null;
-	}
-	
-	/**
-	 * Costruttore della classe quando l'obiettivo da raggiungere riguarda il 
-	 * conteggio di determianti tipi di oggetti.
-	 * @param tipo
-	 * @param oggetto
-	 */
-	public Obiettivo(TipoObiettivo tipo, ArrayList<Oggetto> oggetto) {
-		this.tipo = tipo;
-		this.risorsa = null;
-		this.oggetto = oggetto;
-		this.disposizione = null;
-	}
-	
-	/**
-	 * Costruttore della classe quando l'obiettivo da raggiungere riguarda il 
-	 * conteggio di una determinata disposizione delle carte che deve formare o
-	 * una diagonale, oppure una "elle".
-	 * @param tipo
-	 * @param diag
-	 */
-	public Obiettivo(TipoObiettivo tipo, Regno[][] disposizione) {
-		this.tipo = tipo;
-		this.risorsa = null;
-		this.oggetto = null;
-		this.disposizione = disposizione;
-	}
-
 	/**
 	 * Metodo che ritorna il tipo di obiettivo.
 	 * @return
@@ -154,7 +113,7 @@ public class Obiettivo {
 		switch (getTipo()) {
 		
 		case RISORSA:
-			obi += "3 risorse del tipo " + getRisorsa();
+			obi += "3 risorse del tipo: " + getRisorsa();
 			break;
 		case OGGETTO:
 			for (int i =0; i <oggetto.size(); i++) {
@@ -164,7 +123,7 @@ public class Obiettivo {
 				}
 				ogg+= ", ";
 			}
-			obi += "ogni gruppo di oggetti del tipo " + ogg;
+			obi += "ogni gruppo di oggetti del tipo: " + ogg;
 			break;
 		case DISPOSIZIONE:
 			for (int j=0; j<3; j++) {

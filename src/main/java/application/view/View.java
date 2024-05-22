@@ -13,6 +13,7 @@ import application.model.CartaRisorsa;
 import application.model.Giocatore;
 import application.model.Mano;
 import application.model.Pedina;
+import application.model.Regno;
 
 /**
  * Classe che rappresenta l'interfaccia di output e input utilizzata dai giocatori.
@@ -198,12 +199,11 @@ public class View {
 	 * @return
 	 */
 	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) {
-		
 		System.out.println("\nQueste sono le due carte obiettivo del giocatore " + gio + ":" );
 		System.out.println("\nCARTA 1:");
-		System.out.println(obi1.showCard());
+		this.showObjective(obi1.showCard(), obi1.getObiettivo().getDisposizione());
 		System.out.println("\nCARTA 2:");
-		System.out.println(obi2.showCard());
+		this.showObjective(obi2.showCard(), obi2.getObiettivo().getDisposizione());
 		System.out.println("\n" + "Quale carta vuoi scegliere? (1/2)");
 		
 		while(true) {
@@ -220,6 +220,52 @@ public class View {
 				System.out.println("Risposta non valida, riprova con 1 o 2");
 			}
 		}
+	}
+	
+	/**
+	 * Metodo che gestisce la visualizzazione degli obiettivi di tipo disposizione.
+	 * @param riga
+	 * @param dispo
+	 */
+	public void showObjective(String riga, Regno[][]dispo) {
+		String regex = "[\n]";
+		String [] righe = riga.split(regex);
+		String line = "   ";
+		
+		if(righe[3].contains("disposizione")) {
+			for(int i = 0; i < 3; i++) {
+				for(int j = 0; j < 3; j++) {
+					int s = i + 1;
+					if(dispo[i][j] == null) {
+						line += "     ";
+					}else {
+						switch(dispo[i][j]) {
+						case VEGETALE:
+							line += AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "CARD" + s + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						case ANIMALE:
+							line += AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode( ) +"CARD" + s + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						case FUNGHI:
+							line += AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "CARD" + s + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						case INSETTI:
+							line += AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "CARD" + s + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						default:
+							line += "     ";
+							break;
+						}
+					}
+					
+					if (j == 2) {
+						line += "\n   ";
+					}
+				}
+			}
+		}
+		
+		System.out.print(righe[0] + "\n" + righe[1] + "\n" + righe[2] + "\n" + righe[3] + "\n" + line);
 	}
 	
 	/**
@@ -249,8 +295,9 @@ public class View {
 	
 	/**
 	 * Metodo che mostra in output le board dei giocatori.
+	 * @param n
 	 */
-	public void showBoard() {
+	public void showBoard(int n) {
 		
 	}
 	

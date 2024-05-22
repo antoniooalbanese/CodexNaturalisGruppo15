@@ -64,7 +64,7 @@ public class CartaIniziale extends Carta{
 		if(this.getFronte()==true) {
 			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang;
 		} else {
-			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   "  + "\n   " + "Angoli: " + ang;
+			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;
 		}
 
 	}

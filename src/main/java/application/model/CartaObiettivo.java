@@ -76,6 +76,7 @@ public class CartaObiettivo extends Carta{
 	
 	/**
 	 * Metodo che permette di mostrare tutte le informazioni di una carta obiettivo.
+	 * @param dispo
 	 * @return
 	 */
 	public String showCard() {

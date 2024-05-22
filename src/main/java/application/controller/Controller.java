@@ -164,6 +164,7 @@ public class Controller  {
 			}else {
 				this.model.getCampo().getGiocatore().get(i).initBoard(this.model.getMazzoIniziale().getRetroCarta(carta));
 			}
+			this.model.getCampo().getGiocatore().get(i).getBoard().getMatrix()[5][5] = this.model.getCampo().getGiocatore().get(i).getId();
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoO().getMazzoFronte());
@@ -218,9 +219,9 @@ public class Controller  {
 		
 		while(!this.isGameOver()) {
 			for(int i = 0; i < num; i++) {
-				view.showBoard();
+				view.showBoard(i);
 				view.showField(this.model.getCampo());
-				this.posiziona();
+				this.posiziona(i);
 				this.pesca(i);
 			}
 		}
@@ -238,9 +239,10 @@ public class Controller  {
 	
 	/**
 	 * Metodo che gestisce il posizionamento delle carte sulla board.
+	 * @param n
 	 */
-	public void posiziona() {
-		
+	public void posiziona(int n) {
+		view.showBoard(n);
 	}
 	
 	/**
@@ -266,7 +268,13 @@ public class Controller  {
 		mazzo.remove(0);
 	}
 	
-	
+	/**
+	 * Metodo che permette al giocatore di pescare una carta tra quelle scoperte
+	 * sul campo di gioco.
+	 * @param giocatore
+	 * @param down
+	 * @return
+	 */
 	public Carta pescaDown(Giocatore giocatore, ArrayList<? extends Carta> down) {
 		return null;
 	}

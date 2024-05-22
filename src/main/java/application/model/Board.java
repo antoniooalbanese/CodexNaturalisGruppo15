@@ -8,6 +8,10 @@ import java.util.ArrayList;
  */
 public class Board {
 	/**
+	 * Matrice che rappresenta la disposizione delle carte sulla board.
+	 */
+	private String [][] matrix;
+	/**
 	 * Carta iniziale posseduta e piazzata da un giocatore.
 	 */
 	private CartaIniziale centro;
@@ -46,9 +50,28 @@ public class Board {
 	 * @param centro
 	 */
 	public Board(CartaIniziale centro) {
+		this.matrix = new String [9][9];
 		this.centro = centro;
 		this.turno = 0;
 		this.punteggio = 0;
+	}
+	
+	/**
+	 * Metodo che ritorna la matrice che rappresenta la disposizione delle carte 
+	 * sulla board.
+	 * @return
+	 */
+	public String[][] getMatrix(){
+		return this.matrix;
+	}
+	
+	/**
+	 * Metodo che modifica la matrice che rappresenta la disposizione delle carte 
+	 * sulla board. 
+	 * @param matrix
+	 */
+	public void getMatrix(String [][] matrix){
+		this.matrix = matrix;
 	}
 	
 	/**
