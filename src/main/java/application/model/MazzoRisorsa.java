@@ -68,6 +68,31 @@ public class MazzoRisorsa {
 		return this.mazzoRetro;
 	}
 	
+
+	/**
+	 * Metodo che ritorna una determinata carta del mazzo retro delle carte risorsa 
+	 * che appartiene al regno preso come parametro.
+	 * @param risorsa
+	 * @return
+	 */
+	public CartaRisorsa getCartaRetroByRegno(Regno risorsa) {
+		for(int i = 0; i < this.getMazzoRetro().size(); i++) {
+			if(this.getMazzoRetro().get(i).getRegno().equals(risorsa)) {
+				return this.getMazzoRetro().get(i);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Metodo che ritorna il retro di una carta in posizione i del mazzo fronte 
+	 * delle carte risorsa.
+	 * @param i
+	 * @return
+	 */
+	public CartaRisorsa showRetro(int i) {
+		return this.getCartaRetroByRegno(this.mazzoFronte.get(i).getRegno());	
+	}
 	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.

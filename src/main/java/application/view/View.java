@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import application.model.CampoDiGioco;
 import application.model.CartaIniziale;
 import application.model.CartaObiettivo;
+import application.model.CartaOro;
+import application.model.CartaRisorsa;
 import application.model.Giocatore;
 import application.model.Pedina;
 
@@ -216,8 +219,6 @@ public class View {
 				System.out.println("Risposta non valida, riprova con 1 o 2");
 			}
 		}
-		
-		
 	}
 	
 	/**
@@ -250,5 +251,30 @@ public class View {
 	 */
 	public void showBoard() {
 		
+	}
+	
+	/**
+	 * Metodo che mostra i mazzi e le carte scoperte presenti sul campo di gioco. 
+	 */
+	public void showField(CampoDiGioco campo) {
+		System.out.println("SUL CAMPO DA GIOCO CI SONO QUESTE CARTE:");
+		System.out.println("CIMA DEI MAZZI RISORSA E ORO:");
+		campo.getMazzoR().showRetro(0).showCard();
+		campo.getMazzoO().showRetro(0).showCard();
+		System.out.println("CARTE SCOPERTE");
+	
+		for (CartaRisorsa r : campo.getRisorsa()) {
+			  System.out.println(r.showCard());
+		}
+		
+		for (CartaOro o : campo.getOro()) {
+			  System.out.println(o.showCard());
+		}
+		
+		System.out.println("OBIETTIVI COMUNI");
+		
+		for (CartaObiettivo ob : campo.getObiettivo()) {
+			  System.out.println(ob.showCard());
+		}
 	}
 }

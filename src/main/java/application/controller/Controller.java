@@ -214,8 +214,9 @@ public class Controller  {
 		while(!this.isGameOver()) {
 			for(int i = 0; i < num; i++) {
 				view.showBoard();
+				view.showField(this.model.getCampo());
 				this.posiziona();
-				this.pesca(null, null);
+				this.pesca(i);
 			}
 		}
 	}
@@ -238,17 +239,30 @@ public class Controller  {
 	}
 	
 	/**
-	 * METODO DA RIGUARDARE QUANDO SI ARRIVERA' A IMPLEMENTARE IL TURNO DEL
-	 * GIOCATORE.
+	 * Metodo che permette al giocatore in posizione n di pescare una carta.
+	 * @param n
+	 */
+	public void pesca(int n) {
+		
+	}
+	
+	/**
+	 * Metodo che permette al giocatore di pescare una carta da un determinato 
+	 * mazzo.
 	 * @param giocatore
 	 * @param mazzo
 	 * @return
 	 */
-	public Carta pesca(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
+	public Carta pescaMazzo(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
 		Carta carta = mazzo.get(0);
 		giocatore.getMano().getRisorsa().add((CartaRisorsa) carta);
 		giocatore.getMano().getOro().add((CartaOro) carta);
 		return carta;
+	}
+	
+	
+	public Carta pescaDown(Giocatore giocatore, ArrayList<? extends Carta> down) {
+		return null;
 	}
 		
 }
