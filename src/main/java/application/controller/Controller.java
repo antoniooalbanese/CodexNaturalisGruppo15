@@ -164,6 +164,11 @@ public class Controller  {
 			}else {
 				this.model.getCampo().getGiocatore().get(i).initBoard(this.model.getMazzoIniziale().getRetroCarta(carta));
 			}
+			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
+			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
+			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoO().getMazzoFronte());
+			view.showHand(this.model.getCampo().getGiocatore().get(i).getNick(), this.model.getCampo().getGiocatore().get(i).getMano());
+			view.passaMano();
 		}	
 	}
 	
@@ -251,13 +256,14 @@ public class Controller  {
 	 * mazzo.
 	 * @param giocatore
 	 * @param mazzo
-	 * @return
 	 */
-	public Carta pescaMazzo(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
-		Carta carta = mazzo.get(0);
-		giocatore.getMano().getRisorsa().add((CartaRisorsa) carta);
-		giocatore.getMano().getOro().add((CartaOro) carta);
-		return carta;
+	public void pescaMazzo(Giocatore giocatore, ArrayList<? extends Carta> mazzo) {
+		if(mazzo.get(0) instanceof CartaRisorsa) {
+			giocatore.getMano().getRisorsa().add((CartaRisorsa) mazzo.get(0));
+		}else if(mazzo.get(0) instanceof CartaOro) {
+			giocatore.getMano().getOro().add((CartaOro) mazzo.get(0));
+		}
+		mazzo.remove(0);
 	}
 	
 	

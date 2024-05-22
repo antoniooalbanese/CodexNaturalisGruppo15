@@ -17,16 +17,6 @@ public class Mano {
 	private ArrayList<CartaOro> oro = new ArrayList<CartaOro>();
 	
 	/**
-	 * Costruttore della classe.
-	 * @param risorsa
-	 * @param oro
-	 */
-	public Mano(ArrayList<CartaRisorsa> risorsa, ArrayList<CartaOro> oro) {
-		this.risorsa = risorsa;
-		this.oro = oro;
-	}
-	
-	/**
 	 * Metodo che ritorna le carte risorsa in mano al giocatore.
 	 * @return
 	 */

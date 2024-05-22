@@ -143,7 +143,7 @@ public class CartaRisorsa extends Carta {
 			ang += "\n       " + angoli.get(i).showAngolo();
 		}
 		
-		if(this.getFronte()==true) {
+		if(this.getFronte()!=true) {
 			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang + "\n   " + "Punti: " + getPunto().showPunto();
 		} else {
 			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;

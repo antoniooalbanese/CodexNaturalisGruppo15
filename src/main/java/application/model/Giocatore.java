@@ -25,7 +25,7 @@ public class Giocatore {
 	/**
 	 * Attributo che rappresenta la mano del giocatore.
 	 */
-	private Mano mano;
+	private Mano mano = new Mano();
 	/**
 	 * Attributo che rappresenta l'insieme delle carte piazzate dal giocatore
 	 * sul campo di gioco.
@@ -43,8 +43,6 @@ public class Giocatore {
 		this.nick = nick;
 		this.pedina = pedina;
 		this.inizio = false;
-		this.mano = null;
-		this.board = null;
 	}
 	
 	/**

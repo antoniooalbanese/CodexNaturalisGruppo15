@@ -11,6 +11,7 @@ import application.model.CartaObiettivo;
 import application.model.CartaOro;
 import application.model.CartaRisorsa;
 import application.model.Giocatore;
+import application.model.Mano;
 import application.model.Pedina;
 
 /**
@@ -164,7 +165,7 @@ public class View {
 	 */
 	public boolean chooseStartCard(String gio, CartaIniziale fronte, CartaIniziale retro) {
 		
-		System.out.println("\nQuesta è la carta iniziale di " + gio + "\n");
+		System.out.println("\nQuesta è la carta iniziale di " + gio + ":\n");
 		System.out.println("FRONTE:");
 		System.out.println(fronte.showCard());
 		System.out.println("\nRETRO:");
@@ -261,7 +262,7 @@ public class View {
 		System.out.println("CIMA DEI MAZZI RISORSA E ORO:");
 		campo.getMazzoR().showRetro(0).showCard();
 		campo.getMazzoO().showRetro(0).showCard();
-		System.out.println("CARTE SCOPERTE");
+		System.out.println("CARTE SCOPERTE:");
 	
 		for (CartaRisorsa r : campo.getRisorsa()) {
 			  System.out.println(r.showCard());
@@ -271,10 +272,46 @@ public class View {
 			  System.out.println(o.showCard());
 		}
 		
-		System.out.println("OBIETTIVI COMUNI");
+		System.out.println("OBIETTIVI COMUNI:");
 		
 		for (CartaObiettivo ob : campo.getObiettivo()) {
 			  System.out.println(ob.showCard());
+		}
+	}
+	
+	/**
+	 * Metodo che mostra le carte in mano di un giocatore.
+	 * @param nick
+	 * @param mano
+	 */
+	public void showHand(String nick, Mano mano) {
+		System.out.println("\nMANO DEL GIOCATORE " + nick + ":");
+		
+		for (CartaRisorsa r : mano.getRisorsa()) {
+			  System.out.println(r.showCard());
+		}
+		
+		for (CartaOro o : mano.getOro()) {
+			  System.out.println(o.showCard());
+		}	
+	}
+	
+	public boolean passaMano() {
+		System.out.println("\nVuoi passare la mano al prossimo giocatore? (SI/NO)");
+		
+		while(true) {
+			try {
+				String check = SCANNER.nextLine();
+				if(check.equalsIgnoreCase("NO")) {
+					return false;
+				}else if(check.equalsIgnoreCase("SI")){
+					return true;
+				}else {
+					throw new IOException();
+				}
+			} catch(IOException e){
+				System.out.println("Risposta non ammessa, riprova con SI o NO");
+			}
 		}
 	}
 }
