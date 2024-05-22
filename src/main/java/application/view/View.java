@@ -294,10 +294,40 @@ public class View {
 	}
 	
 	/**
+	 * Metodo che avvisa i giocatori a chi appartiene il turno che sta per essere
+	 * giocato.
+	 * @param nick
+	 */
+	public void tellWhoseTurn(String nick) {
+		System.out.println("TURNO DI: " + nick );
+	}
+	
+	/**
 	 * Metodo che mostra in output le board dei giocatori.
 	 * @param n
 	 */
-	public void showBoard(int n) {
+	public void showAllBoards(Giocatore g) {
+		System.out.println("Carte in campo degli altri giocatori:");
+		this.showOtherBoards(g);
+		System.out.println("BOARD DI: " + g.getNick());
+		this.showPlayerStatus(g);
+	}
+	
+	/**
+	 * Metodo che stampa a schermo le board degli altri giocatori che non sono 
+	 * di turno.
+	 * @param g
+	 */
+	public void showOtherBoards(Giocatore g) {
+		
+	}
+	
+	/**
+	 * Metodo che stampa a schermo lo stato del giocatore di turno, ossia:
+	 * la board, le carte che ha in mano e l'obiettivo nascosto.  
+	 * @param g
+	 */
+	public void showPlayerStatus(Giocatore g) {
 		
 	}
 	

@@ -219,9 +219,10 @@ public class Controller  {
 		
 		while(!this.isGameOver()) {
 			for(int i = 0; i < num; i++) {
-				view.showBoard(i);
+				view.tellWhoseTurn(this.model.getCampo().getGiocatore().get(i).getNick());
+				view.showAllBoards(this.model.getCampo().getGiocatore().get(i));
 				view.showField(this.model.getCampo());
-				this.posiziona(i);
+				this.posiziona();
 				this.pesca(i);
 			}
 		}
@@ -241,8 +242,8 @@ public class Controller  {
 	 * Metodo che gestisce il posizionamento delle carte sulla board.
 	 * @param n
 	 */
-	public void posiziona(int n) {
-		view.showBoard(n);
+	public void posiziona() {
+
 	}
 	
 	/**

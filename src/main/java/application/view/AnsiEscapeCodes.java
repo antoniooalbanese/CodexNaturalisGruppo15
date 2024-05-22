@@ -5,6 +5,10 @@ package application.view;
  */
 public enum AnsiEscapeCodes {
 	/**
+	 * Background di colore bianco.
+	 */
+	WHITE_BACKGROUND("\u001B[48;2;255;255;255m"),
+	/**
 	 * Background di colore verde.
 	 */
 	GREEN_BACKGROUND("\u001B[48;2;27;186;9m"),
