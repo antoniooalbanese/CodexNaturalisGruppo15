@@ -37,11 +37,21 @@ public class Board {
 	 */
 	private int punteggio;
 	/**
-	 * Lista contenente il numero di ogni risorsa presente sulla board. 
+	 * Lista contenente il numero di ogni risorsa presente sulla board, più nello
+	 * specifico la lista di contatori è composta in questo modo:
+	 * 	elemento 0: numero risorse di tipo VEGETALE;
+	 * 	elemento 1: numero risorse di tipo ANIMALE;
+	 * 	elemento 2: numero risorse di tipo FUNGHI;
+	 * 	elemento 3: numero risorse di tipo INSETTI. 
 	 */
 	private ArrayList<Integer> numRis;
+	
 	/**
-	 * Lista contenente il numero di ogni oggetto presente sulla board. 
+	 * Lista contenente il numero di ogni oggetto presente sulla board, più nello
+	 * specifico la lista di contatori è composta in questo modo:
+	 * 	elemento 0: numero oggetti di tipo PIUMA;
+	 * 	elemento 1: numero oggetti di tipo INCHIOSTRO;
+	 * 	elemento 2: numero oggetti di tipo PERGAMENA;
 	 */
 	private ArrayList<Integer> numOgg;
 	

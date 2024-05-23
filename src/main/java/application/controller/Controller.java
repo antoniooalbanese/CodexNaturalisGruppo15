@@ -169,7 +169,9 @@ public class Controller  {
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoO().getMazzoFronte());
 			view.showHand(this.model.getCampo().getGiocatore().get(i).getNick(), this.model.getCampo().getGiocatore().get(i).getMano());
-			view.passaMano();
+			while(!view.passaMano()) {
+				
+			}
 		}	
 	}
 	
@@ -220,10 +222,13 @@ public class Controller  {
 		while(!this.isGameOver()) {
 			for(int i = 0; i < num; i++) {
 				view.tellWhoseTurn(this.model.getCampo().getGiocatore().get(i).getNick());
-				view.showAllBoards(this.model.getCampo().getGiocatore().get(i));
+				view.showAllBoards(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getGiocatore());
 				view.showField(this.model.getCampo());
-				this.posiziona();
-				this.pesca(i);
+				this.posiziona(this.model.getCampo().getGiocatore().get(i));
+				this.pesca(this.model.getCampo().getGiocatore().get(i));
+				while(!view.passaMano()) {
+					
+				}
 			}
 		}
 	}
@@ -242,7 +247,7 @@ public class Controller  {
 	 * Metodo che gestisce il posizionamento delle carte sulla board.
 	 * @param n
 	 */
-	public void posiziona() {
+	public void posiziona(Giocatore g) {
 
 	}
 	
@@ -250,7 +255,7 @@ public class Controller  {
 	 * Metodo che permette al giocatore in posizione n di pescare una carta.
 	 * @param n
 	 */
-	public void pesca(int n) {
+	public void pesca(Giocatore g) {
 		
 	}
 	

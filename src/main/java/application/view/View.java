@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import application.model.Board;
 import application.model.CampoDiGioco;
 import application.model.CartaIniziale;
 import application.model.CartaObiettivo;
@@ -304,12 +305,12 @@ public class View {
 	
 	/**
 	 * Metodo che mostra in output le board dei giocatori.
-	 * @param n
+	 * @param g
+	 * @param giocatori
 	 */
-	public void showAllBoards(Giocatore g) {
-		System.out.println("Carte in campo degli altri giocatori:");
-		this.showOtherBoards(g);
-		System.out.println("BOARD DI: " + g.getNick());
+	public void showAllBoards(Giocatore g, ArrayList<Giocatore> giocatori) {
+		System.out.println("Informazioni sul campo degli altri giocatori:");
+		this.showOtherBoards(g, giocatori);
 		this.showPlayerStatus(g);
 	}
 	
@@ -317,9 +318,76 @@ public class View {
 	 * Metodo che stampa a schermo le board degli altri giocatori che non sono 
 	 * di turno.
 	 * @param g
+	 * @param giocatori
 	 */
-	public void showOtherBoards(Giocatore g) {
+	public void showOtherBoards(Giocatore g, ArrayList<Giocatore> giocatori) {
+		for(int i = 0; i < giocatori.size(); i++) {
+			if(giocatori.get(i) != g) {
+				this.showBoard(giocatori.get(i));
+			}
+		}
+	}
+	
+	/**
+	 * Metodo che stampa a schermo la board di un determinato giocatore.
+	 * @param g
+	 */
+	public void showBoard(Giocatore g) {
+		Board bor = g.getBoard();
+		String [][] mat = bor.getMatrix();
+		String board =  "CAMPO DI: " + g.getNick() + "\n" +
+						"   Turni giocati: " + bor.getTurno() + "\n" +
+						"   Punteggio: " + bor.getPunteggio() + "\n" +
+						"   Risorse presenti negli angoli delle carte posizionate sul campo:" + "\n" +
+						"    VEGETALE: " + bor.getNumRis().get(0) + "\n" +
+						"    ANIMALE: " + bor.getNumRis().get(1) + "\n" +
+						"    FUNGHI: " + bor.getNumRis().get(2) + "\n" +
+						"    INSETTI: " + bor.getNumRis().get(3) + "\n" +
+						"   Oggetti presenti negli angoli delle carte posizionate sul campo:" + "\n" + 
+						"    PIUMA: " + bor.getNumOgg().get(0) + "\n" + 
+						"    INCHIOSTRO " + bor.getNumOgg().get(1) + "\n" +
+						"    PERGAMENA: " + bor.getNumOgg().get(2) + "\n" +
+						"   Carta obiettivo segreta: " + "\n" +
+						"    " + bor.getObiettivo().showCard() +
+						"   Carte in campo:" + "\n";
 		
+		for (int i = 0; i < mat.length; i++) {
+			board += "    ";
+			for (int j = 0; j < mat[i].length; j++) {
+				if(mat[i][j] == null) {
+					board += "     ";
+				}else {
+					if(mat[i][j].charAt(0) == 'I') {
+						board += AnsiEscapeCodes.WHITE_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+					} else {
+						switch(mat[i][j].charAt(1)) {
+						case 'R':
+							board += AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						case 'B':
+							board += AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode( ) + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						case 'V':
+							if(mat[i][j].charAt(2) == 'R') {
+								board += AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							} else if(mat[i][j].charAt(2) == 'L') {
+								board += AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							}
+							break;
+						default:
+							board += "     ";
+							break;
+						}
+					}
+				}
+				
+				if (j == mat.length - 1) {
+					board += "\n   ";
+				}
+			}
+		}
+		
+		System.out.println(board);
 	}
 	
 	/**
@@ -328,7 +396,10 @@ public class View {
 	 * @param g
 	 */
 	public void showPlayerStatus(Giocatore g) {
-		
+		System.out.println("Informazioni sullo stato del giocatore di turno:");
+		this.showBoard(g);
+		this.showHand(g.getNick(), g.getMano());
+		this.showSecretObjective(g, g.getBoard());
 	}
 	
 	/**
@@ -362,7 +433,7 @@ public class View {
 	 * @param mano
 	 */
 	public void showHand(String nick, Mano mano) {
-		System.out.println("\nMANO DEL GIOCATORE " + nick + ":");
+		System.out.println("\nMANO DI" + nick + ":");
 		
 		for (CartaRisorsa r : mano.getRisorsa()) {
 			  System.out.println(r.showCard());
@@ -373,6 +444,19 @@ public class View {
 		}	
 	}
 	
+	/**
+	 * Metodo che mostra al giocatore di turno il suo obiettivo segreto.
+	 * @param g
+	 * @param board
+	 */
+	public void showSecretObjective(Giocatore g, Board board) {
+		System.out.println("OBIETTIVO SEGRETO DI " + g.getNick());
+		System.out.println(board.getObiettivo().showCard());
+	}
+	/**
+	 * Metodo che chiede al giocatore di turno se ha intenzione di passare la mano.
+	 * @return
+	 */
 	public boolean passaMano() {
 		System.out.println("\nVuoi passare la mano al prossimo giocatore? (SI/NO)");
 		
