@@ -475,4 +475,20 @@ public class View {
 			}
 		}
 	}
+	
+	/**
+	 * Metodo che chiede al giocatore di turno quale carta posizionare.
+	 * @return
+	 */
+	public String chooseWhatToPlace() {
+		System.out.println("Quale carta vuoi posizionare?");
+		return SCANNER.nextLine();
+	}
+	
+	/**
+	 * Metodo che stampa il messaggio di errore di codice non valido.
+	 */
+	public void insertAValidCode() {
+		System.out.println("Codice della carta non valido, riprova con uno dei codici disponibili");
+	}
 }

@@ -245,10 +245,19 @@ public class Controller  {
 	
 	/**
 	 * Metodo che gestisce il posizionamento delle carte sulla board.
-	 * @param n
+	 * @param g
 	 */
 	public void posiziona(Giocatore g) {
+		try {
+			switch(view.chooseWhatToPlace()) {
+			default:
+				throw new IOException();
+			}
+		}catch(IOException e) {
+			view.insertAValidCode();
+		}
 
+		/**view.chooseWhereToPlace()*/
 	}
 	
 	/**
