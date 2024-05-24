@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import application.model.Angolo;
 import application.model.Board;
 import application.model.CampoDiGioco;
+import application.model.Carta;
 import application.model.CartaIniziale;
 import application.model.CartaObiettivo;
 import application.model.CartaOro;
@@ -14,6 +16,7 @@ import application.model.CartaRisorsa;
 import application.model.Giocatore;
 import application.model.Mano;
 import application.model.Pedina;
+import application.model.Posizione;
 import application.model.Regno;
 
 /**
@@ -295,6 +298,16 @@ public class View {
 	}
 	
 	/**
+	 * Metodo che avvisa i giocatori che stanno per giocare il loro ultimo turno.
+	 * @param last
+	 */
+	public void tellLastTurn(boolean last) {
+		if(last) {
+			System.out.println("È L'ULTIMO TURNO");
+		}
+	}
+	
+	/**
 	 * Metodo che avvisa i giocatori a chi appartiene il turno che sta per essere
 	 * giocato.
 	 * @param nick
@@ -481,7 +494,7 @@ public class View {
 	 * @return
 	 */
 	public String chooseWhatToPlace() {
-		System.out.println("Quale carta vuoi posizionare?");
+		System.out.println("Inserisci il codice della carta che vuoi posizionare:");
 		return SCANNER.nextLine();
 	}
 	
@@ -490,5 +503,81 @@ public class View {
 	 */
 	public void insertAValidCode() {
 		System.out.println("Codice della carta non valido, riprova con uno dei codici disponibili");
+	}
+	
+	/**
+	 * Metodo che stampa il messaggio di errore dell'inserimento della carta in
+	 * quanto non soddisfa i requisiti.
+	 */
+	public void showRequirementMessage() {
+		System.out.println("La carta non soddisfa i requisiti, scegliere un'altra carta");
+	}
+	
+	/**
+	 * Metodo che chiede al giocatore di turno quale carta coprire con quella 
+	 * che viene posizionata.
+	 * @return
+	 */
+	public String chooseWhatToCover() {
+		System.out.println("Inserisci il codice della carta che vuoi coprire:");
+		return SCANNER.nextLine();
+	}
+	
+	/**
+	 * Metodo che stampa il messaggio di apertura della lista degli angoli 
+	 * disponibili.
+	 */
+	public void showFreeCornersMessage() {
+		System.out.println("Gli angoli disponibili sono:\n");
+	}
+	
+	/**
+	 * Metodo che stampa tutti gli angoli risorsa liberi.
+	 * @param cardR
+	 * @param angolo
+	 */
+	public void showFreeResourceCorners(CartaRisorsa cardR, ArrayList<Angolo> angolo) {
+		System.out.println(cardR.getId() + ":\n");
+		
+		for(Angolo a: angolo) {
+			System.out.println("   " + a.showAngolo() + "\n");
+		}
+	}
+	
+	/**
+	 * Metodo che stampa tutti gli angoli oro liberi.
+	 * @param cardO
+	 * @param angolo
+	 */
+	public void showFreeGoldCorners(CartaOro cardO, ArrayList<Angolo> angolo) {
+		System.out.println(cardO.getId() + ":\n");
+		
+		for(Angolo a: angolo) {
+			System.out.println("   " + a.showAngolo() + "\n");
+		}
+	}
+	
+	
+	public Posizione chooseWhichCorner() {
+		while(true) {
+			try {
+				String res = SCANNER.nextLine();
+				
+				switch(res) {
+				case "ADX":
+					return Posizione.ADX;
+				case "BDX":
+					return Posizione.BDX;
+				case "BSX":
+					return Posizione.BSX;
+				case "ASX":
+					return Posizione.ASX;
+				default:
+					throw new IOException();
+				}
+			} catch(IOException e){
+				System.out.println("Risposta non ammessa, riprova con ADX, BDX, BSX, ASX");
+			}
+		}
 	}
 }

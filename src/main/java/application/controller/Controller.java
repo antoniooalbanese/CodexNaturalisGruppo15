@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
 
+import application.model.Angolo;
 import application.model.CampoDiGioco;
 import application.model.Carta;
 import application.model.CartaIniziale;
@@ -20,6 +21,7 @@ import application.model.MazzoOro;
 import application.model.MazzoRisorsa;
 import application.model.Model;
 import application.model.Pedina;
+import application.model.Posizione;
 import application.view.View;
 
 /**
@@ -218,9 +220,12 @@ public class Controller  {
 	 */
 	public void playGame() {
 		view.startMessage();
+		boolean last = false;
 		
-		while(!this.isGameOver()) {
+		while(!this.isGameOver(last)) {
+			
 			for(int i = 0; i < num; i++) {
+				view.tellLastTurn(last); 
 				view.tellWhoseTurn(this.model.getCampo().getGiocatore().get(i).getNick());
 				view.showAllBoards(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getGiocatore());
 				view.showField(this.model.getCampo());
@@ -229,35 +234,227 @@ public class Controller  {
 				while(!view.passaMano()) {
 					
 				}
+				last = this.checkLastTurn(this.model.getCampo().getGiocatore().get(i));
 			}
 		}
+	}
+	
+	/**
+	 * Metodo che controlla se il giocatore a fine del proprio turno ha raggiunto
+	 * almeno i 20 punti per far terminare la partita.
+	 * @param g
+	 * @return
+	 */
+	public boolean checkLastTurn(Giocatore g) {
+		if(g.getBoard().getPunteggio() >= 20) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
 	 * Metodo che controlla se si sono verificate le condizioni per terminare la
 	 * partita, ossia che almeno un giocatore abbia raggiunto o superato 20 punti 
 	 * con il solo posizionamento delle carte.
+	 * @param last
 	 * @return
 	 */
-	public boolean isGameOver() {
+	public boolean isGameOver(boolean last) {
+		if(!last && !this.isOneDeckFinished()) {
+			return false;
+		}
 		return true;
 	}
 	
+	/**
+	 * Metodo che controlla se uno dei due mazzi(oro o risorsa) è terminato.
+	 * @return
+	 */
+	public boolean isOneDeckFinished() {
+		if(this.model.getCampo().getMazzoR().getMazzoFronte().isEmpty() || this.model.getCampo().getMazzoO().getMazzoFronte().isEmpty()) {
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * Metodo che gestisce il posizionamento delle carte sulla board.
 	 * @param g
 	 */
 	public void posiziona(Giocatore g) {
-		try {
-			switch(view.chooseWhatToPlace()) {
-			default:
-				throw new IOException();
-			}
-		}catch(IOException e) {
-			view.insertAValidCode();
+		String scelta = "";
+		ArrayList<CartaRisorsa> libereRisorsa = new ArrayList<CartaRisorsa>();
+		ArrayList<CartaOro> libereOro = new ArrayList<CartaOro>();
+		boolean check = false; 
+		boolean req = false;
+		String riga = "";
+		CartaRisorsa cardR = null;
+		CartaOro cardO = null;
+		
+		libereRisorsa.addAll(this.getFreeResourceCards(g.getBoard().getRisorsa()));
+		libereOro.addAll(this.getFreeGoldCards(g.getBoard().getOro()));
+		
+		view.showFreeCornersMessage();
+		
+		for(int z = 0; z < libereRisorsa.size(); z++) {
+			view.showFreeResourceCorners(libereRisorsa.get(z), this.getFreeResourceCorners(libereRisorsa.get(z)));
 		}
-
-		/**view.chooseWhereToPlace()*/
+		
+		for(int k = 0; k < libereRisorsa.size(); k++) {
+			view.showFreeGoldCorners(libereOro.get(k), this.getFreeGoldCorners(libereOro.get(k)));
+		}
+		
+		scelta = view.chooseWhatToPlace();
+		while(check != true) {
+			try {
+				for(int i = 0; i < g.getMano().getRisorsa().size(); i++) {
+					if(scelta == g.getMano().getRisorsa().get(i).getId()) {
+						check = true;
+						break;
+					}
+				}
+				
+				for(int j = 0; j < g.getMano().getOro().size() - 1; j++) {
+					if(scelta == g.getMano().getOro().get(j).getId()) {
+						check = true;
+						break;
+					}
+				}
+				if(check == false) {
+					throw new IOException();
+				}
+			}catch(IOException e) {
+				view.insertAValidCode();
+			}
+		}
+		
+		check = false;
+		
+		while(check != true && req != true) {
+			riga = view.chooseWhatToCover();
+		
+			try {
+				for(CartaRisorsa r: libereRisorsa) {
+					if(riga.equals(r.getId())) {
+						cardR = r;
+						check = true;
+					}
+				}
+				
+				for(CartaOro o: libereOro) {
+					if(riga.equals(o.getId())) {
+						if(this.checkRequirements(g, o)) {
+							cardO = o;
+							check = true;
+							req = true;
+						} else {
+							check = true;
+							req = false;
+						}
+					}
+				}
+				
+				if(check == false) {
+					throw new IOException();
+				}
+				
+				if(req == false) {
+					view.showRequirementMessage();
+				}
+			}catch(IOException e) {
+				view.insertAValidCode();
+			}
+		}
+		
+		view.showFreeCornersMessage();
+		
+		if(cardR != null) {
+			view.showFreeResourceCorners(cardR, cardR.getAngoli());
+			
+			if(this.checkPlaceResource(scelta, cardR, view.chooseWhichCorner())) {
+				this.placeCard(cardR);
+			}
+		}else if(cardO != null) {
+			view.showFreeGoldCorners(cardO, cardO.getAngoli());
+			if(this.checkPlaceGold(scelta, cardO, view.chooseWhichCorner())) {
+				this.placeCard(cardO);
+			}
+		}
+	}
+	
+	/**
+	 * Metodo che controlla se la carta oro che il giocatore vuole posizionare 
+	 * rispetta i requisiti di posizionamento.
+	 * @param g
+	 * @param oro
+	 * @return
+	 */
+	public boolean checkRequirements(Giocatore g, CartaOro oro) {
+		int veg = 0;
+		int ani = 0;
+		int fun = 0;
+		int ins = 0;
+		
+		for(int i = 0; i < oro.getRequisito().getRisorsa().size(); i++) {
+			switch(oro.getRequisito().getRisorsa().get(i)) {
+			case VEGETALE:
+				veg++;
+			case ANIMALE:
+				ani++;
+			case FUNGHI:
+				fun++;
+			case INSETTI:
+				ins++;
+			}
+		}
+		
+		if(veg <= g.getBoard().getNumRis().get(0)) {
+			if(ani <= g.getBoard().getNumRis().get(1)) {
+				if(fun <= g.getBoard().getNumRis().get(2)) {
+					if(ins <= g.getBoard().getNumRis().get(3)) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	/**
+	 * Metodo che controlla che la carta risorsa possa essere realmente posizionata
+	 * come vuole il giocatore.
+	 * @param scelta
+	 * @param coperta
+	 * @param angolo
+	 * @return
+	 */
+	public boolean checkPlaceResource(String scelta, CartaRisorsa coperta, Posizione angolo) {
+		/**PRIMO CONTROLLO: COMBINAZIONE ANGOLI
+		 * SECONDO CONTROLLO: CONTENUTO ANGOLO SU QUALE VUOI PIAZZARE, CIOE'
+		 * IL TIPO DI ANGOLO E IL SUO CONTENUTO(TIPO NASCOSTO PUO' ESSERE
+		 * POSIZIONATO SOLO SU TIPO RISORSA E OGGETTI E NON PUO' ESSERE COPERTO
+		 */
+		return true;
+	}
+	
+	/**
+	 * Metodo che controlla che la carta oro possa essere realmente posizionata
+	 * come vuole il giocatore.
+	 * @param scelta
+	 * @param coperta
+	 * @param angolo
+	 * @return
+	 */
+	public boolean checkPlaceGold(String scelta, CartaOro coperta, Posizione angolo) {
+		return true;
+	}
+	
+	/**
+	 * Metodo che aggiunge alla lista di carte della board la carta piazzata e 
+	 * aggiorna la relativa matrice e i contatori.
+	 * @param card
+	 */
+	public void placeCard(Carta card) {
+		
 	}
 	
 	/**
@@ -293,5 +490,88 @@ public class Controller  {
 	public Carta pescaDown(Giocatore giocatore, ArrayList<? extends Carta> down) {
 		return null;
 	}
+	
+	/**
+	 * Metodo che ritorna le carte risorsa posizionate che hanno angoli liberi che 
+	 * possono essere coperti da angoli di altre carte.
+	 * @param card
+	 * @return
+	 */
+	public ArrayList<CartaRisorsa> getFreeResourceCards(ArrayList<CartaRisorsa> card){
+		ArrayList<CartaRisorsa> free = new ArrayList<CartaRisorsa>();
+		boolean empty = false;
 		
+		for(int i = 0; i < card.size(); i++) {
+			for(int j = 0; j < 4; j++) {
+				if(this.getFreeResourceCorners(free.get(i)) == null) {
+					empty = true;
+				}
+			}
+			if(empty == true) {
+				free.add(card.get(i));
+				empty = false;
+			}
+		}
+		
+		return free;
+	}
+	
+	/**
+	 * Metodo che ritorna le carte oro posizionate che hanno angoli liberi che 
+	 * possono essere coperti da angoli di altre carte.
+	 * @param card
+	 * @return
+	 */
+	public ArrayList<CartaOro> getFreeGoldCards(ArrayList<CartaOro> card){
+		ArrayList<CartaOro> free = new ArrayList<CartaOro>();
+		boolean empty = false;
+		
+		for(int i = 0; i < card.size(); i++) {
+			for(int j = 0; j < 4; j++) {
+				if(this.getFreeGoldCorners(free.get(i)) == null) {
+					empty = true;
+				}
+			}
+			if(empty == true) {
+				free.add(card.get(i));
+				empty = false;
+			}
+		}
+		
+		return free;
+	}
+	
+	/**
+	 * Metodo che ritorna tutti gli angoli liberi di una carta risorsa.
+	 * @param card
+	 * @return
+	 */
+	public ArrayList<Angolo> getFreeResourceCorners(CartaRisorsa card){
+		ArrayList<Angolo> corner = new ArrayList<Angolo>();
+		
+		for (Angolo c : card.getAngoli()) {
+			if(c.getLink() != null) {
+				corner.add(c);
+			}
+		}
+		
+		return corner;
+	}
+	
+	/**
+	 * Metodo che ritorna tutti gli angoli liberi di una carta oro.
+	 * @param card
+	 * @return
+	 */
+	public ArrayList<Angolo> getFreeGoldCorners(CartaOro card){
+		ArrayList<Angolo> corner = new ArrayList<Angolo>();
+		
+		for (Angolo c : card.getAngoli()) {
+			if(c.getLink() != null) {
+				corner.add(c);
+			}
+		}
+		
+		return corner;
+	}
 }
