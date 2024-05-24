@@ -101,7 +101,7 @@ public class Punto {
 	 * @return
 	 */
 	public String showPunto() {
-		String riga = null;
+		String riga = "";
 		
 		switch(getTipo()) {
 		

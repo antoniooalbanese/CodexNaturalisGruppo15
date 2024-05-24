@@ -46,6 +46,9 @@ public class Requisito {
 		
 		for (int i = 0; i<risorsa.size(); i++) {
 			req += risorsa.get(i);
+			if(i != risorsa.size() - 1) {
+				req += ", ";
+			}
 		}
 		
 		return req;

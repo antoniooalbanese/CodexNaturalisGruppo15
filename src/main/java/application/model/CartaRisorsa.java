@@ -43,7 +43,6 @@ public class CartaRisorsa extends Carta {
 						Punto punto) {
 		super(id);
 		this.regno = regno;
-		this.centro = null;
 		this.angoli = angoli;
 		this.punto = punto;
 	}
@@ -63,7 +62,6 @@ public class CartaRisorsa extends Carta {
 		this.regno = regno;
 		this.centro = centro;
 		this.angoli = angoli;
-		this.punto = null;
 	}
 	
 	/**
@@ -143,10 +141,14 @@ public class CartaRisorsa extends Carta {
 			ang += "\n       " + angoli.get(i).showAngolo();
 		}
 		
-		if(this.getFronte()!=true) {
-			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang + "\n   " + "Punti: " + getPunto().showPunto();
+		if(this.getFronte() == true) {
+			if(this.getPunto() == null) {
+				return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang + "\n   ";
+			} else {
+				return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang + "\n   " + "Punti: " + getPunto().showPunto();
+			}
 		} else {
-			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;
+			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang;
 		}
 
 	}

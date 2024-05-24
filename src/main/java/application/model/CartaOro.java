@@ -165,11 +165,11 @@ public class CartaOro extends Carta{
 			ang += "\n       " + angoli.get(i).showAngolo();
 		}
 		
-		if(this.getFronte()!=true) {
-			return "\nCarta Oro:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + 
-					"\n   " + "Angoli: " + ang + "Punti: " + getPunto().showPunto() + "\n   " + "Requisito di piazzamento: " + getRequisito().showRequisito();
+		if(this.getFronte() == true) {
+			return "\nCarta Oro:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang + "\n   " + "Punti: " + getPunto().showPunto() + "\n   "
+					+ "Requisito di piazzamento: " + getRequisito().showRequisito();
 		} else {
-			return "\nCarta Oro:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;
+			return "\nCarta Oro:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "Angoli: " + ang;
 		}
 
 	}
