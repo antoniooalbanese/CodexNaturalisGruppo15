@@ -44,7 +44,7 @@ public class Board {
 	 * 	elemento 2: numero risorse di tipo FUNGHI;
 	 * 	elemento 3: numero risorse di tipo INSETTI. 
 	 */
-	private ArrayList<Integer> numRis;
+	private ArrayList<Integer> numRis = new ArrayList<Integer>();
 	
 	/**
 	 * Lista contenente il numero di ogni oggetto presente sulla board, più nello
@@ -53,7 +53,7 @@ public class Board {
 	 * 	elemento 1: numero oggetti di tipo INCHIOSTRO;
 	 * 	elemento 2: numero oggetti di tipo PERGAMENA;
 	 */
-	private ArrayList<Integer> numOgg;
+	private ArrayList<Integer> numOgg = new ArrayList<Integer>();
 	
 	/**
 	 * Costruttore della classe.
@@ -64,6 +64,12 @@ public class Board {
 		this.centro = centro;
 		this.turno = 0;
 		this.punteggio = 0;
+		for(int i=0; i<4; i++) {
+			this.numRis.add(0);
+		}
+		for(int i=0; i<3; i++) {
+			this.numOgg.add(0);
+		}
 	}
 	
 	/**
@@ -210,6 +216,24 @@ public class Board {
 	 */
 	public void setNumOgg(ArrayList<Integer> numOgg) {
 		this.numOgg = numOgg;
+	}
+	
+	public Carta getByID (String id) {
+		if(id.charAt(0)=='R') {
+			for(CartaRisorsa r: this.risorsa ) {
+				if(r.equals(id)) {
+					return r;
+				}
+			}
+		}
+		if(id.charAt(0)=='O') {
+			for(CartaOro o: this.oro ) {
+				if(o.equals(id)) {
+					return o;
+				}
+			}
+		}
+		return null;
 	}
 	
 	

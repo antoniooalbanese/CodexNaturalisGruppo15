@@ -361,7 +361,8 @@ public class View {
 	public void showBoard(Giocatore g) {
 		Board bor = g.getBoard();
 		String [][] mat = bor.getMatrix();
-		String board =  "CAMPO DI: " + g.getNick() + "\n" +
+		Regno[][] disp = bor.getObiettivo().getObiettivo().getDisposizione();
+		String intro =  "CAMPO DI: " + g.getNick() + "\n" +
 						"   Turni giocati: " + bor.getTurno() + "\n" +
 						"   Punteggio: " + bor.getPunteggio() + "\n" +
 						"   Risorse presenti negli angoli delle carte posizionate sul campo:" + "\n" +
@@ -373,9 +374,8 @@ public class View {
 						"    PIUMA: " + bor.getNumOgg().get(0) + "\n" + 
 						"    INCHIOSTRO " + bor.getNumOgg().get(1) + "\n" +
 						"    PERGAMENA: " + bor.getNumOgg().get(2) + "\n" +
-						"   Carta obiettivo segreta: " + "\n" +
-						"    " + bor.getObiettivo().showCard() +
-						"   Carte in campo:" + "\n";
+						"   Carta obiettivo segreta: " + "\n   ";
+		String board = "Carte in campo:" + "\n";
 		
 		for (int i = 0; i < mat.length; i++) {
 			board += "    ";
@@ -413,7 +413,9 @@ public class View {
 			}
 		}
 		
-		System.out.println(board);
+		System.out.println(intro);
+		showObjective(bor.getObiettivo().showCard(), bor.getObiettivo().getObiettivo().getDisposizione());
+		System.out.println("\n" + board);
 	}
 	
 	/**
@@ -449,7 +451,7 @@ public class View {
 		System.out.println("OBIETTIVI COMUNI:");
 		
 		for (CartaObiettivo ob : campo.getObiettivo()) {
-			  System.out.println(ob.showCard());
+			  showObjective(ob.showCard(), ob.getObiettivo().getDisposizione());
 		}
 	}
 	
@@ -459,7 +461,7 @@ public class View {
 	 * @param mano
 	 */
 	public void showHand(String nick, Mano mano) {
-		System.out.println("\nMANO DI" + nick + ":");
+		System.out.println("\nMANO DI " + nick + ":");
 		
 		for (CartaRisorsa r : mano.getRisorsa()) {
 			  System.out.println(r.showCard());
@@ -598,6 +600,6 @@ public class View {
 		System.out.println("La posizione scelta è gia occupata");
 	}
 	public void showPlaceErrorMessage() {
-		System.out.println("Un angolo nascosto non può coprire un angolo vuoto");
+		System.out.println("Un angolo nascosto non può coprire un angolo vuoto. Controlla e riprova");
 	}
 }
