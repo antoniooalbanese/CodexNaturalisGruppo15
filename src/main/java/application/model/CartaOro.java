@@ -173,4 +173,13 @@ public class CartaOro extends Carta{
 		}
 
 	}
+	
+	public Angolo getAngoloByPosizione(Posizione pos) {
+		for(Angolo a : this.angoli) {
+			if(a.getPos().equals(pos)) {
+				return a;
+			}
+		}
+		return null;
+	}
 }

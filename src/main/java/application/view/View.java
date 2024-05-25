@@ -593,4 +593,11 @@ public class View {
 			}
 		}
 	}
+	
+	public void isFullMessage() {
+		System.out.println("La posizione scelta è gia occupata");
+	}
+	public void showPlaceErrorMessage() {
+		System.out.println("Un angolo nascosto non può coprire un angolo vuoto");
+	}
 }
