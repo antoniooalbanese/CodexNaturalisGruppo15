@@ -22,6 +22,7 @@ import application.model.MazzoRisorsa;
 import application.model.Model;
 import application.model.Pedina;
 import application.model.Posizione;
+import application.model.TipoAngolo;
 import application.view.View;
 
 /**
@@ -421,8 +422,41 @@ public class Controller  {
 		
 		return false;
 	}
+	
+	public boolean checkFreeMatrix(Giocatore g, Carta carta, Posizione angolo) {
+		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
+			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
+				if(g.getBoard().getMatrix()[i][j].equals(carta.getId())) {
+					switch (angolo) {
+					case ADX:
+						if(g.getBoard().getMatrix()[i-1][j+1] == null) {
+							return true;
+						}
+						break;
+					case BDX:
+						if(g.getBoard().getMatrix()[i+1][j+1] == null) {
+							return true;
+						}
+						break;
+					case BSX:
+						if(g.getBoard().getMatrix()[i+1][j-1] == null) {
+							return true;
+						}
+						break;
+					case ASX:
+						if(g.getBoard().getMatrix()[i-1][j-1] == null) {
+							return true;
+						}
+						break;
+					
+					}
+				}
+			}
+		}
+		return false;
+	}
 	/**
-	 * Metodo che controlla che la carta risorsa possa essere realmente posizionata
+	 * Metodo che controlla che la carta possa essere realmente posizionata su una carta risorsa
 	 * come vuole il giocatore.
 	 * @param scelta
 	 * @param coperta
@@ -430,13 +464,32 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean checkPlaceResource(Giocatore g, String scelta, CartaRisorsa coperta, Posizione angolo) {
-		CartaRisorsa card = g.getMano().getResourceById(scelta);
-		
+		Carta card = g.getMano().getResourceById(scelta);
+		if(this.checkFreeMatrix(g, coperta, angolo)) {
+			view.isFullMessage();
+			return false;
+		}
 		switch(angolo) {
 		case ADX:
+			if(!checkPlaceCondition(((CartaOro) card).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
+				view.showPlaceErrorMessage();
+				return false;
+			}
 		case BDX:
+			if(!checkPlaceCondition(((CartaOro) card).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
+				view.showPlaceErrorMessage();
+				return false;
+			}
 		case BSX:
-		case ASX:	
+			if(!checkPlaceCondition(((CartaOro) card).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
+				view.showPlaceErrorMessage();
+				return false;
+			}
+		case ASX:
+			if(!checkPlaceCondition(((CartaOro) card).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
+				view.showPlaceErrorMessage();
+				return false;
+			}
 		}
 		/**PRIMO CONTROLLO: COMBINAZIONE ANGOLI
 		 * SECONDO CONTROLLO: CONTENUTO ANGOLO SU QUALE VUOI PIAZZARE, CIOE'
@@ -446,8 +499,16 @@ public class Controller  {
 		return true;
 	}
 	
+	public boolean checkPlaceCondition(Angolo ang, Angolo coperto) {
+		if(ang.getTipo().equals(TipoAngolo.NASCOSTO)) {
+			if(coperto.getTipo().equals(TipoAngolo.VUOTO)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	/**
-	 * Metodo che controlla che la carta oro possa essere realmente posizionata
+	 * Metodo che controlla che la carta possa essere realmente posizionata su una carta oro
 	 * come vuole il giocatore.
 	 * @param scelta
 	 * @param coperta
@@ -560,7 +621,7 @@ public class Controller  {
 		ArrayList<Angolo> corner = new ArrayList<Angolo>();
 		
 		for (Angolo c : card.getAngoli()) {
-			if(c.getLink() != null) {
+			if(c.getLink() == null && c.getTipo() != TipoAngolo.NASCOSTO) {
 				corner.add(c);
 			}
 		}
@@ -577,7 +638,7 @@ public class Controller  {
 		ArrayList<Angolo> corner = new ArrayList<Angolo>();
 		
 		for (Angolo c : card.getAngoli()) {
-			if(c.getLink() != null) {
+			if(c.getLink() == null && c.getTipo() != TipoAngolo.NASCOSTO) {
 				corner.add(c);
 			}
 		}
