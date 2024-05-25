@@ -91,6 +91,7 @@ public class MazzoOro {
 	public CartaOro showRetro(int i) {
 		return this.getCartaRetroByRegno(this.mazzoFronte.get(i).getRegno());	
 	}
+
 	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
 	 * DELLE CARTE.

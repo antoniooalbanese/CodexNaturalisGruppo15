@@ -298,6 +298,19 @@ public class View {
 	}
 	
 	/**
+	 * Metodo che dice ai giocatori che i mazzi sono terminati.
+	 * @param over
+	 * @return
+	 */
+	public boolean showDecksAreOverMessage(boolean over) {
+		if(over) {
+			System.out.println("I mazzi sono entrambi terminati");
+			return true;
+		}
+		
+		return false;
+	}
+	/**
 	 * Metodo che avvisa i giocatori che stanno per giocare il loro ultimo turno.
 	 * @param last
 	 */

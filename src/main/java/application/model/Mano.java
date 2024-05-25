@@ -31,4 +31,34 @@ public class Mano {
 	public ArrayList<CartaOro> getOro() {
 		return this.oro;
 	}
+	
+	/**
+	 * Metodo che restituisce la carta risorsa partendo dall'id.
+	 * @param id
+	 * @return
+	 */
+	public CartaOro getGoldById(String id) {
+		for(CartaOro s: this.oro) {
+			if(id.equals(s.getId())) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Metodo che restituisce la carta oro partendo dall'id.
+	 * @param id
+	 * @return
+	 */
+	public CartaRisorsa getResourceById(String id) {
+		for(CartaRisorsa s: this.risorsa) {
+			if(id.equals(s.getId())) {
+				return s;
+			}
+		}
+		
+		return null;
+	}
 }

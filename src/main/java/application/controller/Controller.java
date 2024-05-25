@@ -225,6 +225,9 @@ public class Controller  {
 		while(!this.isGameOver(last)) {
 			
 			for(int i = 0; i < num; i++) {
+				if(view.showDecksAreOverMessage(areDecksFinished())) {
+					break;
+				}
 				view.tellLastTurn(last); 
 				view.tellWhoseTurn(this.model.getCampo().getGiocatore().get(i).getNick());
 				view.showAllBoards(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getGiocatore());
@@ -260,18 +263,18 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean isGameOver(boolean last) {
-		if(!last && !this.isOneDeckFinished()) {
+		if(!last && !this.areDecksFinished()) {
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * Metodo che controlla se uno dei due mazzi(oro o risorsa) è terminato.
+	 * Metodo che controlla se i due mazzi(oro e risorsa) sono terminati.
 	 * @return
 	 */
-	public boolean isOneDeckFinished() {
-		if(this.model.getCampo().getMazzoR().getMazzoFronte().isEmpty() || this.model.getCampo().getMazzoO().getMazzoFronte().isEmpty()) {
+	public boolean areDecksFinished() {
+		if(this.model.getCampo().getMazzoR().getMazzoFronte().isEmpty() && this.model.getCampo().getMazzoO().getMazzoFronte().isEmpty()) {
 			return true;
 		}
 		return false;
@@ -369,14 +372,13 @@ public class Controller  {
 		
 		if(cardR != null) {
 			view.showFreeResourceCorners(cardR, cardR.getAngoli());
-			
-			if(this.checkPlaceResource(scelta, cardR, view.chooseWhichCorner())) {
-				this.placeCard(cardR);
+			if(this.checkPlaceResource(g, scelta, cardR, view.chooseWhichCorner())) {
+				this.placeCard(g, cardR);
 			}
 		}else if(cardO != null) {
 			view.showFreeGoldCorners(cardO, cardO.getAngoli());
-			if(this.checkPlaceGold(scelta, cardO, view.chooseWhichCorner())) {
-				this.placeCard(cardO);
+			if(this.checkPlaceGold(g, scelta, cardO, view.chooseWhichCorner())) {
+				this.placeCard(g, cardO);
 			}
 		}
 	}
@@ -427,7 +429,15 @@ public class Controller  {
 	 * @param angolo
 	 * @return
 	 */
-	public boolean checkPlaceResource(String scelta, CartaRisorsa coperta, Posizione angolo) {
+	public boolean checkPlaceResource(Giocatore g, String scelta, CartaRisorsa coperta, Posizione angolo) {
+		CartaRisorsa card = g.getMano().getResourceById(scelta);
+		
+		switch(angolo) {
+		case ADX:
+		case BDX:
+		case BSX:
+		case ASX:	
+		}
 		/**PRIMO CONTROLLO: COMBINAZIONE ANGOLI
 		 * SECONDO CONTROLLO: CONTENUTO ANGOLO SU QUALE VUOI PIAZZARE, CIOE'
 		 * IL TIPO DI ANGOLO E IL SUO CONTENUTO(TIPO NASCOSTO PUO' ESSERE
@@ -444,7 +454,7 @@ public class Controller  {
 	 * @param angolo
 	 * @return
 	 */
-	public boolean checkPlaceGold(String scelta, CartaOro coperta, Posizione angolo) {
+	public boolean checkPlaceGold(Giocatore g, String scelta, CartaOro coperta, Posizione angolo) {
 		return true;
 	}
 	
@@ -453,7 +463,7 @@ public class Controller  {
 	 * aggiorna la relativa matrice e i contatori.
 	 * @param card
 	 */
-	public void placeCard(Carta card) {
+	public void placeCard(Giocatore g, Carta card) {
 		
 	}
 	
