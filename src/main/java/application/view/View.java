@@ -349,10 +349,72 @@ public class View {
 	public void showOtherBoards(Giocatore g, ArrayList<Giocatore> giocatori) {
 		for(int i = 0; i < giocatori.size(); i++) {
 			if(giocatori.get(i) != g) {
-				this.showBoard(giocatori.get(i));
+				this.showEnemyBoard(giocatori.get(i));
 			}
 		}
 	}
+	
+	/**
+	 * Metodo che stampa a schermo la board di un avversarios.
+	 * @param g
+	 */
+	public void showEnemyBoard(Giocatore g) {
+		Board bor = g.getBoard();
+		String [][] mat = bor.getMatrix();
+		String intro =  "CAMPO DI: " + g.getNick() + "\n" +
+						"   Turni giocati: " + bor.getTurno() + "\n" +
+						"   Punteggio: " + bor.getPunteggio() + "\n" +
+						"   Risorse presenti negli angoli delle carte posizionate sul campo:" + "\n" +
+						"    VEGETALE: " + bor.getNumRis().get(0) + "\n" +
+						"    ANIMALE: " + bor.getNumRis().get(1) + "\n" +
+						"    FUNGHI: " + bor.getNumRis().get(2) + "\n" +
+						"    INSETTI: " + bor.getNumRis().get(3) + "\n" +
+						"   Oggetti presenti negli angoli delle carte posizionate sul campo:" + "\n" + 
+						"    PIUMA: " + bor.getNumOgg().get(0) + "\n" + 
+						"    INCHIOSTRO " + bor.getNumOgg().get(1) + "\n" +
+						"    PERGAMENA: " + bor.getNumOgg().get(2) + "\n";
+		String board = "Carte in campo:" + "\n";
+		
+		for (int i = 0; i < mat.length; i++) {
+			board += "    ";
+			for (int j = 0; j < mat[i].length; j++) {
+				if(mat[i][j] == null) {
+					board += "     ";
+				}else {
+					if(mat[i][j].charAt(0) == 'I') {
+						board += AnsiEscapeCodes.WHITE_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+					} else {
+						switch(mat[i][j].charAt(1)) {
+						case 'R':
+							board += AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						case 'B':
+							board += AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode( ) + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							break;
+						case 'V':
+							if(mat[i][j].charAt(2) == 'R') {
+								board += AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							} else if(mat[i][j].charAt(2) == 'L') {
+								board += AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + mat[i][j] + AnsiEscapeCodes.ENDING_CODE.getCode();
+							}
+							break;
+						default:
+							board += "     ";
+							break;
+						}
+					}
+				}
+				
+				if (j == mat.length - 1) {
+					board += "\n   ";
+				}
+			}
+		}
+		
+		System.out.println(intro);
+		System.out.println("\n" + board);
+	}
+	
 	
 	/**
 	 * Metodo che stampa a schermo la board di un determinato giocatore.
@@ -420,14 +482,13 @@ public class View {
 	
 	/**
 	 * Metodo che stampa a schermo lo stato del giocatore di turno, ossia:
-	 * la board, le carte che ha in mano e l'obiettivo nascosto.  
+	 * la board, le carte che ha in mano.  
 	 * @param g
 	 */
 	public void showPlayerStatus(Giocatore g) {
 		System.out.println("Informazioni sullo stato del giocatore di turno:");
 		this.showBoard(g);
 		this.showHand(g.getNick(), g.getMano());
-		this.showSecretObjective(g, g.getBoard());
 	}
 	
 	/**
@@ -547,6 +608,19 @@ public class View {
 	}
 	
 	/**
+	 * Metodo che stampa tutti gli angoli iniziali liberi.
+	 * @param cardR
+	 * @param angolo
+	 */
+	public void showFreeInitialCorners(CartaIniziale cardI, ArrayList<Angolo> angolo) {
+	System.out.println(cardI.getId() + ":\n");
+		
+		for(Angolo a: angolo) {
+			System.out.println("   " + a.showAngolo() + "\n");
+		}
+	}
+	
+	/**
 	 * Metodo che stampa tutti gli angoli risorsa liberi.
 	 * @param cardR
 	 * @param angolo
@@ -574,11 +648,13 @@ public class View {
 	
 	
 	public Posizione chooseWhichCorner() {
+		System.out.println("Scegli l'angolo che vuoi coprire: (ADX/BDX/BSX/ASX)");
 		while(true) {
 			try {
 				String res = SCANNER.nextLine();
 				
-				switch(res) {
+				
+				switch(res.toUpperCase()) {
 				case "ADX":
 					return Posizione.ADX;
 				case "BDX":
@@ -601,5 +677,9 @@ public class View {
 	}
 	public void showPlaceErrorMessage() {
 		System.out.println("Un angolo nascosto non può coprire un angolo vuoto. Controlla e riprova");
+	}
+	
+	public void showImpossiblePlaceMessage() {
+		System.out.println("Non è possibile coprire un angolo nascosto");
 	}
 }

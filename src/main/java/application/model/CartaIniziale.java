@@ -49,6 +49,24 @@ public class CartaIniziale extends Carta{
 		this.angoli = angoli;
 	}
 	
+	
+	
+	public ArrayList<Regno> getCentro() {
+		return centro;
+	}
+
+	public void setCentro(ArrayList<Regno> centro) {
+		this.centro = centro;
+	}
+
+	public ArrayList<Angolo> getAngoli() {
+		return angoli;
+	}
+
+	public void setAngoli(ArrayList<Angolo> angoli) {
+		this.angoli = angoli;
+	}
+
 	/**
 	 * Metodo che permette di mostrare tutte le informazioni di una carta iniziale.
 	 * @return
@@ -67,6 +85,15 @@ public class CartaIniziale extends Carta{
 			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;
 		}
 
+	}
+	
+	public Angolo getAngoloByPosizione(Posizione pos) {
+		for(Angolo a : this.angoli) {
+			if(a.getPos().equals(pos)) {
+				return a;
+			}
+		}
+		return null;
 	}
 
 }
