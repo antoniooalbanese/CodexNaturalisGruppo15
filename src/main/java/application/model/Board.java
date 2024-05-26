@@ -86,8 +86,18 @@ public class Board {
 	 * sulla board. 
 	 * @param matrix
 	 */
-	public void getMatrix(String [][] matrix){
+	public void setMatrix(String [][] matrix){
 		this.matrix = matrix;
+	}
+	
+	/**
+	 * Metodo che modifica l'elemento della matrice nella posizione data in input
+	 * @param row
+	 * @param column
+	 * @param cell
+	 */
+	public void setMatrixElementByIndex(int row, int column, String cell) {
+		this.matrix [row][column] = cell;
 	}
 	
 	/**

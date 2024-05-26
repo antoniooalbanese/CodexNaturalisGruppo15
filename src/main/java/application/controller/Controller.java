@@ -171,6 +171,7 @@ public class Controller  {
 				scelta = this.model.getMazzoIniziale().getRetroCarta(carta);
 			}
 			this.model.getCampo().getGiocatore().get(i).getBoard().getMatrix()[5][5] = scelta.getId();
+			this.count(scelta, null, null);
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoO().getMazzoFronte());
@@ -237,6 +238,7 @@ public class Controller  {
 				view.showAllBoards(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getGiocatore());
 				view.showField(this.model.getCampo());
 				this.posiziona(this.model.getCampo().getGiocatore().get(i));
+				view.showBoard(this.model.getCampo().getGiocatore().get(i));
 				this.pesca(this.model.getCampo().getGiocatore().get(i));
 				while(!view.passaMano()) {
 					
@@ -1164,6 +1166,136 @@ public class Controller  {
 			((CartaOro)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
 			((CartaRisorsa)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
 		}
+		
+		int riga = 5;
+		int colonna = 5;
+		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
+			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
+				if(g.getBoard().getMatrix()[i][j] != null) {
+					if(g.getBoard().getMatrix()[i][j].equals(coperta.getId())) {
+						riga=i;
+						colonna=j;
+					}
+				}
+			}
+		}
+		boolean delete = false;
+		switch(angoloCop) {
+		case ADX:
+			if(riga == 0 || colonna == 8) {
+				delete = true;
+			}
+			break;
+		case BDX:
+			if(riga == 8 || colonna == 8) {
+				delete = true;
+			}
+			break;
+		case BSX:
+			if(riga == 8 || colonna == 0) {
+				delete = true;
+			}
+			break;
+		case ASX:
+			if(riga == 0 || colonna == 0) {
+				delete = true;
+			}
+			break;
+		}
+		
+		if(delete) {
+			String [][] mat = new String [g.getBoard().getMatrix().length + 8][g.getBoard().getMatrix().length + 8];
+			for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
+				for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
+					mat [i + 4][j + 4] = g.getBoard().getMatrix()[i][j];
+				}
+			}
+			g.getBoard().setMatrix(mat);
+		}
+	}
+	
+	/**
+	 * Metodo che ritorna gli id delle carte che stanno per essere coperte con il posizionamento.
+	 * @param g
+	 * @param coperta
+	 * @param angolo
+	 * @return
+	 */
+	public ArrayList<String> getCarteCoperte(Giocatore g, Carta coperta, Posizione angolo) {
+		ArrayList<String> carteCoperte = new ArrayList<String>();
+		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
+			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
+				if(g.getBoard().getMatrix()[i][j] != null) {
+					if(g.getBoard().getMatrix()[i][j].equals(coperta.getId())) {
+						switch(angolo) {
+						case ADX:
+							carteCoperte.add(coperta.getId());
+							if (g.getBoard().getMatrix()[i-2][j] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i-2][j]);
+							}
+							if (g.getBoard().getMatrix()[i][j+2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i][j+2]);
+							}
+							if (g.getBoard().getMatrix()[i-2][j+2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i-2][j+2]);
+							}
+							break;
+						case BDX:
+							carteCoperte.add(coperta.getId());
+							if (g.getBoard().getMatrix()[i+2][j] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i+2][j]);
+							}
+							if (g.getBoard().getMatrix()[i][j+2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i][j+2]);
+							}
+							if (g.getBoard().getMatrix()[i+2][j+2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i+2][j+2]);
+							}
+							break;
+						case BSX:
+							carteCoperte.add(coperta.getId());
+							if (g.getBoard().getMatrix()[i+2][j] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i+2][j]);
+							}
+							if (g.getBoard().getMatrix()[i][j-2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i][j-2]);
+							}
+							if (g.getBoard().getMatrix()[i+2][j-2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i+2][j-2]);
+							}
+							break;
+						case ASX:
+							carteCoperte.add(coperta.getId());
+							if (g.getBoard().getMatrix()[i-2][j] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i-2][j]);
+							}
+							if (g.getBoard().getMatrix()[i][j-2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i][j-2]);
+							}
+							if (g.getBoard().getMatrix()[i-2][j-2] != null) {
+								carteCoperte.add(g.getBoard().getMatrix()[i-2][j-2]);
+							}
+							break;
+						}
+					}
+				}
+			}
+		}	
+		
+		return carteCoperte;
+	}
+	
+	/**
+	 * Metodo che aggiorna i vari contatori visulizzati sulla Board.
+	 * @param carta
+	 * @param carteCoperte
+	 * @param angolo
+	 */
+	public void count(Carta carta, ArrayList<String> carteCoperte, Posizione angolo) {
+		if(carteCoperte == null) {
+			
+		}
+		
 	}
 	
 	/**
