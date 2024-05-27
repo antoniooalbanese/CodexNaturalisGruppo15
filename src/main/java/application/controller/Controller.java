@@ -21,8 +21,11 @@ import application.model.MazzoObiettivo;
 import application.model.MazzoOro;
 import application.model.MazzoRisorsa;
 import application.model.Model;
+import application.model.Obiettivo;
+import application.model.Oggetto;
 import application.model.Pedina;
 import application.model.Posizione;
+import application.model.Regno;
 import application.model.TipoAngolo;
 import application.view.View;
 
@@ -245,6 +248,29 @@ public class Controller  {
 					
 				}
 				last = this.checkLastTurn(this.model.getCampo().getGiocatore().get(i));
+			}
+		}
+		view.GameOverMessage();
+	}
+	
+	public void checkExtraPoint() {
+		for(int i = 0; i < num; i++) {
+			 this.checkObjective(this.model.getCampo().getGiocatore().get(i).getBoard(), this.model.getCampo().getGiocatore().get(i).getBoard().getObiettivo());
+		}
+	}
+	
+	public ArrayList<String> createRanking(ArrayList<Giocatore> giocatori){
+		ArrayList<String> ranking = new ArrayList<String>();
+		String g;
+		for (int k=0; k < giocatori.size(); k++) {
+			ranking.add(giocatori.get(k).getNick());
+		}
+		for(int i = 0; i < giocatori.size() - 1; i++) {
+			for(int j = 0; j < giocatori.size() - i - 1; j++) {
+				if(giocatori.get(j).getBoard().getPunteggio() < giocatori.get(j + 1).getBoard().getPunteggio()) {
+					g = ranking.get(j);
+				}
+				
 			}
 		}
 	}
@@ -2299,5 +2325,116 @@ public class Controller  {
 		}
 		
 		return corner;
+	}
+	
+	public void checkObjective(Board board, CartaObiettivo obiettivo) {
+		
+		switch (obiettivo.getObiettivo().getTipo()) {
+		case RISORSA:	
+			board.setPunteggio(board.getPunteggio() + countResource(obiettivo.getObiettivo().getRisorsa(), board) * obiettivo.getPunto());
+			break;
+		case OGGETTO:
+			if(obiettivo.getObiettivo().getOggetto().get(0).equals(Oggetto.PIUMA)) {
+				if(obiettivo.getObiettivo().getOggetto().get(1).equals(Oggetto.PIUMA)) {
+					board.setPunteggio(board.getPunteggio() + countObject(Oggetto.PIUMA, null, board) * obiettivo.getPunto());
+				}else {
+					board.setPunteggio(board.getPunteggio() + countObject(null ,obiettivo.getObiettivo().getOggetto(), board) * obiettivo.getPunto());
+				}	
+			}else {
+				board.setPunteggio(board.getPunteggio() + countObject(obiettivo.getObiettivo().getOggetto().get(0), null, board) * obiettivo.getPunto());
+			}
+		case DISPOSIZIONE:
+			board.setPunteggio(board.getPunteggio() + countDisposition(board, obiettivo.getObiettivo()) * obiettivo.getPunto());	
+			break;
+		}
+	}
+	
+	public int countResource(Regno risorsa, Board board) {
+		switch(risorsa) {
+		case VEGETALE:
+			return board.getNumRis().get(0) / 3;
+		case ANIMALE: 
+			return board.getNumRis().get(1) / 3;	
+		case FUNGHI:
+			return board.getNumRis().get(2) / 3;	
+		case INSETTI:
+			return board.getNumRis().get(3) / 3;
+		}
+		return 0;
+	}
+	
+	public int countObject(Oggetto oggetto, ArrayList<Oggetto> diversi, Board board) {
+		int piuma = 0;
+		int inchiostro = 0;
+		int pergamena = 0;
+		
+		if(oggetto != null) {
+			switch(oggetto) {
+			case PIUMA:
+				return board.getNumOgg().get(0) / 2;
+			case INCHIOSTRO:
+				return board.getNumOgg().get(1) / 2;
+			case PERGAMENA:
+				return board.getNumOgg().get(2) / 2;
+			}
+		}
+		
+		if(diversi != null) {
+			piuma = board.getNumOgg().get(0);
+			inchiostro = board.getNumOgg().get(1);
+			pergamena = board.getNumOgg().get(2);
+			return (piuma + inchiostro + pergamena) / 3;
+		}
+		
+		return 0;
+	}
+	
+	public int countDisposition(Board board, Obiettivo obiettivo) {
+		int counter = 0;
+		
+		for(int i = 0; i < board.getMatrix().length - 2; i++) {
+			for (int j = 0; j < board.getMatrix()[i].length - 2; j++) {
+				counter += this.scanDisposition(board.getMatrix(), obiettivo.getDisposizione(), i, j);
+			}
+		}
+		return counter;
+	}
+   
+	public int scanDisposition (String [][] mat, Regno [][] obiettivo, int i, int j) {
+		boolean scanner = true;
+		
+		while(scanner || i < 3) {
+			while(scanner || j < 3) {
+				switch(obiettivo [i][j]) {
+				case VEGETALE:
+					if(!mat [i][j].contains("VR")) {
+						scanner = false;
+						return 0;
+					}
+					break;
+				case ANIMALE:
+					if(!mat [i][j].contains("BL")) {
+						scanner = false;
+						return 0;
+					}
+					break;
+				case FUNGHI:
+					if(!mat [i][j].contains("RS")) {
+						scanner = false;
+						return 0;
+					}
+					break;
+				case INSETTI:
+					if(!mat [i][j].contains("VL")) {
+						scanner = false;
+						return 0;
+					}
+					break;
+				}
+				j++;
+			}
+			i++;
+		}
+		return 1;
 	}
 }

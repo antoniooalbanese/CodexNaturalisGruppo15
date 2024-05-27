@@ -731,4 +731,5 @@ public class View {
 		System.out.println("Inserisci il codice della carta che vuoi pescare");
 		return SCANNER.nextLine();
 	}
+	
 }
