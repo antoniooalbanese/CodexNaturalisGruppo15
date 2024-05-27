@@ -175,7 +175,7 @@ public class Controller  {
 				scelta = this.model.getMazzoIniziale().getRetroCarta(carta);
 			}
 			this.model.getCampo().getGiocatore().get(i).getBoard().getMatrix()[5][5] = scelta.getId();
-			this.count(this.model.getCampo().getGiocatore().get(i).getBoard(),scelta, null, null);
+			this.count(this.model.getCampo().getGiocatore().get(i),scelta, null, null);
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoO().getMazzoFronte());
@@ -1278,7 +1278,7 @@ public class Controller  {
 			g.getBoard().setMatrix(mat);
 		}
 		
-		this.count(g.getBoard(), coperta, getCarteCoperte(g,coperta, angoloCop), angoloCop);
+		this.count(g, card, getCarteCoperte(g,coperta, angoloCop), angoloCop);
 		this.countPoints(g.getBoard(), card);
 		
 		if(card.getId().charAt(0)=='R') {
@@ -1394,11 +1394,11 @@ public class Controller  {
 	 * @param carteCoperte
 	 * @param angolo
 	 */
-	public void count(Board board, Carta carta, ArrayList<String> carteCoperte, Posizione angolo) {
+	public void count(Giocatore g, Carta carta, ArrayList<String> carteCoperte, Posizione angolo) {
 		if(carteCoperte == null) {
 			for (int i=0; i < 4; i++) {
 				if (((CartaIniziale)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
-					countRisorsa(board, ((CartaIniziale)carta).getAngoli().get(i), true);
+					countRisorsa(g, ((CartaIniziale)carta).getAngoli().get(i), true);
 				}
 			}
 		} else {
@@ -1407,33 +1407,33 @@ public class Controller  {
 					int sum = 0;
 					switch(((CartaRisorsa) carta).getCentro()) {
 					case VEGETALE:
-						sum = board.getNumRis().get(0);
+						sum = g.getBoard().getNumRis().get(0);
 						sum ++;
-						board.getNumRis().set(0, sum);
+						g.getBoard().getNumRis().set(0, sum);
 						break;
 					case ANIMALE:
-						sum = board.getNumRis().get(1);
+						sum = g.getBoard().getNumRis().get(1);
 						sum ++;
-						board.getNumRis().set(1, sum);
+						g.getBoard().getNumRis().set(1, sum);
 						break;
 					case FUNGHI:
-						sum = board.getNumRis().get(2);
+						sum = g.getBoard().getNumRis().get(2);
 						sum ++;
-						board.getNumRis().set(2, sum);
+						g.getBoard().getNumRis().set(2, sum);
 						break;
 					case INSETTI:
-						sum = board.getNumRis().get(3);
+						sum = g.getBoard().getNumRis().get(3);
 						sum ++;
-						board.getNumRis().set(3, sum);
+						g.getBoard().getNumRis().set(3, sum);
 						break;
 					}
 				} else {
 					for (int i=0; i < 4; i++) {
 						if (((CartaRisorsa)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
-							countRisorsa(board, ((CartaRisorsa)carta).getAngoli().get(i), true);
+							countRisorsa(g, ((CartaRisorsa)carta).getAngoli().get(i), true);
 						
 						} else if (((CartaRisorsa)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.OGGETTO)) {
-							countOggetto(board, ((CartaRisorsa)carta).getAngoli().get(i), true);
+							countOggetto(g, ((CartaRisorsa)carta).getAngoli().get(i), true);
 						}
 					}
 				}
@@ -1442,33 +1442,33 @@ public class Controller  {
 					int sum = 0;
 					switch(((CartaOro) carta).getCentro()) {
 					case VEGETALE:
-						sum = board.getNumRis().get(0);
+						sum = g.getBoard().getNumRis().get(0);
 						sum ++;
-						board.getNumRis().set(0, sum);
+						g.getBoard().getNumRis().set(0, sum);
 						break;
 					case ANIMALE:
-						sum = board.getNumRis().get(1);
+						sum = g.getBoard().getNumRis().get(1);
 						sum ++;
-						board.getNumRis().set(1, sum);
+						g.getBoard().getNumRis().set(1, sum);
 						break;
 					case FUNGHI:
-						sum = board.getNumRis().get(2);
+						sum = g.getBoard().getNumRis().get(2);
 						sum ++;
-						board.getNumRis().set(2, sum);
+						g.getBoard().getNumRis().set(2, sum);
 						break;
 					case INSETTI:
-						sum = board.getNumRis().get(3);
+						sum = g.getBoard().getNumRis().get(3);
 						sum ++;
-						board.getNumRis().set(3, sum);
+						g.getBoard().getNumRis().set(3, sum);
 						break;
 					}
 				} else {
 					for (int i=0; i<4; i++) {
 						if (((CartaOro)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
-							countRisorsa(board, ((CartaOro)carta).getAngoli().get(i), true);
+							countRisorsa(g, ((CartaOro)carta).getAngoli().get(i), true);
 						
 						} else if (((CartaOro)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.OGGETTO)) {
-							countOggetto(board, ((CartaOro)carta).getAngoli().get(i), true);
+							countOggetto(g, ((CartaOro)carta).getAngoli().get(i), true);
 						}
 					}
 				}
@@ -1478,32 +1478,32 @@ public class Controller  {
 				for(int i=0; i<carteCoperte.size(); i++) {
 					if (i==0) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 						}
@@ -1511,32 +1511,32 @@ public class Controller  {
 					}
 					if (i==1) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 						}
@@ -1544,32 +1544,32 @@ public class Controller  {
 					}
 					if (i==2) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 						}
@@ -1577,32 +1577,32 @@ public class Controller  {
 					}
 					if (i==3) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 						}	
@@ -1613,32 +1613,32 @@ public class Controller  {
 				for(int i=0; i<carteCoperte.size(); i++) {
 					if (i==0) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 						}
@@ -1646,32 +1646,32 @@ public class Controller  {
 					}
 					if (i==1) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 						}
@@ -1679,32 +1679,32 @@ public class Controller  {
 					}
 					if (i==2) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 						}
@@ -1712,32 +1712,32 @@ public class Controller  {
 					}
 					if (i==3) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 						}
@@ -1749,32 +1749,32 @@ public class Controller  {
 				for(int i=0; i<carteCoperte.size(); i++) {
 					if (i==0) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 						}
@@ -1782,32 +1782,32 @@ public class Controller  {
 					}
 					if (i==1) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 						}
@@ -1815,32 +1815,32 @@ public class Controller  {
 					}
 					if (i==2) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 						}
@@ -1848,32 +1848,32 @@ public class Controller  {
 					}
 					if (i==3) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 						}
@@ -1885,32 +1885,32 @@ public class Controller  {
 				for(int i=0; i<carteCoperte.size(); i++) {
 					if (i==0) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ASX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ASX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ASX), false);
 								
 							}
 						}
@@ -1918,32 +1918,32 @@ public class Controller  {
 					}
 					if (i==1) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BSX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BSX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BSX), false);
 								
 							}
 						}
@@ -1951,32 +1951,32 @@ public class Controller  {
 					}
 					if (i==2) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.ADX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.ADX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.ADX), false);
 								
 							}
 						}
@@ -1984,32 +1984,32 @@ public class Controller  {
 					}
 					if (i==3) {
 						if(carteCoperte.get(i).charAt(0)=='I') {
-							CartaIniziale cardI = (CartaIniziale) board.getByID(carteCoperte.get(i));
+							CartaIniziale cardI = (CartaIniziale) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardI.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardI.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardI.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='R') {
-							CartaRisorsa cardR = (CartaRisorsa) board.getByID(carteCoperte.get(i));
+							CartaRisorsa cardR = (CartaRisorsa) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardR.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardR.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardR.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 							
 						} else if(carteCoperte.get(i).charAt(0)=='O') {
-							CartaOro cardO = (CartaOro) board.getByID(carteCoperte.get(i));
+							CartaOro cardO = (CartaOro) g.getBoard().getByID(carteCoperte.get(i));
 							if(cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.RISORSA)) {
-								countRisorsa(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countRisorsa(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							} else if (cardO.getAngoloByPosizione(Posizione.BDX).getTipo().equals(TipoAngolo.OGGETTO)) {
-								countOggetto(board, cardO.getAngoloByPosizione(Posizione.BDX), false);
+								countOggetto(g, cardO.getAngoloByPosizione(Posizione.BDX), false);
 								
 							}
 						}
@@ -2026,29 +2026,29 @@ public class Controller  {
 	 * @param angolo
 	 * @param somma
 	 */
-	public void countRisorsa(Board board, Angolo angolo, boolean somma) {
+	public void countRisorsa(Giocatore g, Angolo angolo, boolean somma) {
 		if (somma) {
 			int sum = 0;
 			switch (angolo.getRisorsa()) {
 			case VEGETALE:
-				sum = board.getNumRis().get(0);
+				sum = g.getBoard().getNumRis().get(0);
 				sum ++;
-				board.getNumRis().set(0, sum);
+				g.getBoard().getNumRis().set(0, sum);
 				break;
 			case ANIMALE:
-				sum = board.getNumRis().get(1);
+				sum = g.getBoard().getNumRis().get(1);
 				sum ++;
-				board.getNumRis().set(1, sum);
+				g.getBoard().getNumRis().set(1, sum);
 				break;
 			case FUNGHI:
-				sum = board.getNumRis().get(2);
+				sum = g.getBoard().getNumRis().get(2);
 				sum ++;
-				board.getNumRis().set(2, sum);
+				g.getBoard().getNumRis().set(2, sum);
 				break;
 			case INSETTI:
-				sum = board.getNumRis().get(3);
+				sum = g.getBoard().getNumRis().get(3);
 				sum ++;
-				board.getNumRis().set(3, sum);
+				g.getBoard().getNumRis().set(3, sum);
 				break;
 			default:
 				break;
@@ -2057,24 +2057,24 @@ public class Controller  {
 			int dif = 0;
 			switch (angolo.getRisorsa()) {
 			case VEGETALE:
-				dif = board.getNumRis().get(0);
+				dif = g.getBoard().getNumRis().get(0);
 				dif --;
-				board.getNumRis().set(0, dif);
+				g.getBoard().getNumRis().set(0, dif);
 				break;
 			case ANIMALE:
-				dif = board.getNumRis().get(1);
+				dif = g.getBoard().getNumRis().get(1);
 				dif --;
-				board.getNumRis().set(1, dif);
+				g.getBoard().getNumRis().set(1, dif);
 				break;
 			case FUNGHI:
-				dif = board.getNumRis().get(2);
+				dif = g.getBoard().getNumRis().get(2);
 				dif --;
-				board.getNumRis().set(2, dif);
+				g.getBoard().getNumRis().set(2, dif);
 				break;
 			case INSETTI:
-				dif = board.getNumRis().get(3);
+				dif = g.getBoard().getNumRis().get(3);
 				dif --;
-				board.getNumRis().set(3, dif);
+				g.getBoard().getNumRis().set(3, dif);
 				break;
 			default:
 				break;
@@ -2091,24 +2091,24 @@ public class Controller  {
 	 * @param angolo
 	 * @param somma
 	 */
-	public void countOggetto(Board board, Angolo angolo, boolean somma) {
+	public void countOggetto(Giocatore g, Angolo angolo, boolean somma) {
 		if (somma) {
 			int sum = 0;
 			switch (angolo.getOggetto()) {
 			case PIUMA:
-				sum = board.getNumOgg().get(0);
+				sum = g.getBoard().getNumOgg().get(0);
 				sum ++;
-				board.getNumOgg().set(0, sum);
+				g.getBoard().getNumOgg().set(0, sum);
 				break;
 			case INCHIOSTRO:
-				sum = board.getNumOgg().get(1);
+				sum = g.getBoard().getNumOgg().get(1);
 				sum ++;
-				board.getNumOgg().set(1, sum);
+				g.getBoard().getNumOgg().set(1, sum);
 				break;
 			case PERGAMENA:
-				sum = board.getNumOgg().get(2);
+				sum = g.getBoard().getNumOgg().get(2);
 				sum ++;
-				board.getNumOgg().set(2, sum);
+				g.getBoard().getNumOgg().set(2, sum);
 				break;
 			default:
 				break;
@@ -2117,19 +2117,19 @@ public class Controller  {
 			int dif = 0;
 			switch (angolo.getOggetto()) {
 			case PIUMA:
-				dif = board.getNumOgg().get(0);
+				dif = g.getBoard().getNumOgg().get(0);
 				dif --;
-				board.getNumOgg().set(0, dif);
+				g.getBoard().getNumOgg().set(0, dif);
 				break;
 			case INCHIOSTRO:
-				dif = board.getNumOgg().get(1);
+				dif = g.getBoard().getNumOgg().get(1);
 				dif --;
-				board.getNumOgg().set(1, dif);
+				g.getBoard().getNumOgg().set(1, dif);
 				break;
 			case PERGAMENA:
-				dif = board.getNumOgg().get(2);
+				dif = g.getBoard().getNumOgg().get(2);
 				dif --;
-				board.getNumOgg().set(2, dif);
+				g.getBoard().getNumOgg().set(2, dif);
 				break;
 			default:
 				break;
