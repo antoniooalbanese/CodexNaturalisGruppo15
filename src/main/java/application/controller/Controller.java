@@ -250,7 +250,9 @@ public class Controller  {
 				last = this.checkLastTurn(this.model.getCampo().getGiocatore().get(i));
 			}
 		}
-		view.GameOverMessage();
+		
+		this.checkExtraPoint();
+		view.isGameOverMessage(this.createRanking(this.model.getCampo().getGiocatore()));
 	}
 	
 	public void checkExtraPoint() {
@@ -269,10 +271,13 @@ public class Controller  {
 			for(int j = 0; j < giocatori.size() - i - 1; j++) {
 				if(giocatori.get(j).getBoard().getPunteggio() < giocatori.get(j + 1).getBoard().getPunteggio()) {
 					g = ranking.get(j);
+					ranking.set(j, ranking.get(j + 1));		
+					ranking.set(j + 1, g);
 				}
-				
 			}
 		}
+		
+		return ranking;
 	}
 	
 	/**
@@ -440,14 +445,12 @@ public class Controller  {
 						cartaScelta = g.getMano().getResourceById(scelta);
 					} else {
 						cartaScelta = this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta));
-						scelta = cartaScelta.getId();
 					}
 				} else {
 					if(view.chooseWhichSide(g.getNick(), g.getMano().getGoldById(scelta),this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)))) {
 						cartaScelta = g.getMano().getGoldById(scelta);
 					} else {
 						cartaScelta = this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta));
-						scelta = cartaScelta.getId();
 					}
 				}
 				
@@ -455,18 +458,18 @@ public class Controller  {
 				
 				if(cardI != null) {
 					view.showFreeInitialCorners(cardI, this.getFreeInitialCorners(cardI));
-					if(this.checkPlaceInitial(g, scelta, cardI, view.chooseWhichCorner())) {
+					if(this.checkPlaceInitial(g, scelta, cartaScelta, cardI, view.chooseWhichCorner())) {
 						check = true;
 					}
 				}
 				if(cardR != null) {
 					view.showFreeResourceCorners(cardR, this.getFreeResourceCorners(cardR));
-					if(this.checkPlaceResource(g, scelta, cardR, view.chooseWhichCorner())) {
+					if(this.checkPlaceResource(g, scelta, cartaScelta, cardR, view.chooseWhichCorner())) {
 						check = true;
 					}
 				}else if(cardO != null) {
 					view.showFreeGoldCorners(cardO, this.getFreeGoldCorners(cardO));
-					if(this.checkPlaceGold(g, scelta, cardO, view.chooseWhichCorner())) {
+					if(this.checkPlaceGold(g, scelta, cartaScelta, cardO, view.chooseWhichCorner())) {
 						check = true;
 					}
 				}
@@ -572,88 +575,98 @@ public class Controller  {
 		return true;
 	}
 	
-	public boolean checkPlaceInitial(Giocatore g, String scelta, CartaIniziale coperta, Posizione angolo) {
+	/**
+	 * Metodo che controlla che la carta possa essere realmente posizionata su una carta iniziale
+	 * come vuole il giocatore.
+	 * @param g
+	 * @param scelta
+	 * @param cartaScelta
+	 * @param coperta
+	 * @param angolo
+	 * @return
+	 */
+	public boolean checkPlaceInitial(Giocatore g, String scelta, Carta cartaScelta, CartaIniziale coperta, Posizione angolo) {
 		if(!this.checkFreeMatrix(g, coperta, angolo)) {
 			view.isFullMessage();
 			return false;
 		} 
 		switch(angolo) {
 		case ADX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.BSX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.BSX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case BDX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.ASX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.ASX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case BSX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.ADX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.ADX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case ASX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.BDX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.BDX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
 					}
 				}
@@ -666,93 +679,95 @@ public class Controller  {
 	/**
 	 * Metodo che controlla che la carta possa essere realmente posizionata su una carta risorsa
 	 * come vuole il giocatore.
+	 * @param g
 	 * @param scelta
+	 * @param cartaScelta
 	 * @param coperta
 	 * @param angolo
 	 * @return
 	 */
-	public boolean checkPlaceResource(Giocatore g, String scelta, CartaRisorsa coperta, Posizione angolo) {
+	public boolean checkPlaceResource(Giocatore g, String scelta, Carta cartaScelta, CartaRisorsa coperta, Posizione angolo) {
 		if(!this.checkFreeMatrix(g, coperta, angolo)) {
 			view.isFullMessage();
 			return false;
 		} 
 		switch(angolo) {
 		case ADX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.BSX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.BSX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case BDX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.ASX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.ASX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case BSX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.ADX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.ADX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case ASX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.BDX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.BDX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
 					}
 				}
@@ -766,93 +781,95 @@ public class Controller  {
 	/**
 	 * Metodo che controlla che la carta possa essere realmente posizionata su una carta oro
 	 * come vuole il giocatore.
+	 * @param g
 	 * @param scelta
+	 * @param cartaScelta
 	 * @param coperta
 	 * @param angolo
 	 * @return
 	 */
-	public boolean checkPlaceGold(Giocatore g, String scelta, CartaOro coperta, Posizione angolo) {
+	public boolean checkPlaceGold(Giocatore g, String scelta, Carta cartaScelta, CartaOro coperta, Posizione angolo) {
 		if(!this.checkFreeMatrix(g, coperta, angolo)) {
 			view.isFullMessage();
 			return false;
 		} 
 		switch(angolo) {
 		case ADX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.BSX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.BSX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.BSX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case BDX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.ASX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.ASX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.ASX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case BSX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.ADX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.ADX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.ADX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
 					}
 				}
 			}
 		case ASX:
-			if(scelta.charAt(0)=='R') {
-				if(!checkPlaceCondition(g.getMano().getResourceById(scelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
+			if(cartaScelta.getId().charAt(0)=='R') {
+				if(!checkPlaceCondition(((CartaRisorsa) cartaScelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getResourceById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getResourceById(scelta), coperta, Posizione.BDX, angolo);
+					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
 					}
 				}
 			} else {
-				if(!checkPlaceCondition(g.getMano().getGoldById(scelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
+				if(!checkPlaceCondition(((CartaOro) cartaScelta).getAngoloByPosizione(Posizione.BDX),coperta.getAngoloByPosizione(angolo))) {
 					return false;
 				} else {
-					if(checkPlace(g.getMano().getGoldById(scelta), coperta, g, angolo)) {
-						this.placeCard(g, g.getMano().getGoldById(scelta), coperta, Posizione.BDX, angolo);
+					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
+						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
 					}
 				}
@@ -1192,25 +1209,31 @@ public class Controller  {
 	 * @param angoloPos
 	 * @param angoloCop
 	 */
-	public void placeCard(Giocatore g, Carta card, Carta coperta, Posizione angoloPos, Posizione angoloCop) {
+	public void placeCard(Giocatore g, Carta card, Carta coperta, Posizione angoloPos, Posizione angoloCop, String scelta) {
 		if(card.getId().charAt(0)=='R') {
 			if(coperta.getId().charAt(0)=='R') {
 				((CartaRisorsa)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
 				((CartaRisorsa)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
-			} else {
+			} else if(coperta.getId().charAt(0)=='O') {
 				((CartaRisorsa)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
 				((CartaOro)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
+			}else {
+				((CartaRisorsa)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
+				((CartaIniziale)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
 			}
 		} else if (coperta.getId().charAt(0)=='O') {
 			((CartaOro)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
 			((CartaOro)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
-		} else {
-			((CartaOro)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
-			((CartaRisorsa)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
+			} else if(coperta.getId().charAt(0)=='R') {
+				((CartaOro)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
+				((CartaRisorsa)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
+			}else {
+				((CartaOro)card).getAngoloByPosizione(angoloPos).setLink(coperta.getId());
+				((CartaIniziale)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
 		}
 		
-		int riga = 5;
-		int colonna = 5;
+		int riga = (g.getBoard().getMatrix().length/2)+1;
+		int colonna = (g.getBoard().getMatrix().length/2)+1;
 		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
 			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
 				if(g.getBoard().getMatrix()[i][j] != null) {
@@ -1259,10 +1282,10 @@ public class Controller  {
 		this.countPoints(g.getBoard(), card);
 		
 		if(card.getId().charAt(0)=='R') {
-			g.getMano().getRisorsa().remove(card);
+			g.getMano().getRisorsa().remove(g.getMano().getResourceById(scelta));
 			g.getBoard().getRisorsa().add((CartaRisorsa) card);
 		} else {
-			g.getMano().getOro().remove(card);
+			g.getMano().getOro().remove(g.getMano().getGoldById(scelta));
 			g.getBoard().getOro().add((CartaOro) card);
 		}
 		
@@ -1373,10 +1396,9 @@ public class Controller  {
 	 */
 	public void count(Board board, Carta carta, ArrayList<String> carteCoperte, Posizione angolo) {
 		if(carteCoperte == null) {
-			for (int i=0; i<4; i++) {
+			for (int i=0; i < 4; i++) {
 				if (((CartaIniziale)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
 					countRisorsa(board, ((CartaIniziale)carta).getAngoli().get(i), true);
-				
 				}
 			}
 		} else {
@@ -1405,16 +1427,16 @@ public class Controller  {
 						board.getNumRis().set(3, sum);
 						break;
 					}
-				}
-				for (int i=0; i<4; i++) {
-					if (((CartaRisorsa)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
-						countRisorsa(board, ((CartaRisorsa)carta).getAngoli().get(i), true);
-					
-					} else if (((CartaRisorsa)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.OGGETTO)) {
-						countOggetto(board, ((CartaRisorsa)carta).getAngoli().get(i), true);
+				} else {
+					for (int i=0; i < 4; i++) {
+						if (((CartaRisorsa)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
+							countRisorsa(board, ((CartaRisorsa)carta).getAngoli().get(i), true);
+						
+						} else if (((CartaRisorsa)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.OGGETTO)) {
+							countOggetto(board, ((CartaRisorsa)carta).getAngoli().get(i), true);
+						}
 					}
 				}
-				
 			} else if (carta.getId().charAt(0)=='O') {
 				if (((CartaOro) carta).getCentro() != null) {
 					int sum = 0;
@@ -1440,13 +1462,14 @@ public class Controller  {
 						board.getNumRis().set(3, sum);
 						break;
 					}
-				}
-				for (int i=0; i<4; i++) {
-					if (((CartaOro)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
-						countRisorsa(board, ((CartaOro)carta).getAngoli().get(i), true);
-					
-					} else if (((CartaOro)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.OGGETTO)) {
-						countOggetto(board, ((CartaOro)carta).getAngoli().get(i), true);
+				} else {
+					for (int i=0; i<4; i++) {
+						if (((CartaOro)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.RISORSA)) {
+							countRisorsa(board, ((CartaOro)carta).getAngoli().get(i), true);
+						
+						} else if (((CartaOro)carta).getAngoli().get(i).getTipo().equals(TipoAngolo.OGGETTO)) {
+							countOggetto(board, ((CartaOro)carta).getAngoli().get(i), true);
+						}
 					}
 				}
 			}
@@ -1585,6 +1608,7 @@ public class Controller  {
 						}	
 					}
 				}
+				break;
 			case BDX:
 				for(int i=0; i<carteCoperte.size(); i++) {
 					if (i==0) {
@@ -1720,6 +1744,7 @@ public class Controller  {
 						
 					}
 				}
+				break;
 			case BSX:
 				for(int i=0; i<carteCoperte.size(); i++) {
 					if (i==0) {
@@ -1855,6 +1880,7 @@ public class Controller  {
 						
 					}
 				}
+				break;
 			case ASX:
 				for(int i=0; i<carteCoperte.size(); i++) {
 					if (i==0) {
@@ -1989,6 +2015,7 @@ public class Controller  {
 						}
 					}
 				}
+				break;
 			}
 		}
 	}
@@ -2023,6 +2050,8 @@ public class Controller  {
 				sum ++;
 				board.getNumRis().set(3, sum);
 				break;
+			default:
+				break;
 			}
 		} else {
 			int dif = 0;
@@ -2046,6 +2075,8 @@ public class Controller  {
 				dif = board.getNumRis().get(3);
 				dif --;
 				board.getNumRis().set(3, dif);
+				break;
+			default:
 				break;
 			
 			}
@@ -2079,6 +2110,8 @@ public class Controller  {
 				sum ++;
 				board.getNumOgg().set(2, sum);
 				break;
+			default:
+				break;
 			}
 		} else {
 			int dif = 0;
@@ -2098,18 +2131,27 @@ public class Controller  {
 				dif --;
 				board.getNumOgg().set(2, dif);
 				break;
+			default:
+				break;
 			}
 			
 		}
 		
 	}
 	
+	/**
+	 * Metodo che conta i punti asegnati da una carta al suo posizionamento.
+	 * @param board
+	 * @param carta
+	 */
 	public void countPoints(Board board, Carta carta) {
 		int punto = 0;
 		int numLink = 0;
 		if(carta.getId().charAt(0)=='R') {
-			punto = ((CartaRisorsa)carta).getPunto().getSomma();
-		} else {
+			if (((CartaRisorsa)carta).getPunto()!=null) {
+				punto = ((CartaRisorsa)carta).getPunto().getSomma();
+			}
+		} else if (((CartaOro)carta).getPunto() != null) {
 			switch(((CartaOro)carta).getPunto().getTipo()){
 			case IMMEDIATO:
 				punto = ((CartaOro)carta).getPunto().getSomma();
@@ -2147,7 +2189,7 @@ public class Controller  {
 		boolean trovata = false;
 		
 		while(!trovata) {
-			pescata = view.chooseWhatToDraw();
+			pescata = view.chooseWhatToDraw().toUpperCase();
 			try {
 				for(int i = 0; i < this.model.getCampo().getRisorsa().size(); i++) {
 					if(pescata.equals(this.model.getCampo().getRisorsa().get(i).getId())) {
@@ -2436,5 +2478,10 @@ public class Controller  {
 			i++;
 		}
 		return 1;
+	}
+	
+	public void endGame() {
+		view.endMessage();
+		System.exit(0);
 	}
 }

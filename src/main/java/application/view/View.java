@@ -497,9 +497,9 @@ public class View {
 	public void showField(CampoDiGioco campo) {
 		System.out.println("SUL CAMPO DA GIOCO CI SONO QUESTE CARTE:");
 		System.out.println("CIMA DEI MAZZI RISORSA E ORO:");
-		campo.getMazzoR().showRetro(0).showCard();
-		campo.getMazzoO().showRetro(0).showCard();
-		System.out.println("CARTE SCOPERTE:");
+		System.out.println(campo.getMazzoR().getRetroCarta(campo.getMazzoR().getMazzoFronte().get(0)).showCard());
+		System.out.println(campo.getMazzoO().getRetroCarta(campo.getMazzoO().getMazzoFronte().get(0)).showCard());
+		System.out.println("\nCARTE SCOPERTE:");
 	
 		for (CartaRisorsa r : campo.getRisorsa()) {
 			  System.out.println(r.showCard());
@@ -509,7 +509,7 @@ public class View {
 			  System.out.println(o.showCard());
 		}
 		
-		System.out.println("OBIETTIVI COMUNI:");
+		System.out.println("\nOBIETTIVI COMUNI:");
 		
 		for (CartaObiettivo ob : campo.getObiettivo()) {
 			  showObjective(ob.showCard(), ob.getObiettivo().getDisposizione());
@@ -730,6 +730,16 @@ public class View {
 	public String chooseWhatToDraw() {		
 		System.out.println("Inserisci il codice della carta che vuoi pescare");
 		return SCANNER.nextLine();
+	}
+	
+	public void isGameOverMessage(ArrayList<String> ranking) {
+		System.out.println("LA PARTITA È TERMINATA");
+		System.out.println("CLASSIFICA FINALE: ");
+		for(String r: ranking) {
+			System.out.println("   " + (ranking.indexOf(r)+1) + "° " + r);
+		}
+		System.out.println("IL VINCITORE È:");
+		System.out.println("!!!! " + ranking.get(0) + " !!!!");
 	}
 	
 }

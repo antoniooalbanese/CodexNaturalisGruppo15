@@ -18,11 +18,11 @@ public class Board {
 	/**
 	 * Insieme di carte risorsa piazzate da un giocatore.
 	 */
-	private ArrayList<CartaRisorsa> risorsa;
+	private ArrayList<CartaRisorsa> risorsa = new ArrayList<CartaRisorsa>();
 	/**
 	 * Insieme di carte oro piazzate da un giocatore.
 	 */
-	private ArrayList<CartaOro> oro;
+	private ArrayList<CartaOro> oro = new ArrayList<CartaOro>();
 	/**
 	 * Carta obiettivo che rappresenta l'obiettivo personale che se 
 	 * il giocatore soddisfa dona a quest'ultimo i punti indicata sulla carta. 
@@ -242,6 +242,9 @@ public class Board {
 					return o;
 				}
 			}
+		}
+		if(id.charAt(0)=='I') {
+			return this.centro;
 		}
 		return null;
 	}

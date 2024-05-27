@@ -31,7 +31,11 @@ public class Application {
 		 * Metodi che gestiscono la partita.
 		 */
 		controller.playGame();
-		controller.checkExtraPoint();
+		
+		/**
+		 * Metodo che gestisce l'uscita dalla partita.
+		 */
+		controller.endGame();
 		
 	}
 }
