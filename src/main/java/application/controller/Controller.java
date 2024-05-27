@@ -2111,11 +2111,52 @@ public class Controller  {
 	}
 	
 	/**
-	 * Metodo che permette al giocatore in posizione n di pescare una carta.
+	 * Metodo che permette al giocatore di turno di pescare una carta.
 	 * @param n
 	 */
 	public void pesca(Giocatore g) {
+		view.showField(this.model.getCampo());
+		view.showHand(g.getNick(), g.getMano());
+		String pescata = "";
+		boolean trovata = false;
 		
+		while(!trovata) {
+			pescata = view.chooseWhatToDraw();
+			try {
+				for(int i = 0; i < this.model.getCampo().getRisorsa().size(); i++) {
+					if(pescata.equals(this.model.getCampo().getRisorsa().get(i).getId())) {
+						trovata = true;
+						g.getMano().getRisorsa().add(this.model.getCampo().getRisorsa().get(i));
+						this.model.getCampo().getRisorsa().remove(i);
+						this.model.getCampo().getRisorsa().add((CartaRisorsa) this.estrai(this.model.getCampo().getMazzoR().getMazzoFronte()));
+					}
+				}
+				for(int i = 0; i < this.model.getCampo().getOro().size(); i++) {
+					if(pescata.equals(this.model.getCampo().getOro().get(i).getId())) {
+						trovata = true;
+						g.getMano().getOro().add(this.model.getCampo().getOro().get(i));
+						this.model.getCampo().getOro().remove(i);
+						this.model.getCampo().getOro().add((CartaOro) this.estrai(this.model.getCampo().getMazzoO().getMazzoFronte()));
+					}
+				}
+				if(this.model.getCampo().getMazzoR().showRetro(0).getId().equals(pescata)) {
+					trovata = true;
+					g.getMano().getRisorsa().add(this.model.getCampo().getMazzoR().getMazzoFronte().get(0));
+					this.model.getCampo().getMazzoR().getMazzoFronte().remove(0);
+				}
+				if(this.model.getCampo().getMazzoO().showRetro(0).getId().equals(pescata)) {
+					trovata = true;
+					g.getMano().getOro().add(this.model.getCampo().getMazzoO().getMazzoFronte().get(0));
+					this.model.getCampo().getMazzoO().getMazzoFronte().remove(0);
+				}
+				if(!trovata) {
+					throw new IOException();
+				}
+			} catch (IOException e) {
+				view.insertAValidCode();
+			}
+				
+		}
 	}
 	
 	/**

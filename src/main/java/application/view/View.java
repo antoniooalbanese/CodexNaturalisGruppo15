@@ -726,4 +726,9 @@ public class View {
 	public void showImpossiblePlaceMessage() {
 		System.out.println("Non è possibile coprire un angolo nascosto");
 	}
+	
+	public String chooseWhatToDraw() {		
+		System.out.println("Inserisci il codice della carta che vuoi pescare");
+		return SCANNER.nextLine();
+	}
 }
