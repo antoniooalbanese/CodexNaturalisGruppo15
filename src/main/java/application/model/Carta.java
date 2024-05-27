@@ -46,6 +46,14 @@ public abstract class Carta {
 	public String getId() {
 		return this.id;
 	}
+	
+	/**
+	 * Metodo che modifica l'id.
+	 * @param id
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	/**
 	 * Metodo che ritorna il booleano che indica se la carta è mostrata sul fronte

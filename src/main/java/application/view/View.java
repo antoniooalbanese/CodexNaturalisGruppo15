@@ -590,6 +590,50 @@ public class View {
 	}
 	
 	/**
+	 * Metodo che chiede all'utente se intende piazzare la carta scelta 
+	 * mostrando il fronte o il retro.
+	 * @param gio
+	 * @param fronte
+	 * @param retro
+	 * @return
+	 */
+	public boolean chooseWhichSide(String gio, Carta fronte, Carta retro) {
+		
+		String f = "";
+		String r = "";
+		
+		if (fronte.getId().charAt(0)=='R') {
+			f = ((CartaRisorsa)fronte).showCard();
+			r = ((CartaRisorsa)retro).showCard();
+		} else {
+			f = ((CartaOro)fronte).showCard();
+			r = ((CartaOro)retro).showCard();
+		}
+		
+		System.out.println("\nQuesta è la carta scelta da " + gio + ":\n");
+		System.out.println("FRONTE:");
+		System.out.println(f);
+		System.out.println("\nRETRO:");
+		System.out.println(r);
+		System.out.println("\n" + "Come vuoi posizionare la carta? (FRONTE/RETRO)");
+		
+		while(true) {
+			try {
+				String ris = SCANNER.nextLine();
+				if(ris.equalsIgnoreCase("FRONTE")) {
+					return true;
+				} else if (ris.equalsIgnoreCase("RETRO")) {
+					return false;
+				} else {
+					throw new IOException();
+				}
+			}catch(IOException e) {
+				System.out.println("Risposta non valida, riprova con FRONTE o RETRO");
+			}
+		}
+	}		
+	
+	/**
 	 * Metodo che chiede al giocatore di turno quale carta coprire con quella 
 	 * che viene posizionata.
 	 * @return

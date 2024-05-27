@@ -61,4 +61,32 @@ public class Mano {
 		
 		return null;
 	}
+	
+	/**
+	 * Metodo che sostuisce il fronte di una carta risorsa con il suo retro in mano.
+	 * @param fronte
+	 * @param retro
+	 */
+	public void setResourceElement(CartaRisorsa fronte, CartaRisorsa retro) {
+		
+		for(CartaRisorsa r : risorsa) {
+			if(r.getId().equals(fronte.getId())) {
+				r = retro;
+			}
+		}
+	}
+	
+	/**
+	 * Metodo che sostuisce il fronte di una carta oro con il suo retro in mano.
+	 * @param fronte
+	 * @param retro
+	 */
+	public void setGoldElement(CartaOro fronte, CartaOro retro) {
+		
+		for(CartaOro o : oro) {
+			if(o.getId().equals(fronte.getId())) {
+				o = retro;
+			}
+		}
+	}
 }

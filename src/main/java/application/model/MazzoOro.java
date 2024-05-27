@@ -91,6 +91,22 @@ public class MazzoOro {
 	public CartaOro showRetro(int i) {
 		return this.getCartaRetroByRegno(this.mazzoFronte.get(i).getRegno());	
 	}
+	
+	/**
+	 * Metodo che ritorna la il retro di una carta.
+	 * @param carta
+	 * @return
+	 */
+	public CartaOro getRetroCarta(CartaOro carta) {
+		Regno risorsa = carta.getRegno();
+		
+		for(int i = 0; i < mazzoRetro.size(); i++) {
+			if(this.mazzoRetro.get(i).getRegno().equals(risorsa)){
+				return this.mazzoRetro.get(i);
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO

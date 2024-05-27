@@ -182,4 +182,5 @@ public class CartaOro extends Carta{
 		}
 		return null;
 	}
+	
 }
