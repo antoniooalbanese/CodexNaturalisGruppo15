@@ -1376,7 +1376,7 @@
         }
     },
     {
-        "id": "ORRSS",
+        "id": "ORSSR",
         "regno": "FUNGHI",
         "centro": "FUNGHI",
         "angoli": [
@@ -1399,7 +1399,7 @@
         ]
     },
     {
-        "id": "ORVRD",
+        "id": "OVRDR",
         "regno": "VEGETALE",
         "centro": "VEGETALE",
         "angoli": [
@@ -1422,7 +1422,7 @@
         ]
     },
     {
-        "id": "ORBLU",
+        "id": "OBLUR",
         "regno": "ANIMALE",
         "centro": "ANIMALE",
         "angoli": [
@@ -1445,7 +1445,7 @@
         ]
     },
     {
-        "id": "ORVLO",
+        "id": "OVLOR",
         "regno": "INSETTI",
         "centro": "INSETTI",
         "angoli": [

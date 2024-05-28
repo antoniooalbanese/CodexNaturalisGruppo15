@@ -373,10 +373,10 @@ public class View {
 						"    PIUMA: " + bor.getNumOgg().get(0) + "\n" + 
 						"    INCHIOSTRO " + bor.getNumOgg().get(1) + "\n" +
 						"    PERGAMENA: " + bor.getNumOgg().get(2) + "\n";
-		String board = "Carte in campo:" + "\n";
+		String board = "Carte in campo:" + "\n   ";
 		
 		for (int i = 0; i < mat.length; i++) {
-			board += "    ";
+			board += "     ";
 			for (int j = 0; j < mat[i].length; j++) {
 				if(mat[i][j] == null) {
 					board += "     ";
@@ -437,10 +437,10 @@ public class View {
 						"    INCHIOSTRO " + bor.getNumOgg().get(1) + "\n" +
 						"    PERGAMENA: " + bor.getNumOgg().get(2) + "\n" +
 						"   Carta obiettivo segreta: " + "\n   ";
-		String board = "Carte in campo:" + "\n";
+		String board = "Carte in campo:" + "\n   ";
 		
 		for (int i = 0; i < mat.length; i++) {
-			board += "    ";
+			board += "     ";
 			for (int j = 0; j < mat[i].length; j++) {
 				if(mat[i][j] == null) {
 					board += "     ";
@@ -675,6 +675,7 @@ public class View {
 		for(Angolo a: angolo) {
 			System.out.println("   " + a.showAngolo() + "\n");
 		}
+		
 	}
 	
 	/**

@@ -231,14 +231,14 @@ public class Board {
 	public Carta getByID (String id) {
 		if(id.charAt(0)=='R') {
 			for(CartaRisorsa r: this.risorsa ) {
-				if(r.equals(id)) {
+				if(r.getId().equals(id)) {
 					return r;
 				}
 			}
 		}
 		if(id.charAt(0)=='O') {
 			for(CartaOro o: this.oro ) {
-				if(o.equals(id)) {
+				if(o.getId().equals(id)) {
 					return o;
 				}
 			}

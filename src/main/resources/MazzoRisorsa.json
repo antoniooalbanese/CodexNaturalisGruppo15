@@ -1008,7 +1008,7 @@
         ]
     },
     {
-        "id": "RRBLU",
+        "id": "RBLUR",
         "regno": "ANIMALE",
         "centro": "ANIMALE",
         "angoli": [
@@ -1031,7 +1031,7 @@
         ]
     },
     {
-        "id": "RRVRD",
+        "id": "RVRDR",
         "regno": "VEGETALE",
         "centro": "VEGETALE",
         "angoli": [
@@ -1054,7 +1054,7 @@
         ]
     },
     {
-        "id": "RRVLO",
+        "id": "RVLOR",
         "regno": "INSETTI",
         "centro": "INSETTI",
         "angoli": [
@@ -1077,7 +1077,7 @@
         ]
     },
     {
-        "id": "RRRSS",
+        "id": "RRSSR",
         "regno": "FUNGHI",
         "centro": "FUNGHI",
         "angoli": [

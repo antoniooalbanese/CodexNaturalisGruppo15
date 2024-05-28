@@ -174,7 +174,7 @@ public class Controller  {
 				this.model.getCampo().getGiocatore().get(i).initBoard(this.model.getMazzoIniziale().getRetroCarta(carta));
 				scelta = this.model.getMazzoIniziale().getRetroCarta(carta);
 			}
-			this.model.getCampo().getGiocatore().get(i).getBoard().getMatrix()[5][5] = scelta.getId();
+			this.model.getCampo().getGiocatore().get(i).getBoard().getMatrix()[4][4] = scelta.getId();
 			this.count(this.model.getCampo().getGiocatore().get(i),scelta, null, null);
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
 			this.pescaMazzo(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getMazzoR().getMazzoFronte());
@@ -247,6 +247,7 @@ public class Controller  {
 				while(!view.passaMano()) {
 					
 				}
+				this.model.getCampo().getGiocatore().get(i).getBoard().setTurno(this.model.getCampo().getGiocatore().get(i).getBoard().getTurno()+1);
 				last = this.checkLastTurn(this.model.getCampo().getGiocatore().get(i));
 			}
 		}
@@ -366,6 +367,7 @@ public class Controller  {
 		
 		while(check != true && req != true) {
 			scelta = view.chooseWhatToPlace().toUpperCase();
+			
 			try {
 				for(int i = 0; i < g.getMano().getRisorsa().size(); i++) {
 					if(scelta.equalsIgnoreCase(g.getMano().getRisorsa().get(i).getId())) {
@@ -375,24 +377,16 @@ public class Controller  {
 					}
 				}
 				
-				for(int j = 0; j < g.getMano().getOro().size(); j++) {
-					if(scelta.equalsIgnoreCase(g.getMano().getOro().get(j).getId())) {
-						check = true;
-						req = true;
-						break;
-					}
-				}
 				int i = 0;
-				while(!check) {
+				
+				while(!req && i < g.getMano().getOro().size()) {
 					if(scelta.equalsIgnoreCase(g.getMano().getOro().get(i).getId())) {
 						if(this.checkRequirements(g, g.getMano().getOro().get(i))) {
 							check = true;
 							req = true;
-							break;
 						} else {
-							check = false;
+							check = true;
 							req = false;
-							break;
 						}
 					}
 					i++;
@@ -444,13 +438,17 @@ public class Controller  {
 					if(view.chooseWhichSide(g.getNick(), g.getMano().getResourceById(scelta), this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)))) {
 						cartaScelta = g.getMano().getResourceById(scelta);
 					} else {
-						cartaScelta = this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta));
+						cartaScelta = g.getMano().getResourceById(scelta);
+						((CartaRisorsa) cartaScelta).setAngoli(this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)).getAngoli());
+						((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)).getCentro());
 					}
 				} else {
 					if(view.chooseWhichSide(g.getNick(), g.getMano().getGoldById(scelta),this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)))) {
 						cartaScelta = g.getMano().getGoldById(scelta);
 					} else {
-						cartaScelta = this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta));
+						cartaScelta = g.getMano().getGoldById(scelta);
+						((CartaOro) cartaScelta).setAngoli(this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)).getAngoli());
+						((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)).getCentro());
 					}
 				}
 				
@@ -473,6 +471,7 @@ public class Controller  {
 						check = true;
 					}
 				}
+				
 				
 				if(check == false) {
 					throw new IOException();
@@ -503,15 +502,19 @@ public class Controller  {
 			switch(oro.getRequisito().getRisorsa().get(i)) {
 			case VEGETALE:
 				veg++;
+				continue;
 			case ANIMALE:
 				ani++;
+				continue;
 			case FUNGHI:
 				fun++;
+				continue;
 			case INSETTI:
 				ins++;
+				continue;
 			}
 		}
-		
+	
 		if(veg <= g.getBoard().getNumRis().get(0)) {
 			if(ani <= g.getBoard().getNumRis().get(1)) {
 				if(fun <= g.getBoard().getNumRis().get(2)) {
@@ -1247,22 +1250,22 @@ public class Controller  {
 		boolean delete = false;
 		switch(angoloCop) {
 		case ADX:
-			if(riga == 0 || colonna == 8) {
+			if(riga == 1 || colonna == 7) {
 				delete = true;
 			}
 			break;
 		case BDX:
-			if(riga == 8 || colonna == 8) {
+			if(riga == 7 || colonna == 7) {
 				delete = true;
 			}
 			break;
 		case BSX:
-			if(riga == 8 || colonna == 0) {
+			if(riga == 7 || colonna == 1) {
 				delete = true;
 			}
 			break;
 		case ASX:
-			if(riga == 0 || colonna == 0) {
+			if(riga == 1 || colonna == 1) {
 				delete = true;
 			}
 			break;
@@ -1277,6 +1280,39 @@ public class Controller  {
 			}
 			g.getBoard().setMatrix(mat);
 		}
+		
+		int r = 0;
+		int c = 0;
+		for (int i=0; i<g.getBoard().getMatrix().length; i++) {
+			for (int j=0; j<g.getBoard().getMatrix()[i].length; j++) {
+				if (g.getBoard().getMatrix()[i][j]!=null) {
+					if (g.getBoard().getMatrix()[i][j].equals(coperta.getId())){
+						r = i;
+						c = j;
+					}
+		
+				}
+			}
+		}
+		
+		switch(angoloCop) {
+		case ADX:
+			g.getBoard().setMatrixElementByIndex(r-1, c+1, card.getId());
+			break;
+		case BDX:
+			g.getBoard().setMatrixElementByIndex(r+1, c+1, card.getId());
+			break;
+		case BSX:
+			g.getBoard().setMatrixElementByIndex(r+1, c-1, card.getId());
+			break;
+		case ASX:
+			g.getBoard().setMatrixElementByIndex(r-1, c-1, card.getId());
+			break;
+		}
+		
+		
+			
+		
 		
 		this.count(g, card, getCarteCoperte(g,coperta, angoloCop), angoloCop);
 		this.countPoints(g.getBoard(), card);
@@ -1384,6 +1420,8 @@ public class Controller  {
 			}
 		}	
 		
+		System.out.println(coperta.getId());
+		System.out.println(carteCoperte.get(0));
 		return carteCoperte;
 	}
 	
@@ -2281,7 +2319,7 @@ public class Controller  {
 		
 		for(int i = 0; i < card.size(); i++) {
 			for(int j = 0; j < 4; j++) {
-				if(this.getFreeResourceCorners(free.get(i)) == null) {
+				if(this.getFreeResourceCorners(card.get(i)) != null) {
 					empty = true;
 				}
 			}
@@ -2310,7 +2348,7 @@ public class Controller  {
 		
 		for(int i = 0; i < card.size(); i++) {
 			for(int j = 0; j < 4; j++) {
-				if(this.getFreeGoldCorners(free.get(i)) == null) {
+				if(this.getFreeGoldCorners(card.get(i)) != null) {
 					empty = true;
 				}
 			}
