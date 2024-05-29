@@ -3,7 +3,9 @@ package application.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -324,8 +326,7 @@ public class Controller  {
 	 */
 	public void posiziona(Giocatore g) {
 		String scelta = "";
-		String sceltaFronte = "";
-		Carta cartaScelta;
+		Carta cartaScelta = null;
 		ArrayList<CartaRisorsa> libereRisorsa = new ArrayList<CartaRisorsa>();
 		ArrayList<CartaOro> libereOro = new ArrayList<CartaOro>();
 		CartaIniziale liberaIniziale;
@@ -370,7 +371,8 @@ public class Controller  {
 			
 			try {
 				for(int i = 0; i < g.getMano().getRisorsa().size(); i++) {
-					if(scelta.equalsIgnoreCase(g.getMano().getRisorsa().get(i).getId())) {
+					if(scelta.equals(g.getMano().getRisorsa().get(i).getId())) {
+						scelta=g.getMano().getRisorsa().get(i).getId();
 						check = true;
 						req = true;
 						break;
@@ -380,8 +382,9 @@ public class Controller  {
 				int i = 0;
 				
 				while(!req && i < g.getMano().getOro().size()) {
-					if(scelta.equalsIgnoreCase(g.getMano().getOro().get(i).getId())) {
+					if(scelta.equals(g.getMano().getOro().get(i).getId())) {
 						if(this.checkRequirements(g, g.getMano().getOro().get(i))) {
+							scelta = g.getMano().getOro().get(i).getId();
 							check = true;
 							req = true;
 						} else {
@@ -404,10 +407,8 @@ public class Controller  {
 		}
 		
 		check = false;
-		sceltaFronte = scelta;
 		
 		while(check != true && checkAngoli != true) {
-			scelta = sceltaFronte;
 			riga = view.chooseWhatToCover().toUpperCase();
 		
 			try {
@@ -438,15 +439,17 @@ public class Controller  {
 					if(view.chooseWhichSide(g.getNick(), g.getMano().getResourceById(scelta), this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)))) {
 						cartaScelta = g.getMano().getResourceById(scelta);
 					} else {
-						cartaScelta = g.getMano().getResourceById(scelta);
-						((CartaRisorsa) cartaScelta).setAngoli(this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)).getAngoli());
-						((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)).getCentro());
+						boolean verso = false;
+						((CartaRisorsa) cartaScelta).setId(scelta);
+						((CartaRisorsa) cartaScelta).setAngoli(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getAngoli());
+						((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getCentro());
+						cartaScelta.setFronte(verso);
 					}
 				} else {
 					if(view.chooseWhichSide(g.getNick(), g.getMano().getGoldById(scelta),this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)))) {
 						cartaScelta = g.getMano().getGoldById(scelta);
 					} else {
-						cartaScelta = g.getMano().getGoldById(scelta);
+						cartaScelta = this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno());
 						((CartaOro) cartaScelta).setAngoli(this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)).getAngoli());
 						((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)).getCentro());
 					}
