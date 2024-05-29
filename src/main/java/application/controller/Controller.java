@@ -333,6 +333,7 @@ public class Controller  {
 		boolean check = false;
 		boolean checkAngoli = false;
 		boolean req = false;
+		boolean verso;
 		String riga = "";
 		CartaIniziale cardI = null;
 		CartaRisorsa cardR = null;
@@ -439,7 +440,9 @@ public class Controller  {
 					if(view.chooseWhichSide(g.getNick(), g.getMano().getResourceById(scelta), this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)))) {
 						cartaScelta = g.getMano().getResourceById(scelta);
 					} else {
-						boolean verso = false;
+						verso = false;
+						int indice =  g.getMano().getRisorsa().indexOf(g.getMano().getResourceById(scelta));
+						cartaScelta = g.getMano().getRisorsa().get(indice);
 						((CartaRisorsa) cartaScelta).setId(scelta);
 						((CartaRisorsa) cartaScelta).setAngoli(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getAngoli());
 						((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getCentro());
@@ -449,9 +452,13 @@ public class Controller  {
 					if(view.chooseWhichSide(g.getNick(), g.getMano().getGoldById(scelta),this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)))) {
 						cartaScelta = g.getMano().getGoldById(scelta);
 					} else {
-						cartaScelta = this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno());
-						((CartaOro) cartaScelta).setAngoli(this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)).getAngoli());
-						((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)).getCentro());
+						verso = false;
+						int indice =  g.getMano().getOro().indexOf(g.getMano().getGoldById(scelta));
+						cartaScelta = g.getMano().getOro().get(indice);
+						((CartaOro) cartaScelta).setId(scelta);
+						((CartaOro) cartaScelta).setAngoli(this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno()).getAngoli());
+						((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno()).getCentro());
+						cartaScelta.setFronte(verso);
 					}
 				}
 				
