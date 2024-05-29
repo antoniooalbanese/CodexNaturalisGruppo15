@@ -538,39 +538,48 @@ public class Controller  {
 		return false;
 	}
 	
-	public boolean checkFreeMatrix(Giocatore g, Carta carta, Posizione angolo) {
+	public int[] getCardCordinates(Giocatore g, Carta carta) {
 		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
 			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
-				if(g.getBoard().getMatrix()[i][j] == null) {
-					continue;
-				} else {
+				if(g.getBoard().getMatrix()[i][j] != null) {
 					if(g.getBoard().getMatrix()[i][j].equals(carta.getId())) {
-						switch (angolo) {
-						case ADX:
-							if(g.getBoard().getMatrix()[i-1][j+1] == null) {
-								return true;
-							}
-							break;
-						case BDX:
-							if(g.getBoard().getMatrix()[i+1][j+1] == null) {
-								return true;
-							}
-							break;
-						case BSX:
-							if(g.getBoard().getMatrix()[i+1][j-1] == null) {
-								return true;
-							}
-							break;
-						case ASX:
-							if(g.getBoard().getMatrix()[i-1][j-1] == null) {
-								return true;
-							}
-							break;
-						}
+						return new int [] {i,j};
 					}
 				}
 			}
 		}
+		return null;
+	}
+	public boolean checkFreeMatrix(Giocatore g, Carta carta, Posizione angolo) {
+		int [] cords = this.getCardCordinates(g, carta);
+		
+		if(cords == null) {
+			return false;
+		}
+		
+		switch (angolo) {
+		case ADX:
+			if(g.getBoard().getMatrix()[cords[0]-1][cords[1]+1] == null) {
+				return true;
+			}
+			break;
+		case BDX:
+			if(g.getBoard().getMatrix()[cords[0]+1][cords[1]+1] == null) {
+				return true;
+			}
+			break;
+		case BSX:
+			if(g.getBoard().getMatrix()[cords[0]+1][cords[1]-1] == null) {
+				return true;
+			}
+			break;
+		case ASX:
+			if(g.getBoard().getMatrix()[cords[0]-1][cords[1]-1] == null) {
+				return true;
+			}
+			break;
+		}
+		
 		return false;
 	}
 	
