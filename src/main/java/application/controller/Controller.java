@@ -1245,52 +1245,6 @@ public class Controller  {
 				((CartaIniziale)coperta).getAngoloByPosizione(angoloCop).setLink(card.getId());
 		}
 		
-		int riga = (g.getBoard().getMatrix().length/2)+1;
-		int colonna = (g.getBoard().getMatrix().length/2)+1;
-		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
-			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
-				if(g.getBoard().getMatrix()[i][j] != null) {
-					if(g.getBoard().getMatrix()[i][j].equals(coperta.getId())) {
-						riga=i;
-						colonna=j;
-					}
-				}
-			}
-		}
-		boolean delete = false;
-		switch(angoloCop) {
-		case ADX:
-			if(riga == 1 || colonna == 7) {
-				delete = true;
-			}
-			break;
-		case BDX:
-			if(riga == 7 || colonna == 7) {
-				delete = true;
-			}
-			break;
-		case BSX:
-			if(riga == 7 || colonna == 1) {
-				delete = true;
-			}
-			break;
-		case ASX:
-			if(riga == 1 || colonna == 1) {
-				delete = true;
-			}
-			break;
-		}
-		
-		if(delete) {
-			String [][] mat = new String [g.getBoard().getMatrix().length + 8][g.getBoard().getMatrix().length + 8];
-			for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
-				for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
-					mat [i + 4][j + 4] = g.getBoard().getMatrix()[i][j];
-				}
-			}
-			g.getBoard().setMatrix(mat);
-		}
-		
 		int r = 0;
 		int c = 0;
 		for (int i=0; i<g.getBoard().getMatrix().length; i++) {
@@ -1320,9 +1274,52 @@ public class Controller  {
 			break;
 		}
 		
+		int riga = (g.getBoard().getMatrix().length/2)+1;
+		int colonna = (g.getBoard().getMatrix().length/2)+1;
+		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
+			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
+				if(g.getBoard().getMatrix()[i][j] != null) {
+					if(g.getBoard().getMatrix()[i][j].equals(card.getId())) {
+						riga=i;
+						colonna=j;
+					}
+				}
+			}
+		}
 		
-			
+		boolean delete = false;
+		switch(angoloCop) {
+		case ADX:
+			if(riga == 1 || colonna == g.getBoard().getMatrix()[0].length -1) {
+				delete = true;
+			}
+			break;
+		case BDX:
+			if(riga == g.getBoard().getMatrix().length - 1 || colonna == g.getBoard().getMatrix()[0].length - 1) {
+				delete = true;
+			}
+			break;
+		case BSX:
+			if(riga == g.getBoard().getMatrix().length - 1 || colonna == 1) {
+				delete = true;
+			}
+			break;
+		case ASX:
+			if(riga == 1 || colonna == 1) {
+				delete = true;
+			}
+			break;
+		}
 		
+		if(delete) {
+			String [][] mat = new String [g.getBoard().getMatrix().length + 8][g.getBoard().getMatrix().length + 8];
+			for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
+				for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
+					mat [i + 4][j + 4] = g.getBoard().getMatrix()[i][j];
+				}
+			}
+			g.getBoard().setMatrix(mat);
+		}
 		
 		this.count(g, card, getCarteCoperte(g,coperta, angoloCop), angoloCop);
 		this.countPoints(g.getBoard(), card);
