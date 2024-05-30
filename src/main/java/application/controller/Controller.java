@@ -327,6 +327,7 @@ public class Controller  {
 		boolean checkAngoli = false;
 		boolean req = false;
 		boolean verso;
+		boolean checkReq = false;
 		String riga = "";
 		CartaIniziale cardI = null;
 		CartaRisorsa cardR = null;
@@ -360,95 +361,90 @@ public class Controller  {
 			}
 		}
 		
-		while(check != true && req != true) {
-			scelta = view.chooseWhatToPlace().toUpperCase();
-			
-			try {
-				for(int i = 0; i < g.getMano().getRisorsa().size(); i++) {
-					if(scelta.equals(g.getMano().getRisorsa().get(i).getId())) {
-						scelta=g.getMano().getRisorsa().get(i).getId();
-						check = true;
-						req = true;
-						break;
-					}
-				}
+		while(!check) {
+			while(!checkReq) {
+				scelta = view.chooseWhatToPlace().toUpperCase();
 				
-				int i = 0;
-				
-				while(!req && i < g.getMano().getOro().size()) {
-					if(scelta.equals(g.getMano().getOro().get(i).getId())) {
-						if(this.checkRequirements(g, g.getMano().getOro().get(i))) {
-							scelta = g.getMano().getOro().get(i).getId();
+				try {
+					for(int i = 0; i < g.getMano().getRisorsa().size(); i++) {
+						if(scelta.equals(g.getMano().getRisorsa().get(i).getId())) {
+							scelta=g.getMano().getRisorsa().get(i).getId();
 							check = true;
-							req = true;
-						} else {
-							check = true;
-							req = false;
 						}
 					}
-					i++;
-				}
-				if(check == false) {
-					throw new IOException();
-				}
-				if(req == false) {
-					view.showRequirementMessage();
-				}
-				
-			}catch(IOException e) {
-				view.insertAValidCode();
-			}
-		}
-		
-		check = false;
-		
-		while(check != true && checkAngoli != true) {
-			riga = view.chooseWhatToCover().toUpperCase();
-		
-			try {
-				if(riga.equals(liberaIniziale.getId())) {
-					cardI = liberaIniziale;	
-					check = true;
+					for(int j=0; j < g.getMano().getOro().size(); j++) {
+						if(scelta.equals(g.getMano().getOro().get(j).getId())) {
+								scelta = g.getMano().getOro().get(j).getId();
+								check = true;
+						}
+					}
 					
-				}
-				if (libereRisorsa != null) {
-					for(CartaRisorsa r: libereRisorsa) {
-						if(riga.equals(r.getId())) {
-							cardR = r;
+				
+					riga = view.chooseWhatToCover().toUpperCase();
+				
+					
+						if(riga.equals(liberaIniziale.getId())) {
+							cardI = liberaIniziale;	
 							check = true;	
 						}
-					}
-				} 
-				if (libereOro != null) {
-					for(CartaOro o: libereOro) {
-						if(riga.equals(o.getId())) {
-							cardO = o;
-							check = true;
-
+						if (libereRisorsa != null) {
+							for(CartaRisorsa r: libereRisorsa) {
+								if(riga.equals(r.getId())) {
+									cardR = r;
+									check = true;	
+								}
+							}
+						} 
+						if (libereOro != null) {
+							for(CartaOro o: libereOro) {
+								if(riga.equals(o.getId())) {
+									cardO = o;
+									check = true;
+		
+								}
+							}
 						}
+						
+						
+						if(scelta.charAt(0)=='R') {
+							if(view.chooseWhichSide(g.getNick(), g.getMano().getResourceById(scelta), this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)))) {
+								cartaScelta = g.getMano().getResourceById(scelta);
+								checkReq = true;
+							} else {
+								verso = false;
+								cartaScelta = setAngoliRetro(g.getMano().getResourceById(scelta), g.getMano().getResourceById(scelta).getAngoli());
+								((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getCentro());
+								cartaScelta.setFronte(verso);
+								checkReq = true;
+							}
+						} else {
+								if(view.chooseWhichSide(g.getNick(), g.getMano().getGoldById(scelta),this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)))) {
+									cartaScelta = g.getMano().getGoldById(scelta);
+									if(this.checkRequirements(g, (CartaOro) cartaScelta)) {
+										checkReq = true;
+									} else {
+										checkReq = false;
+										view.showRequirementMessage();
+									}
+								} else {
+									verso = false;
+									cartaScelta = setAngoliRetro(g.getMano().getGoldById(scelta), g.getMano().getGoldById(scelta).getAngoli());
+									((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno()).getCentro());
+									cartaScelta.setFronte(verso);
+									checkReq= true;
+								}
+							}
+						if(check == false) {
+							throw new IOException();
+						}
+						
+					}catch(IOException e) {
+						view.insertAValidCode();
 					}
-				}
+			
+			}
 				
-				if(scelta.charAt(0)=='R') {
-					if(view.chooseWhichSide(g.getNick(), g.getMano().getResourceById(scelta), this.model.getCampo().getMazzoR().getRetroCarta(g.getMano().getResourceById(scelta)))) {
-						cartaScelta = g.getMano().getResourceById(scelta);
-					} else {
-						verso = false;
-						cartaScelta = setAngoliRetro(g.getMano().getResourceById(scelta), g.getMano().getResourceById(scelta).getAngoli());
-						((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getCentro());
-						cartaScelta.setFronte(verso);
-					}
-				} else {
-					if(view.chooseWhichSide(g.getNick(), g.getMano().getGoldById(scelta),this.model.getCampo().getMazzoO().getRetroCarta(g.getMano().getGoldById(scelta)))) {
-						cartaScelta = g.getMano().getGoldById(scelta);
-					} else {
-						verso = false;
-						cartaScelta = setAngoliRetro(g.getMano().getGoldById(scelta), g.getMano().getGoldById(scelta).getAngoli());
-						((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno()).getCentro());
-						cartaScelta.setFronte(verso);
-					}
-				}
-				
+			if(checkReq) {
 				view.showFreeCornersMessage();
 				
 				if(cardI != null) {
@@ -468,18 +464,12 @@ public class Controller  {
 						check = true;
 					}
 				}
+			} else {
+				check = false;
 				
-				
-				if(check == false) {
-					throw new IOException();
-				}
-				
-			}catch(IOException e) {
-				view.insertAValidCode();
 			}
-		}
-		
-		
+				
+		}	
 	}
 	
 	/**
