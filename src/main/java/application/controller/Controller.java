@@ -3,6 +3,8 @@ package application.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import com.google.gson.JsonSyntaxException;
 import application.model.Angolo;
 import application.model.Board;
@@ -604,10 +606,10 @@ public class Controller  {
 				for(Angolo a: angoli) {
 					if(a.getPos().toString().equals(pos.toString())) {
 						return pos;
-					} else {
-						throw new IOException();
 					}
 				}
+				
+				throw new IOException();
 				
 			} catch(IOException e){
 				view.isCornerAlreadyOccupied(angoli);
@@ -2221,6 +2223,7 @@ public class Controller  {
 	public void countPoints(Board board, Carta carta) {
 		int punto = 0;
 		int numLink = 0;
+		
 		if(carta.getId().charAt(0)=='R') {
 			if (((CartaRisorsa)carta).getPunto()!=null) {
 				punto = ((CartaRisorsa)carta).getPunto().getSomma();
@@ -2242,10 +2245,13 @@ public class Controller  {
 				switch(((CartaOro)carta).getPunto().getOggetto()) {
 				case PIUMA:
 					punto = board.getNumOgg().get(0) * ((CartaOro)carta).getPunto().getSomma();
+					break;
 				case INCHIOSTRO:
 					punto = board.getNumOgg().get(1) * ((CartaOro)carta).getPunto().getSomma();
+					break;
 				case PERGAMENA:
 					punto = board.getNumOgg().get(2) * ((CartaOro)carta).getPunto().getSomma();
+					break;
 				}
 			}
 		}
@@ -2490,12 +2496,21 @@ public class Controller  {
 				return board.getNumOgg().get(2) / 2;
 			}
 		}
-		
+	
 		if(diversi != null) {
 			piuma = board.getNumOgg().get(0);
 			inchiostro = board.getNumOgg().get(1);
 			pergamena = board.getNumOgg().get(2);
-			return (piuma + inchiostro + pergamena) / 3;
+			
+			int groups = 0;
+			while(piuma > 0 && inchiostro > 0 && pergamena > 0) {
+				groups++;
+				piuma--;
+				inchiostro--;
+				pergamena--;
+			}
+			
+			return groups;
 		}
 		
 		return 0;
@@ -2503,51 +2518,90 @@ public class Controller  {
 	
 	public int countDisposition(Board board, Obiettivo obiettivo) {
 		int counter = 0;
+		Regno[][] disposizione = obiettivo.getDisposizione();
+		int disposizioneSize = 3;
 		
-		for(int i = 0; i < board.getMatrix().length - 2; i++) {
-			for (int j = 0; j < board.getMatrix()[i].length - 2; j++) {
-				counter += this.scanDisposition(board.getMatrix(), obiettivo.getDisposizione(), i, j);
-			}
+		if(disposizione[0][2] == null && disposizione[1][2] == null && disposizione[2][2] == null) {
+			disposizione = new Regno[3][2];
+			
+			disposizione[0][0] = obiettivo.getDisposizione()[0][0];
+			disposizione[0][1] = obiettivo.getDisposizione()[0][1];
+			disposizione[1][0] = obiettivo.getDisposizione()[1][0];
+			disposizione[1][1] = obiettivo.getDisposizione()[1][1];
+			disposizione[2][0] = obiettivo.getDisposizione()[2][0];
+			disposizione[2][1] = obiettivo.getDisposizione()[2][1];
+			disposizioneSize = 2;
 		}
+		
+		int boardSize = board.getMatrix().length;
+		List<Regno[][]> disposizioni = new ArrayList<>();
+		
+		if(disposizioneSize == 3) {
+			for (int i = 0; i < boardSize - disposizione.length; i++) {
+                for (int j = 0; j < boardSize - disposizione[0].length; j++) {
+                    Regno[][] disp = new Regno[boardSize][boardSize];
+
+                    disp[i][j] = disposizione[0][0];
+                    disp[i][j + 1] = disposizione[0][1];
+                    disp[i][j + 2] = disposizione[0][2];
+
+                    disp[i + 1][j] = disposizione[1][0];
+                    disp[i + 1][j + 1] = disposizione[1][1];
+                    disp[i + 1][j + 2] = disposizione[1][2];
+
+                    disp[i + 2][j] = disposizione[2][0];
+                    disp[i + 2][j + 1] = disposizione[2][1];
+                    disp[i + 2][j + 2] = disposizione[2][2];
+
+                    disposizioni.add(disp);
+                }
+            }
+		} else {
+			 for (int i = 0; i < boardSize - disposizione.length; i++) {
+	                for (int j = 0; j < boardSize - disposizione[0].length; j++) {
+	                    Regno[][] disp = new Regno[boardSize][boardSize];
+
+	                    disp[i][j] = disposizione[0][0];
+	                    disp[i][j + 1] = disposizione[0][1];
+
+	                    disp[i + 1][j] = disposizione[1][0];
+	                    disp[i + 1][j + 1] = disposizione[1][1];
+
+	                    disp[i + 2][j] = disposizione[2][0];
+	                    disp[i + 2][j + 1] = disposizione[2][1];
+
+	                    disposizioni.add(disp);
+	                }
+	            }
+		}
+		
+		for (Regno[][] disp : disposizioni) {
+            counter += scanDisposition(board.getMatrix(), disp);
+        }
+
 		return counter;
 	}
    
-	public int scanDisposition (String [][] mat, Regno [][] obiettivo, int i, int j) {
-		boolean scanner = true;
-		
-		while(scanner || i < 3) {
-			while(scanner || j < 3) {
-				switch(obiettivo [i][j]) {
-				case VEGETALE:
-					if(!mat [i][j].contains("VR")) {
-						scanner = false;
-						return 0;
-					}
-					break;
-				case ANIMALE:
-					if(!mat [i][j].contains("BL")) {
-						scanner = false;
-						return 0;
-					}
-					break;
-				case FUNGHI:
-					if(!mat [i][j].contains("RS")) {
-						scanner = false;
-						return 0;
-					}
-					break;
-				case INSETTI:
-					if(!mat [i][j].contains("VL")) {
-						scanner = false;
-						return 0;
-					}
-					break;
-				}
-				j++;
-			}
-			i++;
-		}
-		return 1;
+	public int scanDisposition (String [][] mat, Regno [][] disp) {
+		 for (int i = 0; i < mat.length; i++) {
+	            for (int j = 0; j < mat.length; j++) {
+	                String matCellId = mat[i][j];
+	                Regno matCell = null;
+
+	                if (matCellId != null) {
+	                    if (matCellId.contains("VR")) matCell = Regno.VEGETALE;
+	                    else if (matCellId.contains("BL")) matCell = Regno.ANIMALE;
+	                    else if (matCellId.contains("RS")) matCell = Regno.FUNGHI;
+	                    else if (matCellId.contains("VL")) matCell = Regno.INSETTI;
+	                }
+
+	                Regno dispCell = disp[i][j];
+
+	                if (dispCell != null && matCell == null) return 0;
+	                if (dispCell != null && dispCell != matCell) return 0;
+	            }
+	        }
+		 return 1;
 	}
 	
 	public void endGame() {
