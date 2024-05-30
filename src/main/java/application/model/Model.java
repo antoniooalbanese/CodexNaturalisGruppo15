@@ -1,11 +1,7 @@
 package application.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import com.google.gson.JsonSyntaxException;
-
-import application.controller.Controller;
 
 /**
  * Classe che racchiude tutti i componenti del gioco.

@@ -3,22 +3,15 @@ package application.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.gson.JsonSyntaxException;
-
 import application.model.Angolo;
 import application.model.Board;
-import application.model.CampoDiGioco;
 import application.model.Carta;
 import application.model.CartaIniziale;
 import application.model.CartaObiettivo;
 import application.model.CartaOro;
 import application.model.CartaRisorsa;
 import application.model.Giocatore;
-import application.model.MazzoIniziale;
 import application.model.MazzoObiettivo;
 import application.model.MazzoOro;
 import application.model.MazzoRisorsa;
@@ -441,10 +434,7 @@ public class Controller  {
 						cartaScelta = g.getMano().getResourceById(scelta);
 					} else {
 						verso = false;
-						int indice =  g.getMano().getRisorsa().indexOf(g.getMano().getResourceById(scelta));
-						cartaScelta = g.getMano().getRisorsa().get(indice);
-						((CartaRisorsa) cartaScelta).setId(scelta);
-						((CartaRisorsa) cartaScelta).setAngoli(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getAngoli());
+						cartaScelta = setAngoliRetro(g.getMano().getResourceById(scelta), g.getMano().getResourceById(scelta).getAngoli());
 						((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getCentro());
 						cartaScelta.setFronte(verso);
 					}
@@ -453,10 +443,7 @@ public class Controller  {
 						cartaScelta = g.getMano().getGoldById(scelta);
 					} else {
 						verso = false;
-						int indice =  g.getMano().getOro().indexOf(g.getMano().getGoldById(scelta));
-						cartaScelta = g.getMano().getOro().get(indice);
-						((CartaOro) cartaScelta).setId(scelta);
-						((CartaOro) cartaScelta).setAngoli(this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno()).getAngoli());
+						cartaScelta = setAngoliRetro(g.getMano().getGoldById(scelta), g.getMano().getGoldById(scelta).getAngoli());
 						((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno()).getCentro());
 						cartaScelta.setFronte(verso);
 					}
@@ -466,18 +453,18 @@ public class Controller  {
 				
 				if(cardI != null) {
 					view.showFreeInitialCorners(cardI, this.getFreeInitialCorners(cardI));
-					if(this.checkPlaceInitial(g, scelta, cartaScelta, cardI, view.chooseWhichCorner())) {
+					if(this.checkPlaceInitial(g, scelta, cartaScelta, cardI, this.checkCorners(this.getFreeInitialCorners(cardI)))) {
 						check = true;
 					}
 				}
 				if(cardR != null) {
 					view.showFreeResourceCorners(cardR, this.getFreeResourceCorners(cardR));
-					if(this.checkPlaceResource(g, scelta, cartaScelta, cardR, view.chooseWhichCorner())) {
+					if(this.checkPlaceResource(g, scelta, cartaScelta, cardR, this.checkCorners(this.getFreeResourceCorners(cardR)))) {
 						check = true;
 					}
 				}else if(cardO != null) {
 					view.showFreeGoldCorners(cardO, this.getFreeGoldCorners(cardO));
-					if(this.checkPlaceGold(g, scelta, cartaScelta, cardO, view.chooseWhichCorner())) {
+					if(this.checkPlaceGold(g, scelta, cartaScelta, cardO, this.checkCorners(this.getFreeGoldCorners(cardO)))) {
 						check = true;
 					}
 				}
@@ -493,6 +480,41 @@ public class Controller  {
 		}
 		
 		
+	}
+	
+	/**
+	 * Metodo che cambia gli angoli della carta fronte con gli angoli della carta retro.
+	 * @param fronte
+	 * @param angoliFronte
+	 * @return
+	 */
+	public Carta setAngoliRetro (Carta fronte, ArrayList<Angolo> angoliFronte){
+		
+		Angolo angolo;
+		ArrayList<Angolo> nuoviAngoli = new ArrayList<Angolo>();
+			
+			for(int i=0; i<4;i++) {
+				angolo =angoliFronte.get(i);
+				if(angolo.getPos()==Posizione.ADX) {
+					angolo.setTipo(TipoAngolo.VUOTO);
+					nuoviAngoli.add(angolo);
+				} else if(angolo.getPos()==Posizione.BDX) {
+					angolo.setTipo(TipoAngolo.VUOTO);
+					nuoviAngoli.add(angolo);
+				} else if (angolo.getPos()==Posizione.BSX) {
+					angolo.setTipo(TipoAngolo.VUOTO);
+					nuoviAngoli.add(angolo);
+				} else {
+					angolo.setTipo(TipoAngolo.VUOTO);
+					nuoviAngoli.add(angolo);
+				}
+			}
+		if (fronte.getId().charAt(0)=='R') {
+			((CartaRisorsa) fronte).setAngoli(nuoviAngoli);
+		} else {
+			((CartaOro) fronte).setAngoli(nuoviAngoli);
+		}
+		return fronte;
 	}
 	
 	/**
@@ -550,6 +572,7 @@ public class Controller  {
 		}
 		return null;
 	}
+	
 	public boolean checkFreeMatrix(Giocatore g, Carta carta, Posizione angolo) {
 		int [] cords = this.getCardCordinates(g, carta);
 		
@@ -583,6 +606,25 @@ public class Controller  {
 		return false;
 	}
 	
+	public Posizione checkCorners(ArrayList<Angolo> angoli) {
+		while(true) {
+			try{
+				 Posizione pos = view.chooseWhichCorner();
+				
+				for(Angolo a: angoli) {
+					if(a.getPos().toString().equals(pos.toString())) {
+						return pos;
+					} else {
+						throw new IOException();
+					}
+				}
+				
+			} catch(IOException e){
+				view.isCornerAlreadyOccupied(angoli);
+			}
+		}
+	}
+	
 	public boolean checkPlaceCondition(Angolo ang, Angolo coperto) {
 		if(ang.getTipo().equals(TipoAngolo.NASCOSTO)) {
 			if(coperto.getTipo().equals(TipoAngolo.VUOTO)) {
@@ -608,10 +650,6 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean checkPlaceInitial(Giocatore g, String scelta, Carta cartaScelta, CartaIniziale coperta, Posizione angolo) {
-		if(!this.checkFreeMatrix(g, coperta, angolo)) {
-			view.isFullMessage();
-			return false;
-		} 
 		switch(angolo) {
 		case ADX:
 			if(cartaScelta.getId().charAt(0)=='R') {
@@ -709,10 +747,6 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean checkPlaceResource(Giocatore g, String scelta, Carta cartaScelta, CartaRisorsa coperta, Posizione angolo) {
-		if(!this.checkFreeMatrix(g, coperta, angolo)) {
-			view.isFullMessage();
-			return false;
-		} 
 		switch(angolo) {
 		case ADX:
 			if(cartaScelta.getId().charAt(0)=='R') {
@@ -811,10 +845,6 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean checkPlaceGold(Giocatore g, String scelta, Carta cartaScelta, CartaOro coperta, Posizione angolo) {
-		if(!this.checkFreeMatrix(g, coperta, angolo)) {
-			view.isFullMessage();
-			return false;
-		} 
 		switch(angolo) {
 		case ADX:
 			if(cartaScelta.getId().charAt(0)=='R') {
@@ -2308,15 +2338,11 @@ public class Controller  {
 	}
 	
 	public CartaIniziale getFreeInitialCard(CartaIniziale carta) {
-		for(int i=0; i < 4; i++) {
-			if(this.getFreeInitialCorners(carta)==null) {
-				return null;
-			} else {
-				return carta;
-			}
+		if(this.getFreeInitialCorners(carta)==null) {
+			return null;
+		} else {
+			return carta;
 		}
-		
-		return null;
 	}
 	
 	/**

@@ -476,7 +476,7 @@ public class View {
 		}
 		
 		System.out.println(intro);
-		showObjective(bor.getObiettivo().showCard(), bor.getObiettivo().getObiettivo().getDisposizione());
+		showObjective(bor.getObiettivo().showCard(), disp);
 		System.out.println("\n" + board);
 	}
 	
@@ -715,6 +715,22 @@ public class View {
 				System.out.println("Risposta non ammessa, riprova con ADX, BDX, BSX, ASX");
 			}
 		}
+	}
+	
+	public void isCornerAlreadyOccupied(ArrayList<Angolo> angoli) {
+		String message = "L'angolo selezionato non è disponibile, è già occupato. Riprova con: (";
+		
+		for(int i = 0; i < angoli.size(); i++) {
+			message += angoli.get(i).getPos();
+			
+			if(i != angoli.size() - 1) {
+				message += ", ";
+			} else {
+				message += "): ";
+			}
+		}
+		
+		System.out.println(message);
 	}
 	
 	public void isFullMessage() {
