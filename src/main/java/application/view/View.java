@@ -571,7 +571,8 @@ public class View {
 	 */
 	public String chooseWhatToPlace() {
 		System.out.println("Inserisci il codice della carta che vuoi posizionare:");
-		return SCANNER.nextLine();
+		String scelta = SCANNER.nextLine().toUpperCase();
+		return scelta;
 	}
 	
 	/**
