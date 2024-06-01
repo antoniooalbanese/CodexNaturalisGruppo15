@@ -3,6 +3,7 @@ package application.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.gson.JsonSyntaxException;
@@ -231,7 +232,7 @@ public class Controller  {
 		
 		while(!this.isGameOver(finish)) {
 			
-			for(int i = 0; i < num; i++) {
+			for(int i = 0; i < this.num; i++) {
 				if(view.showDecksAreOverMessage(areDecksFinished())) {
 					break;
 				}
@@ -253,7 +254,7 @@ public class Controller  {
 			}
 		}
 		
-		for(int i = 0; i < this.model.getCampo().getGiocatore().size(); i++ ) {
+		for(int i = 0; i < this.num; i++ ) {
 			this.checkExtraPoint(this.model.getCampo().getGiocatore().get(i));
 		}
 		this.createRanking(this.model.getCampo().getGiocatore());
@@ -265,9 +266,7 @@ public class Controller  {
 	}
 	
 	public void checkExtraPoint(Giocatore g) {
-		for(int i = 0; i < num; i++) {
-			 this.checkObjective(g, g.getBoard().getObiettivo());
-		}
+			 this.checkObjective(g);
 	}
 	
 	/**
@@ -275,24 +274,22 @@ public class Controller  {
 	 * @param giocatori
 	 * @return
 	 */
-	public ArrayList<String> createRanking(ArrayList<Giocatore> giocatori){
-		ArrayList<String> ranking = new ArrayList<String>();
-		String g;
-		for (int k=0; k < giocatori.size(); k++) {
-			ranking.add(giocatori.get(k).getNick());
-		}
-		for(int i = 0; i < giocatori.size() - 1; i++) {
-			for(int j = 0; j < giocatori.size() - i - 1; j++) {
-				if(giocatori.get(j).getBoard().getPunteggio() < giocatori.get(j + 1).getBoard().getPunteggio()) {
-					g = ranking.get(j);
-					ranking.set(j, ranking.get(j + 1));		
-					ranking.set(j + 1, g);
-				}
-			}
-		}
-		
-		return ranking;
-	}
+	 public ArrayList<String> createRanking(ArrayList<Giocatore> giocatori) {
+		Collections.sort(giocatori, new Comparator<Giocatore>() {
+	           
+	          public int compare(Giocatore g1, Giocatore g2) {
+	              return Integer.compare(g2.getBoard().getPunteggio(), g1.getBoard().getPunteggio());
+	          }
+	      });
+
+	      ArrayList<String> ranking = new ArrayList<>();
+	      for (Giocatore giocatore : giocatori) {
+	          ranking.add(giocatore.getNick());
+	      }
+
+	      return ranking;
+	  }
+	
 	
 	/**
 	 * Metodo che controlla se il giocatore a fine del proprio turno ha raggiunto
@@ -301,7 +298,7 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean checkLastTurn(Giocatore g) {
-		if(g.getBoard().getPunteggio() >= 2) {
+		if(g.getBoard().getPunteggio() >= 1) {
 			return true;
 		}
 		return false;
@@ -3213,78 +3210,112 @@ public class Controller  {
 		return corner;
 	}
 	
-	public void checkObjective(Giocatore g, CartaObiettivo obiettivo) {
-		
-		switch (obiettivo.getObiettivo().getTipo()) {
-		case RISORSA:	
-			g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countResource(obiettivo.getObiettivo().getRisorsa(), g) * obiettivo.getPunto());
-			break;
-		case OGGETTO:
-			if(obiettivo.getObiettivo().getOggetto().get(0).equals(Oggetto.PIUMA)) {
-				if(obiettivo.getObiettivo().getOggetto().get(1).equals(Oggetto.PIUMA)) {
-					g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countObject(Oggetto.PIUMA, null, g) * obiettivo.getPunto());
-				}else {
-					g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countObject(null ,obiettivo.getObiettivo().getOggetto(), g) * obiettivo.getPunto());
-				}	
-			}else {
-				g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countObject(obiettivo.getObiettivo().getOggetto().get(0), null, g) * obiettivo.getPunto());
-			}
-		case DISPOSIZIONE:
-			g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countDisposition(g.getBoard(), obiettivo.getObiettivo()) * obiettivo.getPunto());	
-			break;
-		}
+	public void checkObjective(Giocatore g) {
+		Board board = g.getBoard();
+		CartaObiettivo cartaObiettivo = board.getObiettivo();
+	    Obiettivo obiettivo = cartaObiettivo.getObiettivo();
+	    int punto = cartaObiettivo.getPunto();
+
+	    switch (obiettivo.getTipo()) {
+	        case RISORSA:    
+	            int puntiRisorsa = (countResource(obiettivo.getRisorsa(), g) * punto);
+	            g.getBoard().setPunteggio(g.getBoard().getPunteggio() + puntiRisorsa);
+	            break;
+	        case OGGETTO:
+	            List<Oggetto> oggetti = obiettivo.getOggetto();
+	            if (oggetti.size() >= 2) {
+	                if (oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.PIUMA)) {
+	                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PIUMA, null, g) * punto));
+	                } else if (oggetti.get(0).equals(Oggetto.INCHIOSTRO) && oggetti.get(1).equals(Oggetto.INCHIOSTRO)) {
+	                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.INCHIOSTRO, null, g) * punto));
+	                } else if (oggetti.get(0).equals(Oggetto.PERGAMENA) && oggetti.get(1).equals(Oggetto.PERGAMENA)) {
+	                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PERGAMENA, null, g) * punto));
+	                } else if (oggetti.size() >= 3 && oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.INCHIOSTRO) && oggetti.get(2).equals(Oggetto.PERGAMENA)) {
+	                    board.setPunteggio(board.getPunteggio() + (countObject(null, oggetti, g) * punto));
+	                }
+	            }
+	            break;
+	        case DISPOSIZIONE:
+	            board.setPunteggio(board.getPunteggio() + countDisposition(g, obiettivo) * punto);    
+	            break;
+	    }
 	}
+
 	
 	public int countResource(Regno risorsa, Giocatore g) {
-		switch(risorsa) {
-		case VEGETALE:
-			return g.getBoard().getNumRis().get(0) / 3;
-		case ANIMALE: 
-			return g.getBoard().getNumRis().get(1) / 3;	
-		case FUNGHI:
-			return g.getBoard().getNumRis().get(2) / 3;	
-		case INSETTI:
-			return g.getBoard().getNumRis().get(3) / 3;
+		  Board board = g.getBoard();
+		    int ris = 0;
+		    int risorsaIndex = -1;
+
+		    switch (risorsa) {
+		        case VEGETALE: 
+		        	risorsaIndex = 0; 
+		        	break;
+		        case ANIMALE: 
+		        	risorsaIndex = 1; 
+		        	break;
+		        case FUNGHI: 
+		        	risorsaIndex = 2; 
+		        	break;
+		        case INSETTI: 
+		        	risorsaIndex = 3; 
+		        	break;
+		    }
+
+		    if (risorsaIndex != -1 && board.getNumRis().get(risorsaIndex) != 0) {
+		        ris = board.getNumRis().get(risorsaIndex) / 3;
+		    } else {
+	        	return ris;
+	        }
+			return ris;
 		}
-		return 0;
+	
+	public int countObject(Oggetto oggetto, List<Oggetto> diversi, Giocatore g) {
+	    Board board = g.getBoard();
+	    int ris = 0;
+
+	    if (oggetto != null) {
+	        int oggettoIndex = -1;
+
+	        switch (oggetto) {
+	            case PIUMA: 
+	            	oggettoIndex = 0; 
+	            	break;
+	            case INCHIOSTRO: 
+	            	oggettoIndex = 1; 
+	            	break;
+	            case PERGAMENA: 
+	            	oggettoIndex = 2; 
+	            	break;
+	        }
+
+	        if (oggettoIndex != -1 && board.getNumOgg().get(oggettoIndex) != 0) {
+	            ris = board.getNumOgg().get(oggettoIndex) / 2;
+	        } else {
+	        	return ris;
+	        }
+	    }
+
+	    if (diversi != null && diversi.size() >= 3) {
+	        int piuma = board.getNumOgg().get(0);
+	        int inchiostro = board.getNumOgg().get(1);
+	        int pergamena = board.getNumOgg().get(2);
+	        int groups = 0;
+
+	        while (piuma > 0 && inchiostro > 0 && pergamena > 0) {
+	            groups++;
+	            piuma--;
+	            inchiostro--;
+	            pergamena--;
+	        }
+
+	        return groups;
+	    }
+
+	    return ris;
 	}
 	
-	public int countObject(Oggetto oggetto, ArrayList<Oggetto> diversi, Giocatore g) {
-		int piuma = 0;
-		int inchiostro = 0;
-		int pergamena = 0;
-		
-		if(oggetto != null) {
-			switch(oggetto) {
-			case PIUMA:
-				return g.getBoard().getNumOgg().get(0) / 2;
-			case INCHIOSTRO:
-				return g.getBoard().getNumOgg().get(1) / 2;
-			case PERGAMENA:
-				return g.getBoard().getNumOgg().get(2) / 2;
-			}
-		}
-	
-		if(diversi != null) {
-			piuma = g.getBoard().getNumOgg().get(0);
-			inchiostro = g.getBoard().getNumOgg().get(1);
-			pergamena = g.getBoard().getNumOgg().get(2);
-			
-			int groups = 0;
-			while(piuma > 0 && inchiostro > 0 && pergamena > 0) {
-				groups++;
-				piuma--;
-				inchiostro--;
-				pergamena--;
-			}
-			
-			return groups;
-		}
-		
-		return 0;
-	}
-	
-	public int countDisposition(Board board, Obiettivo obiettivo) {
+	public int countDisposition(Giocatore g, Obiettivo obiettivo) {
 		int counter = 0;
 		Regno[][] disposizione = obiettivo.getDisposizione();
 		int disposizioneSize = 3;
@@ -3301,7 +3332,7 @@ public class Controller  {
 			disposizioneSize = 2;
 		}
 		
-		int boardSize = board.getMatrix().length;
+		int boardSize = g.getBoard().getMatrix().length;
 		List<Regno[][]> disposizioni = new ArrayList<>();
 		
 		if(disposizioneSize == 3) {
@@ -3344,7 +3375,7 @@ public class Controller  {
 		}
 		
 		for (Regno[][] disp : disposizioni) {
-            counter += scanDisposition(board.getMatrix(), disp);
+            counter += scanDisposition(g.getBoard().getMatrix(), disp);
         }
 
 		return counter;
