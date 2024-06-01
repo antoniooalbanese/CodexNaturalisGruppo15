@@ -750,14 +750,19 @@ public class View {
 		return SCANNER.nextLine();
 	}
 	
-	public void isGameOverMessage(ArrayList<String> ranking) {
+	public void isGameOverMessage() {
 		System.out.println("LA PARTITA È TERMINATA");
 		System.out.println("CLASSIFICA FINALE: ");
-		for(String r: ranking) {
-			System.out.println("   " + (ranking.indexOf(r)+1) + "° " + r);
-		}
+		
+	}
+	
+	public void showFinalPoints(String nick, int punti, int posizione) {
+		System.out.println("    " + posizione + "° " + nick + ": " + punti + " punti");
+	}
+	
+	public void showWinner(String winner) {
 		System.out.println("IL VINCITORE È:");
-		System.out.println("!!!! " + ranking.get(0) + " !!!!");
+		System.out.println("!!!! " + winner + " !!!!");
 	}
 	
 }

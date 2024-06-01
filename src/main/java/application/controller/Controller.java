@@ -227,8 +227,9 @@ public class Controller  {
 	public void playGame() {
 		view.startMessage();
 		boolean last = false;
+		boolean finish = false;
 		
-		while(!this.isGameOver(last)) {
+		while(!this.isGameOver(finish)) {
 			
 			for(int i = 0; i < num; i++) {
 				if(view.showDecksAreOverMessage(areDecksFinished())) {
@@ -246,11 +247,19 @@ public class Controller  {
 				}
 				this.model.getCampo().getGiocatore().get(i).getBoard().setTurno(this.model.getCampo().getGiocatore().get(i).getBoard().getTurno()+1);
 				last = this.checkLastTurn(this.model.getCampo().getGiocatore().get(i));
+				if (last) {
+					finish = last;
+				}
 			}
 		}
 		
 		this.checkExtraPoint();
-		view.isGameOverMessage(this.createRanking(this.model.getCampo().getGiocatore()));
+		this.createRanking(this.model.getCampo().getGiocatore());
+		view.isGameOverMessage();
+		for(int i = 0; i < this.model.getCampo().getGiocatore().size(); i++ ) {
+			view.showFinalPoints(this.model.getCampo().getGiocatore().get(i).getNick(), this.model.getCampo().getGiocatore().get(i).getBoard().getPunteggio(), i+1);
+		}
+		view.showWinner(this.model.getCampo().getGiocatore().get(0).getNick());
 	}
 	
 	public void checkExtraPoint() {
@@ -290,7 +299,7 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean checkLastTurn(Giocatore g) {
-		if(g.getBoard().getPunteggio() >= 7) {
+		if(g.getBoard().getPunteggio() >= 2) {
 			return true;
 		}
 		return false;
@@ -377,7 +386,7 @@ public class Controller  {
 								if(scelta.equalsIgnoreCase(g.getMano().getRisorsa().get(i).getId())) {
 									scelta=g.getMano().getRisorsa().get(i).getId();
 									sceltaGiusta = true;
-								} else if(i==g.getMano().getOro().size() && !sceltaGiusta) {
+								} else if(i==g.getMano().getRisorsa().size() && !sceltaGiusta) {
 									view.insertAValidCode();
 								}
 							}
@@ -437,6 +446,7 @@ public class Controller  {
 								verso = false;
 								cartaScelta = setAngoliRetro(g.getMano().getResourceById(scelta), g.getMano().getResourceById(scelta).getAngoli());
 								((CartaRisorsa) cartaScelta).setCentro(this.model.getCampo().getMazzoR().getCartaRetroByRegno(g.getMano().getResourceById(scelta).getRegno()).getCentro());
+								((CartaRisorsa) cartaScelta).setPunto(null);
 								cartaScelta.setFronte(verso);
 								checkReq = true;
 							}
@@ -453,6 +463,7 @@ public class Controller  {
 									verso = false;
 									cartaScelta = setAngoliRetro(g.getMano().getGoldById(scelta), g.getMano().getGoldById(scelta).getAngoli());
 									((CartaOro) cartaScelta).setCentro(this.model.getCampo().getMazzoO().getCartaRetroByRegno(g.getMano().getGoldById(scelta).getRegno()).getCentro());
+									((CartaOro) cartaScelta).setPunto(null);							
 									cartaScelta.setFronte(verso);
 									checkReq= true;
 								}
@@ -474,17 +485,29 @@ public class Controller  {
 					view.showFreeInitialCorners(cardI, this.getFreeInitialCorners(cardI));
 					if(this.checkPlaceInitial(g, scelta, cartaScelta, cardI, this.checkCorners(this.getFreeInitialCorners(cardI)))) {
 						check = true;
+					} else {
+						check = false;
+						checkReq = false;
+						sceltaGiusta = false;
 					}
 				}
 				if(cardR != null) {
 					view.showFreeResourceCorners(cardR, this.getFreeResourceCorners(cardR));
 					if(this.checkPlaceResource(g, scelta, cartaScelta, cardR, this.checkCorners(this.getFreeResourceCorners(cardR)))) {
 						check = true;
+					} else {
+						check = false;
+						checkReq = false;
+						sceltaGiusta = false;
 					}
 				}else if(cardO != null) {
 					view.showFreeGoldCorners(cardO, this.getFreeGoldCorners(cardO));
 					if(this.checkPlaceGold(g, scelta, cartaScelta, cardO, this.checkCorners(this.getFreeGoldCorners(cardO)))) {
 						check = true;
+					} else {
+						check = false;
+						checkReq = false;
+						sceltaGiusta = false;
 					}
 				}
 			} else {
@@ -691,6 +714,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -700,6 +725,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -711,6 +738,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -720,6 +749,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -731,6 +762,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -740,6 +773,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -751,6 +786,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -760,6 +797,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -788,6 +827,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -797,6 +838,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -808,6 +851,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -817,6 +862,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -828,6 +875,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -837,6 +886,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -848,6 +899,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -857,6 +910,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -886,6 +941,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -895,6 +952,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BSX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -906,6 +965,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -915,6 +976,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ASX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -926,6 +989,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -935,6 +1000,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.ADX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -946,6 +1013,8 @@ public class Controller  {
 					if(checkPlace(((CartaRisorsa) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaRisorsa) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			} else {
@@ -955,6 +1024,8 @@ public class Controller  {
 					if(checkPlace(((CartaOro) cartaScelta), coperta, g, angolo)) {
 						this.placeCard(g, ((CartaOro) cartaScelta), coperta, Posizione.BDX, angolo, scelta);
 						break;
+					} else {
+						return false;
 					}
 				}
 			}
@@ -977,6 +1048,9 @@ public class Controller  {
 	
 		Carta cartaDaCoprire;
 		boolean checkCon = false;
+		boolean check1 = false;
+		boolean check2 = false;
+		boolean check3 = false;
 		
 		for(int i = 0; i < g.getBoard().getMatrix().length; i++) {
 			for(int j = 0; j < g.getBoard().getMatrix()[i].length; j++) {
@@ -987,33 +1061,52 @@ public class Controller  {
 						switch (angolo) {
 						case ADX:
 							if(g.getBoard().getMatrix()[i-2][j] == null) {
-							 return true;
+								check1 = true;
+								checkCon = false;
 							} else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} 
 							}
@@ -1045,33 +1138,52 @@ public class Controller  {
 							}
 							
 							if(g.getBoard().getMatrix()[i-2][j+2] == null) {
-								 return true;
+								check2 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i-2][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i-2][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} 
 							}
@@ -1102,33 +1214,52 @@ public class Controller  {
 								}
 							}
 							if(g.getBoard().getMatrix()[i][j+2] == null) {
-								 return true;
+								check3 = true;
+								checkCon = false;
 							} else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} 
 							}
@@ -1158,36 +1289,60 @@ public class Controller  {
 									}
 								}
 							}
-							break;
+							if(check1 && check2 && check3) {
+								return true;
+							} else {
+								return false;
+							}
+							
 						case BDX:
 							if(g.getBoard().getMatrix()[i][j+2] == null) {
-								 return true;
+								 check1 = true;
+								 checkCon = false;
 							} else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j+2])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} 
 							}
@@ -1218,33 +1373,52 @@ public class Controller  {
 								}
 							}
 							if(g.getBoard().getMatrix()[i+2][j+2] == null) {
-								 return true;
+								check2 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i+2][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i+2][j+2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j+2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j+2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j+2])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} 
 							}
@@ -1275,33 +1449,52 @@ public class Controller  {
 								}
 							}
 							if(g.getBoard().getMatrix()[i+2][j] == null) {
-								 return true;
+								check3 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} 
 							}
@@ -1331,36 +1524,59 @@ public class Controller  {
 									}
 								}
 							}
-							break;
+							if(check1 && check2 && check3) {
+								return true;
+							} else {
+								return false;
+							}
 						case BSX:
 							if(g.getBoard().getMatrix()[i+2][j] == null) {
-								 return true;
+								check1 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BDX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BDX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j])).getAngoloByPosizione(Posizione.ASX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} 
 							}
@@ -1391,33 +1607,52 @@ public class Controller  {
 								}
 							}
 							if(g.getBoard().getMatrix()[i+2][j-2] == null) {
-								 return true;
+								check2 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i+2][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i+2][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i+2][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i+2][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i+2][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} 
 							}
@@ -1448,33 +1683,52 @@ public class Controller  {
 								}
 							}
 							if(g.getBoard().getMatrix()[i][j-2] == null) {
-								 return true;
+								check3 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} 
 							}
@@ -1504,36 +1758,59 @@ public class Controller  {
 									}
 								}
 							}
-							break;
+							if(check1 && check2 && check3) {
+								return true;
+							} else {
+								return false;
+							}
 						case ASX:
 							if(g.getBoard().getMatrix()[i][j-2] == null) {
-								 return true;
+								check1 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.BSX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.BSX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i][j-2])).getAngoloByPosizione(Posizione.ADX))) {
 										checkCon = true;
+										check1 = true;
+									} else {
+										check1 = false;
 									}
 								} 
 							}
@@ -1564,33 +1841,52 @@ public class Controller  {
 								}
 							}
 							if(g.getBoard().getMatrix()[i-2][j-2] == null) {
-								 return true;
+								check2 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i-2][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ASX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i-2][j-2]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j-2]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j-2]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ASX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j-2])).getAngoloByPosizione(Posizione.BDX))) {
 										checkCon = true;
+										check2 = true;
+									} else {
+										check2 = false;
 									}
 								} 
 							}
@@ -1621,33 +1917,52 @@ public class Controller  {
 								}
 							}
 							if(g.getBoard().getMatrix()[i-2][j] == null) {
-								 return true;
+								check3 = true;
+								checkCon = false;
 							}  else if (carta.getId().charAt(0)=='R') {
 								if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaRisorsa) carta).getAngoloByPosizione(Posizione.ADX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								}
 							} else if (carta.getId().charAt(0)=='O') {
 								if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='R') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaRisorsa) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
-								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='0') {
+								} else if ((g.getBoard().getMatrix()[i-2][j]).charAt(0)=='O') {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaOro) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} else {
 									if (checkPlaceCondition(((CartaOro) carta).getAngoloByPosizione(Posizione.ADX), ((CartaIniziale) g.getBoard().getByID(g.getBoard().getMatrix()[i-2][j])).getAngoloByPosizione(Posizione.BSX))) {
 										checkCon = true;
+										check3 = true;
+									} else {
+										check3 = false;
 									}
 								} 
 							}
@@ -1677,13 +1992,17 @@ public class Controller  {
 									}
 								}
 							}
-							break;
+							if(check1 && check2 && check3) {
+								return true;
+							} else {
+								return false;
+							}
 						}
 					}
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 		
 	
@@ -1765,17 +2084,17 @@ public class Controller  {
 		boolean delete = false;
 		switch(angoloCop) {
 		case ADX:
-			if(riga == 1 || colonna == g.getBoard().getMatrix()[0].length -1) {
+			if(riga == 1 || colonna == g.getBoard().getMatrix()[0].length -2) {
 				delete = true;
 			}
 			break;
 		case BDX:
-			if(riga == g.getBoard().getMatrix().length - 1 || colonna == g.getBoard().getMatrix()[0].length - 1) {
+			if(riga == g.getBoard().getMatrix().length - 2 || colonna == g.getBoard().getMatrix()[0].length - 2) {
 				delete = true;
 			}
 			break;
 		case BSX:
-			if(riga == g.getBoard().getMatrix().length - 1 || colonna == 1) {
+			if(riga == g.getBoard().getMatrix().length - 2 || colonna == 1) {
 				delete = true;
 			}
 			break;
@@ -1901,9 +2220,6 @@ public class Controller  {
 				}
 			}
 		}	
-		
-		System.out.println(coperta.getId());
-		System.out.println(carteCoperte.get(0));
 		return carteCoperte;
 	}
 	
