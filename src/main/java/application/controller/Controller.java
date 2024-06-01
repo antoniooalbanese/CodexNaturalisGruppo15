@@ -253,7 +253,9 @@ public class Controller  {
 			}
 		}
 		
-		this.checkExtraPoint();
+		for(int i = 0; i < this.model.getCampo().getGiocatore().size(); i++ ) {
+			this.checkExtraPoint(this.model.getCampo().getGiocatore().get(i));
+		}
 		this.createRanking(this.model.getCampo().getGiocatore());
 		view.isGameOverMessage();
 		for(int i = 0; i < this.model.getCampo().getGiocatore().size(); i++ ) {
@@ -262,9 +264,9 @@ public class Controller  {
 		view.showWinner(this.model.getCampo().getGiocatore().get(0).getNick());
 	}
 	
-	public void checkExtraPoint() {
+	public void checkExtraPoint(Giocatore g) {
 		for(int i = 0; i < num; i++) {
-			 this.checkObjective(this.model.getCampo().getGiocatore().get(i).getBoard(), this.model.getCampo().getGiocatore().get(i).getBoard().getObiettivo());
+			 this.checkObjective(g, g.getBoard().getObiettivo());
 		}
 	}
 	
@@ -3211,43 +3213,43 @@ public class Controller  {
 		return corner;
 	}
 	
-	public void checkObjective(Board board, CartaObiettivo obiettivo) {
+	public void checkObjective(Giocatore g, CartaObiettivo obiettivo) {
 		
 		switch (obiettivo.getObiettivo().getTipo()) {
 		case RISORSA:	
-			board.setPunteggio(board.getPunteggio() + countResource(obiettivo.getObiettivo().getRisorsa(), board) * obiettivo.getPunto());
+			g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countResource(obiettivo.getObiettivo().getRisorsa(), g) * obiettivo.getPunto());
 			break;
 		case OGGETTO:
 			if(obiettivo.getObiettivo().getOggetto().get(0).equals(Oggetto.PIUMA)) {
 				if(obiettivo.getObiettivo().getOggetto().get(1).equals(Oggetto.PIUMA)) {
-					board.setPunteggio(board.getPunteggio() + countObject(Oggetto.PIUMA, null, board) * obiettivo.getPunto());
+					g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countObject(Oggetto.PIUMA, null, g) * obiettivo.getPunto());
 				}else {
-					board.setPunteggio(board.getPunteggio() + countObject(null ,obiettivo.getObiettivo().getOggetto(), board) * obiettivo.getPunto());
+					g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countObject(null ,obiettivo.getObiettivo().getOggetto(), g) * obiettivo.getPunto());
 				}	
 			}else {
-				board.setPunteggio(board.getPunteggio() + countObject(obiettivo.getObiettivo().getOggetto().get(0), null, board) * obiettivo.getPunto());
+				g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countObject(obiettivo.getObiettivo().getOggetto().get(0), null, g) * obiettivo.getPunto());
 			}
 		case DISPOSIZIONE:
-			board.setPunteggio(board.getPunteggio() + countDisposition(board, obiettivo.getObiettivo()) * obiettivo.getPunto());	
+			g.getBoard().setPunteggio(g.getBoard().getPunteggio() + countDisposition(g.getBoard(), obiettivo.getObiettivo()) * obiettivo.getPunto());	
 			break;
 		}
 	}
 	
-	public int countResource(Regno risorsa, Board board) {
+	public int countResource(Regno risorsa, Giocatore g) {
 		switch(risorsa) {
 		case VEGETALE:
-			return board.getNumRis().get(0) / 3;
+			return g.getBoard().getNumRis().get(0) / 3;
 		case ANIMALE: 
-			return board.getNumRis().get(1) / 3;	
+			return g.getBoard().getNumRis().get(1) / 3;	
 		case FUNGHI:
-			return board.getNumRis().get(2) / 3;	
+			return g.getBoard().getNumRis().get(2) / 3;	
 		case INSETTI:
-			return board.getNumRis().get(3) / 3;
+			return g.getBoard().getNumRis().get(3) / 3;
 		}
 		return 0;
 	}
 	
-	public int countObject(Oggetto oggetto, ArrayList<Oggetto> diversi, Board board) {
+	public int countObject(Oggetto oggetto, ArrayList<Oggetto> diversi, Giocatore g) {
 		int piuma = 0;
 		int inchiostro = 0;
 		int pergamena = 0;
@@ -3255,18 +3257,18 @@ public class Controller  {
 		if(oggetto != null) {
 			switch(oggetto) {
 			case PIUMA:
-				return board.getNumOgg().get(0) / 2;
+				return g.getBoard().getNumOgg().get(0) / 2;
 			case INCHIOSTRO:
-				return board.getNumOgg().get(1) / 2;
+				return g.getBoard().getNumOgg().get(1) / 2;
 			case PERGAMENA:
-				return board.getNumOgg().get(2) / 2;
+				return g.getBoard().getNumOgg().get(2) / 2;
 			}
 		}
 	
 		if(diversi != null) {
-			piuma = board.getNumOgg().get(0);
-			inchiostro = board.getNumOgg().get(1);
-			pergamena = board.getNumOgg().get(2);
+			piuma = g.getBoard().getNumOgg().get(0);
+			inchiostro = g.getBoard().getNumOgg().get(1);
+			pergamena = g.getBoard().getNumOgg().get(2);
 			
 			int groups = 0;
 			while(piuma > 0 && inchiostro > 0 && pergamena > 0) {
