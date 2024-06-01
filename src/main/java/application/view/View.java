@@ -92,8 +92,11 @@ public class View {
 	 * @throws Exception 
 	 */
 	public String getNick(int n) {
-		System.out.println("Inserire il nickname del giocatore " + n +":");
-		String giocatore = SCANNER.nextLine();
+		String giocatore;
+		do {
+			System.out.println("Inserire il nickname del giocatore " + n +":");
+			giocatore = SCANNER.nextLine();
+		} while (giocatore.length()==0);
 		
 		while(true) {
 			System.out.println("Quindi il nickname del giocatore " + n +" è " + giocatore + "?");
