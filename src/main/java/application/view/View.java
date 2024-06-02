@@ -66,7 +66,13 @@ public class View {
 	  * Metodo che stampa il messaggio di chiusura del programma.
 	  */
 	public void endMessage() {
-		System.out.println("ARRIVEDERCI!!!");
+		System.out.println("\n\n ________   ______    ______     ________  __   __   ______   ______   ______   ______    ______    ________    \n"
+				+ "/_______/\\ /_____/\\  /_____/\\   /_______/\\/_/\\ /_/\\ /_____/\\ /_____/\\ /_____/\\ /_____/\\  /_____/\\  /_______/\\   \n"
+				+ "\\::: _  \\ \\\\:::_ \\ \\ \\:::_ \\ \\  \\__.::._\\/\\:\\ \\\\ \\ \\\\::::_\\/_\\:::_ \\ \\\\::::_\\/_\\:::_ \\ \\ \\:::__\\/  \\__.::._\\/   \n"
+				+ " \\::(_)  \\ \\\\:(_) ) )_\\:(_) ) )_   \\::\\ \\  \\:\\ \\\\ \\ \\\\:\\/___/\\\\:\\ \\ \\ \\\\:\\/___/\\\\:(_) ) )_\\:\\ \\  __   \\::\\ \\    \n"
+				+ "  \\:: __  \\ \\\\: __ `\\ \\\\: __ `\\ \\  _\\::\\ \\__\\:\\_/.:\\ \\\\::___\\/_\\:\\ \\ \\ \\\\::___\\/_\\: __ `\\ \\\\:\\ \\/_/\\  _\\::\\ \\__ \n"
+				+ "   \\:.\\ \\  \\ \\\\ \\ `\\ \\ \\\\ \\ `\\ \\ \\/__\\::\\__/\\\\ ..::/ / \\:\\____/\\\\:\\/.:| |\\:\\____/\\\\ \\ `\\ \\ \\\\:\\_\\ \\ \\/__\\::\\__/\\\n"
+				+ "    \\__\\/\\__\\/ \\_\\/ \\_\\/ \\_\\/ \\_\\/\\________\\/ \\___/_(   \\_____\\/ \\____/_/ \\_____\\/ \\_\\/ \\_\\/ \\_____\\/\\________\\/!!!");
 	}
 	
 	/**
@@ -149,19 +155,15 @@ public class View {
 				switch (pedina) {
 				case "ROSSO":
 					colore = Pedina.ROSSO;
-					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return colore;
 				case "BLU":
 					colore = Pedina.BLU;
-					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return colore;
 				case "VERDE":
 					colore = Pedina.VERDE;
-					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return colore;
 				case "GIALLO":
 					colore = Pedina.GIALLO;
-					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return colore;
 				default:
 					throw new IOException();
@@ -169,6 +171,7 @@ public class View {
 			}catch(IOException e) {
 				System.out.println("Risposta non ammessa, riprova con ROSSO, BLU, VERDE o GIALLO");
 			}
+			System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 		}
 	}
 	
@@ -348,7 +351,7 @@ public class View {
 	 */
 	public void tellLastTurn(boolean last) {
 		if(last) {
-			System.out.println("È L'ULTIMO TURNO");
+			System.out.println("\nÈ L'ULTIMO TURNO");
 		}
 	}
 	
@@ -693,7 +696,7 @@ public class View {
 	 * disponibili.
 	 */
 	public void showFreeCornersMessage() {
-		System.out.println("Gli angoli disponibili sono:\n");
+		System.out.println("\nGli angoli disponibili sono:\n");
 	}
 	
 	/**
@@ -821,23 +824,50 @@ public class View {
 	}
 	
 	public void isGameOverMessage() {
-		System.out.println("LA PARTITA È TERMINATA");
-		System.out.println("CLASSIFICA FINALE: ");
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗\n");
+		System.out.println("    ____  ___    ____ ___________________        ________________  __  ________   _____  _________ \n"
+				+ "   / __ \\/   |  / __ /_  __/  _/_  __/   |      /_  __/ ____/ __ \\/  |/  /  _/ | / /   |/_  __/   |\n"
+				+ "  / /_/ / /| | / /_/ // /  / /  / / / /| |       / / / __/ / /_/ / /|_/ // //  |/ / /| | / / / /| |\n"
+				+ " / ____/ ___ |/ _, _// / _/ /  / / / ___ |      / / / /___/ _, _/ /  / _/ // /|  / ___ |/ / / ___ |\n"
+				+ "/_/   /_/  |_/_/ |_|/_/ /___/ /_/ /_/  |_|     /_/ /_____/_/ |_/_/  /_/___/_/ |_/_/  |_/_/ /_/  |_|");
+		System.out.print("        ,\t\t\t\t\t\t" + "                              __\n"
+				+ "        }`-.   ,          ,\t\t\t\t" + "                            .d$$b\n"
+				+ "        \\ \\ '-' \\      .-'{\t\t\t\t" + "                          .' TO$;\\\n"
+				+ "        _} .  | ,`\\   /  ' ;    .-;\\\t\t\t" + "                         /  : TP._;\n"
+				+ "       {    \\ |    | / `/  '-.,/ ; |\t\t\t" + "                        / _.;  :Tb|\n"
+				+ "       { -- -.  '  '`-, .--._.' ;  \\__\t\t\t" + "                       /   /   ;j$j\n"
+				+ "        \\     \\ | '  /  |`.    ;    _,`\\\t\t" + "                   _.-\"       d$$$$\n"
+				+ "         '. '-     ' `_- '.`;  ; ,-`_.-'\\t\t\t" + "                 .' ..       d$$$$;\n"
+				+ "     ,--.  \\    `   /` '--'  `;.` (`  _\t\t\t" + "                /  /P'      d$$$$P. |\\\n"
+				+ "  .--.\\  '._) '-. \\ \\ `-.    ;     `-';|\t\t" + "               /   \"      .d$$$P' |\\^\"l\n"
+				+ "  '. -. '         __ '.  ;  ;     _,-' /\t\t" + "             .'           `T$P^\"\"\"\"\"  :\n"
+				+ "   { __'.\\  ' '-,/; `-'   ';`.- `   .-'\t\t\t" + "         ._.'      _.'                ;\n"
+				+ "    '-.  `-._'  | `;     ;`'   .-'`\t\t\t" + "      `-.-\".-'-' ._.       _.-\"    .-\"\n"
+				+ "      <_ -'   ` .\\  `;  ;     (_.'`\\\t\t\t" + "    `.-\" _____  ._              .-\"\n"
+				+ "      _.;-\"``\"'-._'. `:;  ___, _.-' |\t\t\t" + "   -(.g$$$$$$$b.              .'\n" 
+				+ "  .-'\\'. '.` \\ \\_,_`\\ ;##`   `';  _.'\t\t\t" + "     \"\"^^T$$$P^)            .(:\n"
+				+ " /_'._\\ \\  \\__;#####./###.      \\`\t\t\t" + "       _/  -\"  /.'         /:/;\n"
+				+ " \\.' .'`/\"`/ (#######)###::.. _.'\t\t\t" + "    ._.'-'`-'  \")/         /;/;\n"
+				+ "  '.' .'  ; , |:.  `|()##`\"\"\"` \t\t\t\t" + "    ._.'-'`-'  \")/         /;/;\n"
+				+ "    `'-../__/_\\::   /O()()o\t\t\t\t" + ".-\" ..--\"\"        -'          :\n"
+				+ "             ()'._.'`()()'\t\t\t\t" + "..--\"\"--.-\"         (\\      .-(\\\n");
+		System.out.println("\n\n					CLASSIFICA FINALE: ");
 		
 	}
 	
 	public void showFinalPoints(String nick, int punti, int posizione) {
-		System.out.println("    " + posizione + "° " + nick + ": " + punti + " punti");
+		System.out.println("					" + posizione + "° " + nick + ": " + punti + " punti");
 	}
 	
 	public void showWinner(String winner) {
+		System.out.println("\n");
 		if(winner.contains("&")) {
-			System.out.println("I VINCITORI SONO:\n");
+			System.out.println("					I VINCITORI SONO:\n");
 		} else {
-			System.out.println("IL VINCITORE È:\n");
+			System.out.println("					IL VINCITORE È:\n");
 		}
 		
-		System.out.println(AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
+		System.out.println("					" + AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
 							+ AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode() 
 							+ AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
 							+ AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
@@ -846,6 +876,24 @@ public class View {
 							+ AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
 							+ AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode() 
 							+ AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode());
+		System.out.println("\n\n");
+		System.out.print("                `\t\t\t\t\t\t" + "        __.....__\n"
+				+ ";,,,             `       '             ,,,;\t\t\t" + "     .'\" _  o    \"`.\n"
+				+ "`YES8888bo.       :     :       .od8888YES'\t\t\t" + "   .' O (_)     () o`.\n"
+				+ "  888IO8DO88b.     :   :     .d8888I8DO88\t\t\t" + "  .           O       .\n"
+				+ "  8LOVEY'  `Y8b.   `   '   .d8Y'  `YLOVE8\t\t\t" + " . ()   o__...__    O  .\n"
+				+ " jTHEE!  .db.  Yb. '   ' .dY  .db.  8THEE!\t\t\t" + ". _.--'''''      ''''''--._ .\n"
+				+ "   `888  Y88Y    `b ( ) d'    Y88Y  888'\t\t\t" + ":'''                     ''';\n"
+				+ "    8MYb  '\"        ,',        \"'  dMY8t\t\t\t" + " `-.__    :   :    __.-'\n"
+				+ "   j8prECIOUSgf\"'   ':'   `\"?g8prECIOUSk\t\t\t" + "      '''-:   :-'''\n"
+				+ "     'Y'   .8'     d' 'b     '8.   'Y'\t\t\t\t" + "         J     L\n"
+				+ "      !   .8' db  d'; ;`b  db '8.   !\t\t\t\t" + "         :     :\n"
+				+ "         d88  `'  8 ; ; 8  `'  88b\t\t\t\t" + "         :     :\n"
+				+ "        d88Ib   .g8 ',' 8g.   dI88b\t\t\t\t" + "        J       L\n"
+				+ "       :888LOVE88Y'     'Y88LOVE888:\t\t\t\t" + "        :       :\n"
+				+ "       '! THEE888'       `888THEE !'\t\t\t\t" + "        :       :\n"
+				+ "          '8Y  `Y         Y'  Y8'\t\t\t\t" + "        :       :\n"
+				+ "           Y                   Y	\t\t\t" + "        `._____.'");
 	}
 	
 }
