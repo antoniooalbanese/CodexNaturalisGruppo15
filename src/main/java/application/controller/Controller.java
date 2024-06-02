@@ -3484,6 +3484,7 @@ public class Controller  {
 	}
    
 	public int scanDisposition (String [][] mat, Regno [][] disp, Set<String> c) {
+		List<String> celle = new ArrayList<>();
 		 for (int i = 0; i < mat.length; i++) {
 	            for (int j = 0; j < mat.length; j++) {
 	                String matCellId = mat[i][j];
@@ -3508,10 +3509,13 @@ public class Controller  {
 	                if (dispCell != null && matCell == null) return 0;
 	                if (dispCell != null && dispCell != matCell) return 0;
 	                if(matCellId != null) {
-	                c.add(matCellId);
+	                celle.add(matCellId);
 	                }
 	            }
 	        }
+		 if(celle != null) {
+			 c.addAll(celle);
+		 }
 		 return 1;
 	}
 	
