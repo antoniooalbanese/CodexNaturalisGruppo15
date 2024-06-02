@@ -105,8 +105,8 @@ public class View {
 	 */
 	public String getNick(int n) {
 		String giocatore;
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		do {
-			System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 			System.out.println("\nInserire il nickname del giocatore " + n +":");
 			giocatore = SCANNER.nextLine();
 		} while (giocatore.length()==0);
@@ -188,7 +188,7 @@ public class View {
 	 * @return
 	 */
 	public boolean chooseStartCard(String gio, CartaIniziale fronte, CartaIniziale retro) {
-		System.out.println("\n❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉");
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nQuesta è la carta iniziale di " + gio + ":\n");
 		System.out.println("FRONTE:");
 		System.out.println(fronte.showCard());
@@ -200,8 +200,10 @@ public class View {
 			try {
 				String ris = SCANNER.nextLine();
 				if(ris.equalsIgnoreCase("FRONTE")) {
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return true;
 				} else if (ris.equalsIgnoreCase("RETRO")) {
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return false;
 				} else {
 					throw new IOException();
@@ -222,7 +224,7 @@ public class View {
 	 * @return
 	 */
 	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) {
-		System.out.println("\n❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉");
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nQueste sono le due carte obiettivo del giocatore " + gio + ":" );
 		System.out.println("\nCARTA 1:");
 		this.showObjective(obi1.showCard(), obi1.getObiettivo().getDisposizione());
@@ -234,8 +236,10 @@ public class View {
 			try {
 				String ris = SCANNER.nextLine();
 				if(ris.equalsIgnoreCase("1")) {
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return true;
 				} else if (ris.equalsIgnoreCase("2")) {
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return false;
 				} else {
 					throw new IOException();
@@ -290,6 +294,7 @@ public class View {
 		}
 		
 		System.out.print(righe[0] + "\n" + righe[1] + "\n" + righe[2] + "\n" + righe[3] + "\n" + line);
+		System.out.println("\n｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 	}
 	
 	/**
@@ -303,8 +308,9 @@ public class View {
 			nuovoOrdine += "    " + (i+1) + "." + ordine.get(i).getNick();
 			nuovoOrdine += "\n";
 		}
-		
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nQuesto è l'ordine di gioco:\n\n" + nuovoOrdine);
+		System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 		
 	}
 	
@@ -313,8 +319,14 @@ public class View {
 	 * della partita vera e propria.
 	 */
 	public void startMessage() {
-		System.out.println("I PREPARATIVI SONO TERMINATI");
-		System.out.println("CHE LA PARTITA ABBIA INIZIO");
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗\n");
+		System.out.println("			  ╔═╗╦═╗╔═╗╔═╗╔═╗╦═╗╔═╗╔╦╗╦╦  ╦╦  ╔╦╗╔═╗╦═╗╔╦╗╦╔╗╔╔═╗╔╦╗╦\n"
+				+ "			  ╠═╝╠╦╝║╣ ╠═╝╠═╣╠╦╝╠═╣ ║ ║╚╗╔╝║   ║ ║╣ ╠╦╝║║║║║║║╠═╣ ║ ║\n"
+				+ "			  ╩  ╩╚═╚═╝╩  ╩ ╩╩╚═╩ ╩ ╩ ╩ ╚╝ ╩   ╩ ╚═╝╩╚═╩ ╩╩╝╚╝╩ ╩ ╩ ╩");
+		System.out.println("	╔═╗╦ ╦╔═╗  ╦  ╔═╗  ╦  ╦╔═╗╔═╗╔╦╗╦═╗╔═╗  ╔═╗╦  ╦╦  ╦╔═╗╔╗╔╔╦╗╦ ╦╦═╗╔═╗  ╔═╗╔╗ ╔╗ ╦╔═╗  ╦╔╗╔╔═╗╦╔═╗\n"
+				+ "	║  ╠═╣║╣   ║  ╠═╣  ╚╗╔╝║ ║╚═╗ ║ ╠╦╝╠═╣  ╠═╣╚╗╔╝╚╗╔╝║╣ ║║║ ║ ║ ║╠╦╝╠═╣  ╠═╣╠╩╗╠╩╗║╠═╣  ║║║║╔═╝║║ ║\n"
+				+ "	╚═╝╩ ╩╚═╝  ╩═╝╩ ╩   ╚╝ ╚═╝╚═╝ ╩ ╩╚═╩ ╩  ╩ ╩ ╚╝  ╚╝ ╚═╝╝╚╝ ╩ ╚═╝╩╚═╩ ╩  ╩ ╩╚═╝╚═╝╩╩ ╩  ╩╝╚╝╚═╝╩╚═╝");
+		System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 	}
 	
 	/**
@@ -346,7 +358,8 @@ public class View {
 	 * @param nick
 	 */
 	public void tellWhoseTurn(String nick) {
-		System.out.println("TURNO DI: " + nick );
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗\n");
+		System.out.println("TURNO DI: " + nick + "\n" );
 	}
 	
 	/**
@@ -381,18 +394,18 @@ public class View {
 	public void showEnemyBoard(Giocatore g) {
 		Board bor = g.getBoard();
 		String [][] mat = bor.getMatrix();
-		String intro =  "CAMPO DI: " + g.getNick() + "\n" +
+		String intro =  "\n──────────────────────────────────── ❝ CAMPO DI " + g.getNick() + " ❞ ────────────────────────────────────" + "\n" +
 						"   Turni giocati: " + bor.getTurno() + "\n" +
 						"   Punteggio: " + bor.getPunteggio() + "\n" +
 						"   Risorse presenti negli angoli delle carte posizionate sul campo:" + "\n" +
-						"    VEGETALE: " + bor.getNumRis().get(0) + "\n" +
-						"    ANIMALE: " + bor.getNumRis().get(1) + "\n" +
-						"    FUNGHI: " + bor.getNumRis().get(2) + "\n" +
-						"    INSETTI: " + bor.getNumRis().get(3) + "\n" +
+						"     VEGETALE: " + bor.getNumRis().get(0) + "\n" +
+						"     ANIMALE: " + bor.getNumRis().get(1) + "\n" +
+						"     FUNGHI: " + bor.getNumRis().get(2) + "\n" +
+						"     INSETTI: " + bor.getNumRis().get(3) + "\n" +
 						"   Oggetti presenti negli angoli delle carte posizionate sul campo:" + "\n" + 
-						"    PIUMA: " + bor.getNumOgg().get(0) + "\n" + 
-						"    INCHIOSTRO " + bor.getNumOgg().get(1) + "\n" +
-						"    PERGAMENA: " + bor.getNumOgg().get(2) + "\n";
+						"     PIUMA: " + bor.getNumOgg().get(0) + "\n" + 
+						"     INCHIOSTRO " + bor.getNumOgg().get(1) + "\n" +
+						"     PERGAMENA: " + bor.getNumOgg().get(2);
 		String board = "Carte in campo:" + "\n   ";
 		
 		for (int i = 0; i < mat.length; i++) {
@@ -433,6 +446,7 @@ public class View {
 		
 		System.out.println(intro);
 		System.out.println("\n" + board);
+		System.out.println("\n─────────────────────────────────────────────────────────────────────────────────────────────\n");
 	}
 	
 	
@@ -444,7 +458,7 @@ public class View {
 		Board bor = g.getBoard();
 		String [][] mat = bor.getMatrix();
 		Regno[][] disp = bor.getObiettivo().getObiettivo().getDisposizione();
-		String intro =  "CAMPO DI: " + g.getNick() + "\n" +
+		String intro =  "\n──────────────────────────────────── ❝ CAMPO DI " + g.getNick() + " ❞ ────────────────────────────────────" + "\n" +
 						"   Turni giocati: " + bor.getTurno() + "\n" +
 						"   Punteggio: " + bor.getPunteggio() + "\n" +
 						"   Risorse presenti negli angoli delle carte posizionate sul campo:" + "\n" +
@@ -498,6 +512,7 @@ public class View {
 		System.out.println(intro);
 		showObjective(bor.getObiettivo().showCard(), disp);
 		System.out.println("\n" + board);
+		System.out.println("\n─────────────────────────────────────────────────────────────────────────────────────────────");
 	}
 	
 	/**
@@ -515,25 +530,30 @@ public class View {
 	 * Metodo che mostra i mazzi e le carte scoperte presenti sul campo di gioco. 
 	 */
 	public void showField(CampoDiGioco campo) {
-		System.out.println("SUL CAMPO DA GIOCO CI SONO QUESTE CARTE:");
-		System.out.println("CIMA DEI MAZZI RISORSA E ORO:");
+		System.out.println("\nSUL CAMPO DA GIOCO CI SONO QUESTE CARTE:");
+		System.out.println("\n\nCIMA DEI MAZZI RISORSA E ORO:");
 		System.out.println(campo.getMazzoR().getRetroCarta(campo.getMazzoR().getMazzoFronte().get(0)).showCard());
+		System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		System.out.println(campo.getMazzoO().getRetroCarta(campo.getMazzoO().getMazzoFronte().get(0)).showCard());
-		System.out.println("\nCARTE SCOPERTE:");
+		System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+		System.out.println("\n\nCARTE SCOPERTE:");
 	
 		for (CartaRisorsa r : campo.getRisorsa()) {
 			  System.out.println(r.showCard());
+			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		}
 		
 		for (CartaOro o : campo.getOro()) {
 			  System.out.println(o.showCard());
+			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		}
 		
-		System.out.println("\nOBIETTIVI COMUNI:");
+		System.out.println("\n\nOBIETTIVI COMUNI:");
 		
 		for (CartaObiettivo ob : campo.getObiettivo()) {
 			  showObjective(ob.showCard(), ob.getObiettivo().getDisposizione());
 		}
+		
 	}
 	
 	/**
@@ -542,15 +562,18 @@ public class View {
 	 * @param mano
 	 */
 	public void showHand(String nick, Mano mano) {
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nMANO DI " + nick + ":");
 		
 		for (CartaRisorsa r : mano.getRisorsa()) {
 			  System.out.println(r.showCard());
+			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		}
 		
 		for (CartaOro o : mano.getOro()) {
 			  System.out.println(o.showCard());
-		}	
+			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+		}
 	}
 	
 	/**
@@ -575,6 +598,7 @@ public class View {
 				if(check.equalsIgnoreCase("NO")) {
 					return false;
 				}else if(check.equalsIgnoreCase("SI")){
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return true;
 				}else {
 					throw new IOException();
