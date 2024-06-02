@@ -9,6 +9,7 @@ import java.util.List;
 import com.google.gson.JsonSyntaxException;
 import application.model.Angolo;
 import application.model.Board;
+import application.model.CampoDiGioco;
 import application.model.Carta;
 import application.model.CartaIniziale;
 import application.model.CartaObiettivo;
@@ -381,7 +382,7 @@ public class Controller  {
 					while(!sceltaGiusta) {
 						do {
 						scelta = view.chooseWhatToPlace();
-						}while (scelta!=null);
+						}while (scelta.length()==0);
 						if(scelta.charAt(0)=='R') {
 							for(int i = 0; i < g.getMano().getRisorsa().size(); i++) {
 								if(scelta.equalsIgnoreCase(g.getMano().getRisorsa().get(i).getId())) {
@@ -3212,7 +3213,7 @@ public class Controller  {
 	}
 	
 	public void checkObjective(Giocatore g) {
-		for(int i =0; i<2; i++) {
+		for(int i =0; i<=2; i++) {
 			if (i==0) {
 				Board board = g.getBoard();
 				CartaObiettivo cartaObiettivo = board.getObiettivo();
@@ -3222,24 +3223,29 @@ public class Controller  {
 			    switch (obiettivo.getTipo()) {
 		        case RISORSA:    
 		            int puntiRisorsa = (countResource(obiettivo.getRisorsa(), g) * punto);
-		            g.getBoard().setPunteggio(g.getBoard().getPunteggio() + puntiRisorsa);
+		            board.setPunteggio(board.getPunteggio() + puntiRisorsa);
 		            break;
 		        case OGGETTO:
 		            List<Oggetto> oggetti = obiettivo.getOggetto();
 		            if (oggetti.size() >= 2) {
 		                if (oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.PIUMA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PIUMA, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.PIUMA, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.get(0).equals(Oggetto.INCHIOSTRO) && oggetti.get(1).equals(Oggetto.INCHIOSTRO)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.INCHIOSTRO, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.INCHIOSTRO, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.get(0).equals(Oggetto.PERGAMENA) && oggetti.get(1).equals(Oggetto.PERGAMENA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PERGAMENA, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.PERGAMENA, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.size() >= 3 && oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.INCHIOSTRO) && oggetti.get(2).equals(Oggetto.PERGAMENA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(null, oggetti, g) * punto));
+		                	int puntiOggetto = (countObject(null, oggetti, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                }
 		            }
 		            break;
 		        case DISPOSIZIONE:
-		            board.setPunteggio(board.getPunteggio() + countDisposition(g, obiettivo) * punto);    
+		        	int puntiDisposizione = countDisposition(g, obiettivo) * punto;
+		            board.setPunteggio(board.getPunteggio() + puntiDisposizione);    
 		            break;
 			    }
 			    
@@ -3252,24 +3258,29 @@ public class Controller  {
 			    switch (obiettivo.getTipo()) {
 		        case RISORSA:    
 		            int puntiRisorsa = (countResource(obiettivo.getRisorsa(), g) * punto);
-		            g.getBoard().setPunteggio(g.getBoard().getPunteggio() + puntiRisorsa);
+		            board.setPunteggio(board.getPunteggio() + puntiRisorsa);
 		            break;
 		        case OGGETTO:
 		            List<Oggetto> oggetti = obiettivo.getOggetto();
 		            if (oggetti.size() >= 2) {
 		                if (oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.PIUMA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PIUMA, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.PIUMA, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.get(0).equals(Oggetto.INCHIOSTRO) && oggetti.get(1).equals(Oggetto.INCHIOSTRO)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.INCHIOSTRO, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.INCHIOSTRO, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.get(0).equals(Oggetto.PERGAMENA) && oggetti.get(1).equals(Oggetto.PERGAMENA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PERGAMENA, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.PERGAMENA, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.size() >= 3 && oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.INCHIOSTRO) && oggetti.get(2).equals(Oggetto.PERGAMENA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(null, oggetti, g) * punto));
+		                	int puntiOggetto = (countObject(null, oggetti, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                }
 		            }
 		            break;
 		        case DISPOSIZIONE:
-		            board.setPunteggio(board.getPunteggio() + countDisposition(g, obiettivo) * punto);    
+		        	int puntiDisposizione = countDisposition(g, obiettivo) * punto;
+		            board.setPunteggio(board.getPunteggio() + puntiDisposizione);    
 		            break;
 			    }
 		    
@@ -3282,24 +3293,29 @@ public class Controller  {
 			    switch (obiettivo.getTipo()) {
 		        case RISORSA:    
 		            int puntiRisorsa = (countResource(obiettivo.getRisorsa(), g) * punto);
-		            g.getBoard().setPunteggio(g.getBoard().getPunteggio() + puntiRisorsa);
+		            board.setPunteggio(board.getPunteggio() + puntiRisorsa);
 		            break;
 		        case OGGETTO:
 		            List<Oggetto> oggetti = obiettivo.getOggetto();
 		            if (oggetti.size() >= 2) {
 		                if (oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.PIUMA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PIUMA, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.PIUMA, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.get(0).equals(Oggetto.INCHIOSTRO) && oggetti.get(1).equals(Oggetto.INCHIOSTRO)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.INCHIOSTRO, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.INCHIOSTRO, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.get(0).equals(Oggetto.PERGAMENA) && oggetti.get(1).equals(Oggetto.PERGAMENA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(Oggetto.PERGAMENA, null, g) * punto));
+		                	int puntiOggetto = (countObject(Oggetto.PERGAMENA, null, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                } else if (oggetti.size() >= 3 && oggetti.get(0).equals(Oggetto.PIUMA) && oggetti.get(1).equals(Oggetto.INCHIOSTRO) && oggetti.get(2).equals(Oggetto.PERGAMENA)) {
-		                    board.setPunteggio(board.getPunteggio() + (countObject(null, oggetti, g) * punto));
+		                	int puntiOggetto = (countObject(null, oggetti, g) * punto);
+		                    board.setPunteggio(board.getPunteggio() + puntiOggetto);
 		                }
 		            }
 		            break;
 		        case DISPOSIZIONE:
-		            board.setPunteggio(board.getPunteggio() + countDisposition(g, obiettivo) * punto);    
+		        	int puntiDisposizione = countDisposition(g, obiettivo) * punto;
+		            board.setPunteggio(board.getPunteggio() + puntiDisposizione);    
 		            break;
 			    }
 			}

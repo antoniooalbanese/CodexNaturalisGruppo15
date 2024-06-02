@@ -33,8 +33,15 @@ public class View {
 	 * @return
 	 */
 	public boolean welcomeMessage() {
-		System.out.println("CODEX NATURALIS\n");
-		System.out.println("Benvenuti!!! Volete giocare? (SI/NO)");
+		System.out.println("WELCOME TO...\n");
+		System.out.println(" ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗    ███╗   ██╗ █████╗ ████████╗██╗   ██╗██████╗  █████╗ ██╗     ██╗███████╗\n"
+				+ "██╔════╝██╔═══██╗██╔══██╗██╔════╝╚██╗██╔╝    ████╗  ██║██╔══██╗╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██║     ██║██╔════╝\n"
+				+ "██║     ██║   ██║██║  ██║█████╗   ╚███╔╝     ██╔██╗ ██║███████║   ██║   ██║   ██║██████╔╝███████║██║     ██║███████╗\n"
+				+ "██║     ██║   ██║██║  ██║██╔══╝   ██╔██╗     ██║╚██╗██║██╔══██║   ██║   ██║   ██║██╔══██╗██╔══██║██║     ██║╚════██║\n"
+				+ "╚██████╗╚██████╔╝██████╔╝███████╗██╔╝ ██╗    ██║ ╚████║██║  ██║   ██║   ╚██████╔╝██║  ██║██║  ██║███████╗██║███████║\n"
+				+ " ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚══════╝\n"
+				+ "");
+		System.out.println("\nVolete giocare? (SI/NO)");
 		
 		while(true) {
 			try {
@@ -62,8 +69,8 @@ public class View {
 	 * Metodo che chiede il numero di giocatori.
 	 */
 	public int getPlayersNumberMessage() {
-	
-		System.out.print("Inserire il numero di giocatori:");
+		System.out.println("\n❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉");
+		System.out.print("\nInserire il numero di giocatori:");
 		int giocatori;
 		
 		while(true) {
@@ -94,7 +101,8 @@ public class View {
 	public String getNick(int n) {
 		String giocatore;
 		do {
-			System.out.println("Inserire il nickname del giocatore " + n +":");
+			System.out.println("\n❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉");
+			System.out.println("\nInserire il nickname del giocatore " + n +":");
 			giocatore = SCANNER.nextLine();
 		} while (giocatore.length()==0);
 		
@@ -172,7 +180,7 @@ public class View {
 	 * @return
 	 */
 	public boolean chooseStartCard(String gio, CartaIniziale fronte, CartaIniziale retro) {
-		
+		System.out.println("\n❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉");
 		System.out.println("\nQuesta è la carta iniziale di " + gio + ":\n");
 		System.out.println("FRONTE:");
 		System.out.println(fronte.showCard());
@@ -206,6 +214,7 @@ public class View {
 	 * @return
 	 */
 	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) {
+		System.out.println("\n❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉❉⊱•═•⊰❉⊱•═•⊰❉⊱•═•⊰❉");
 		System.out.println("\nQueste sono le due carte obiettivo del giocatore " + gio + ":" );
 		System.out.println("\nCARTA 1:");
 		this.showObjective(obi1.showCard(), obi1.getObiettivo().getDisposizione());
