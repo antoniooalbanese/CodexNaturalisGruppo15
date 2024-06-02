@@ -3421,13 +3421,13 @@ public class Controller  {
 			
 			disposizione[0][0] = obiettivo.getDisposizione()[0][0];
 			disposizione[0][1] = obiettivo.getDisposizione()[0][1];
-			disposizione[0][2] = obiettivo.getDisposizione()[0][1];
+			disposizione[0][2] = obiettivo.getDisposizione()[0][2];
 			disposizione[1][0] = obiettivo.getDisposizione()[1][0];
 			disposizione[1][1] = obiettivo.getDisposizione()[1][1];
-			disposizione[1][2] = obiettivo.getDisposizione()[0][1];
+			disposizione[1][2] = obiettivo.getDisposizione()[1][2];
 			disposizione[2][0] = obiettivo.getDisposizione()[2][0];
 			disposizione[2][1] = obiettivo.getDisposizione()[2][1];
-			disposizione[2][2] = obiettivo.getDisposizione()[0][1];
+			disposizione[2][2] = obiettivo.getDisposizione()[2][2];
 			disposizioneSize = 3;
 		}
 		
@@ -3489,7 +3489,7 @@ public class Controller  {
 	                String matCellId = mat[i][j];
 	                Regno matCell = null;
 	                
-	                if(c != null) {
+	                if(c != null && matCellId != null) {
 	                	if(c.contains(matCellId)) {
 	                		return 0;
 	                	}
@@ -3500,13 +3500,16 @@ public class Controller  {
 	                    else if (matCellId.contains("BL")) matCell = Regno.ANIMALE;
 	                    else if (matCellId.contains("RS")) matCell = Regno.FUNGHI;
 	                    else if (matCellId.contains("VL")) matCell = Regno.INSETTI;
+	                    else matCell = null;
 	                }
 
 	                Regno dispCell = disp[i][j];
 
 	                if (dispCell != null && matCell == null) return 0;
 	                if (dispCell != null && dispCell != matCell) return 0;
+	                if(matCellId != null) {
 	                c.add(matCellId);
+	                }
 	            }
 	        }
 		 return 1;
