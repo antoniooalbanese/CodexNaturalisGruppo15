@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.gson.JsonSyntaxException;
 import application.model.Angolo;
@@ -3398,6 +3400,7 @@ public class Controller  {
 	
 	public int countDisposition(Giocatore g, Obiettivo obiettivo) {
 		int counter = 0;
+		Set<String> checked = new HashSet<>();
 		Regno[][] disposizione = obiettivo.getDisposizione();
 		int disposizioneSize = 3;
 		
@@ -3456,17 +3459,23 @@ public class Controller  {
 		}
 		
 		for (Regno[][] disp : disposizioni) {
-            counter += scanDisposition(g.getBoard().getMatrix(), disp);
+            counter += scanDisposition(g.getBoard().getMatrix(), disp, checked);
         }
 
 		return counter;
 	}
    
-	public int scanDisposition (String [][] mat, Regno [][] disp) {
+	public int scanDisposition (String [][] mat, Regno [][] disp, Set<String> c) {
 		 for (int i = 0; i < mat.length; i++) {
 	            for (int j = 0; j < mat.length; j++) {
 	                String matCellId = mat[i][j];
 	                Regno matCell = null;
+	                
+	                if(c != null) {
+	                	if(c.contains(matCellId)) {
+	                		return 0;
+	                	}
+	                }
 
 	                if (matCellId != null) {
 	                    if (matCellId.contains("VR")) matCell = Regno.VEGETALE;
@@ -3479,6 +3488,7 @@ public class Controller  {
 
 	                if (dispCell != null && matCell == null) return 0;
 	                if (dispCell != null && dispCell != matCell) return 0;
+	                c.add(matCellId);
 	            }
 	        }
 		 return 1;
