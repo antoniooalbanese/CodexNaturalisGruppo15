@@ -3404,8 +3404,8 @@ public class Controller  {
 		Regno[][] disposizione = obiettivo.getDisposizione();
 		int disposizioneSize = 3;
 		
-		if(disposizione[0][2] == null && disposizione[1][2] == null && disposizione[2][2] == null) {
-			disposizione = new Regno[3][2];
+		if(disposizione[0][2] == null && disposizione[1][2] == null && disposizione[2][2] == null && disposizione[3][2] == null) {
+			disposizione = new Regno[4][2];
 			
 			disposizione[0][0] = obiettivo.getDisposizione()[0][0];
 			disposizione[0][1] = obiettivo.getDisposizione()[0][1];
@@ -3413,7 +3413,22 @@ public class Controller  {
 			disposizione[1][1] = obiettivo.getDisposizione()[1][1];
 			disposizione[2][0] = obiettivo.getDisposizione()[2][0];
 			disposizione[2][1] = obiettivo.getDisposizione()[2][1];
+			disposizione[3][0] = obiettivo.getDisposizione()[3][0];
+			disposizione[3][1] = obiettivo.getDisposizione()[3][1];
 			disposizioneSize = 2;
+		} else {
+			disposizione = new Regno[3][3];
+			
+			disposizione[0][0] = obiettivo.getDisposizione()[0][0];
+			disposizione[0][1] = obiettivo.getDisposizione()[0][1];
+			disposizione[0][2] = obiettivo.getDisposizione()[0][1];
+			disposizione[1][0] = obiettivo.getDisposizione()[1][0];
+			disposizione[1][1] = obiettivo.getDisposizione()[1][1];
+			disposizione[1][2] = obiettivo.getDisposizione()[0][1];
+			disposizione[2][0] = obiettivo.getDisposizione()[2][0];
+			disposizione[2][1] = obiettivo.getDisposizione()[2][1];
+			disposizione[2][2] = obiettivo.getDisposizione()[0][1];
+			disposizioneSize = 3;
 		}
 		
 		int boardSize = g.getBoard().getMatrix().length;
@@ -3452,7 +3467,10 @@ public class Controller  {
 
 	                    disp[i + 2][j] = disposizione[2][0];
 	                    disp[i + 2][j + 1] = disposizione[2][1];
-
+	                    
+	                    disp[i + 3][j] = disposizione[3][0];
+	                    disp[i + 3][j + 1] = disposizione[3][1];
+	                    
 	                    disposizioni.add(disp);
 	                }
 	            }

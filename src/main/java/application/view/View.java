@@ -249,8 +249,8 @@ public class View {
 		String line = "   ";
 		
 		if(righe[3].contains("disposizione")) {
-			for(int i = 0; i < 3; i++) {
-				for(int j = 0; j < 3; j++) {
+			for(int i = 0; i < 4; i++) {
+				for(int j = 0; j < 4; j++) {
 					int s = i + 1;
 					if(dispo[i][j] == null) {
 						line += "     ";
@@ -274,7 +274,7 @@ public class View {
 						}
 					}
 					
-					if (j == 2) {
+					if (j == 3) {
 						line += "\n   ";
 					}
 				}

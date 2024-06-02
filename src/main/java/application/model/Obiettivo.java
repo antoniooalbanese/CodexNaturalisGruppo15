@@ -22,7 +22,7 @@ public class Obiettivo {
 	 * Matrice contenente la disposizione che deve essere soddisfatta 
 	 * per raggiungere l'obiettivo.
 	 */
-	private Regno[][] disposizione = new Regno[3][3];
+	private Regno[][] disposizione = new Regno[4][4];
 
 	/**
 	 * Metodo che ritorna il tipo di obiettivo.
@@ -126,15 +126,15 @@ public class Obiettivo {
 			obi += "ogni gruppo di oggetti del tipo: " + ogg;
 			break;
 		case DISPOSIZIONE:
-			for (int j=0; j<3; j++) {
-				for (int k=0; k<3; k++) {
+			for (int j=0; j<4; j++) {
+				for (int k=0; k<4; k++) {
 					if(disposizione [j][k]==null) {
 						mat += "      ";
 					}else {
 						mat += disposizione [j][k];
 					}
 					
-					if (k==2) {
+					if (k==3) {
 						mat += "\n";
 					}
 				}

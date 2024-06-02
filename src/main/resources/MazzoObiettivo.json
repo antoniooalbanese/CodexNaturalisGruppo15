@@ -84,15 +84,24 @@
                 [
                     null,
                     null,
-                    "FUNGHI"
-                ],
-                [
-                    null,
                     "FUNGHI",
                     null
                 ],
                 [
+                    null,
                     "FUNGHI",
+                    null,
+                    null
+                ],
+                [
+                    "FUNGHI",
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
                     null,
                     null
                 ]
@@ -108,15 +117,24 @@
                 [
                     null,
                     null,
-                    "ANIMALE"
-                ],
-                [
-                    null,
                     "ANIMALE",
                     null
                 ],
                 [
+                    null,
                     "ANIMALE",
+                    null,
+                    null
+                ],
+                [
+                    "ANIMALE",
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
                     null,
                     null
                 ]
@@ -132,9 +150,17 @@
                 [
                     "VEGETALE",
                     null,
+                    null,
                     null
                 ],
                 [
+                    null,
+                    "VEGETALE",
+                    null,
+                    null
+                ],
+                [
+                    null,
                     null,
                     "VEGETALE",
                     null
@@ -142,7 +168,8 @@
                 [
                     null,
                     null,
-                    "VEGETALE"
+                    null,
+                    null
                 ]
             ]
         },
@@ -156,9 +183,17 @@
                 [
                     "INSETTI",
                     null,
+                    null,
                     null
                 ],
                 [
+                    null,
+                    "INSETTI",
+                    null,
+                    null
+                ],
+                [
+                    null,
                     null,
                     "INSETTI",
                     null
@@ -166,7 +201,8 @@
                 [
                     null,
                     null,
-                    "INSETTI"
+                    null,
+                    null
                 ]
             ]
         },
@@ -180,9 +216,11 @@
                 [
                     "FUNGHI",
                     null,
+                    null,
                     null
                 ],
                 [
+                    null,
                     null,
                     null,
                     null
@@ -190,11 +228,13 @@
                 [
                     "FUNGHI",
                     null,
+                    null,
                     null
                 ],
                 [
                     null,
                     "VEGETALE",
+                    null,
                     null
                 ]
             ]
@@ -209,9 +249,11 @@
                 [
                     null,
                     "VEGETALE",
+                    null,
                     null
                 ],
                 [
+                    null,
                     null,
                     null,
                     null
@@ -219,10 +261,12 @@
                 [
                     null,
                     "VEGETALE",
+                    null,
                     null
                 ],
                 [
                     "INSETTI",
+                    null,
                     null,
                     null
                 ]
@@ -238,20 +282,24 @@
                 [
                     null,
                     "FUNGHI",
-                    null
-                ],
-                [
-                    "ANIMALE",
-                    null,
-                    null
-                ],
-                [
-                    null,
                     null,
                     null
                 ],
                 [
                     "ANIMALE",
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    "ANIMALE",
+                    null,
                     null,
                     null
                 ]
@@ -267,21 +315,25 @@
                 [
                     "ANIMALE",
                     null,
-                    null
-                ],
-                [
-                    null,
-                    "INSETTI",
-                    null
-                ],
-                [
-                    null,
                     null,
                     null
                 ],
                 [
                     null,
                     "INSETTI",
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    null,
+                    null,
+                    null
+                ],
+                [
+                    null,
+                    "INSETTI",
+                    null,
                     null
                 ]
             ]
