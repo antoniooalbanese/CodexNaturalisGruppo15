@@ -2,6 +2,8 @@ package application.model;
 
 import java.util.ArrayList;
 
+import application.view.AnsiEscapeCodes;
+
 /**
  * Questa classe implementa le carte di tipo risorsa.
  */
@@ -136,19 +138,30 @@ public class CartaRisorsa extends Carta {
 	 */
 	public String showCard() {
 	String ang = "";
+	String code = "";
 		
 		for(int i =0;i<4;i++) { 
 			ang += "\n       " + angoli.get(i).showAngolo();
 		}
 		
+		if (this.getId().contains("VR")) {
+			 code = "" + AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + getId() + AnsiEscapeCodes.ENDING_CODE.getCode();  
+		} else if (this.getId().contains("BL")){
+			code = "" + AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		} else if (this.getId().contains("RS")) {
+			code = "" + AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		} else if (this.getId().contains("VL")) {
+			code = "" + AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		}
+		
 		if(this.getFronte() == true) {
 			if(this.getPunto() == null) {
-				return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang + "\n   ";
+				return "\nCarta Risorsa:\n   " + "ID: " + code + "\n   " + "Angoli: " + ang + "\n   ";
 			} else {
-				return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang + "\n   " + "Punti: " + getPunto().showPunto();
+				return "\nCarta Risorsa:\n   " + "ID: " + code + "\n   " + "Angoli: " + ang + "\n   " + "Punti: " + getPunto().showPunto();
 			}
 		} else {
-			return "\nCarta Risorsa:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang;
+			return "\nCarta Risorsa:\n   " + "ID: " + code + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang;
 		}
 
 	}

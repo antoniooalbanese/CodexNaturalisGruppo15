@@ -265,7 +265,8 @@ public class Controller  {
 		for(int i = 0; i < this.model.getCampo().getGiocatore().size(); i++ ) {
 			view.showFinalPoints(this.model.getCampo().getGiocatore().get(i).getNick(), this.model.getCampo().getGiocatore().get(i).getBoard().getPunteggio(), i+1);
 		}
-		view.showWinner(this.model.getCampo().getGiocatore().get(0).getNick());
+		
+		view.showWinner(this.getUltimateWinner(this.model.getCampo().getGiocatore()));
 	}
 	
 	public void checkExtraPoint(Giocatore g) {
@@ -283,16 +284,188 @@ public class Controller  {
 	          public int compare(Giocatore g1, Giocatore g2) {
 	              return Integer.compare(g2.getBoard().getPunteggio(), g1.getBoard().getPunteggio());
 	          }
-	      });
+	    });
 
 	      ArrayList<String> ranking = new ArrayList<>();
 	      for (Giocatore giocatore : giocatori) {
 	          ranking.add(giocatore.getNick());
 	      }
-
+	      
 	      return ranking;
-	  }
+	}
 	
+	public String getUltimateWinner(ArrayList<Giocatore> g) {
+		String winner = "";
+		int dim = g.size();
+		
+		switch(dim) {
+		case 2:
+			if(g.get(0).getBoard().getPunteggio() > g.get(1).getBoard().getPunteggio()) {
+				winner = g.get(0).getNick();
+			} else if(g.get(0).getBoard().getNumObj() > g.get(1).getBoard().getNumObj()) {
+				winner = g.get(0).getNick();
+			} else if(g.get(0).getBoard().getNumObj() < g.get(1).getBoard().getNumObj()){
+				winner = g.get(1).getNick();
+			} else {
+				winner = g.get(0).getNick() + " & " + g.get(1).getNick();
+			}
+			break;
+		case 3:
+			if(g.get(0).getBoard().getPunteggio() > g.get(1).getBoard().getPunteggio()) {
+				winner = g.get(0).getNick();
+			} 
+			else if (g.get(1).getBoard().getPunteggio() > g.get(2).getBoard().getPunteggio()) {
+				if (g.get(0).getBoard().getNumObj() > g.get(1).getBoard().getNumObj()) {
+					winner = g.get(0).getNick();
+				} else if(g.get(0).getBoard().getNumObj() < g.get(1).getBoard().getNumObj()){
+					winner = g.get(1).getNick();
+				} else {
+					winner = g.get(0).getNick() + " & " + g.get(1).getNick();
+				}
+			} else if(g.get(0).getBoard().getNumObj() > g.get(1).getBoard().getNumObj()) {
+				if(g.get(0).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()) {
+					winner = g.get(0).getNick();
+				} else if(g.get(0).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+					winner = g.get(2).getNick();
+				} else {
+					winner = g.get(0).getNick() + " & " + g.get(2).getNick();
+				}
+			} else if(g.get(0).getBoard().getNumObj() < g.get(1).getBoard().getNumObj()) {
+				if(g.get(1).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()) {
+					winner = g.get(1).getNick();
+				} else if(g.get(1).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+					winner = g.get(2).getNick();
+				} else {
+					winner = g.get(1).getNick() + " & " + g.get(2).getNick();
+				}
+			} else if(g.get(0).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()){
+				winner = g.get(0).getNick() + " & " + g.get(1).getNick();
+			} else if(g.get(0).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+				winner = g.get(2).getNick();
+			} else {
+				winner = g.get(0).getNick() + " & " + g.get(1).getNick() + " & " + g.get(2).getNick();
+				
+			}
+			break;
+		case 4:
+			if(g.get(0).getBoard().getPunteggio() > g.get(1).getBoard().getPunteggio()) {
+				winner = g.get(0).getNick();
+			} else if(g.get(1).getBoard().getPunteggio() > g.get(2).getBoard().getPunteggio()) {
+				if (g.get(0).getBoard().getNumObj() > g.get(1).getBoard().getNumObj()) {
+					winner = g.get(0).getNick();
+				} else if(g.get(0).getBoard().getNumObj() < g.get(1).getBoard().getNumObj()){
+					winner = g.get(1).getNick();
+				} else {
+					winner = g.get(0).getNick() + " & " + g.get(1).getNick();
+				}
+			} else if(g.get(2).getBoard().getPunteggio() > g.get(3).getBoard().getPunteggio()) {
+				if(g.get(0).getBoard().getNumObj() > g.get(1).getBoard().getNumObj()) {
+					if(g.get(0).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()) {
+						winner = g.get(0).getNick();
+					} else if(g.get(0).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+						winner = g.get(2).getNick();
+					} else {
+						winner = g.get(0).getNick() + " & " + g.get(2).getNick();
+					}
+				} else if(g.get(0).getBoard().getNumObj() < g.get(1).getBoard().getNumObj()) {
+					if(g.get(1).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()) {
+						winner = g.get(1).getNick();
+					} else if(g.get(1).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+						winner = g.get(2).getNick();
+					} else {
+						winner = g.get(1).getNick() + " & " + g.get(2).getNick();
+					}
+				} else if(g.get(0).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()){
+					winner = g.get(0).getNick() + " & " + g.get(1).getNick();
+				} else if(g.get(0).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+					winner = g.get(2).getNick();
+				} else {
+					winner = g.get(0).getNick() + " & " + g.get(1).getNick() + " & " + g.get(2).getNick(); 
+				}
+			} else if(g.get(0).getBoard().getNumObj() > g.get(1).getBoard().getNumObj()) {
+				if(g.get(0).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()) {
+					if(g.get(0).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(0).getNick();
+					} else if(g.get(0).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getNick();
+					} else {
+						winner = g.get(0).getNick() + " & " + g.get(3).getNick();
+					}
+				} else if(g.get(0).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+					if(g.get(2).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(2).getNick();
+					} else if(g.get(2).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getId();
+					} else {
+						winner = g.get(2).getNick() + " & " + g.get(3).getNick();
+					}
+				} else {
+					if(g.get(0).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(0).getNick() + " & " + g.get(2).getNick();
+					} else if(g.get(0).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getNick();
+					} else {
+						winner = g.get(0).getNick() + " & " + g.get(2).getNick() + " & " + g.get(3).getNick();
+					}
+				}
+			} else if(g.get(0).getBoard().getNumObj() < g.get(1).getBoard().getNumObj()) {
+				if(g.get(1).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()) {
+					if(g.get(1).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(1).getNick();
+					} else if(g.get(1).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getNick();
+					} else {
+						winner = g.get(1).getNick() + " & " + g.get(3).getNick();
+					}
+				} else if(g.get(1).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+					if(g.get(2).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(2).getNick();
+					} else if(g.get(2).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getId();
+					} else {
+						winner = g.get(2).getNick() + " & " + g.get(3).getNick();
+					}
+				} else {
+					if(g.get(1).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(1).getNick() + " & " + g.get(2).getNick();
+					} else if(g.get(1).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getNick();
+					} else {
+						winner = g.get(1).getNick() + " & " + g.get(2).getNick() + " & " + g.get(3).getNick();
+					}
+				}
+			} else {
+				if(g.get(0).getBoard().getNumObj() > g.get(2).getBoard().getNumObj()) {
+					if(g.get(0).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(0).getNick() + " & " + g.get(1).getNick();
+					} else if(g.get(0).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getNick();
+					} else {
+						winner = g.get(0).getNick() + " & " + g.get(1).getNick() + " & " + g.get(3).getNick();
+					}
+				} else if(g.get(0).getBoard().getNumObj() < g.get(2).getBoard().getNumObj()) {
+					if(g.get(2).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(2).getNick();
+					} else if(g.get(2).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getId();
+					} else {
+						winner = g.get(2).getNick() + " & " + g.get(3).getNick();
+					}
+				} else {
+					if(g.get(0).getBoard().getNumObj() > g.get(3).getBoard().getNumObj()) {
+						winner = g.get(0).getNick() + " & " + g.get(1).getNick() + " & " + g.get(2).getNick();
+					} else if(g.get(0).getBoard().getNumObj() < g.get(3).getBoard().getNumObj()) {
+						winner = g.get(3).getId();
+					} else {
+						winner = g.get(0).getNick() + " & " + g.get(1).getNick() + " & " + g.get(2).getNick() + " & " + g.get(3).getNick();
+					}
+				}
+			}
+			break;
+		}
+		
+		return winner;
+	}
 	
 	/**
 	 * Metodo che controlla se il giocatore a fine del proprio turno ha raggiunto
@@ -301,7 +474,7 @@ public class Controller  {
 	 * @return
 	 */
 	public boolean checkLastTurn(Giocatore g) {
-		if(g.getBoard().getPunteggio() >= 1) {
+		if(g.getBoard().getPunteggio() >= 0) {
 			return true;
 		}
 		return false;
@@ -383,8 +556,8 @@ public class Controller  {
 				try {
 					while(!sceltaGiusta) {
 						do {
-						scelta = view.chooseWhatToPlace();
-						}while (scelta.length()==0);
+							scelta = view.chooseWhatToPlace();
+						}while (scelta.length() == 0);
 						if(scelta.charAt(0)=='R') {
 							for(int i = 0; i < g.getMano().getRisorsa().size(); i++) {
 								if(scelta.equalsIgnoreCase(g.getMano().getRisorsa().get(i).getId())) {
@@ -3347,6 +3520,7 @@ public class Controller  {
 
 		    if (risorsaIndex != -1 && board.getNumRis().get(risorsaIndex) != 0) {
 		        ris = board.getNumRis().get(risorsaIndex) / 3;
+		        g.getBoard().addObj(ris);
 		    } else {
 	        	return ris;
 	        }
@@ -3374,6 +3548,7 @@ public class Controller  {
 
 	        if (oggettoIndex != -1 && board.getNumOgg().get(oggettoIndex) != 0) {
 	            ris = board.getNumOgg().get(oggettoIndex) / 2;
+	            g.getBoard().addObj(ris);
 	        } else {
 	        	return ris;
 	        }
@@ -3391,7 +3566,9 @@ public class Controller  {
 	            inchiostro--;
 	            pergamena--;
 	        }
-
+	        
+	        g.getBoard().addObj(groups);
+	        
 	        return groups;
 	    }
 
@@ -3479,7 +3656,8 @@ public class Controller  {
 		for (Regno[][] disp : disposizioni) {
             counter += scanDisposition(g.getBoard().getMatrix(), disp, checked);
         }
-
+		
+		g.getBoard().addObj(counter);
 		return counter;
 	}
    

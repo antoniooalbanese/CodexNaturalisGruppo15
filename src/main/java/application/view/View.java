@@ -702,7 +702,9 @@ public class View {
 	 * @param angolo
 	 */
 	public void showFreeInitialCorners(CartaIniziale cardI, ArrayList<Angolo> angolo) {
-	System.out.println(cardI.getId() + ":\n");
+		String code = "" + AnsiEscapeCodes.WHITE_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardI.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		
+		System.out.println(code + ":\n");
 		
 		for(Angolo a: angolo) {
 			System.out.println("   " + a.showAngolo() + "\n");
@@ -715,7 +717,19 @@ public class View {
 	 * @param angolo
 	 */
 	public void showFreeResourceCorners(CartaRisorsa cardR, ArrayList<Angolo> angolo) {
-		System.out.println(cardR.getId() + ":\n");
+		String code = "";
+		
+		if (cardR.getId().contains("VR")) {
+			 code = "" + AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();  
+		} else if (cardR.getId().contains("BL")){
+			code = "" + AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		} else if (cardR.getId().contains("RS")) {
+			code = "" + AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		} else if (cardR.getId().contains("VL")) {
+			code = "" + AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		}
+		
+		System.out.println(code + ":\n");
 		
 		for(Angolo a: angolo) {
 			System.out.println("   " + a.showAngolo() + "\n");
@@ -729,7 +743,19 @@ public class View {
 	 * @param angolo
 	 */
 	public void showFreeGoldCorners(CartaOro cardO, ArrayList<Angolo> angolo) {
-		System.out.println(cardO.getId() + ":\n");
+		String code = "";
+		
+		if (cardO.getId().contains("VR")) {
+			 code = "" + AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();  
+		} else if (cardO.getId().contains("BL")){
+			code = "" + AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		} else if (cardO.getId().contains("RS")) {
+			code = "" + AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		} else if (cardO.getId().contains("VL")) {
+			code = "" + AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
+		}
+		
+		System.out.println(code + ":\n");
 		
 		for(Angolo a: angolo) {
 			System.out.println("   " + a.showAngolo() + "\n");
@@ -805,8 +831,21 @@ public class View {
 	}
 	
 	public void showWinner(String winner) {
-		System.out.println("IL VINCITORE È:");
-		System.out.println("!!!! " + winner + " !!!!");
+		if(winner.contains("&")) {
+			System.out.println("I VINCITORI SONO:\n");
+		} else {
+			System.out.println("IL VINCITORE È:\n");
+		}
+		
+		System.out.println(AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
+							+ AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode() 
+							+ AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
+							+ AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
+							+ AnsiEscapeCodes.WHITE_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + winner + AnsiEscapeCodes.ENDING_CODE.getCode()
+							+ AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode() 
+							+ AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
+							+ AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode() 
+							+ AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode());
 	}
 	
 }

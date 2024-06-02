@@ -2,6 +2,8 @@ package application.model;
 
 import java.util.ArrayList;
 
+import application.view.AnsiEscapeCodes;
+
 /**
  * Questa classe implementa le carte iniziali.
  */
@@ -80,9 +82,9 @@ public class CartaIniziale extends Carta{
 		}
 		
 		if(this.getFronte()==true) {
-			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang;
+			return "\nCarta Iniziale:\n   " + "ID: " + AnsiEscapeCodes.WHITE_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + getId() + AnsiEscapeCodes.ENDING_CODE.getCode() + "\n   " + "Centro: " + centro.toString() + "\n   " + "Angoli: " + ang;
 		} else {
-			return "\nCarta Iniziale:\n   " + "ID: " + getId() + "\n   " + "Angoli: " + ang;
+			return "\nCarta Iniziale:\n   " + "ID: " + AnsiEscapeCodes.WHITE_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + getId() + AnsiEscapeCodes.ENDING_CODE.getCode() + "\n   " + "Angoli: " + ang;
 		}
 
 	}

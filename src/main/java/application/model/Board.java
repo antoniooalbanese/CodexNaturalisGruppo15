@@ -56,6 +56,12 @@ public class Board {
 	private ArrayList<Integer> numOgg = new ArrayList<Integer>();
 	
 	/**
+	 * Attributo che descrive il numero di obiettivi conseguiti dal
+	 * giocatore
+	 */
+	private int numObj;
+	
+	/**
 	 * Costruttore della classe.
 	 * @param centro
 	 */
@@ -70,6 +76,7 @@ public class Board {
 		for(int i=0; i<3; i++) {
 			this.numOgg.add(0);
 		}
+		this.numObj = 0;
 	}
 	
 	/**
@@ -226,6 +233,33 @@ public class Board {
 	 */
 	public void setNumOgg(ArrayList<Integer> numOgg) {
 		this.numOgg = numOgg;
+	}
+	
+	/**
+	 * Metodo che ritorna il numero di obiettivi conseguiti dal 
+	 * giocatore.
+	 * @return
+	 */
+	public int getNumObj() {
+		return numObj;
+	}
+	
+	/**
+	 * Metodo che modifica il numero di obiettivi conseguiti dal
+	 * giocatore.
+	 * @param numOgg
+	 */
+	public void setNumObj(int numObj) {
+		this.numObj = numObj;
+	}
+	
+	/**
+	 * Metodo che aggiorna il numero di obiettivi conseguiti dal
+	 * giocatore.
+	 * @param num
+	 */
+	public void addObj(int num) {
+		this.numObj += num;
 	}
 	
 	public Carta getByID (String id) {
