@@ -3901,11 +3901,6 @@ public class Controller  {
 		for(Regno[][] disp : disposizioni) {
             int puntiDisposizione = scanDisposition(g.getBoard().getMatrix(), disp, checked);
             counter = counter + puntiDisposizione;
-            System.out.println(counter);
-            System.out.println(puntiDisposizione);
-            for(String c : checked) {
-            	System.out.println(c);
-            }
         }
 		
 		g.getBoard().addObj(counter);
