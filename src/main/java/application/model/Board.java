@@ -82,7 +82,7 @@ public class Board {
 	/**
 	 * Metodo che ritorna la matrice che rappresenta la disposizione 
 	 * delle carte sulla board.
-	 * @return: matrice che rappresenta la board
+	 * @return matrice che rappresenta la board
 	 */
 	public String[][] getMatrix(){
 		return this.matrix;
@@ -111,7 +111,7 @@ public class Board {
 	/**
 	 * Metodo che ritorna la carta iniziale che si trova al centro
 	 * della board.
-	 * @return: carta iniziale al centro della board
+	 * @return carta iniziale al centro della board
 	 */
 	public CartaIniziale getCentro() {
 		return centro;
@@ -128,7 +128,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna le carte risorsa presenti nella board.
-	 * @return: carte risorsa presenti nella board
+	 * @return carte risorsa presenti nella board
 	 */
 	public ArrayList<CartaRisorsa> getRisorsa() {
 		return risorsa;
@@ -144,7 +144,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna le carte oro presenti nella board.
-	 * @return: carte oro presenti nella board
+	 * @return carte oro presenti nella board
 	 */
 	public ArrayList<CartaOro> getOro() {
 		return oro;
@@ -160,7 +160,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna la carta obietttivo presente nella board.
-	 * @return: carta obiettivo segreta presente nella board
+	 * @return carta obiettivo segreta presente nella board
 	 */
 	public CartaObiettivo getObiettivo() {
 		return obiettivo;
@@ -176,7 +176,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna il numero dei turni giocati dal giocatore.
-	 * @return: numero di turni giocati
+	 * @return numero di turni giocati
 	 */
 	public int getTurno() {
 		return turno;
@@ -192,7 +192,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna il numero di punti in possesso del giocatore.
-	 * @return: punteggio del giocatore
+	 * @return punteggio del giocatore
 	 */
 	public int getPunteggio() {
 		return punteggio;
@@ -209,7 +209,7 @@ public class Board {
 	/**
 	 * Metodo che ritorna il numero dei vari tipi di risorse 
 	 * presenti nella board.
-	 * @return: numero dei vari tipi di risorsa
+	 * @return numero dei vari tipi di risorsa
 	 */
 	public ArrayList<Integer> getNumRis() {
 		return numRis;
@@ -227,7 +227,7 @@ public class Board {
 	/**
 	 * Metodo che ritorna il numero dei vari tipi di oggetti presenti 
 	 * nella board.
-	 * @return: numero dei vari tipi di oggetti
+	 * @return numero dei vari tipi di oggetti
 	 */
 	public ArrayList<Integer> getNumOgg() {
 		return numOgg;
@@ -245,7 +245,7 @@ public class Board {
 	/**
 	 * Metodo che ritorna il numero di obiettivi conseguiti dal 
 	 * giocatore.
-	 * @return: numero di obiettivi conseguiti dal giocatore
+	 * @return numero di obiettivi conseguiti dal giocatore
 	 */
 	public int getNumObj() {
 		return numObj;
@@ -274,7 +274,7 @@ public class Board {
 	 * Metodo che ritorna la carta presente nella board che possiede
 	 * l'id passato come parametro
 	 * @param id: id della carta da prendere dalla board
-	 * @return: la carta che ha come id quello inserito come parametro
+	 * @return la carta che ha come id quello inserito come parametro
 	 */
 	public Carta getByID (String id) {
 		if(id.charAt(0)=='R') {

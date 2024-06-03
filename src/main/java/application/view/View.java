@@ -30,15 +30,15 @@ public class View {
 	
 	/**
 	 * Metodo che stampa il messaggio di inizio del gioco.
-	 * @return: TRUE se i giocatori decidono di iniziare a giocare,
+	 * @return TRUE se i giocatori decidono di iniziare a giocare,
 	 * FALSE se i giocatori decidono di non giocare
 	 * @throws IOException: quando la risposta non è tra quelle
 	 * ammesse(SI o NO)
 	 */
 	public boolean welcomeMessage() {
-		System.out.println("\n				  ╦ ╦╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗  ╔╦╗╔═╗\n"
-				+ "				  ║║║║╣ ║  ║  ║ ║║║║║╣    ║ ║ ║\n"
-				+ "				  ╚╩╝╚═╝╩═╝╚═╝╚═╝╩ ╩╚═╝   ╩ ╚═╝\n\n");
+		System.out.println("\n				╦ ╦╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗  ╔╦╗╔═╗\n"
+				+ "				║║║║╣ ║  ║  ║ ║║║║║╣    ║ ║ ║\n"
+				+ "				╚╩╝╚═╝╩═╝╚═╝╚═╝╩ ╩╚═╝   ╩ ╚═╝\n\n");
 		
 		System.out.println("  ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗    ███╗   ██╗ █████╗ ████████╗██╗   ██╗██████╗  █████╗ ██╗     ██╗███████╗\n"
 				+ " ██╔════╝██╔═══██╗██╔══██╗██╔════╝╚██╗██╔╝    ████╗  ██║██╔══██╗╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██║     ██║██╔════╝\n"
@@ -68,6 +68,7 @@ public class View {
 			}
 		}
 	}
+	
 	 /**
 	  * Metodo che stampa il messaggio di chiusura del programma.
 	  */
@@ -116,7 +117,7 @@ public class View {
 	 * Metodo che chiede il nickname del giocatore.
 	 * @param n: numero del giocatore a cui si chiede il nickname da 
 	 * utilizzare durante la partita
-	 * @return: nickname scelto dal giocatore 
+	 * @return nickname scelto dal giocatore 
 	 * @throws IOException: quando la risposta non è tra quelle
 	 * ammesse(SI o NO)
 	 */
@@ -155,7 +156,7 @@ public class View {
 	 * pedina da utilizzare durante la partita tra quelle disponibili
 	 * @param ped: lista di pedine rimanenti che possono essere scelte
 	 * dai giocatori
-	 * @return: pedina scelta dal giocatore
+	 * @return pedina scelta dal giocatore
 	 * @throws IOException: quando la risposta non è tra quelle
 	 * ammesse(ROSSO, BLU, VERDE o GIALLO)
 	 */
@@ -214,7 +215,7 @@ public class View {
 	 * vista sul retro
 	 * @param fronte: carta iniziale vista sul fronte
 	 * @param retro: carta iniziale vista sul retro
-	 * @return: TRUE se il giocatore decide di posizionare la carta
+	 * @return TRUE se il giocatore decide di posizionare la carta
 	 * iniziale vista sul fronte, FALSE se il giocatore decide di 
 	 * posizionare la carta iniziale vista sul retro
 	 * @throws IOException: quando la risposta non è tra quelle
@@ -255,7 +256,7 @@ public class View {
 	 * scartare
 	 * @param obi1: prima carta obiettivo pescata
 	 * @param obi2: seconda carta obiettivo pescata
-	 * @return: TRUE se il giocatore decide di tenere la prima carta
+	 * @return TRUE se il giocatore decide di tenere la prima carta
 	 * obiettivo, FALSE se il giocatore decide di tenere la seconda
 	 * carta obiettivo
 	 * @throws IOException: quando la risposta non è tra quelle
@@ -379,7 +380,7 @@ public class View {
 	 * @param over: booleano che descrive se i mazzi sono entrambi 
 	 * terminati(TRUE se sono terminati e FALSE se invece non sono
 	 * ancora terminati)
-	 * @return: TRUE se i mazzi sono terminati, FALSE se i mazzi non 
+	 * @return TRUE se i mazzi sono terminati, FALSE se i mazzi non 
 	 * sono ancora terminati
 	 */
 	public boolean showDecksAreOverMessage(boolean over) {
@@ -647,7 +648,7 @@ public class View {
 	/**
 	 * Metodo che chiede al giocatore di turno se ha intenzione
 	 * di passare la mano.
-	 * @return: TRUE se il giocatore di turno intende passare la mano,
+	 * @return TRUE se il giocatore di turno intende passare la mano,
 	 * FALSE se il giocatore di turno non intende passare la mano
 	 * @throws IOException: quando la risposta non è tra quelle
 	 * ammesse(SI o NO)
@@ -674,7 +675,7 @@ public class View {
 	
 	/**
 	 * Metodo che chiede al giocatore di turno quale carta posizionare.
-	 * @return: la stringa contenente l'id della carta che il 
+	 * @return la stringa contenente l'id della carta che il 
 	 * giocatore di turno ha scelto di posizionare
 	 */
 	public String chooseWhatToPlace() {
@@ -707,7 +708,7 @@ public class View {
 	 * piazzare la carta
 	 * @param fronte: carta da posizionare vista sul fronte
 	 * @param retro: carta da posizionare vista sul retro
-	 * @return: TRUE se il giocatore decide di posizionare la carta
+	 * @return TRUE se il giocatore decide di posizionare la carta
 	 * vista sul fronte, FALSE se il giocatore decide di posizionare 
 	 * la carta vista sul retro
 	 * @throws IOException: quando la risposta non è tra quelle
@@ -752,7 +753,7 @@ public class View {
 	/**
 	 * Metodo che chiede al giocatore di turno quale carta coprire 
 	 * con quella che vuole posizionare.
-	 * @return: stringa contenente l'id della carta che il giocatore 
+	 * @return stringa contenente l'id della carta che il giocatore 
 	 * intende coprire con la carta che vuole posizionare 
 	 */
 	public String chooseWhatToCover() {
@@ -837,7 +838,7 @@ public class View {
 	 * Metodo che chiede al giocatore di turno quale angolo vuole
 	 * coprire della carta che vuole coprire con la carta che 
 	 * vuole posizionare.
-	 * @return: posizione dell'angolo che il giocatore intende coprire
+	 * @return posizione dell'angolo che il giocatore intende coprire
 	 * @throws IOException: quando la risposta non è tra quelle
 	 * ammesse(ADX, BDX, BSX o ASX) 
 	 */
@@ -916,7 +917,7 @@ public class View {
 	/**
 	 * Metodo che chiede al giocatore di turno di inserire il codice
 	 * della carta che intende pescare.
-	 * @return: stringa contenente il codice della carta che il
+	 * @return stringa contenente il codice della carta che il
 	 * giocatore di turno intende pescare
 	 */
 	public String chooseWhatToDraw() {		

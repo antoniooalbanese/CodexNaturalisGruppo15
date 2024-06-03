@@ -73,7 +73,7 @@ public class CartaRisorsa extends Carta {
 	
 	/**
 	 * Metodo che ritorna il regno a cui appartiene la carta risorsa.
-	 * @return: regno a cui appartiene la carta
+	 * @return regno a cui appartiene la carta
 	 */
 	public Regno getRegno() {
 		return regno;
@@ -90,7 +90,7 @@ public class CartaRisorsa extends Carta {
 	/**
 	 * Metodo che ritorna il tipo di risorsa a cui appartiene il centro
 	 * della carta risorsa.
-	 * @return: regno della risorsa al centro della carta
+	 * @return regno della risorsa al centro della carta
 	 */
 	public Regno getCentro() {
 		return centro;
@@ -107,7 +107,7 @@ public class CartaRisorsa extends Carta {
 	
 	/**
 	 * Metodo che ritorna la lista di angoli della carta risorsa.
-	 * @return: lista di angoli posseduti dalla carta
+	 * @return lista di angoli posseduti dalla carta
 	 */
 	public ArrayList<Angolo> getAngoli() {
 		return angoli;
@@ -124,7 +124,7 @@ public class CartaRisorsa extends Carta {
 	/**
 	 * Metodo che ritorna i punti assegnati al posizionamento
 	 * della carta risorsa.
-	 * @return: punti assegnati dalla carta
+	 * @return punti assegnati dalla carta
 	 */
 	public Punto getPunto() {
 		return punto;
@@ -142,7 +142,7 @@ public class CartaRisorsa extends Carta {
 	/**
 	 * Metodo che permette di mostrare tutte le informazioni di una 
 	 * carta risorsa.
-	 * @return: stringa contenente tutte le informazioni di una carta
+	 * @return stringa contenente tutte le informazioni di una carta
 	 */
 	public String showCard() {
 	String ang = "";
@@ -178,7 +178,7 @@ public class CartaRisorsa extends Carta {
 	 * Metodo che ritorna l'angolo della carta che si trova nella 
 	 * posizione data come parametro.
 	 * @param pos: posizione dell'angolo da ritornare
-	 * @return: angolo della carta che si trova nella posizione data
+	 * @return angolo della carta che si trova nella posizione data
 	 * come parametro
 	 */
 	public Angolo getAngoloByPosizione(Posizione pos) {

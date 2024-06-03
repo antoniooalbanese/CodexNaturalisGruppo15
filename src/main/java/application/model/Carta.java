@@ -40,7 +40,7 @@ public abstract class Carta {
 	
 	/**
 	 * Metodo che ritorna l'id della carta.
-	 * @return: codice identificativo della carta
+	 * @return codice identificativo della carta
 	 */
 	public String getId() {
 		return this.id;
@@ -57,7 +57,7 @@ public abstract class Carta {
 	/**
 	 * Metodo che ritorna il booleano che indica se la carta è 
 	 * mostrata sul fronte o sul retro.
-	 * @return: booleano che indica se la carta è mostrata sul 
+	 * @return booleano che indica se la carta è mostrata sul 
 	 * fronte o sul retro
 	 */
 	public boolean getFronte() {
@@ -77,7 +77,7 @@ public abstract class Carta {
 	/**
 	 * Metodo astratto che permette di mostrare tutte le informazioni 
 	 * di una carta.
-	 * @return: stringa contenente tutte le informazioni relative 
+	 * @return stringa contenente tutte le informazioni relative 
 	 * ad una carta
 	 */
 	public abstract String showCard();

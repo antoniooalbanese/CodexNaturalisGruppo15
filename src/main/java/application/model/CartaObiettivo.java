@@ -34,7 +34,7 @@ public class CartaObiettivo extends Carta{
 
 	/**
 	 * Metodo che ritorna l'obiettivo contenuto nella carta.
-	 * @return: obiettivo contenuto nella carta
+	 * @return obiettivo contenuto nella carta
 	 */
 	public Obiettivo getObiettivo() {
 		return obiettivo;
@@ -51,7 +51,7 @@ public class CartaObiettivo extends Carta{
 	/**
 	 * Metodo che ritorna i punti dati dalla carta obiettivo in caso di
 	 * raggiungimento dell'obiettivo. 
-	 * @return: punti extra assegnati dalla carta
+	 * @return punti extra assegnati dalla carta
 	 */
 	public int getPunto() {
 		return punto;
@@ -69,7 +69,7 @@ public class CartaObiettivo extends Carta{
 	/**
 	 * Metodo che permette di mostrare tutte le informazioni di una 
 	 * carta obiettivo.
-	 * @return: stringa contenente tutte le informazioni di una carta
+	 * @return stringa contenente tutte le informazioni di una carta
 	 * obiettivo
 	 */
 	public String showCard() {

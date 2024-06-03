@@ -54,7 +54,7 @@ public enum AnsiEscapeCodes {
 
     /**
      * Questo metodo ritorna l'ANSI escape code
-     * @return: ANSI escape code
+     * @return ANSI escape code
      */
     public String getCode() {
         return code;

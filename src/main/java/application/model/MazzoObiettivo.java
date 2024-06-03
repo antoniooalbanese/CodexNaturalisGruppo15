@@ -29,7 +29,7 @@ public class MazzoObiettivo {
 	
 	/**
 	 * Metodo che ritorna il mazzo iniziale visto sul fronte.
-	 * @return: mazzo iniziale visto sul fronte
+	 * @return mazzo iniziale visto sul fronte
 	 */
 	public ArrayList<CartaObiettivo> getMazzoFronte() {
 		return this.mazzo;

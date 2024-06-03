@@ -85,7 +85,7 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che ritorna il regno a cui appartiene la carta oro
-	 * @return: regno a cui appartiene la carta
+	 * @return regno a cui appartiene la carta
 	 */
 	public Regno getRegno() {
 		return regno;
@@ -102,7 +102,7 @@ public class CartaOro extends Carta{
 	/**
 	 * Metodo che ritorna il regno a cui appartiene risorsa nel 
 	 * centro della carta oro.
-	 * @return: regno della risorsa al centro della carta
+	 * @return regno della risorsa al centro della carta
 	 */
 	public Regno getCentro() {
 		return centro;
@@ -119,7 +119,7 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che ritorna la lista di angoli della carta oro.
-	 * @return: lista di angoli posseduti dalla carta
+	 * @return lista di angoli posseduti dalla carta
 	 */
 	public ArrayList<Angolo> getAngoli() {
 		return angoli;
@@ -136,7 +136,7 @@ public class CartaOro extends Carta{
 	/**
 	 * Metodo che ritorna i punti assegnati dalla carta oro al 
 	 * suo posizionamento.
-	 * @return: punti assegnati dalla carta
+	 * @return punti assegnati dalla carta
 	 */
 	public Punto getPunto() {
 		return punto;
@@ -152,7 +152,7 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che ritorna il requisito di posizionamento della carta oro.
-	 * @return: requsisito di piazzamaneto
+	 * @return requsisito di piazzamaneto
 	 */
 	public Requisito getRequisito() {
 		return requisito;
@@ -169,7 +169,7 @@ public class CartaOro extends Carta{
 	/**
 	 * Metodo che permette di mostrare tutte le informazioni di una
 	 * carta oro.
-	 * @return: stringa contenente tutte le informazioni di una carta
+	 * @return stringa contenente tutte le informazioni di una carta
 	 */
 	public String showCard() {
 	String ang = "";
@@ -202,7 +202,7 @@ public class CartaOro extends Carta{
 	 * Metodo che ritorna l'angolo della carta che si trova nella 
 	 * posizione data come parametro.
 	 * @param pos: posizione dell'angolo da ritornare
-	 * @return: angolo della carta che si trova nella posizione data
+	 * @return angolo della carta che si trova nella posizione data
 	 * come parametro
 	 */
 	public Angolo getAngoloByPosizione(Posizione pos) {

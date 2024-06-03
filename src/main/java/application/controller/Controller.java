@@ -115,7 +115,7 @@ public class Controller  {
 	 * Metodo che estrae una carta dalla cima del mazzo e la posiziona
 	 * sul campo di gioco mostrandola sul fronte.
 	 * @param mazzo: mazzo da cui si estrae la carta
-	 * @return: carta estratta dalla cima del mazzo
+	 * @return carta estratta dalla cima del mazzo
 	 */
 	public Carta estrai(ArrayList<? extends Carta> mazzo){
 		Carta carta = mazzo.get(0);
@@ -128,7 +128,7 @@ public class Controller  {
 	 * posizione. 
 	 * @param i: posizione nel mazzo della carta che si vuole prendere
 	 * @param mazzo: mazzo da cui si vuole prendere la carta 
-	 * @return: carta che si trova nella posizione data come parametro
+	 * @return carta che si trova nella posizione data come parametro
 	 */
 	public Carta getCarta(int i, ArrayList<Carta> mazzo){
 		return mazzo.get(i);
@@ -310,7 +310,7 @@ public class Controller  {
 	 * giocatori in base al punteggio conseguito.
 	 * @param giocatori: lista dei giocatori che hanno giocato la 
 	 * partita
-	 * @return: lista di stringhe che rappresentano i nickname 
+	 * @return lista di stringhe che rappresentano i nickname 
 	 * dei giocatori in ordine di punteggio
 	 */
 	 public ArrayList<String> createRanking(ArrayList<Giocatore> giocatori) {
@@ -334,7 +334,7 @@ public class Controller  {
 	  * Metodo che ritorna il vincitore sotto forma di stringa che 
 	  * rappresenta il suo nickname.
 	  * @param g: lista dei giocatori ordinati per punteggio
-	  * @return: nickname del vincitore
+	  * @return nickname del vincitore
 	  */
 	public String getUltimateWinner(ArrayList<Giocatore> g) {
 		String winner = "";
@@ -513,7 +513,7 @@ public class Controller  {
 	 * Metodo che controlla se il giocatore a fine del proprio turno ha raggiunto
 	 * almeno i 20 punti per far terminare la partita.
 	 * @param g: giocatore di cui si controlla il punteggio
-	 * @return: TRUE se il giocatore ha conseguito almeno 20 punti,
+	 * @return TRUE se il giocatore ha conseguito almeno 20 punti,
 	 * FALSE se il giocatore ha conseguito memo di 20 punti
 	 */
 	public boolean checkLastTurn(Giocatore g) {
@@ -533,7 +533,7 @@ public class Controller  {
 	 * @param last: booleano che, se TRUE indica che almeno un 
 	 * giocatore ha raggiunto o superato i 20 punti, mentre se FALSE,
 	 * indica che nessun giocatore ha ancora raggiunto i 20 punti
-	 * @return: TRUE se sussistono le condizioni per terminare la 
+	 * @return TRUE se sussistono le condizioni per terminare la 
 	 * partita, FALSE se invece non sussistono
 	 */
 	public boolean isGameOver(boolean last) {
@@ -548,7 +548,7 @@ public class Controller  {
 	/**
 	 * Metodo che controlla se i due mazzi(oro e risorsa)
 	 * sono terminati.
-	 * @return: TRUE se i mazzi sono terminati, FALSE se almeno uno 
+	 * @return TRUE se i mazzi sono terminati, FALSE se almeno uno 
 	 * dei mazzi non è ancora terminato 
 	 */
 	public boolean areDecksFinished() {
@@ -760,7 +760,7 @@ public class Controller  {
 	 * @param fronte: carta vista sul fronte
 	 * @param angoliFronte: lista degli angoli della carta vista sul
 	 * fronte
-	 * @return: carta fronte con gli angoli settati come se fosse 
+	 * @return carta fronte con gli angoli settati come se fosse 
 	 * vista sul retro
 	 */
 	public Carta setAngoliRetro (Carta fronte, ArrayList<Angolo> angoliFronte){
@@ -798,7 +798,7 @@ public class Controller  {
 	 * posizionare rispetta i requisiti di posizionamento.
 	 * @param g: giocatore di turno che vuole posizionare la carta
 	 * @param oro: carta oro che il giocatore vuole posizionare
-	 * @return: TRUE se i requisiti di posizionamento della carta oro
+	 * @return TRUE se i requisiti di posizionamento della carta oro
 	 * sono soddisfatti, FALSE se i requisiti di posizionamento non
 	 * sono soddisfatti
 	 */
@@ -842,7 +842,7 @@ public class Controller  {
 	 * Metodo che ritorna la posizione dell'angolo di una carta data
 	 * in input dall'utente
 	 * @param angoli: lista di angoli di una carta
-	 * @return: posizione dell'angolo di una carta scelta dal giocatore
+	 * @return posizione dell'angolo di una carta scelta dal giocatore
 	 * @throws IOException: quando la posizione scelta dal giocatore
 	 * è già occupata da un'altra carta
 	 */
@@ -872,7 +872,7 @@ public class Controller  {
 	 * può coprire un angolo vuoto)
 	 * @param ang: angolo della carta da posizionare
 	 * @param coperto: angolo della carta da coprire
-	 * @return: TRUE se l'angolo della carta che si vuole posizionare
+	 * @return TRUE se l'angolo della carta che si vuole posizionare
 	 * può coprire l'angolo scelto dal giocatore della carta che si
 	 * vuole coprire, FALSE se l'angolo della carta che si 
 	 * vuole posizionare non può coprire l'angolo scelto dal giocatore
@@ -903,7 +903,7 @@ public class Controller  {
 	 * @param cartaScelta: carta che si vuole posizionare
 	 * @param coperta: carta che si vuole coprire
 	 * @param angolo: posizione dell'angolo che si vuole coprire
-	 * @return: TRUE se la carta può essere posizionata come vuole
+	 * @return TRUE se la carta può essere posizionata come vuole
 	 * il giocatore; FALSE, se la carta non può essere posizionata
 	 * come vuole il giocatore
 	 */
@@ -1019,7 +1019,7 @@ public class Controller  {
 	 * @param cartaScelta: carta che si vuole posizionare
 	 * @param coperta: carta che si vuole coprire
 	 * @param angolo: posizione dell'angolo che si vuole coprire
-	 * @return: TRUE se la carta può essere posizionata come vuole
+	 * @return TRUE se la carta può essere posizionata come vuole
 	 * il giocatore; FALSE, se la carta non può essere posizionata
 	 * come vuole il giocatore
 	 */
@@ -1136,7 +1136,7 @@ public class Controller  {
 	 * @param cartaScelta: carta che si vuole posizionare
 	 * @param coperta: carta che si vuole coprire
 	 * @param angolo: posizione dell'angolo che si vuole coprire
-	 * @return: TRUE se la carta può essere posizionata come vuole
+	 * @return TRUE se la carta può essere posizionata come vuole
 	 * il giocatore; FALSE, se la carta non può essere posizionata
 	 * come vuole il giocatore
 	 */
@@ -1256,7 +1256,7 @@ public class Controller  {
 	 * @param coperta: carta che si vuole coprire
 	 * @param g: giocatore di turno che sta posizionando la carta
 	 * @param angolo:  posizione dell'angolo che si vuole coprire
-	 * @return: TRUE se l'angolo della carta che si vuole posizionare
+	 * @return TRUE se l'angolo della carta che si vuole posizionare
 	 * può coprire l'angolo scelto dal giocatore della carta che si
 	 * vuole coprire, FALSE se l'angolo della carta che si 
 	 * vuole posizionare non può coprire l'angolo scelto dal giocatore
@@ -2383,7 +2383,7 @@ public class Controller  {
 	 * @param coperta: carta scelta dal giocatore per essere coperta
 	 * @param angolo: angolo che deve essere coperto della carta
 	 * che deve essere coperta
-	 * @return: lista della carte che stanno per essere coperte dalla carta 
+	 * @return lista della carte che stanno per essere coperte dalla carta 
 	 * che sta per essere posizionata 
 	 */
 	public ArrayList<String> getCarteCoperte(Giocatore g, Carta coperta, Posizione angolo) {
@@ -3430,7 +3430,7 @@ public class Controller  {
 	 * Metodo che ritorna la carta iniziale della board nel caso in cui
 	 * quest'ultima abbia almeno un angolo che può essere coperto.
 	 * @param carta: carta iniziale posizionata sulla board 
-	 * @return: carta iniziale nel caso in cui abbia almeno un angolo
+	 * @return carta iniziale nel caso in cui abbia almeno un angolo
 	 * che può essere coperto, altrimenti null
 	 */
 	public CartaIniziale getFreeInitialCard(CartaIniziale carta) {
@@ -3446,7 +3446,7 @@ public class Controller  {
 	 * Metodo che ritorna le carte risorsa posizionate che hanno angoli 
 	 * liberi che possono essere coperti da angoli di altre carte.
 	 * @param card: lista delle carte risorsa presenti sulla board
-	 * @return: lista di carte risorsa che hanno almeno un angolo
+	 * @return lista di carte risorsa che hanno almeno un angolo
 	 * che può essere coperto
 	 */
 	public ArrayList<CartaRisorsa> getFreeResourceCards(ArrayList<CartaRisorsa> card){
@@ -3479,7 +3479,7 @@ public class Controller  {
 	 * Metodo che ritorna le carte oro posizionate che hanno angoli 
 	 * liberi che possono essere coperti da angoli di altre carte.
 	 * @param card: lista delle carte oro presenti sulla board
-	 * @return: lista di carte oro che hanno almeno un angolo
+	 * @return lista di carte oro che hanno almeno un angolo
 	 * che può essere coperto
 	 */
 	public ArrayList<CartaOro> getFreeGoldCards(ArrayList<CartaOro> card){
@@ -3513,7 +3513,7 @@ public class Controller  {
 	 * che possono essere coperti possono essere coperti da angoli
 	 * di altre carte.
 	 * @param card: carta iniziale di cui si controllano gli angoli
-	 * @return: lista di angoli di una carta iniziale che possono
+	 * @return lista di angoli di una carta iniziale che possono
 	 * essere coperti
 	 */
 	public ArrayList<Angolo> getFreeInitialCorners(CartaIniziale card){
@@ -3532,7 +3532,7 @@ public class Controller  {
 	 * Metodo che ritorna tutti gli angoli di una carta risorsa che 
 	 * possono essere coperti.
 	 * @param card: carta risorsa di cui si controllano gli angoli
-	 * @return: lista di angoli di una carta risorsa che possono
+	 * @return lista di angoli di una carta risorsa che possono
 	 * essere coperti
 	 */
 	public ArrayList<Angolo> getFreeResourceCorners(CartaRisorsa card){
@@ -3551,7 +3551,7 @@ public class Controller  {
 	 * Metodo che ritorna tutti gli angoli di una carta oro che 
 	 * possono essere coperti.
 	 * @param card: carta oro di cui si controllano gli angoli
-	 * @return: lista di angoli di una carta oro che possono
+	 * @return lista di angoli di una carta oro che possono
 	 * essere coperti
 	 */
 	public ArrayList<Angolo> getFreeGoldCorners(CartaOro card){
@@ -3700,7 +3700,7 @@ public class Controller  {
 	 * tali risorse presenti sulla board
 	 * @param g: giocatore di cui si controllano il numero di risorse 
 	 * del regno indicato sulla carta obiettivo presenti sulla board 
-	 * @return: numero di gruppi di tre risorse appartenenti
+	 * @return numero di gruppi di tre risorse appartenenti
 	 * al regno indicato sulla carta obiettivo
 	 */
 	public int countResource(Regno risorsa, Giocatore g) {
@@ -3743,7 +3743,7 @@ public class Controller  {
 	 * tratta di qualsiasi altro obiettivo di tipo "oggetto"
 	 * @param g: giocatore di cui si controllano gli oggetti del tipo 
 	 * indicato sulla carta obiettivo presenti sulla board
-	 * @return: numero di gruppi del tipo indicato sulla carta 
+	 * @return numero di gruppi del tipo indicato sulla carta 
 	 * obiettivo presenti sulla board
 	 */
 	public int countObject(Oggetto oggetto, List<Oggetto> diversi, Giocatore g) {
@@ -3803,7 +3803,7 @@ public class Controller  {
 	 * presenti sulla board
 	 * @param obiettivo: obiettivo che contiene la disposizione 
 	 * che deve essere controllata sulla board del giocatore
-	 * @return: numero di disposizioni del tipo indicato sulla 
+	 * @return numero di disposizioni del tipo indicato sulla 
 	 * carta obiettivo presenti sulla board
 	 */
 	public int countDisposition(Giocatore g, Obiettivo obiettivo) {
@@ -3901,7 +3901,7 @@ public class Controller  {
 	 * matrice che rappresenta la board
 	 * @param c: set contenente le celle della matrice che sono già 
 	 * state contate per una precedente disposizione
-	 * @return: 1 se la disposzione è rispettata, altrimenti 0
+	 * @return 1 se la disposzione è rispettata, altrimenti 0
 	 */
 	public int scanDisposition (String [][] mat, Regno [][] disp, Set<String> c) {
 		

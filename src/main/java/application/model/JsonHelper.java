@@ -33,7 +33,7 @@ public class JsonHelper {
 	 * @param path: percorso del file, ossia dove è salvato il file che 
 	 * viene letto
 	 * @param type: tipo della variabile in cui viene salvato il file
-	 * @return: file convertito in una classe
+	 * @return file convertito in una classe
 	 * @throws IOException: quando non viene trovato il file nel percorso
 	 * indicato
 	 * @throws JsonSyntaxException: quando non è rispettata la sintassi

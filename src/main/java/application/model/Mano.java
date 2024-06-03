@@ -19,7 +19,7 @@ public class Mano {
 	
 	/**
 	 * Metodo che ritorna le carte risorsa in mano al giocatore.
-	 * @return: carte risorsa presenti nella mano
+	 * @return carte risorsa presenti nella mano
 	 */
 	public ArrayList<CartaRisorsa> getRisorsa() {
 		return this.risorsa;
@@ -27,7 +27,7 @@ public class Mano {
 	
 	/**
 	 * Metodo che ritorna le carte oro in mano al giocatore.
-	 * @return: carte oro presenti nella mano
+	 * @return carte oro presenti nella mano
 	 */
 	public ArrayList<CartaOro> getOro() {
 		return this.oro;
@@ -36,7 +36,7 @@ public class Mano {
 	/**
 	 * Metodo che restituisce la carta risorsa partendo dall'id.
 	 * @param id: identificativo della carta da ritornare
-	 * @return: carta risorsa che possiede l'id dato come parametro
+	 * @return carta risorsa che possiede l'id dato come parametro
 	 */
 	public CartaOro getGoldById(String id) {
 		for(CartaOro s: this.oro) {
@@ -51,7 +51,7 @@ public class Mano {
 	/**
 	 * Metodo che restituisce la carta oro partendo dall'id.
 	 * @param id: identificativo della carta da ritornare
-	 * @return: carta oro che possiede l'id dato come parametro
+	 * @return carta oro che possiede l'id dato come parametro
 	 */
 	public CartaRisorsa getResourceById(String id) {
 		for(CartaRisorsa s: this.risorsa) {

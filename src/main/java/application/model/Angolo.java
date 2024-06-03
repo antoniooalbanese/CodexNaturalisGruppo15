@@ -50,7 +50,7 @@ public class Angolo {
 	
 	/**
 	 * Metodo che ritorna il tipo dell'angolo.
-	 * @return: tipo dell'angolo
+	 * @return tipo dell'angolo
 	 */
 	public TipoAngolo getTipo() {
 		return tipo;
@@ -66,7 +66,7 @@ public class Angolo {
 
 	/**
 	 * Metodo che ritorna la posizione dell'angolo.
-	 * @return: posizione dell'angolo nella carta
+	 * @return posizione dell'angolo nella carta
 	 */
 	public Posizione getPos() {
 		return pos;
@@ -83,7 +83,7 @@ public class Angolo {
 	/**
 	 * Metodo che ritorna il regno a cui appartiene la risorsa 
 	 * presente nell'angolo.
-	 * @return: risorsa presente nell'angolo
+	 * @return risorsa presente nell'angolo
 	 */
 	public Regno getRisorsa() {
 		return risorsa;
@@ -100,7 +100,7 @@ public class Angolo {
 
 	/**
 	 * Metodo che ritorna il tipo di oggetto presente nell'angolo.
-	 * @return: tipo di oggetto presente nell'angolo
+	 * @return tipo di oggetto presente nell'angolo
 	 */
 	public Oggetto getOggetto() {
 		return oggetto;
@@ -117,7 +117,7 @@ public class Angolo {
 	/**
 	 * Metodo che ritorna il codice della carta il cui angolo è 
 	 * collegato all'angolo in questione.
-	 * @return: codice della carta a cui è collegato l'angolo
+	 * @return codice della carta a cui è collegato l'angolo
 	 */
 	public String getLink() {
 		return link;
@@ -135,7 +135,7 @@ public class Angolo {
 	/**
 	 * Metodo che produce una stringa contenente tutte le informazioni
 	 * relative ad un angolo.
-	 * @return: stringa contenente tutte le informazioni relative 
+	 * @return stringa contenente tutte le informazioni relative 
 	 * ad un angolo
 	 */
 	public String showAngolo() {

@@ -54,7 +54,7 @@ public class Giocatore {
 	
 	/**
 	 * Questo metodo ritorna l'id del giocatore.
-	 * @return: codice identificativo del giocatore
+	 * @return codice identificativo del giocatore
 	 */
 	public String getId() {
 		return this.id;
@@ -62,7 +62,7 @@ public class Giocatore {
 	
 	/**
 	 * Questo metodo ritorna il nickname del giocatore.
-	 * @return: nickname del giocatore
+	 * @return nickname del giocatore
 	 */
 	public String getNick() {
 		return this.nick;
@@ -70,7 +70,7 @@ public class Giocatore {
 	
 	/**
 	 * Metodo che ritorna la mano del giocatore.
-	 * @return: carte in mano del giocatore
+	 * @return carte in mano del giocatore
 	 */
 	public Mano getMano() {
         return this.mano;
@@ -87,7 +87,7 @@ public class Giocatore {
 	
 	/**
 	 * Metodo che ritorna la board del giocatore.
-	 * @return: carte in campo del giocatore
+	 * @return carte in campo del giocatore
 	 */
 	public Board getBoard() {
 		return this.board;

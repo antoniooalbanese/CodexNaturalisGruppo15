@@ -56,7 +56,7 @@ public class CartaIniziale extends Carta{
 	
 	/**
 	 * Metodo che ritorna le risorse presenti nel centro della carta 
-	 * @return: risorse presenti nel centro della carta
+	 * @return risorse presenti nel centro della carta
 	 */
 	public ArrayList<Regno> getCentro() {
 		return centro;
@@ -72,7 +72,7 @@ public class CartaIniziale extends Carta{
 	
 	/**
 	 * Metodo che ritorna la lista di angoli posseduti dalla carta.
-	 * @return: lista di angoli posseduti dalla carta
+	 * @return lista di angoli posseduti dalla carta
 	 */
 	public ArrayList<Angolo> getAngoli() {
 		return angoli;
@@ -89,7 +89,7 @@ public class CartaIniziale extends Carta{
 	/**
 	 * Metodo che permette di mostrare tutte le informazioni di 
 	 * una carta iniziale.
-	 * @return: stringa contenente tutte le informazioni di una 
+	 * @return stringa contenente tutte le informazioni di una 
 	 * carta iniziale.
 	 */
 	public String showCard() {
@@ -110,7 +110,7 @@ public class CartaIniziale extends Carta{
 	 * Metodo che ritorna l'angolo della carta che si trova nella 
 	 * posizione data come parametro.
 	 * @param pos: posizione dell'angolo da ritornare
-	 * @return: angolo della carta che si trova nella posizione data
+	 * @return angolo della carta che si trova nella posizione data
 	 * come parametro
 	 */
 	public Angolo getAngoloByPosizione(Posizione pos) {

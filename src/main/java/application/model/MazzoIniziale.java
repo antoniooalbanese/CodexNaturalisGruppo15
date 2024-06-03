@@ -44,7 +44,7 @@ public class MazzoIniziale {
 	
 	/**
 	 * Metodo che ritorna il mazzo iniziale visto sul fronte.
-	 * @return: mazzo iniziale visto sul fronte
+	 * @return mazzo iniziale visto sul fronte
 	 */
 	public ArrayList<CartaIniziale> getMazzoFronte() {
 		return this.mazzoFronte;
@@ -52,7 +52,7 @@ public class MazzoIniziale {
 	
 	/**
 	 * Metodo che ritorna il mazzo iniziale visto sul retro.
-	 * @return: mazzo iniziale visto sul retro
+	 * @return mazzo iniziale visto sul retro
 	 */
 	public ArrayList<CartaIniziale> getMazzoRetro() {
 		return this.mazzoRetro;
@@ -61,7 +61,7 @@ public class MazzoIniziale {
 	/**
 	 * Metodo che ritorna il retro di una carta.
 	 * @param carta: carta iniziale vista sul fronte
-	 * @return: carta iniziale data come parametro, vista però sul retro
+	 * @return carta iniziale data come parametro, vista però sul retro
 	 */
 	public CartaIniziale getRetroCarta(CartaIniziale carta) {
 		String id = carta.getId();
