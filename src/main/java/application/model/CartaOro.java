@@ -13,24 +13,28 @@ public class CartaOro extends Carta{
 	 */
 	private Regno regno;
 	/**
-	 * Attributo che descrive la risorsa che si trova al centro della carta
-	 * nel caso in cui si mostri il retro di quest'ultima.
+	 * Attributo che descrive la risorsa che si trova al centro della 
+	 * carta nel caso in cui si mostri il retro di quest'ultima.
 	 */
 	private Regno centro;
+	
 	/**
-	 * Questa ArrayList contiene i 4 angoli presenti nella carta seguendo la 
-	 * seguente logica degli indici:
+	 * Questa ArrayList contiene i 4 angoli presenti nella carta
+	 * seguendo la seguente logica degli indici:
 	 * indice 0: angolo in alto a destra;
 	 * indice 1: angolo in basso a destra;
 	 * indice 2: angolo in basso a sinistra;
 	 * indice 3: angolo in alto a sinistra.
 	 */
-	private ArrayList<Angolo> angoli = new ArrayList<Angolo>(4);
+	private ArrayList<Angolo> angoli = new ArrayList<Angolo>();
+	
 	/**
-	 * Questo attributo descrive gli eventuali punti che la carta attribuisce
-	 * al giocatore che la piazza nel momento in cui questa viene piazzata.
+	 * Questo attributo descrive gli eventuali punti che la carta 
+	 * attribuisce al giocatore che la piazza nel momento in cui
+	 * questa viene piazzata.
 	 */
 	private Punto punto;
+	
 	/**
 	 * Attributo che descrive il requisito da soddisfare per posizionare
 	 * la carta.
@@ -40,15 +44,17 @@ public class CartaOro extends Carta{
 	/**
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il fronte della carta.
-	 * @param id
-	 * @param fronte
-	 * @param regno
-	 * @param angoli
-	 * @param punto
-	 * @param requisito
+	 * @param id: codice univoco della carta
+	 * @param fronte: booleano che descrive se carta è mostrata di 
+	 * fronte(TRUE) o di retro(FALSE)
+	 * @param regno: regno a cui appartiene la carta
+	 * @param angoli: lista di angoli posseduti dalla carta
+	 * @param punto: punti assegnati al posizionamento della carta
+	 * @param requisito: requisito da soddisfare per posizionare la
+	 * carta
 	 */
-	public CartaOro(String id, Regno regno, ArrayList<Angolo> angoli, Punto punto,
-					Requisito requisito) {
+	public CartaOro(String id, Regno regno, ArrayList<Angolo> angoli, 
+					Punto punto, Requisito requisito) {
 		super(id);
 		this.regno = regno;
 		this.centro = null;
@@ -60,11 +66,12 @@ public class CartaOro extends Carta{
 	/**
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il retro della carta.
-	 * @param id
-	 * @param fronte
-	 * @param regno
-	 * @param centro
-	 * @param angoli
+	 * @param id: codice univoco della carta
+	 * @param fronte: booleano che descrive se carta è mostrata di 
+	 * fronte(TRUE) o di retro(FALSE)
+	 * @param regno: regno a cui appartiene la carta
+	 * @param centro: risorsa contenuta nel centro della carta
+	 * @param angoli: lista di angoli posseduti dalla carta
 	 */
 	public CartaOro(String id, Regno regno, Regno centro, 
 					ArrayList<Angolo> angoli) {
@@ -78,7 +85,7 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che ritorna il regno a cui appartiene la carta oro
-	 * @return
+	 * @return: regno a cui appartiene la carta
 	 */
 	public Regno getRegno() {
 		return regno;
@@ -86,23 +93,25 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che modifica il regno a cui appartiene la carta oro.
-	 * @param regno
+	 * @param regno: regno a cui appartiene la carta
 	 */
 	public void setRegno(Regno regno) {
 		this.regno = regno;
 	}
 	
 	/**
-	 * Metodo che ritorna il tipo della risorsa nel centro della carta oro.
-	 * @return
+	 * Metodo che ritorna il regno a cui appartiene risorsa nel 
+	 * centro della carta oro.
+	 * @return: regno della risorsa al centro della carta
 	 */
 	public Regno getCentro() {
 		return centro;
 	}
 	
 	/**
-	 * Metodo che modifica il tipo della risorsa nel centro della carta oro.
-	 * @param centro
+	 * Metodo che modifica il regno a cui appartiene la risorsa nel 
+	 * centro della carta oro.
+	 * @param centro: regno della risorsa al centro della carta
 	 */
 	public void setCentro(Regno centro) {
 		this.centro = centro;
@@ -110,7 +119,7 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che ritorna la lista di angoli della carta oro.
-	 * @return
+	 * @return: lista di angoli posseduti dalla carta
 	 */
 	public ArrayList<Angolo> getAngoli() {
 		return angoli;
@@ -118,15 +127,16 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che modifica la lista di angoli della carta oro.
-	 * @param angoli
+	 * @param angoli: lista di angoli posseduti dalla carta
 	 */
 	public void setAngoli(ArrayList<Angolo> angoli) {
 		this.angoli = angoli;
 	}
 
 	/**
-	 * Metodo che ritorna i punti assegnati dalla carta oro al suo posizionamento.
-	 * @return
+	 * Metodo che ritorna i punti assegnati dalla carta oro al 
+	 * suo posizionamento.
+	 * @return: punti assegnati dalla carta
 	 */
 	public Punto getPunto() {
 		return punto;
@@ -134,7 +144,7 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che modifica i punti asseganti dalla carta oro al suo posizionamento.
-	 * @param punto
+	 * @param punto: punti asseganti dalla carta
 	 */
 	public void setPunto(Punto punto) {
 		this.punto = punto;
@@ -142,7 +152,7 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che ritorna il requisito di posizionamento della carta oro.
-	 * @return
+	 * @return: requsisito di piazzamaneto
 	 */
 	public Requisito getRequisito() {
 		return requisito;
@@ -150,15 +160,16 @@ public class CartaOro extends Carta{
 	
 	/**
 	 * Metodo che modifica il requisito di posizionamento della carta oro.
-	 * @param requisito
+	 * @param requisito: requisito di piazzamento
 	 */
 	public void setRequisito(Requisito requisito) {
 		this.requisito = requisito;
 	}
 	
 	/**
-	 * Metodo che permette di mostrare tutte le informazioni di una carta oro.
-	 * @return
+	 * Metodo che permette di mostrare tutte le informazioni di una
+	 * carta oro.
+	 * @return: stringa contenente tutte le informazioni di una carta
 	 */
 	public String showCard() {
 	String ang = "";
@@ -187,12 +198,20 @@ public class CartaOro extends Carta{
 
 	}
 	
+	/**
+	 * Metodo che ritorna l'angolo della carta che si trova nella 
+	 * posizione data come parametro.
+	 * @param pos: posizione dell'angolo da ritornare
+	 * @return: angolo della carta che si trova nella posizione data
+	 * come parametro
+	 */
 	public Angolo getAngoloByPosizione(Posizione pos) {
 		for(Angolo a : this.angoli) {
 			if(a.getPos().equals(pos)) {
 				return a;
 			}
 		}
+		
 		return null;
 	}
 	

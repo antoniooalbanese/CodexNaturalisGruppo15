@@ -9,12 +9,14 @@ import application.view.AnsiEscapeCodes;
  */
 public class CartaRisorsa extends Carta {
 	/**
-	 * Questo attributo descrive a quale dei 4 regni appartiene la carta risorsa.
+	 * Questo attributo descrive a quale dei 4 regni appartiene la 
+	 * carta risorsa.
 	 */
 	private Regno regno;
+	
 	/**
-	 * Attributo che descrive la risorsa che si trova al centro della carta
-	 * nel caso in cui si mostri il retro di quest'ultima.
+	 * Attributo che descrive la risorsa che si trova al centro 
+	 * della carta nel caso in cui si mostri il retro di quest'ultima.
 	 */
 	private Regno centro;
 	/**
@@ -25,7 +27,8 @@ public class CartaRisorsa extends Carta {
 	 * indice 2: angolo in basso a sinistra;
 	 * indice 3: angolo in alto a sinistra.
 	 */
-	private ArrayList<Angolo> angoli = new ArrayList<Angolo>(4);
+	private ArrayList<Angolo> angoli = new ArrayList<Angolo>();
+	
 	/**
 	 * Questo attributo descrive gli eventuali punti che la carta attribuisce
 	 * al giocatore che la piazza nel momento in cui questa viene piazzata.
@@ -35,11 +38,12 @@ public class CartaRisorsa extends Carta {
 	/**
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il fronte della carta.
-	 * @param id
-	 * @param fronte
-	 * @param regno
-	 * @param angoli
-	 * @param punto
+	 * @param id: codice univoco della carta
+	 * @param fronte: booleano che descrive se carta è mostrata di 
+	 * fronte(TRUE) o di retro(FALSE)
+	 * @param regno: regno a cui appartiene la carta
+	 * @param angoli: lista di angoli posseduti dalla carta
+	 * @param punto: punti assegnati al posizionamento della carta
 	 */
 	public CartaRisorsa(String id, Regno regno, ArrayList<Angolo> angoli,
 						Punto punto) {
@@ -52,11 +56,12 @@ public class CartaRisorsa extends Carta {
 	/**
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il retro della carta.
-	 * @param id
-	 * @param fronte
-	 * @param regno
-	 * @param centro
-	 * @param angoli
+	 * @param id: codice univoco della carta
+	 * @param fronte: booleano che descrive se carta è mostrata di 
+	 * fronte(TRUE) o di retro(FALSE)
+	 * @param regno: regno a cui appartiene la carta
+	 * @param centro: risorsa contenuta nel centro della carta
+	 * @param angoli: lista di angoli posseduti dalla carta
 	 */
 	public CartaRisorsa(String id, Regno regno, Regno centro,
 						ArrayList<Angolo> angoli) {
@@ -68,7 +73,7 @@ public class CartaRisorsa extends Carta {
 	
 	/**
 	 * Metodo che ritorna il regno a cui appartiene la carta risorsa.
-	 * @return
+	 * @return: regno a cui appartiene la carta
 	 */
 	public Regno getRegno() {
 		return regno;
@@ -76,25 +81,25 @@ public class CartaRisorsa extends Carta {
 	
 	/**
 	 * Metodo che modifica il regno a cui appartiene la carta risorsa.
-	 * @param regno
+	 * @param regno: regno a cui appartiene la carta
 	 */
 	public void setRegno(Regno regno) {
 		this.regno = regno;
 	}
 	
 	/**
-	 * Metodo che ritorna il tipo di risorsa a cui appartiene il centro della 
-	 * carta risorsa.
-	 * @return
+	 * Metodo che ritorna il tipo di risorsa a cui appartiene il centro
+	 * della carta risorsa.
+	 * @return: regno della risorsa al centro della carta
 	 */
 	public Regno getCentro() {
 		return centro;
 	}
 	
 	/**
-	 * Metodo che modifica il tipo di risorsa a cui appartiene il centro della 
-	 * carta risorsa.
-	 * @param centro
+	 * Metodo che modifica il tipo di risorsa a cui appartiene il 
+	 * centro della carta risorsa.
+	 * @param centro: regno della risorsa al centro della carta
 	 */
 	public void setCentro(Regno centro) {
 		this.centro = centro;
@@ -102,7 +107,7 @@ public class CartaRisorsa extends Carta {
 	
 	/**
 	 * Metodo che ritorna la lista di angoli della carta risorsa.
-	 * @return
+	 * @return: lista di angoli posseduti dalla carta
 	 */
 	public ArrayList<Angolo> getAngoli() {
 		return angoli;
@@ -110,31 +115,34 @@ public class CartaRisorsa extends Carta {
 	
 	/**
 	 * Metodo che modifica la lista di angoli della carta risorsa.
-	 * @param angoli
+	 * @param angoli: lista di angoli posseduti dalla carta
 	 */
 	public void setAngoli(ArrayList<Angolo> angoli) {
 		this.angoli = angoli;
 	}
 	
 	/**
-	 * Metodo che ritorna i punti assegnati al posizionamento della carta risorsa.
-	 * @return
+	 * Metodo che ritorna i punti assegnati al posizionamento
+	 * della carta risorsa.
+	 * @return: punti assegnati dalla carta
 	 */
 	public Punto getPunto() {
 		return punto;
 	}
 	
 	/**
-	 * Metodo che modifica i punti assegnati al posizionamento della carta risorsa.
-	 * @param punto
+	 * Metodo che modifica i punti assegnati al posizionamento 
+	 * della carta risorsa.
+	 * @param punto: punti assegnati dalla carta
 	 */
 	public void setPunto(Punto punto) {
 		this.punto = punto;
 	}
 	
 	/**
-	 * Metodo che permette di mostrare tutte le informazioni di una carta risorsa.
-	 * @return
+	 * Metodo che permette di mostrare tutte le informazioni di una 
+	 * carta risorsa.
+	 * @return: stringa contenente tutte le informazioni di una carta
 	 */
 	public String showCard() {
 	String ang = "";
@@ -166,12 +174,20 @@ public class CartaRisorsa extends Carta {
 
 	}
 	
+	/**
+	 * Metodo che ritorna l'angolo della carta che si trova nella 
+	 * posizione data come parametro.
+	 * @param pos: posizione dell'angolo da ritornare
+	 * @return: angolo della carta che si trova nella posizione data
+	 * come parametro
+	 */
 	public Angolo getAngoloByPosizione(Posizione pos) {
 		for(Angolo a : this.angoli) {
 			if(a.getPos().equals(pos)) {
 				return a;
 			}
 		}
+		
 		return null;
 	}
 }

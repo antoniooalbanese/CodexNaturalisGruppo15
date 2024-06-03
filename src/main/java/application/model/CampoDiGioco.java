@@ -3,9 +3,9 @@ package application.model;
 import java.util.ArrayList;
 
 /**
- * Questa classe rappresenta il campo di gioco contenente tutti gli elementi
- * comuni che sono visibili da tutti i giocatori, compresi gli stessi 
- * giocatori.
+ * Questa classe rappresenta il campo di gioco contenente tutti gli 
+ * elementi comuni che sono visibili da tutti i giocatori, compresi gli 
+ * stessi giocatori.
  */
 public class CampoDiGioco {
 	/**
@@ -43,15 +43,15 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che ritorna la lista dei giocatori che giocano la partita.
-	 * @return
+	 * @return: lista dei giocatori che giocano la partita
 	 */
 	public ArrayList<Giocatore> getGiocatore() {
 		return this.giocatore;
 	}
 	
 	/**
-	 * Metodo che modifica l'attributo giocatore.
-	 * @param giocatore
+	 * Metodo che modifica la lista dei giocatori.
+	 * @param giocatore: lista dei giocatori
 	 */
 	public void setGiocatore(ArrayList<Giocatore> giocatore) {
 		this.giocatore = giocatore;
@@ -59,7 +59,7 @@ public class CampoDiGioco {
 
 	/**
 	 * Metodo che permette di aggiungere un giocatore alla partita.
-	 * @param g
+	 * @param g: giocatore che viene aggiunto alla partita
 	 */
 	public void addPlayer(Giocatore g) {
 		this.giocatore.add(g);
@@ -67,7 +67,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che ritorna il mazzo risorsa.
-	 * @return
+	 * @return: mazzo delle carte risorsa
 	 */
 	public MazzoRisorsa getMazzoR() {
 		return this.mazzoR;
@@ -75,7 +75,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica il mazzo risorsa.
-	 * @return
+	 * @param: mazzo delle carte risorsa
 	 */
 	public void setMazzoR(MazzoRisorsa mazzoR) {
 		this.mazzoR = mazzoR;
@@ -83,7 +83,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che ritorna le carte risorsa estratte sul campo di gioco.
-	 * @return
+	 * @return: carte risorsa estratte sul campo di gioco
 	 */
 	public ArrayList<CartaRisorsa> getRisorsa() {
 		return this.risorsa;
@@ -91,7 +91,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica le carte risorsa estratte sul campo di gioco.
-	 * @return
+	 * @return: carte risorsa estratte sul campo di gioco
 	 */
 	public void setRisorsa(ArrayList<CartaRisorsa> risorsa) {
 		this.risorsa = risorsa;
@@ -99,15 +99,15 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che ritorna il mazzo oro.
-	 * @return
+	 * @return: mazzo delle carte oro
 	 */
 	public MazzoOro getMazzoO() {
 		return this.mazzoO;
 	}
 
 	/**
-	 * Metodo che modifica il oro.
-	 * @return
+	 * Metodo che modifica il mazzo oro.
+	 * @return: mazzo delle carte oro
 	 */
 	public void setMazzoO(MazzoOro mazzoO) {
 		this.mazzoO = mazzoO;
@@ -115,7 +115,7 @@ public class CampoDiGioco {
 
 	/**
 	 * Metodo che ritorna le carte oro estratte sul campo di gioco.
-	 * @return
+	 * @return: carte oro estratte sul campo di gioco
 	 */
 	public ArrayList<CartaOro> getOro() {
 		return oro;
@@ -123,7 +123,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica le carte oro estratte sul campo di gioco.
-	 * @return
+	 * @return: carte oro estratte sul campo di gioco
 	 */
 	public void setOro(ArrayList<CartaOro> oro) {
 		this.oro = oro;
@@ -131,7 +131,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che ritorna il mazzo delle carte obiettivo.
-	 * @return
+	 * @return: mazzo delle carte obiettivo
 	 */
 	public MazzoObiettivo getMazzoOb() {
 		return mazzoOb;
@@ -139,7 +139,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica il mazzo delle carte obiettivo.
-	 * @return
+	 * @return: mazzo delle carte obiettivo
 	 */
 	public void setMazzoOb(MazzoObiettivo mazzoOb) {
 		this.mazzoOb = mazzoOb;
@@ -147,7 +147,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che ritorna le carte obiettivo estratte sul campo di gioco.
-	 * @return
+	 * @return: carte obiettivo estratte sul campo di gioco
 	 */
 	public ArrayList<CartaObiettivo> getObiettivo() {
 		return obiettivo;
@@ -155,7 +155,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica le carte obiettivo estratte sul campo di gioco.
-	 * @return
+	 * @return: carte obiettivo estratte sul campo di gioco
 	 */
 	public void setObiettivo(ArrayList<CartaObiettivo> obiettivo) {
 		this.obiettivo = obiettivo;

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import application.model.Angolo;
 import application.model.Board;
 import application.model.CampoDiGioco;
@@ -20,7 +19,8 @@ import application.model.Posizione;
 import application.model.Regno;
 
 /**
- * Classe che rappresenta l'interfaccia di output e input utilizzata dai giocatori.
+ * Classe che rappresenta l'interfaccia di output e input 
+ * utilizzata dai giocatori.
  */
 public class View {
 	/**
@@ -30,20 +30,26 @@ public class View {
 	
 	/**
 	 * Metodo che stampa il messaggio di inizio del gioco.
-	 * @return
+	 * @return: TRUE se i giocatori decidono di iniziare a giocare,
+	 * FALSE se i giocatori decidono di non giocare
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(SI o NO)
 	 */
 	public boolean welcomeMessage() {
 		System.out.println("\n				  ╦ ╦╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗  ╔╦╗╔═╗\n"
 				+ "				  ║║║║╣ ║  ║  ║ ║║║║║╣    ║ ║ ║\n"
 				+ "				  ╚╩╝╚═╝╩═╝╚═╝╚═╝╩ ╩╚═╝   ╩ ╚═╝\n\n");
-		System.out.println(" ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗    ███╗   ██╗ █████╗ ████████╗██╗   ██╗██████╗  █████╗ ██╗     ██╗███████╗\n"
+		
+		System.out.println("  ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗    ███╗   ██╗ █████╗ ████████╗██╗   ██╗██████╗  █████╗ ██╗     ██╗███████╗\n"
 				+ " ██╔════╝██╔═══██╗██╔══██╗██╔════╝╚██╗██╔╝    ████╗  ██║██╔══██╗╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██║     ██║██╔════╝\n"
 				+ " ██║     ██║   ██║██║  ██║█████╗   ╚███╔╝     ██╔██╗ ██║███████║   ██║   ██║   ██║██████╔╝███████║██║     ██║███████╗\n"
 				+ " ██║     ██║   ██║██║  ██║██╔══╝   ██╔██╗     ██║╚██╗██║██╔══██║   ██║   ██║   ██║██╔══██╗██╔══██║██║     ██║╚════██║\n"
 				+ " ╚██████╗╚██████╔╝██████╔╝███████╗██╔╝ ██╗    ██║ ╚████║██║  ██║   ██║   ╚██████╔╝██║  ██║██║  ██║███████╗██║███████║\n"
 				+ "  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚══════╝\n"
 				+ "");
+		
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
+		
 		System.out.println("\nVolete giocare? (SI/NO)");
 		
 		while(true) {
@@ -57,7 +63,7 @@ public class View {
 				}else {
 					throw new IOException();
 				}
-			} catch(IOException e){
+			}catch(IOException e){
 				System.out.println("Risposta non ammessa, riprova con SI o NO");
 			}
 		}
@@ -77,6 +83,10 @@ public class View {
 	
 	/**
 	 * Metodo che chiede il numero di giocatori.
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(un numero compreso tra 2 e 4 compresi)
+	 * @exception InputMismatchException: quando la risposta non è 
+	 * un numero 
 	 */
 	public int getPlayersNumberMessage() {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
@@ -92,35 +102,39 @@ public class View {
 					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return giocatori;
 				}
-			} catch(IOException e) {
+			}catch(IOException e) {
 				System.out.println("Il numero minimo di giocatori è 2 e il numero massimo di giocatori è 4");
-			} catch(InputMismatchException e) {
+			}catch(InputMismatchException e) {
 				System.out.println("La risposta non è accettabile, riprova con un numero");
-			} finally {
+			}finally {
 				SCANNER.nextLine();
 			}
 		}
-	
 	}
 	
 	/**
 	 * Metodo che chiede il nickname del giocatore.
-	 * @param n
-	 * @return
-	 * @throws Exception 
+	 * @param n: numero del giocatore a cui si chiede il nickname da 
+	 * utilizzare durante la partita
+	 * @return: nickname scelto dal giocatore 
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(SI o NO)
 	 */
 	public String getNick(int n) {
 		String giocatore;
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
+		
 		do {
 			System.out.println("\nInserire il nickname del giocatore " + n +":");
 			giocatore = SCANNER.nextLine();
-		} while (giocatore.length()==0);
+		} while(giocatore.length()==0);
 		
 		while(true) {
 			System.out.println("Quindi il nickname del giocatore " + n +" è " + giocatore + "?");
+			
 			try {
 				String ris = SCANNER.nextLine();
+				
 				if(ris.equalsIgnoreCase("NO")) {
 					System.out.println("Allora qual è il tuo nickname?");
 					giocatore = SCANNER.nextLine();
@@ -129,7 +143,7 @@ public class View {
 				}else {
 					throw new IOException();
 				}
-			} catch(IOException e){
+			}catch(IOException e){
 				System.out.println("Risposta non ammessa, riprova con SI o NO");
 			} 
 		}
@@ -137,15 +151,23 @@ public class View {
 	
 	/**
 	 * Metodo che chiede al giocatore la pedina scelta. 
-	 * @param n
-	 * @return
+	 * @param n: numero del giocatore a cui si chiede di selezionare la
+	 * pedina da utilizzare durante la partita tra quelle disponibili
+	 * @param ped: lista di pedine rimanenti che possono essere scelte
+	 * dai giocatori
+	 * @return: pedina scelta dal giocatore
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(ROSSO, BLU, VERDE o GIALLO)
 	 */
 	public Pedina getPedina(int n, ArrayList<Pedina> ped) {
 		System.out.print("Quale pedina scegli giocatore " + n + " ");
+		
 		for(int i = 0; i < ped.size() - 1; i++) {
 			System.out.print(ped.get(i) + ", ");
 		}
+		
 		System.out.println(ped.get(ped.size() - 1));
+		
 		String pedina;
 		Pedina colore = null;
 		
@@ -171,24 +193,32 @@ public class View {
 			}catch(IOException e) {
 				System.out.println("Risposta non ammessa, riprova con ROSSO, BLU, VERDE o GIALLO");
 			}
+			
 			System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 		}
 	}
 	
 	/**
-	 * Metodo che avvisa l'utente che la pedina da lui selezionata è già stata
-	 * scelta.
+	 * Metodo che avvisa l'utente che la pedina da lui selezionata 
+	 * è già stata scelta da un altro giocatore precedentemente.
 	 */
 	public void retry() {
 		System.out.println("La pedina è già stata scelta");
 	}
 	
 	/**
-	 * Metodo che chiede all'utente se intende piazzare la carta iniziale mostrando
-	 * il fronte oppure mostrando il retro.
-	 * @param fronte
-	 * @param retro
-	 * @return
+	 * Metodo che chiede all'utente se intende piazzare la carta
+	 * iniziale mostrando il fronte oppure mostrando il retro.
+	 * @param gio: nickname del giocatore che deve scegliere se
+	 * posizionare la propria carta iniziale vista sul fronte oppure
+	 * vista sul retro
+	 * @param fronte: carta iniziale vista sul fronte
+	 * @param retro: carta iniziale vista sul retro
+	 * @return: TRUE se il giocatore decide di posizionare la carta
+	 * iniziale vista sul fronte, FALSE se il giocatore decide di 
+	 * posizionare la carta iniziale vista sul retro
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(FRONTE o RETRO)
 	 */
 	public boolean chooseStartCard(String gio, CartaIniziale fronte, CartaIniziale retro) {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
@@ -205,26 +235,31 @@ public class View {
 				if(ris.equalsIgnoreCase("FRONTE")) {
 					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return true;
-				} else if (ris.equalsIgnoreCase("RETRO")) {
+				}else if (ris.equalsIgnoreCase("RETRO")) {
 					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return false;
-				} else {
+				}else {
 					throw new IOException();
 				}
 			}catch(IOException e) {
 				System.out.println("Risposta non valida, riprova con FRONTE o RETRO");
 			}
 		}
-		
 	}	
 	
 	/**
-	 * Metodo che chiede all'utente quale delle due carte obiettivo che ha ricevuto
-	 * intende tenere e quale invece intende scartare.
-	 * @param gio
-	 * @param obi1
-	 * @param obi2
-	 * @return
+	 * Metodo che chiede all'utente quale delle due carte obiettivo 
+	 * che ha ricevuto intende tenere e quale invece intende scartare.
+	 * @param gio: nickname del giocatore che deve scegliere quale 
+	 * delle carte obiettivo pescate intende tenere e quale intende
+	 * scartare
+	 * @param obi1: prima carta obiettivo pescata
+	 * @param obi2: seconda carta obiettivo pescata
+	 * @return: TRUE se il giocatore decide di tenere la prima carta
+	 * obiettivo, FALSE se il giocatore decide di tenere la seconda
+	 * carta obiettivo
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(1 o 2)
 	 */
 	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
@@ -241,10 +276,10 @@ public class View {
 				if(ris.equalsIgnoreCase("1")) {
 					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return true;
-				} else if (ris.equalsIgnoreCase("2")) {
+				}else if (ris.equalsIgnoreCase("2")) {
 					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return false;
-				} else {
+				}else {
 					throw new IOException();
 				}
 			}catch(IOException e) {
@@ -254,9 +289,13 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che gestisce la visualizzazione degli obiettivi di tipo disposizione.
-	 * @param riga
-	 * @param dispo
+	 * Metodo che gestisce la visualizzazione degli obiettivi
+	 * di tipo disposizione.
+	 * @param riga: stringa contenente tutte le informazioni relative
+	 * alla carta obiettivo che contiene l'obiettivo in questione
+	 * @param dispo: matrice che rappresenta la disposizione che deve
+	 * essere rispettata per ottenere i punti assegnabili dalla
+	 * carta obiettivo
 	 */
 	public void showObjective(String riga, Regno[][]dispo) {
 		String regex = "[\n]";
@@ -267,6 +306,7 @@ public class View {
 			for(int i = 0; i < 4; i++) {
 				for(int j = 0; j < 4; j++) {
 					int s = i + 1;
+					
 					if(dispo[i][j] == null) {
 						line += "     ";
 					}else {
@@ -301,8 +341,9 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che mostra qual è l'ordine di gioco che i giocatori dovranno seguire.
-	 * @param ordine
+	 * Metodo che mostra qual è l'ordine di gioco che i giocatori 
+	 * dovranno seguire.
+	 * @param ordine: lista dei giocatori che giocheranno la partita
 	 */
 	public void showNewOrder(ArrayList<Giocatore> ordine) {
 		String nuovoOrdine = "";
@@ -311,6 +352,7 @@ public class View {
 			nuovoOrdine += "    " + (i+1) + "." + ordine.get(i).getNick();
 			nuovoOrdine += "\n";
 		}
+		
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nQuesto è l'ordine di gioco:\n\n" + nuovoOrdine);
 		System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
@@ -318,24 +360,27 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che mostra in output il messaggio di fine dei preparativi ed inizio
-	 * della partita vera e propria.
+	 * Metodo che mostra in output il messaggio di fine dei 
+	 * preparativi ed inizio della partita vera e propria.
 	 */
 	public void startMessage() {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗\n");
 		System.out.println("			  ╔═╗╦═╗╔═╗╔═╗╔═╗╦═╗╔═╗╔╦╗╦╦  ╦╦  ╔╦╗╔═╗╦═╗╔╦╗╦╔╗╔╔═╗╔╦╗╦\n"
 				+ "			  ╠═╝╠╦╝║╣ ╠═╝╠═╣╠╦╝╠═╣ ║ ║╚╗╔╝║   ║ ║╣ ╠╦╝║║║║║║║╠═╣ ║ ║\n"
 				+ "			  ╩  ╩╚═╚═╝╩  ╩ ╩╩╚═╩ ╩ ╩ ╩ ╚╝ ╩   ╩ ╚═╝╩╚═╩ ╩╩╝╚╝╩ ╩ ╩ ╩");
-		System.out.println("	╔═╗╦ ╦╔═╗  ╦  ╔═╗  ╦  ╦╔═╗╔═╗╔╦╗╦═╗╔═╗  ╔═╗╦  ╦╦  ╦╔═╗╔╗╔╔╦╗╦ ╦╦═╗╔═╗  ╔═╗╔╗ ╔╗ ╦╔═╗  ╦╔╗╔╔═╗╦╔═╗\n"
-				+ "	║  ╠═╣║╣   ║  ╠═╣  ╚╗╔╝║ ║╚═╗ ║ ╠╦╝╠═╣  ╠═╣╚╗╔╝╚╗╔╝║╣ ║║║ ║ ║ ║╠╦╝╠═╣  ╠═╣╠╩╗╠╩╗║╠═╣  ║║║║╔═╝║║ ║\n"
-				+ "	╚═╝╩ ╩╚═╝  ╩═╝╩ ╩   ╚╝ ╚═╝╚═╝ ╩ ╩╚═╩ ╩  ╩ ╩ ╚╝  ╚╝ ╚═╝╝╚╝ ╩ ╚═╝╩╚═╩ ╩  ╩ ╩╚═╝╚═╝╩╩ ╩  ╩╝╚╝╚═╝╩╚═╝");
+		System.out.println("	╔═╗╦ ╦╔═╗  ╦  ╔═╗  ╦  ╦╔═╗╔═╗╔╦╗╦═╗╔═╗  ╔═╗╔═╗╦═╗╔╦╗╦╔╦╗╔═╗  ╔═╗╔╗ ╔╗ ╦╔═╗  ╦╔╗╔╦╔═╗╦╔═╗\r\n"
+				+ "	║  ╠═╣║╣   ║  ╠═╣  ╚╗╔╝║ ║╚═╗ ║ ╠╦╝╠═╣  ╠═╝╠═╣╠╦╝ ║ ║ ║ ╠═╣  ╠═╣╠╩╗╠╩╗║╠═╣  ║║║║║╔═╝║║ ║\r\n"
+				+ "	╚═╝╩ ╩╚═╝  ╩═╝╩ ╩   ╚╝ ╚═╝╚═╝ ╩ ╩╚═╩ ╩  ╩  ╩ ╩╩╚═ ╩ ╩ ╩ ╩ ╩  ╩ ╩╚═╝╚═╝╩╩ ╩  ╩╝╚╝╩╚═╝╩╚═╝");
 		System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 	}
 	
 	/**
 	 * Metodo che dice ai giocatori che i mazzi sono terminati.
-	 * @param over
-	 * @return
+	 * @param over: booleano che descrive se i mazzi sono entrambi 
+	 * terminati(TRUE se sono terminati e FALSE se invece non sono
+	 * ancora terminati)
+	 * @return: TRUE se i mazzi sono terminati, FALSE se i mazzi non 
+	 * sono ancora terminati
 	 */
 	public boolean showDecksAreOverMessage(boolean over) {
 		if(over) {
@@ -345,9 +390,12 @@ public class View {
 		
 		return false;
 	}
+	
 	/**
-	 * Metodo che avvisa i giocatori che stanno per giocare il loro ultimo turno.
-	 * @param last
+	 * Metodo che avvisa i giocatori che stanno per giocare 
+	 * il loro ultimo turno.
+	 * @param last: booleano che indica se il giocatore di turno sta 
+	 * per giocare il suo ultimo turno
 	 */
 	public void tellLastTurn(boolean last) {
 		if(last) {
@@ -356,9 +404,9 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che avvisa i giocatori a chi appartiene il turno che sta per essere
-	 * giocato.
-	 * @param nick
+	 * Metodo che avvisa i giocatori a chi appartiene il turno 
+	 * che sta per essere giocato.
+	 * @param nick: nickname del giocatore di turno
 	 */
 	public void tellWhoseTurn(String nick) {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗\n");
@@ -366,9 +414,11 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che mostra in output le board dei giocatori.
-	 * @param g
-	 * @param giocatori
+	 * Metodo che mostra in output le board(carte in campo) dei 
+	 * giocatori.
+	 * @param g: giocatore di turno
+	 * @param giocatori: lista dei giocatori che stanno giocando la
+	 * partita
 	 */
 	public void showAllBoards(Giocatore g, ArrayList<Giocatore> giocatori) {
 		System.out.println("Informazioni sul campo degli altri giocatori:");
@@ -377,10 +427,11 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che stampa a schermo le board degli altri giocatori che non sono 
-	 * di turno.
-	 * @param g
-	 * @param giocatori
+	 * Metodo che stampa a schermo le board degli altri giocatori che
+	 * non sono di turno.
+	 * @param g: giocatore di turno
+	 * @param giocatori: lista dei giocatori che stanno giocando la
+	 * partita
 	 */
 	public void showOtherBoards(Giocatore g, ArrayList<Giocatore> giocatori) {
 		for(int i = 0; i < giocatori.size(); i++) {
@@ -391,8 +442,8 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che stampa a schermo la board di un avversarios.
-	 * @param g
+	 * Metodo che stampa a schermo la board di un avversario.
+	 * @param g: generico giocatore avversario
 	 */
 	public void showEnemyBoard(Giocatore g) {
 		Board bor = g.getBoard();
@@ -455,7 +506,7 @@ public class View {
 	
 	/**
 	 * Metodo che stampa a schermo la board di un determinato giocatore.
-	 * @param g
+	 * @param g: giocatore di cui si stampa la board
 	 */
 	public void showBoard(Giocatore g) {
 		Board bor = g.getBoard();
@@ -519,9 +570,10 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che stampa a schermo lo stato del giocatore di turno, ossia:
-	 * la board, le carte che ha in mano.  
-	 * @param g
+	 * Metodo che stampa a schermo lo stato del giocatore di turno, 
+	 * ossia: la board e le carte che ha in mano.  
+	 * @param g: giocatore di turno di cui si stampano le informazioni
+	 * a lui utili sulla propria condizione di gioco
 	 */
 	public void showPlayerStatus(Giocatore g) {
 		System.out.println("Informazioni sullo stato del giocatore di turno:");
@@ -530,7 +582,10 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che mostra i mazzi e le carte scoperte presenti sul campo di gioco. 
+	 * Metodo che mostra i mazzi e le carte scoperte presenti 
+	 * sul campo di gioco. 
+	 * @param campo: campo di gioco dove si svolge la partita
+	 * contenente i vari mazzi e i giocatori
 	 */
 	public void showField(CampoDiGioco campo) {
 		System.out.println("\nSUL CAMPO DA GIOCO CI SONO QUESTE CARTE:");
@@ -542,55 +597,60 @@ public class View {
 		System.out.println("\n\nCARTE SCOPERTE:");
 	
 		for (CartaRisorsa r : campo.getRisorsa()) {
-			  System.out.println(r.showCard());
-			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+			System.out.println(r.showCard());
+			System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		}
 		
 		for (CartaOro o : campo.getOro()) {
-			  System.out.println(o.showCard());
-			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+			System.out.println(o.showCard());
+			System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		}
 		
 		System.out.println("\n\nOBIETTIVI COMUNI:");
 		
 		for (CartaObiettivo ob : campo.getObiettivo()) {
-			  showObjective(ob.showCard(), ob.getObiettivo().getDisposizione());
+			showObjective(ob.showCard(), ob.getObiettivo().getDisposizione());
 		}
 		
 	}
 	
 	/**
 	 * Metodo che mostra le carte in mano di un giocatore.
-	 * @param nick
-	 * @param mano
+	 * @param nick: nickname del giocatore di cui si mostra la mano
+	 * @param mano: mano del giocatore che viene mostata
 	 */
 	public void showHand(String nick, Mano mano) {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nMANO DI " + nick + ":");
 		
 		for (CartaRisorsa r : mano.getRisorsa()) {
-			  System.out.println(r.showCard());
-			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+			System.out.println(r.showCard());
+			System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		}
 		
 		for (CartaOro o : mano.getOro()) {
-			  System.out.println(o.showCard());
-			  System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+			System.out.println(o.showCard());
+			System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		}
 	}
 	
 	/**
 	 * Metodo che mostra al giocatore di turno il suo obiettivo segreto.
-	 * @param g
-	 * @param board
+	 * @param g: giocatore di turno
+	 * @param board: carte presenti sul campo del giocatore di turno
 	 */
 	public void showSecretObjective(Giocatore g, Board board) {
 		System.out.println("OBIETTIVO SEGRETO DI " + g.getNick());
 		System.out.println(board.getObiettivo().showCard());
 	}
+	
 	/**
-	 * Metodo che chiede al giocatore di turno se ha intenzione di passare la mano.
-	 * @return
+	 * Metodo che chiede al giocatore di turno se ha intenzione
+	 * di passare la mano.
+	 * @return: TRUE se il giocatore di turno intende passare la mano,
+	 * FALSE se il giocatore di turno non intende passare la mano
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(SI o NO)
 	 */
 	public boolean passaMano() {
 		System.out.println("\nVuoi passare la mano al prossimo giocatore? (SI/NO)");
@@ -606,7 +666,7 @@ public class View {
 				}else {
 					throw new IOException();
 				}
-			} catch(IOException e){
+			}catch(IOException e){
 				System.out.println("Risposta non ammessa, riprova con SI o NO");
 			}
 		}
@@ -614,7 +674,8 @@ public class View {
 	
 	/**
 	 * Metodo che chiede al giocatore di turno quale carta posizionare.
-	 * @return
+	 * @return: la stringa contenente l'id della carta che il 
+	 * giocatore di turno ha scelto di posizionare
 	 */
 	public String chooseWhatToPlace() {
 		System.out.println("Inserisci il codice della carta che vuoi posizionare:");
@@ -623,15 +684,17 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che stampa il messaggio di errore di codice non valido.
+	 * Metodo che stampa il messaggio di errore di codice non valido,
+	 * ossia quando il codice non è tra quelli disponibili per
+	 * la scelta.
 	 */
 	public void insertAValidCode() {
 		System.out.println("Codice della carta non valido, riprova con uno dei codici disponibili");
 	}
 	
 	/**
-	 * Metodo che stampa il messaggio di errore dell'inserimento della carta in
-	 * quanto non soddisfa i requisiti.
+	 * Metodo che stampa il messaggio di errore dell'inserimento della
+	 * carta in quanto non soddisfa i requisiti.
 	 */
 	public void showRequirementMessage() {
 		System.out.println("La carta non soddisfa i requisiti, scegliere un'altra carta");
@@ -640,20 +703,25 @@ public class View {
 	/**
 	 * Metodo che chiede all'utente se intende piazzare la carta scelta 
 	 * mostrando il fronte o il retro.
-	 * @param gio
-	 * @param fronte
-	 * @param retro
-	 * @return
+	 * @param gio: nickname del giocatore che deve scegliere come 
+	 * piazzare la carta
+	 * @param fronte: carta da posizionare vista sul fronte
+	 * @param retro: carta da posizionare vista sul retro
+	 * @return: TRUE se il giocatore decide di posizionare la carta
+	 * vista sul fronte, FALSE se il giocatore decide di posizionare 
+	 * la carta vista sul retro
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(FRONTE o RETRO)
+	 * 
 	 */
 	public boolean chooseWhichSide(String gio, Carta fronte, Carta retro) {
-		
 		String f = "";
 		String r = "";
 		
 		if (fronte.getId().charAt(0)=='R') {
 			f = ((CartaRisorsa)fronte).showCard();
 			r = ((CartaRisorsa)retro).showCard();
-		} else {
+		}else {
 			f = ((CartaOro)fronte).showCard();
 			r = ((CartaOro)retro).showCard();
 		}
@@ -670,9 +738,9 @@ public class View {
 				String ris = SCANNER.nextLine();
 				if(ris.equalsIgnoreCase("FRONTE")) {
 					return true;
-				} else if (ris.equalsIgnoreCase("RETRO")) {
+				}else if (ris.equalsIgnoreCase("RETRO")) {
 					return false;
-				} else {
+				}else {
 					throw new IOException();
 				}
 			}catch(IOException e) {
@@ -682,9 +750,10 @@ public class View {
 	}		
 	
 	/**
-	 * Metodo che chiede al giocatore di turno quale carta coprire con quella 
-	 * che viene posizionata.
-	 * @return
+	 * Metodo che chiede al giocatore di turno quale carta coprire 
+	 * con quella che vuole posizionare.
+	 * @return: stringa contenente l'id della carta che il giocatore 
+	 * intende coprire con la carta che vuole posizionare 
 	 */
 	public String chooseWhatToCover() {
 		System.out.println("Inserisci il codice della carta che vuoi coprire:");
@@ -692,17 +761,17 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che stampa il messaggio di apertura della lista degli angoli 
-	 * disponibili.
+	 * Metodo che stampa il messaggio di apertura della lista
+	 * degli angoli disponibili.
 	 */
 	public void showFreeCornersMessage() {
 		System.out.println("\nGli angoli disponibili sono:\n");
 	}
 	
 	/**
-	 * Metodo che stampa tutti gli angoli iniziali liberi.
-	 * @param cardR
-	 * @param angolo
+	 * Metodo che stampa tutti gli angoli della carta iniziale liberi.
+	 * @param cardI: carta iniziale di cui si mostrano gli angoli
+	 * @param angolo: lista degli angoli liberi della carta
 	 */
 	public void showFreeInitialCorners(CartaIniziale cardI, ArrayList<Angolo> angolo) {
 		String code = "" + AnsiEscapeCodes.WHITE_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardI.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
@@ -715,20 +784,20 @@ public class View {
 	}
 	
 	/**
-	 * Metodo che stampa tutti gli angoli risorsa liberi.
-	 * @param cardR
-	 * @param angolo
+	 * Metodo che stampa tutti gli angoli di una carta risorsa liberi.
+	 * @param cardR: carta risorsa di cui si mostrano gli angoli
+	 * @param angolo: lista degli angoli liberi della carta
 	 */
 	public void showFreeResourceCorners(CartaRisorsa cardR, ArrayList<Angolo> angolo) {
 		String code = "";
 		
 		if (cardR.getId().contains("VR")) {
 			 code = "" + AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();  
-		} else if (cardR.getId().contains("BL")){
+		}else if (cardR.getId().contains("BL")){
 			code = "" + AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
-		} else if (cardR.getId().contains("RS")) {
+		}else if (cardR.getId().contains("RS")) {
 			code = "" + AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
-		} else if (cardR.getId().contains("VL")) {
+		}else if (cardR.getId().contains("VL")) {
 			code = "" + AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardR.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
 		}
 		
@@ -737,24 +806,23 @@ public class View {
 		for(Angolo a: angolo) {
 			System.out.println("   " + a.showAngolo() + "\n");
 		}
-		
 	}
 	
 	/**
-	 * Metodo che stampa tutti gli angoli oro liberi.
-	 * @param cardO
-	 * @param angolo
+	 * Metodo che stampa tutti gli angoli di una carta oro liberi.
+	 * @param cardO: carta oro di cui si mostrano gli angoli
+	 * @param angolo: lista degli angoli liberi della carta
 	 */
 	public void showFreeGoldCorners(CartaOro cardO, ArrayList<Angolo> angolo) {
 		String code = "";
 		
 		if (cardO.getId().contains("VR")) {
 			 code = "" + AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();  
-		} else if (cardO.getId().contains("BL")){
+		}else if (cardO.getId().contains("BL")){
 			code = "" + AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
-		} else if (cardO.getId().contains("RS")) {
+		}else if (cardO.getId().contains("RS")) {
 			code = "" + AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
-		} else if (cardO.getId().contains("VL")) {
+		}else if (cardO.getId().contains("VL")) {
 			code = "" + AnsiEscapeCodes.VIOLET_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + cardO.getId() + AnsiEscapeCodes.ENDING_CODE.getCode();
 		}
 		
@@ -765,13 +833,20 @@ public class View {
 		}
 	}
 	
-	
+	/**
+	 * Metodo che chiede al giocatore di turno quale angolo vuole
+	 * coprire della carta che vuole coprire con la carta che 
+	 * vuole posizionare.
+	 * @return: posizione dell'angolo che il giocatore intende coprire
+	 * @throws IOException: quando la risposta non è tra quelle
+	 * ammesse(ADX, BDX, BSX o ASX) 
+	 */
 	public Posizione chooseWhichCorner() {
 		System.out.println("Scegli l'angolo che vuoi coprire: (ADX/BDX/BSX/ASX)");
+		
 		while(true) {
 			try {
 				String res = SCANNER.nextLine();
-				
 				
 				switch(res.toUpperCase()) {
 				case "ADX":
@@ -785,12 +860,18 @@ public class View {
 				default:
 					throw new IOException();
 				}
-			} catch(IOException e){
+			}catch(IOException e){
 				System.out.println("Risposta non ammessa, riprova con ADX, BDX, BSX, ASX");
 			}
 		}
 	}
 	
+	/**
+	 * Metodo che avvisa il giocatore di turno che l'angolo che intende
+	 * coprire è già occupato da un'altra carta.
+	 * @param angoli: lista degli angoli liberi che il giocatore può
+	 * scegliere di coprire al posto di quello già occupato
+	 */
 	public void isCornerAlreadyOccupied(ArrayList<Angolo> angoli) {
 		String message = "L'angolo selezionato non è disponibile, è già occupato. Riprova con: (";
 		
@@ -799,7 +880,7 @@ public class View {
 			
 			if(i != angoli.size() - 1) {
 				message += ", ";
-			} else {
+			}else {
 				message += "): ";
 			}
 		}
@@ -807,22 +888,46 @@ public class View {
 		System.out.println(message);
 	}
 	
+	/**
+	 * Metodo che stampa al giocatore di turno un messaggio che dice 
+	 * che la posizione da lui scelta è già occupata da un'altra carta.
+	 */
 	public void isFullMessage() {
 		System.out.println("La posizione scelta è gia occupata");
 	}
+	
+	/**
+	 * Metodo che stampa al giocatore di turno un messaggio che dice
+	 * che un angolo nascosto non può coprire un angolo vuoto.
+	 */
 	public void showPlaceErrorMessage() {
 		System.out.println("Un angolo nascosto non può coprire un angolo vuoto. Controlla e riprova");
 	}
 	
+	/**
+	 * Metodo che stampa al giocatore di turno un messaggio che dice
+	 * che un angolo nascosto non può essere coperto da nessun altro
+	 * angolo.
+	 */
 	public void showImpossiblePlaceMessage() {
 		System.out.println("Non è possibile coprire un angolo nascosto");
 	}
 	
+	/**
+	 * Metodo che chiede al giocatore di turno di inserire il codice
+	 * della carta che intende pescare.
+	 * @return: stringa contenente il codice della carta che il
+	 * giocatore di turno intende pescare
+	 */
 	public String chooseWhatToDraw() {		
 		System.out.println("Inserisci il codice della carta che vuoi pescare");
 		return SCANNER.nextLine();
 	}
 	
+	/**
+	 * Metodo che stampa ai giocatori il messaggio che li avvisa che 
+	 * la partita è terminata.
+	 */
 	public void isGameOverMessage() {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗\n");
 		System.out.println("    ____  ___    ____ ___________________        ________________  __  ________   _____  _________ \n"
@@ -855,15 +960,33 @@ public class View {
 		
 	}
 	
+	/**
+	 * Metodo che al termine della partita stampa per un giocatore 
+	 * il proprio posto in classifica ed il punteggio che ha
+	 * conseguito.
+	 * @param nick: nickname del giocatore di cui si mostra il posto
+	 * in classifica ed il punteggio che ha conseguito
+	 * @param punti: punteggio conseguito dal giocatore di cui si
+	 * mostra il posto in classifica
+	 * @param posizione: posizione in classifica del giocatore di cui
+	 * si mostra il punteggio conseguito
+	 */
 	public void showFinalPoints(String nick, int punti, int posizione) {
 		System.out.println("					" + posizione + "° " + nick + ": " + punti + " punti");
 	}
 	
+	/**
+	 * Metodo che stampa un messaggio ai giocatori che dice chi è
+	 * il vincitore della partita.
+	 * @param winner: stringa contenente il nickname del giocatore che
+	 * ha vinto la partita
+	 */
 	public void showWinner(String winner) {
 		System.out.println("\n");
+		
 		if(winner.contains("&")) {
 			System.out.println("					I VINCITORI SONO:\n");
-		} else {
+		}else {
 			System.out.println("					IL VINCITORE È:\n");
 		}
 		
@@ -876,6 +999,7 @@ public class View {
 							+ AnsiEscapeCodes.CYAN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode()
 							+ AnsiEscapeCodes.GREEN_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode() 
 							+ AnsiEscapeCodes.RED_BACKGROUND.getCode() + AnsiEscapeCodes.DEFAULT_TEXT.getCode() + "!" + AnsiEscapeCodes.ENDING_CODE.getCode());
+		
 		System.out.println("\n\n");
 		System.out.print("                `\t\t\t\t\t\t" + "        __.....__\n"
 				+ ";,,,             `       '             ,,,;\t\t\t" + "     .'\" _  o    \"`.\n"
@@ -895,5 +1019,4 @@ public class View {
 				+ "          '8Y  `Y         Y'  Y8'\t\t\t\t" + "        :       :\n"
 				+ "           Y                   Y	\t\t\t" + "        `._____.'");
 	}
-	
 }

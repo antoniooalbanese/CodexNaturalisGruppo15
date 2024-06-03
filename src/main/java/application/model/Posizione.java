@@ -1,9 +1,12 @@
 package application.model;
 
 /**
- * Questo enumerativo descrive la posizione che un angolo può occupare in una 
- * carta.
+ * Questo enumerativo descrive la posizione che un angolo può occupare 
+ * in una carta.
  */
 public enum Posizione {
-	ADX, BDX, BSX, ASX
+	ADX, 
+	BDX,
+	BSX,
+	ASX
 }

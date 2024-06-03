@@ -14,16 +14,19 @@ public class MazzoIniziale {
 	 * Lista di carte iniziali mostrate sul fronte.
 	 */
 	private ArrayList<CartaIniziale> mazzoFronte = new ArrayList<CartaIniziale>();
+	
 	/**
 	 * Lista di carte iniziali mostrate sul retro.
 	 */
 	private ArrayList<CartaIniziale> mazzoRetro = new ArrayList<CartaIniziale>();
 	
 	/**
-	 * Metodo che carica il contenuto del file json contenente le carte iniziali
-	 * nel mazzo delle carte iniziali.
-	 * @throws JsonSyntaxException
-	 * @throws IOException
+	 * Metodo che carica il contenuto del file json contenente le carte
+	 * iniziali nel mazzo delle carte iniziali.
+	 * @throws JsonSyntaxException: quando non è rispettata la sintassi
+	 * json
+	 * @throws IOException: quando il file non viene trovato nel 
+	 * percorso indicato
 	 */
 	public void load() throws JsonSyntaxException, IOException{
 		ArrayList <CartaIniziale> mazzo = JsonHelper.loadJson("MazzoIniziale.json",  new TypeToken<List<CartaIniziale>>(){}.getType());
@@ -41,7 +44,7 @@ public class MazzoIniziale {
 	
 	/**
 	 * Metodo che ritorna il mazzo iniziale visto sul fronte.
-	 * @return
+	 * @return: mazzo iniziale visto sul fronte
 	 */
 	public ArrayList<CartaIniziale> getMazzoFronte() {
 		return this.mazzoFronte;
@@ -49,16 +52,16 @@ public class MazzoIniziale {
 	
 	/**
 	 * Metodo che ritorna il mazzo iniziale visto sul retro.
-	 * @return
+	 * @return: mazzo iniziale visto sul retro
 	 */
 	public ArrayList<CartaIniziale> getMazzoRetro() {
 		return this.mazzoRetro;
 	}
 	
 	/**
-	 * Metodo che ritorna la il retro di una carta.
-	 * @param carta
-	 * @return
+	 * Metodo che ritorna il retro di una carta.
+	 * @param carta: carta iniziale vista sul fronte
+	 * @return: carta iniziale data come parametro, vista però sul retro
 	 */
 	public CartaIniziale getRetroCarta(CartaIniziale carta) {
 		String id = carta.getId();
@@ -69,10 +72,7 @@ public class MazzoIniziale {
 				return this.mazzoRetro.get(i);
 			}
 		}
+		
 		return null;
 	}
-	/**
-	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
-	 * DELLE CARTE.
-	 */
 }

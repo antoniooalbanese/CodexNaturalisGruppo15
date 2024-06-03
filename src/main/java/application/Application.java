@@ -7,7 +7,7 @@ import application.model.Model;
 import application.view.View;
 
 /**
- * Questa classe rappresenta il launcher del programma.(DA RIGUARDARE IL COMMENTO).
+ * Questa classe rappresenta il launcher del programma.
  */
 public class Application {
 	

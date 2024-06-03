@@ -10,17 +10,20 @@ public class CartaObiettivo extends Carta{
 	 */
 	private Obiettivo obiettivo;
 	/**
-	 * Attributo che descrive il valore dei punti asseganti al raggiungimento
-	 * dell'obiettivo.
+	 * Attributo che descrive il valore dei punti asseganti al 
+	 * raggiungimento dell'obiettivo.
 	 */
 	private int punto;
 	
 	/**
 	 * Questo è il costruttore della classe.
-	 * @param id
-	 * @param fronte
-	 * @param obiettivo
-	 * @param punto
+	 * @param id: codice univoco della carta
+	 * @param fronte: booleano che descrive se la carta è mostrata sul
+	 * fronte(TRUE) o sul retro(FALSE)
+	 * @param obiettivo: obiettivo che il giocatore deve raggiungere per
+	 * ottenere i punti indicati sulla carta
+	 * @param punto: punti assegnati al giocatore che raggiunge 
+	 * l'obiettivo 
 	 */
 	public CartaObiettivo(String id, Boolean fronte, Obiettivo obiettivo,
 						  int punto) {
@@ -28,21 +31,10 @@ public class CartaObiettivo extends Carta{
 		this.obiettivo = obiettivo;
 		this.punto = punto;
 	}
-	
-
-	/**QUESTA CLASSE E' DA RIGUARDARE.
-	 * TUTTO DIPENDE DA COME SI STRUTTURA LA CLASSE OBIETTIVO.
-	 * HO IL DUBBIO CHE SI DEBBANO FARE 3 CLASSI
-	 * DIVERSE PER I TRE TIPI DI OBIETTIVO DIVERSI. INOLTRE BISOGNA CAPIRE COME
-	 * IDENTIFICARE LE STRUTTURE DA RISPETTARE PER L'OBIETTIVO DI TIPO 
-	 * DISPOSIZIONE.
-	 * INOLTRE BISOGNA FARE SIA UN COSTRUTTORE PER IL FRONTE CHE PER IL RETRO.
-	 * IL RETRO AVRA' IL SOLO SCOPO DI MOSTRARE LA CARTA COPERTA.
-	 */
 
 	/**
 	 * Metodo che ritorna l'obiettivo contenuto nella carta.
-	 * @return
+	 * @return: obiettivo contenuto nella carta
 	 */
 	public Obiettivo getObiettivo() {
 		return obiettivo;
@@ -50,7 +42,7 @@ public class CartaObiettivo extends Carta{
 
 	/**
 	 * Metodo che modifica l'obiettivo contenuto nella carta.
-	 * @param obiettivo
+	 * @param obiettivo: obiettivo contenuto nella carta
 	 */
 	public void setObiettivo(Obiettivo obiettivo) {
 		this.obiettivo = obiettivo;
@@ -59,7 +51,7 @@ public class CartaObiettivo extends Carta{
 	/**
 	 * Metodo che ritorna i punti dati dalla carta obiettivo in caso di
 	 * raggiungimento dell'obiettivo. 
-	 * @return
+	 * @return: punti extra assegnati dalla carta
 	 */
 	public int getPunto() {
 		return punto;
@@ -68,19 +60,19 @@ public class CartaObiettivo extends Carta{
 	/**
 	 * Metodo che ritorna i punti dati dalla carta obiettivo in caso di
 	 * raggiungimento dell'obiettivo.
-	 * @param punto
+	 * @param punto: punti extra assegnati dalla carta
 	 */
 	public void setPunto(int punto) {
 		this.punto = punto;
 	}
 	
 	/**
-	 * Metodo che permette di mostrare tutte le informazioni di una carta obiettivo.
-	 * @param dispo
-	 * @return
+	 * Metodo che permette di mostrare tutte le informazioni di una 
+	 * carta obiettivo.
+	 * @return: stringa contenente tutte le informazioni di una carta
+	 * obiettivo
 	 */
 	public String showCard() {
 		return "\nCarta Obiettivo:\n   " + "ID: " + getId() + "\n   " + "Punti: " + getPunto() + getObiettivo().showObiettivo();
-
 	}
 }

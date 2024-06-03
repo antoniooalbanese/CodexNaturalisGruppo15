@@ -8,6 +8,7 @@ public enum AnsiEscapeCodes {
 	 * Background di colore bianco.
 	 */
 	WHITE_BACKGROUND("\u001B[48;2;255;255;255m"),
+	
 	/**
 	 * Background di colore verde.
 	 */
@@ -32,6 +33,7 @@ public enum AnsiEscapeCodes {
 	 * Colore del testo di default.
 	 */
     DEFAULT_TEXT("\u001B[38;2;48;48;48m"),
+    
     /**
      * Ending code di default.
      */
@@ -44,7 +46,7 @@ public enum AnsiEscapeCodes {
 
     /**
      * Questo è il costruttore della classe
-     * @param code è l'ANSI escape code
+     * @param code: ANSI escape code
      */
     AnsiEscapeCodes(String code) {
         this.code = code;
@@ -52,8 +54,7 @@ public enum AnsiEscapeCodes {
 
     /**
      * Questo metodo ritorna l'ANSI escape code
-     * This method returns the ANSI escape code
-     * @return l'ANSI escape code
+     * @return: ANSI escape code
      */
     public String getCode() {
         return code;

@@ -63,7 +63,7 @@ public class Board {
 	
 	/**
 	 * Costruttore della classe.
-	 * @param centro
+	 * @param centro: carta iniziale posizionata al centro della board
 	 */
 	public Board(CartaIniziale centro) {
 		this.matrix = new String [9][9];
@@ -80,18 +80,18 @@ public class Board {
 	}
 	
 	/**
-	 * Metodo che ritorna la matrice che rappresenta la disposizione delle carte 
-	 * sulla board.
-	 * @return
+	 * Metodo che ritorna la matrice che rappresenta la disposizione 
+	 * delle carte sulla board.
+	 * @return: matrice che rappresenta la board
 	 */
 	public String[][] getMatrix(){
 		return this.matrix;
 	}
 	
 	/**
-	 * Metodo che modifica la matrice che rappresenta la disposizione delle carte 
-	 * sulla board. 
-	 * @param matrix
+	 * Metodo che modifica la matrice che rappresenta la 
+	 * disposizione delle carte sulla board. 
+	 * @param matrix: matrice che rappresenta la board
 	 */
 	public void setMatrix(String [][] matrix){
 		this.matrix = matrix;
@@ -99,25 +99,28 @@ public class Board {
 	
 	/**
 	 * Metodo che modifica l'elemento della matrice nella posizione data in input
-	 * @param row
-	 * @param column
-	 * @param cell
+	 * @param row: riga a cui appartiene l'elemento da modificare
+	 * @param column: colonna a cui appartiene l'elemento da modificare
+	 * @param cell: id che viene assegnato nella cella nella posizione
+	 * data 
 	 */
 	public void setMatrixElementByIndex(int row, int column, String cell) {
 		this.matrix [row][column] = cell;
 	}
 	
 	/**
-	 * Metodo che ritorna la carta iniziale che si trova al centro della board.
-	 * @return
+	 * Metodo che ritorna la carta iniziale che si trova al centro
+	 * della board.
+	 * @return: carta iniziale al centro della board
 	 */
 	public CartaIniziale getCentro() {
 		return centro;
 	}
 	
 	/**
-	 * Metodo che modifica la carta iniziale che si trova al centro della board.
-	 * @param centro
+	 * Metodo che modifica la carta iniziale che si trova al centro 
+	 * della board.
+	 * @param centro: carta iniziale al centro della board
 	 */
 	public void setCentro(CartaIniziale centro) {
 		this.centro = centro;
@@ -125,7 +128,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna le carte risorsa presenti nella board.
-	 * @return
+	 * @return: carte risorsa presenti nella board
 	 */
 	public ArrayList<CartaRisorsa> getRisorsa() {
 		return risorsa;
@@ -133,7 +136,7 @@ public class Board {
 	
 	/**
 	 * Metodo che modifica le carte risorsa presenti nella board.
-	 * @param risorsa
+	 * @param risorsa: carte risorsa presenti nella board 
 	 */
 	public void setRisorsa(ArrayList<CartaRisorsa> risorsa) {
 		this.risorsa = risorsa;
@@ -141,7 +144,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna le carte oro presenti nella board.
-	 * @return
+	 * @return: carte oro presenti nella board
 	 */
 	public ArrayList<CartaOro> getOro() {
 		return oro;
@@ -149,7 +152,7 @@ public class Board {
 	
 	/**
 	 * Metodo che modifica le carte oro presenti nella board.
-	 * @param oro
+	 * @param oro: carte oro presenti nella board
 	 */
 	public void setOro(ArrayList<CartaOro> oro) {
 		this.oro = oro;
@@ -157,7 +160,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna la carta obietttivo presente nella board.
-	 * @return
+	 * @return: carta obiettivo segreta presente nella board
 	 */
 	public CartaObiettivo getObiettivo() {
 		return obiettivo;
@@ -165,7 +168,7 @@ public class Board {
 	
 	/**
 	 * Metodo che modifica la carta obiettivo presente nella board.
-	 * @param obiettivo
+	 * @param obiettivo: carta obiettivo segreta presente nella board
 	 */
 	public void setObiettivo(CartaObiettivo obiettivo) {
 		this.obiettivo = obiettivo;
@@ -173,7 +176,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna il numero dei turni giocati dal giocatore.
-	 * @return
+	 * @return: numero di turni giocati
 	 */
 	public int getTurno() {
 		return turno;
@@ -181,7 +184,7 @@ public class Board {
 	
 	/**
 	 * Metodo che modifica il numero dei turni giocati dal giocatore.
-	 * @param turno
+	 * @param turno: numero di turni giocati
 	 */
 	public void setTurno(int turno) {
 		this.turno = turno;
@@ -189,7 +192,7 @@ public class Board {
 	
 	/**
 	 * Metodo che ritorna il numero di punti in possesso del giocatore.
-	 * @return
+	 * @return: punteggio del giocatore
 	 */
 	public int getPunteggio() {
 		return punteggio;
@@ -197,39 +200,43 @@ public class Board {
 	
 	/**
 	 * Metodo che modifica il numero di punti in possesso del giocatore.
-	 * @param punteggio
+	 * @param punteggio: punteggio del giocatore
 	 */
 	public void setPunteggio(int punteggio) {
 		this.punteggio = punteggio;
 	}
 	
 	/**
-	 * Metodo che ritorna il numero dei vari tipi di risorse presenti nella board.
-	 * @return
+	 * Metodo che ritorna il numero dei vari tipi di risorse 
+	 * presenti nella board.
+	 * @return: numero dei vari tipi di risorsa
 	 */
 	public ArrayList<Integer> getNumRis() {
 		return numRis;
 	}
 	
 	/**
-	 * Metodo che modifica il numero dei vari tipi di risorse presenti nella board.
-	 * @param numRis
+	 * Metodo che modifica il numero dei vari tipi di risorse presenti 
+	 * nella board.
+	 * @param numRis: numero dei vari tipi di risorsa
 	 */
 	public void setNumRis(ArrayList<Integer> numRis) {
 		this.numRis = numRis;
 	}
 	
 	/**
-	 * Metodo che ritorna il numero dei vari tipi di oggetti presenti nella board.
-	 * @return
+	 * Metodo che ritorna il numero dei vari tipi di oggetti presenti 
+	 * nella board.
+	 * @return: numero dei vari tipi di oggetti
 	 */
 	public ArrayList<Integer> getNumOgg() {
 		return numOgg;
 	}
 	
 	/**
-	 * Metodo che modifica il numero dei vari tipi di oggetti presenti nella board.
-	 * @param numOgg
+	 * Metodo che modifica il numero dei vari tipi di oggetti presenti 
+	 * nella board.
+	 * @param numOgg: numero dei vari tipi di oggetti
 	 */
 	public void setNumOgg(ArrayList<Integer> numOgg) {
 		this.numOgg = numOgg;
@@ -238,7 +245,7 @@ public class Board {
 	/**
 	 * Metodo che ritorna il numero di obiettivi conseguiti dal 
 	 * giocatore.
-	 * @return
+	 * @return: numero di obiettivi conseguiti dal giocatore
 	 */
 	public int getNumObj() {
 		return numObj;
@@ -247,7 +254,7 @@ public class Board {
 	/**
 	 * Metodo che modifica il numero di obiettivi conseguiti dal
 	 * giocatore.
-	 * @param numOgg
+	 * @param numObj: numero di obiettivi conseguiti dal giocatore
 	 */
 	public void setNumObj(int numObj) {
 		this.numObj = numObj;
@@ -256,12 +263,19 @@ public class Board {
 	/**
 	 * Metodo che aggiorna il numero di obiettivi conseguiti dal
 	 * giocatore.
-	 * @param num
+	 * @param num: numero di obiettivi da aggiungere a quelli conseguiti
+	 * dal giocatore
 	 */
 	public void addObj(int num) {
 		this.numObj += num;
 	}
 	
+	/**
+	 * Metodo che ritorna la carta presente nella board che possiede
+	 * l'id passato come parametro
+	 * @param id: id della carta da prendere dalla board
+	 * @return: la carta che ha come id quello inserito come parametro
+	 */
 	public Carta getByID (String id) {
 		if(id.charAt(0)=='R') {
 			for(CartaRisorsa r: this.risorsa ) {
@@ -270,6 +284,7 @@ public class Board {
 				}
 			}
 		}
+		
 		if(id.charAt(0)=='O') {
 			for(CartaOro o: this.oro ) {
 				if(o.getId().equals(id)) {
@@ -277,12 +292,11 @@ public class Board {
 				}
 			}
 		}
+		
 		if(id.charAt(0)=='I') {
 			return this.centro;
 		}
+		
 		return null;
-	}
-	
-	
-	
+	}	
 }

@@ -31,14 +31,15 @@ public class Angolo {
 	
 	/**
 	 * Questo è il costruttore della classe.
-	 * @param id
-	 * @param tipo
-	 * @param pos
-	 * @param risorsa
-	 * @param oggetto
-	 * @param link
+	 * @param tipo: tipo dell'angolo
+	 * @param pos: posizione occupata dall'angolo nella carta
+	 * @param risorsa: eventuale risorsa contenuta nell'angolo
+	 * @param oggetto: eventuale oggetto contenuto nell'angolo
+	 * @param link: id della carta a cui l'angolo è collegato, ossia 
+	 * la carta che è coperta dall'angolo in questione oppure la 
+	 * carta che copre l'angolo in questione
 	 */
-	public Angolo(String id, TipoAngolo tipo, Posizione pos, Regno risorsa, 
+	public Angolo(TipoAngolo tipo, Posizione pos, Regno risorsa, 
 				  Oggetto oggetto, String link) {
 		this.tipo = tipo;
 		this.pos = pos;
@@ -49,7 +50,7 @@ public class Angolo {
 	
 	/**
 	 * Metodo che ritorna il tipo dell'angolo.
-	 * @return
+	 * @return: tipo dell'angolo
 	 */
 	public TipoAngolo getTipo() {
 		return tipo;
@@ -57,7 +58,7 @@ public class Angolo {
 
 	/**
 	 * Metodo che modifica il tipo dell'angolo.
-	 * @param tipo
+	 * @param tipo: tipo dell'angolo
 	 */
 	public void setTipo(TipoAngolo tipo) {
 		this.tipo = tipo;
@@ -65,7 +66,7 @@ public class Angolo {
 
 	/**
 	 * Metodo che ritorna la posizione dell'angolo.
-	 * @return
+	 * @return: posizione dell'angolo nella carta
 	 */
 	public Posizione getPos() {
 		return pos;
@@ -73,23 +74,25 @@ public class Angolo {
 
 	/**
 	 * Metodo che modifica la posizione dell'angolo.
-	 * @param pos
+	 * @param pos: posizione dell'angolo nella carta
 	 */
 	public void setPos(Posizione pos) {
 		this.pos = pos;
 	}
 
 	/**
-	 * Metodo che ritorna il tipo della risorsa presente nell'angolo.
-	 * @return
+	 * Metodo che ritorna il regno a cui appartiene la risorsa 
+	 * presente nell'angolo.
+	 * @return: risorsa presente nell'angolo
 	 */
 	public Regno getRisorsa() {
 		return risorsa;
 	}
 
 	/**
-	 * Metodo che modifica il tipo della risorsa presente nell'angolo.
-	 * @param risorsa
+	 * Metodo che modifica il regno a cui appartiene la risorsa presente 
+	 * nell'angolo.
+	 * @param risorsa: risorsa presente nell'angolo
 	 */
 	public void setRisorsa(Regno risorsa) {
 		this.risorsa = risorsa;
@@ -97,7 +100,7 @@ public class Angolo {
 
 	/**
 	 * Metodo che ritorna il tipo di oggetto presente nell'angolo.
-	 * @return
+	 * @return: tipo di oggetto presente nell'angolo
 	 */
 	public Oggetto getOggetto() {
 		return oggetto;
@@ -105,16 +108,16 @@ public class Angolo {
 
 	/**
 	 * Metodo che modifica il tipo di oggetto presente nell'angolo.
-	 * @param oggetto
+	 * @param oggetto: tipo di oggetto presente nell'angolo
 	 */
 	public void setOggetto(Oggetto oggetto) {
 		this.oggetto = oggetto;
 	}
 
 	/**
-	 * Metodo che ritorna il codice della carta il cui angolo è collegato 
-	 * all'angolo in questione.
-	 * @return
+	 * Metodo che ritorna il codice della carta il cui angolo è 
+	 * collegato all'angolo in questione.
+	 * @return: codice della carta a cui è collegato l'angolo
 	 */
 	public String getLink() {
 		return link;
@@ -123,16 +126,17 @@ public class Angolo {
 	/**
 	 * Metodo che modifica il codice della carta il cui angolo è collegato 
 	 * all'angolo in questione.
-	 * @param link
+	 * @param link: codice della carta a cui è collegato l'angolo
 	 */
 	public void setLink(String link) {
 		this.link = link;
 	}
 
 	/**
-	 * Metodo che produce una stringa contenente tutte le informazioni relative ad 
-	 * un angolo.
-	 * @return
+	 * Metodo che produce una stringa contenente tutte le informazioni
+	 * relative ad un angolo.
+	 * @return: stringa contenente tutte le informazioni relative 
+	 * ad un angolo
 	 */
 	public String showAngolo() {
 		String riga = null;
