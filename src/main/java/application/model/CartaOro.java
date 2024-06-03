@@ -45,8 +45,6 @@ public class CartaOro extends Carta{
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il fronte della carta.
 	 * @param id: codice univoco della carta
-	 * @param fronte: booleano che descrive se carta è mostrata di 
-	 * fronte(TRUE) o di retro(FALSE)
 	 * @param regno: regno a cui appartiene la carta
 	 * @param angoli: lista di angoli posseduti dalla carta
 	 * @param punto: punti assegnati al posizionamento della carta
@@ -67,8 +65,6 @@ public class CartaOro extends Carta{
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il retro della carta.
 	 * @param id: codice univoco della carta
-	 * @param fronte: booleano che descrive se carta è mostrata di 
-	 * fronte(TRUE) o di retro(FALSE)
 	 * @param regno: regno a cui appartiene la carta
 	 * @param centro: risorsa contenuta nel centro della carta
 	 * @param angoli: lista di angoli posseduti dalla carta

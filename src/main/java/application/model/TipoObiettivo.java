@@ -5,7 +5,16 @@ package application.model;
  * obiettivo possono contenere.
  */
 public enum TipoObiettivo {
+	/**
+	 * Tipo risorsa
+	 */
 	RISORSA,
+	/**
+	 * Tipo oggetto
+	 */
 	OGGETTO, 
+	/**
+	 * Tipo disposizione
+	 */
 	DISPOSIZIONE
 }

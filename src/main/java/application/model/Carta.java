@@ -32,6 +32,8 @@ public abstract class Carta {
 	 * Questo è il costruttore della classe nel caso in cui la carta
 	 * sia mostrata sul retro.
 	 * @param id: codice identificativo della carta
+	 * @param fronte: booleano che indica che la carta è vista sul
+	 * fronte(TRUE) o sul retro(FALSE)
 	 */
 	public Carta (String id, boolean fronte) {
 		this.id = id;

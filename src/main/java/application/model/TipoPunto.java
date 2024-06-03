@@ -5,7 +5,16 @@ package application.model;
  * quando viene posizionata.
  */
 public enum TipoPunto {
+	/**
+	 * Tipo immediato
+	 */
 	IMMEDIATO,
+	/**
+	 * Tipo angolo
+	 */
 	ANGOLO,
+	/**
+	 * Tipo oggetto
+	 */
 	OGGETTO
 }

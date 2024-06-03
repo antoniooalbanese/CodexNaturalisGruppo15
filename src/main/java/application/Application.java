@@ -11,6 +11,15 @@ import application.view.View;
  */
 public class Application {
 	
+	/**
+	 * Metodo che lancia il programma.
+	 * @param args: argomenti della riga di comando passati 
+	 * durante l'esecuzione del programma
+	 * @throws JsonSyntaxException quando il file json non rispetta
+	 * la sintassi json
+	 * @throws IOException quando non viene trovato il file sul 
+	 * percorso indicato
+	 */
 	public static void main(String[] args) throws JsonSyntaxException, IOException {
 		View view = new View();
 		Model model = new Model();

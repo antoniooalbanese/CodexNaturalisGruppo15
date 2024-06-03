@@ -47,8 +47,8 @@ public class Obiettivo {
 	/**
 	 * Metodo che ritorna il regno a cui appartiene la risorsa 
 	 * richiesta per il raggiungimento dell'obiettivo.
-	 * @return regno a cui appartiene la risorsa richiesta per
-	 * raggiungere l'obiettivo
+	 * @return regno a cui appartiene la risorsa richiesta 
+	 * per raggiungere l'obiettivo
 	 */
 	public Regno getRisorsa() {
 		return risorsa;

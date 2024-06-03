@@ -18,9 +18,9 @@ public class MazzoObiettivo {
 	/**
 	 * Metodo che carica il contenuto del file json contenente le carte
 	 * obiettivo nel mazzo delle carte obiettivo.
-	 * @throws JsonSyntaxException: quando non è rispettata la sintassi
+	 * @throws JsonSyntaxException quando non è rispettata la sintassi
 	 * json
-	 * @throws IOException: quando il file non viene trovato nel 
+	 * @throws IOException quando il file non viene trovato nel 
 	 * percorso indicato
 	 */
 	public void load() throws JsonSyntaxException, IOException{

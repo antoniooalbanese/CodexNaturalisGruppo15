@@ -23,9 +23,9 @@ public class MazzoIniziale {
 	/**
 	 * Metodo che carica il contenuto del file json contenente le carte
 	 * iniziali nel mazzo delle carte iniziali.
-	 * @throws JsonSyntaxException: quando non è rispettata la sintassi
+	 * @throws JsonSyntaxException quando non è rispettata la sintassi
 	 * json
-	 * @throws IOException: quando il file non viene trovato nel 
+	 * @throws IOException quando il file non viene trovato nel 
 	 * percorso indicato
 	 */
 	public void load() throws JsonSyntaxException, IOException{

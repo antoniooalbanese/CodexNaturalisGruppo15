@@ -5,8 +5,20 @@ package application.model;
  * del gioco.
  */
 public enum TipoAngolo {
+	/**
+	 * Tipo vuoto
+	 */
 	VUOTO, 
-	NASCOSTO, 
+	/**
+	 * Tipo nascosto
+	 */
+	NASCOSTO,
+	/**
+	 * Tipo risorsa
+	 */
 	RISORSA,
+	/**
+	 * Tipo oggetto
+	 */
 	OGGETTO
 }

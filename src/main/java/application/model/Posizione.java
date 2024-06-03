@@ -5,8 +5,20 @@ package application.model;
  * in una carta.
  */
 public enum Posizione {
+	/**
+	 * Angolo alto destra
+	 */
 	ADX, 
+	/**
+	 * Angolo basso destra
+	 */
 	BDX,
+	/**
+	 * Angolo basso sinistra
+	 */
 	BSX,
+	/**
+	 * Angolo alto sinistra
+	 */
 	ASX
 }

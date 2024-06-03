@@ -19,9 +19,9 @@ public class Model {
 	
 	/**
 	 * Costruttore della classe.
-	 * @throws JsonSyntaxException: quando il file json non rispetta
+	 * @throws JsonSyntaxException quando il file json non rispetta
 	 * la sintassi json
-	 * @throws IOException: quando non viene trovato il file sul 
+	 * @throws IOException quando non viene trovato il file sul 
 	 * percorso indicato
 	 */
 	public Model() throws JsonSyntaxException, IOException {

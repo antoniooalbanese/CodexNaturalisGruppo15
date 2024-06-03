@@ -29,6 +29,7 @@ public class CartaIniziale extends Carta{
 	 * Questo è il costruttore della classe nel caso in cui si mostri
 	 * il fronte della carta.
 	 * @param id: codice univoco della carta
+	 * @param regno: regno a cui appartiene la risorsa nel centro della carta
 	 * @param centro: lista di risorse presenti nel centro della carta
 	 * @param angoli: lista di angoli posseduti dalla carta
 	 */
@@ -47,8 +48,7 @@ public class CartaIniziale extends Carta{
 	 * mostrando il fronte(TRUE) o il retro(FALSE)
 	 * @param angoli: lista di angoli posseduti dalla carta
 	 */
-	public CartaIniziale(String id, Boolean fronte, Regno regno,
-						ArrayList<Angolo> angoli) {
+	public CartaIniziale(String id, Boolean fronte, ArrayList<Angolo> angoli) {
 		super(id, false);
 		this.centro = null;
 		this.angoli = angoli;

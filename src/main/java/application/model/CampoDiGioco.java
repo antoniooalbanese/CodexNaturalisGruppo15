@@ -75,7 +75,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica il mazzo risorsa.
-	 * @param: mazzo delle carte risorsa
+	 * @param mazzoR: mazzo delle carte risorsa
 	 */
 	public void setMazzoR(MazzoRisorsa mazzoR) {
 		this.mazzoR = mazzoR;
@@ -91,7 +91,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica le carte risorsa estratte sul campo di gioco.
-	 * @return carte risorsa estratte sul campo di gioco
+	 * @param risorsa: carte risorsa estratte sul campo di gioco
 	 */
 	public void setRisorsa(ArrayList<CartaRisorsa> risorsa) {
 		this.risorsa = risorsa;
@@ -107,7 +107,7 @@ public class CampoDiGioco {
 
 	/**
 	 * Metodo che modifica il mazzo oro.
-	 * @return mazzo delle carte oro
+	 * @param mazzoO: mazzo delle carte oro
 	 */
 	public void setMazzoO(MazzoOro mazzoO) {
 		this.mazzoO = mazzoO;
@@ -123,7 +123,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica le carte oro estratte sul campo di gioco.
-	 * @return carte oro estratte sul campo di gioco
+	 * @param oro: carte oro estratte sul campo di gioco
 	 */
 	public void setOro(ArrayList<CartaOro> oro) {
 		this.oro = oro;
@@ -139,7 +139,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica il mazzo delle carte obiettivo.
-	 * @return mazzo delle carte obiettivo
+	 * @param mazzoOb: mazzo delle carte obiettivo
 	 */
 	public void setMazzoOb(MazzoObiettivo mazzoOb) {
 		this.mazzoOb = mazzoOb;
@@ -155,7 +155,7 @@ public class CampoDiGioco {
 	
 	/**
 	 * Metodo che modifica le carte obiettivo estratte sul campo di gioco.
-	 * @return carte obiettivo estratte sul campo di gioco
+	 * @param obiettivo: carte obiettivo estratte sul campo di gioco
 	 */
 	public void setObiettivo(ArrayList<CartaObiettivo> obiettivo) {
 		this.obiettivo = obiettivo;

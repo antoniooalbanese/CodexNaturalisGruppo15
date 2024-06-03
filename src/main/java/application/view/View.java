@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import com.google.gson.JsonSyntaxException;
+
 import application.model.Angolo;
 import application.model.Board;
 import application.model.CampoDiGioco;
@@ -32,10 +35,10 @@ public class View {
 	 * Metodo che stampa il messaggio di inizio del gioco.
 	 * @return TRUE se i giocatori decidono di iniziare a giocare,
 	 * FALSE se i giocatori decidono di non giocare
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(SI o NO)
 	 */
-	public boolean welcomeMessage() {
+	public boolean welcomeMessage() throws IOException{
 		System.out.println("\n				╦ ╦╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗  ╔╦╗╔═╗\n"
 				+ "				║║║║╣ ║  ║  ║ ║║║║║╣    ║ ║ ║\n"
 				+ "				╚╩╝╚═╝╩═╝╚═╝╚═╝╩ ╩╚═╝   ╩ ╚═╝\n\n");
@@ -84,12 +87,13 @@ public class View {
 	
 	/**
 	 * Metodo che chiede il numero di giocatori.
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @return numero di giocatori
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(un numero compreso tra 2 e 4 compresi)
-	 * @exception InputMismatchException: quando la risposta non è 
+	 * @exception InputMismatchException quando la risposta non è 
 	 * un numero 
 	 */
-	public int getPlayersNumberMessage() {
+	public int getPlayersNumberMessage() throws IOException {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.print("\nInserire il numero di giocatori:");
 		int giocatori;
@@ -118,10 +122,10 @@ public class View {
 	 * @param n: numero del giocatore a cui si chiede il nickname da 
 	 * utilizzare durante la partita
 	 * @return nickname scelto dal giocatore 
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(SI o NO)
 	 */
-	public String getNick(int n) {
+	public String getNick(int n) throws IOException {
 		String giocatore;
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		
@@ -157,10 +161,10 @@ public class View {
 	 * @param ped: lista di pedine rimanenti che possono essere scelte
 	 * dai giocatori
 	 * @return pedina scelta dal giocatore
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(ROSSO, BLU, VERDE o GIALLO)
 	 */
-	public Pedina getPedina(int n, ArrayList<Pedina> ped) {
+	public Pedina getPedina(int n, ArrayList<Pedina> ped)throws IOException {
 		System.out.print("Quale pedina scegli giocatore " + n + " ");
 		
 		for(int i = 0; i < ped.size() - 1; i++) {
@@ -178,14 +182,18 @@ public class View {
 				switch (pedina) {
 				case "ROSSO":
 					colore = Pedina.ROSSO;
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					return colore;
 				case "BLU":
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					colore = Pedina.BLU;
 					return colore;
 				case "VERDE":
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					colore = Pedina.VERDE;
 					return colore;
 				case "GIALLO":
+					System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 					colore = Pedina.GIALLO;
 					return colore;
 				default:
@@ -195,7 +203,6 @@ public class View {
 				System.out.println("Risposta non ammessa, riprova con ROSSO, BLU, VERDE o GIALLO");
 			}
 			
-			System.out.println("\n╚════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╝");
 		}
 	}
 	
@@ -204,7 +211,9 @@ public class View {
 	 * è già stata scelta da un altro giocatore precedentemente.
 	 */
 	public void retry() {
-		System.out.println("La pedina è già stata scelta");
+		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
+		System.out.println("\nLa pedina è già stata scelta");
+		
 	}
 	
 	/**
@@ -218,10 +227,10 @@ public class View {
 	 * @return TRUE se il giocatore decide di posizionare la carta
 	 * iniziale vista sul fronte, FALSE se il giocatore decide di 
 	 * posizionare la carta iniziale vista sul retro
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(FRONTE o RETRO)
 	 */
-	public boolean chooseStartCard(String gio, CartaIniziale fronte, CartaIniziale retro) {
+	public boolean chooseStartCard(String gio, CartaIniziale fronte, CartaIniziale retro) throws IOException{
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nQuesta è la carta iniziale di " + gio + ":\n");
 		System.out.println("FRONTE:");
@@ -259,10 +268,10 @@ public class View {
 	 * @return TRUE se il giocatore decide di tenere la prima carta
 	 * obiettivo, FALSE se il giocatore decide di tenere la seconda
 	 * carta obiettivo
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(1 o 2)
 	 */
-	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) {
+	public boolean chooseObjectiveCard(String gio, CartaObiettivo obi1, CartaObiettivo obi2) throws IOException {
 		System.out.println("\n╔════════════════════════════════════════════*.·:·.☽✧    ✦    ✧☾.·:·.*════════════════════════════════════════════╗");
 		System.out.println("\nQueste sono le due carte obiettivo del giocatore " + gio + ":" );
 		System.out.println("\nCARTA 1:");
@@ -650,10 +659,10 @@ public class View {
 	 * di passare la mano.
 	 * @return TRUE se il giocatore di turno intende passare la mano,
 	 * FALSE se il giocatore di turno non intende passare la mano
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(SI o NO)
 	 */
-	public boolean passaMano() {
+	public boolean passaMano() throws IOException {
 		System.out.println("\nVuoi passare la mano al prossimo giocatore? (SI/NO)");
 		
 		while(true) {
@@ -711,11 +720,11 @@ public class View {
 	 * @return TRUE se il giocatore decide di posizionare la carta
 	 * vista sul fronte, FALSE se il giocatore decide di posizionare 
 	 * la carta vista sul retro
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(FRONTE o RETRO)
 	 * 
 	 */
-	public boolean chooseWhichSide(String gio, Carta fronte, Carta retro) {
+	public boolean chooseWhichSide(String gio, Carta fronte, Carta retro)throws IOException {
 		String f = "";
 		String r = "";
 		
@@ -839,10 +848,10 @@ public class View {
 	 * coprire della carta che vuole coprire con la carta che 
 	 * vuole posizionare.
 	 * @return posizione dell'angolo che il giocatore intende coprire
-	 * @throws IOException: quando la risposta non è tra quelle
+	 * @throws IOException quando la risposta non è tra quelle
 	 * ammesse(ADX, BDX, BSX o ASX) 
 	 */
-	public Posizione chooseWhichCorner() {
+	public Posizione chooseWhichCorner()throws IOException {
 		System.out.println("Scegli l'angolo che vuoi coprire: (ADX/BDX/BSX/ASX)");
 		
 		while(true) {

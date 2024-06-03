@@ -36,9 +36,9 @@ public class MazzoOro {
 	/**
 	 * Metodo che carica il contenuto del file json contenente le carte
 	 * oro nel rispettivo mazzo.
-	 * @throws JsonSyntaxException: quando il file json non rispetta
+	 * @throws JsonSyntaxException quando il file json non rispetta
 	 * la sintassi json
-	 * @throws IOException: quando non viene trovato il file sul 
+	 * @throws IOException quando non viene trovato il file sul 
 	 * percorso indicato
 	 */
 	public void load() throws JsonSyntaxException, IOException{

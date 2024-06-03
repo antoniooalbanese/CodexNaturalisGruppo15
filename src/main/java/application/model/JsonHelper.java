@@ -34,9 +34,9 @@ public class JsonHelper {
 	 * viene letto
 	 * @param type: tipo della variabile in cui viene salvato il file
 	 * @return file convertito in una classe
-	 * @throws IOException: quando non viene trovato il file nel percorso
+	 * @throws IOException quando non viene trovato il file nel percorso
 	 * indicato
-	 * @throws JsonSyntaxException: quando non è rispettata la sintassi
+	 * @throws JsonSyntaxException quando non è rispettata la sintassi
 	 * json
 	 */
 	public static <T> T loadJson(String path, Type type) throws IOException, JsonSyntaxException{

@@ -60,8 +60,10 @@ public class Controller  {
 	
 	/**
 	 * Metodo che fa partire il gioco.
+	 * @throws IOException quando la risposta non è tra quelle
+	 * ammesse(SI o NO)
 	 */
-	public void startGame(){
+	public void startGame() throws IOException{
 		
 		if(!view.welcomeMessage()) {
 			view.endMessage();
@@ -71,17 +73,19 @@ public class Controller  {
 	
 	/**
 	 * Metodo che ottiene il numero dei giocatori.
+	 * @throws IOException quando la risposta non è tra quelle
+	 * ammesse(un numero compreso tra 2 e 4 compresi)
 	 */
-	public void getPlayersNumber() {
+	public void getPlayersNumber() throws IOException {
 		num = view.getPlayersNumberMessage();
 	}
 	
 	/**
 	 * Metodo che inizializza i giocatori ad inizio gioco.
-	 * @throws IOException: quando il file non viene trovato nel 
+	 * @throws JsonSyntaxException quando non è rispettata la sintassi
+	 * json
+	 * @throws IOException quando il file non viene trovato nel 
 	 * percorso indicato
-	 * @throws JsonSyntaxException: quando il file non rispetta la 
-	 * corretta sintassi json
 	 */
 	public void initializePlayers() throws JsonSyntaxException, IOException {
 		this.model = new Model();
@@ -136,10 +140,10 @@ public class Controller  {
 	
 	/**
 	 * Metodo utilizzato per inizializzare il campo da gioco.
-	 * @throws IOException: quando il file non viene trovato nel 
+	 * @throws JsonSyntaxException quando non è rispettata la sintassi
+	 * json
+	 * @throws IOException quando il file non viene trovato nel 
 	 * percorso indicato
-	 * @throws JsonSyntaxException: quando il file non rispetta la 
-	 * corretta sintassi json
 	 */
 	public void initializeField() throws JsonSyntaxException, IOException {
 		MazzoRisorsa mazzoR = new MazzoRisorsa();
@@ -165,10 +169,10 @@ public class Controller  {
 
 	/**
 	 * Metodo che distribuisce le carte iniziali ai giocatori.
-	 * @throws IOException: quando il file non viene trovato nel 
+	 * @throws JsonSyntaxException quando non è rispettata la sintassi
+	 * json
+	 * @throws IOException quando il file non viene trovato nel 
 	 * percorso indicato
-	 * @throws JsonSyntaxException: quando il file non rispetta la 
-	 * corretta sintassi json
 	 */
 	public void giveStartCards() throws JsonSyntaxException, IOException {
 		Collections.shuffle(this.model.getMazzoIniziale().getMazzoFronte());
@@ -202,10 +206,10 @@ public class Controller  {
 	 * Metodo che estrae sul campo di gioco le due carte obiettivo 
 	 * generali e distribuisce le carte obiettivo segrete ai vari
 	 * giocatori.
-	 * @throws IOException: quando il file non viene trovato nel 
+	 * @throws JsonSyntaxException quando il file json non rispetta
+	 * la sintassi json
+	 * @throws IOException quando non viene trovato il file sul 
 	 * percorso indicato
-	 * @throws JsonSyntaxException: quando il file non rispetta la 
-	 * corretta sintassi json
 	 */
 	public void giveObjectiveCards() throws JsonSyntaxException, IOException {
 		MazzoObiettivo mazzoOb = new MazzoObiettivo();
@@ -244,8 +248,10 @@ public class Controller  {
 	
 	/**
 	 * Metodo che gestisce l'andamento della partita.
+	 * @throws IOException quando la risposta non è tra quelle
+	 * ammesse(SI o NO)
 	 */
-	public void playGame() {
+	public void playGame() throws IOException {
 		view.startMessage();
 		boolean last = false;
 		boolean finish = false;
@@ -564,13 +570,13 @@ public class Controller  {
 	 * Metodo che gestisce il posizionamento delle carte sulla board.
 	 * @param g: giocatore di turno che sta posizionando le carte
 	 * sulla board
-	 * @throws IOException: quando il codice inserito dal giocatore
+	 * @throws IOException quando il codice inserito dal giocatore
 	 * che indica la carta che lui vuole coprire non è tra quelli
 	 * disponibili e quindi il codice non è valido in quanto la 
 	 * carta non esiste oppure non può essere coperta da nessun'altra
 	 * carta
 	 */
-	public void posiziona(Giocatore g) {
+	public void posiziona(Giocatore g) throws IOException {
 		String scelta = null;
 		Carta cartaScelta = null;
 		ArrayList<CartaRisorsa> libereRisorsa = new ArrayList<CartaRisorsa>();
@@ -580,6 +586,7 @@ public class Controller  {
 		boolean verso;
 		boolean checkReq = false;
 		boolean sceltaGiusta = false;
+		boolean checkCover = false;
 		String riga = "";
 		CartaIniziale cardI = null;
 		CartaRisorsa cardR = null;
@@ -645,19 +652,19 @@ public class Controller  {
 						}
 					}
 				
-					while (!check) {
+					while (!checkCover) {
 					riga = view.chooseWhatToCover().toUpperCase();
 					
 						if(riga.equalsIgnoreCase(liberaIniziale.getId())) {
 							cardI = liberaIniziale;	
-							check = true;	
+							checkCover = true;	
 						}
 						
 						if (libereRisorsa != null) {
 							for(CartaRisorsa r: libereRisorsa) {
 								if(riga.equalsIgnoreCase(r.getId())) {
 									cardR = r;
-									check = true;	
+									checkCover = true;	
 								}
 							}
 						} 
@@ -666,13 +673,13 @@ public class Controller  {
 							for(CartaOro o: libereOro) {
 								if(riga.equalsIgnoreCase(o.getId())) {
 									cardO = o;
-									check = true;
+									checkCover = true;
 		
 								}
 							}
 						}
 						
-						if(!check) {
+						if(!checkCover) {
 							view.insertAValidCode();
 						}
 					} 
@@ -696,6 +703,8 @@ public class Controller  {
 									} else {
 										checkReq = false;
 										view.showRequirementMessage();
+										sceltaGiusta = false;
+										
 									}
 								}else {
 									verso = false;
@@ -706,14 +715,16 @@ public class Controller  {
 									checkReq= true;
 								}
 							}
-						if(check == false) {
+						if(checkCover == false) {
 							throw new IOException();
 						}
 						
 					}catch(IOException e) {
 						view.insertAValidCode();
 					}
-			
+				if(!checkReq) {
+					checkCover = false;
+				}
 			}
 				
 			if(checkReq) {
@@ -726,6 +737,7 @@ public class Controller  {
 					} else {
 						check = false;
 						checkReq = false;
+						checkCover = false;
 						sceltaGiusta = false;
 					}
 				}
@@ -736,6 +748,7 @@ public class Controller  {
 					} else {
 						check = false;
 						checkReq = false;
+						checkCover = false;
 						sceltaGiusta = false;
 					}
 				}else if(cardO != null) {
@@ -745,6 +758,7 @@ public class Controller  {
 					}else {
 						check = false;
 						checkReq = false;
+						checkCover = false;
 						sceltaGiusta = false;
 					}
 				}
@@ -843,10 +857,10 @@ public class Controller  {
 	 * in input dall'utente
 	 * @param angoli: lista di angoli di una carta
 	 * @return posizione dell'angolo di una carta scelta dal giocatore
-	 * @throws IOException: quando la posizione scelta dal giocatore
+	 * @throws IOException quando la posizione scelta dal giocatore
 	 * è già occupata da un'altra carta
 	 */
-	public Posizione checkCorners(ArrayList<Angolo> angoli) {
+	public Posizione checkCorners(ArrayList<Angolo> angoli) throws IOException {
 		
 		while(true) {
 			try{
@@ -2496,7 +2510,7 @@ public class Controller  {
 	
 	/**
 	 * Metodo che aggiorna i vari contatori visualizzati sulla Board.
-	 * @param board: board del giocatore di turno 
+	 * @param g: giocatore di turno
 	 * @param carta: carta posizionata
 	 * @param carteCoperte: lista della carte coperte dalla carta 
 	 * posizionata
@@ -3171,7 +3185,7 @@ public class Controller  {
 	
 	/**
 	 * Metodo che aggiorna il contatore delle risorse.
-	 * @param board: carte in campo del giocatore di turno
+	 * @param g: giocatore di turno
 	 * @param angolo: angolo di cui si controlla il regno a cui 
 	 * appartiene la risorsa che contiene
 	 * @param somma: booleano che indica se il contatore deve essere
@@ -3240,7 +3254,7 @@ public class Controller  {
 	
 	/**
 	 * Metodo che aggiorna il contatore degli oggetti.
-	 * @param board: carte in campo del giocatore di turno
+	 * @param g: giocatore di turno
 	 * @param angolo: angolo di cui si controlla il regno a cui 
 	 * appartiene la risorsa che contiene
 	 * @param somma: booleano che indica se il contatore deve essere
@@ -3353,11 +3367,11 @@ public class Controller  {
 	 * da uno dei due mazzi oppure una delle 4 carte scoperte sul campo
 	 * di gioco.
 	 * @param g: giocatore di turno che deve pescare
-	 * @throws IOException: quando l'identificativo inserito dal
+	 * @throws IOException quando l'identificativo inserito dal
 	 * giocatore non corrisponde a nessuno dei codici disponibili e
 	 * quindi non è valido
 	 */
-	public void pesca(Giocatore g) {
+	public void pesca(Giocatore g) throws IOException {
 		view.showField(this.model.getCampo());
 		view.showHand(g.getNick(), g.getMano());
 		String pescata = "";
@@ -3885,7 +3899,13 @@ public class Controller  {
 		}
 		
 		for(Regno[][] disp : disposizioni) {
-            counter += scanDisposition(g.getBoard().getMatrix(), disp, checked);
+            int puntiDisposizione = scanDisposition(g.getBoard().getMatrix(), disp, checked);
+            counter = counter + puntiDisposizione;
+            System.out.println(counter);
+            System.out.println(puntiDisposizione);
+            for(String c : checked) {
+            	System.out.println(c);
+            }
         }
 		
 		g.getBoard().addObj(counter);
@@ -3924,7 +3944,10 @@ public class Controller  {
 	                    else if (matCellId.contains("BL")) matCell = Regno.ANIMALE;
 	                    else if (matCellId.contains("RS")) matCell = Regno.FUNGHI;
 	                    else if (matCellId.contains("VL")) matCell = Regno.INSETTI;
-	                    else matCell = null;
+	                    else {
+	                    	matCell = null;
+	                    	matCellId = null;
+	                    }
 	                }
 
 	                Regno dispCell = disp[i][j];
