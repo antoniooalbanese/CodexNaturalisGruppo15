@@ -1,30 +1,33 @@
 package application.model;
 
 /**
- * Questa classe rappresenta il punteggio che può assegnare una carta una volta
- * che viene posizionata sulla board.
+ * Questa classe rappresenta il punteggio che può assegnare una carta
+ * una volta che viene posizionata sulla board.
  */
 public class Punto {
 	/**
 	 * Attributo che indica il tipo di punteggio assegnato dalla carta.
 	 */
 	private TipoPunto tipo;
+	
 	/**
 	 * Attributo che indica la quantità di punti assegnati.
 	 */
 	private int somma;
+	
 	/**
-	 * Attributo che indica l'oggetto da contare per ottenere il punteggio della 
-	 * carta.
+	 * Attributo che indica l'oggetto da contare per ottenere il 
+	 * punteggio della carta.
 	 */
 	private Oggetto oggetto;
 	
 	/**
-	 * Costruttore della classe quando il tipo di punteggio è del tipo che viene 
-	 * assegnato immediatamente senza dover fare controlli oppure quando è del tipo
-	 * che viene assegnato controllando il numero di angoli coperti dalla carta.
-	 * @param tipo
-	 * @param somma
+	 * Costruttore della classe quando il tipo di punteggio è del tipo 
+	 * che viene assegnato immediatamente senza dover fare controlli
+	 * oppure quando è del tipo che viene assegnato controllando il 
+	 * numero di angoli coperti dalla carta.
+	 * @param tipo: tipo di punto 
+	 * @param somma: quantità di punti assegnati
 	 */
 	public Punto(TipoPunto tipo, int somma) {
 		this.tipo = tipo;
@@ -33,11 +36,14 @@ public class Punto {
 	}
 	
 	/**
-	 * Costruttore della classe quando il tipo di punteggio è del tipo che viene 
-	 * assegnato controllando la quantità di un determinato oggetto.
-	 * @param tipo
-	 * @param somma
-	 * @param oggetto
+	 * Costruttore della classe quando il tipo di punteggio è del tipo 
+	 * che viene assegnato controllando la quantità di un determinato
+	 * oggetto.
+	 * @param tipo: tipo di punto
+	 * @param somma: quantità di punti assegnati
+	 * @param oggetto: oggetto di cui si deve controllare il numero
+	 * presente sulla board per assegnare il punteggio al momento
+	 * del posizionamento 
 	 */
 	public Punto(TipoPunto tipo, int somma, Oggetto oggetto) {
 		this.tipo = tipo;
@@ -47,7 +53,7 @@ public class Punto {
 	
 	/**
 	 * Metodo che ritorna il tipo di punto.
-	 * @return
+	 * @return tipo di punto
 	 */
 	public TipoPunto getTipo() {
 		return tipo;
@@ -55,7 +61,7 @@ public class Punto {
 
 	/**
 	 * Metodo che modifica il tipo di punto.
-	 * @param tipo
+	 * @param tipo: tipo di punto
 	 */
 	public void setTipo(TipoPunto tipo) {
 		this.tipo = tipo;
@@ -63,7 +69,7 @@ public class Punto {
 	
 	/**
 	 * Metodo che ritorna la quantità di punti assegnati.
-	 * @return
+	 * @return quantità di punti assegnati
 	 */
 	public int getSomma() {
 		return somma;
@@ -71,40 +77,42 @@ public class Punto {
 	
 	/**
 	 * Metodo che modifica la quantità di punti assegnati.
-	 * @param somma
+	 * @param somma: quantità di punti assegnati
 	 */
 	public void setSomma(int somma) {
 		this.somma = somma;
 	}
 
 	/**
-	 * Metodo che ritorna il tipo di oggetto da contare per ottenere il punteggio
-	 * della carta.
-	 * @return
+	 * Metodo che ritorna il tipo di oggetto da contare per 
+	 * ottenere il punteggio della carta.
+	 * @return tipo di oggetto da contare per ottenere il 
+	 * punteggio della carta
 	 */
 	public Oggetto getOggetto() {
 		return oggetto;
 	}
 	
 	/**
-	 * Metodo che modifica il tipo di oggetto da contare per ottenere il punteggio
-	 * della carta.
-	 * @param oggetto
+	 * Metodo che modifica il tipo di oggetto da contare per ottenere
+	 * il punteggio della carta.
+	 * @param oggetto: tipo di oggetto da contare per ottenere il 
+	 * punteggio della carta
 	 */
 	public void setOggetto(Oggetto oggetto) {
 		this.oggetto = oggetto;
 	}
 	
 	/**
-	 * Metodo che permette di prendere tutte le informazioni di un punto e le salva
-	 * in una stringa.
-	 * @return
+	 * Metodo che permette di prendere tutte le informazioni di un
+	 * punto sotto forma di stringa.
+	 * @return stringa contenente tutte le informazioni relative ad un
+	 * punto
 	 */
 	public String showPunto() {
 		String riga = "";
 		
 		switch(getTipo()) {
-		
 		case IMMEDIATO: 
 			riga = String.valueOf(getSomma());
 			break;

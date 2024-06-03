@@ -11,6 +11,7 @@ public class Model {
 	 * Attributo che descrive il campo di gioco.
 	 */
 	private CampoDiGioco campo;
+	
 	/**
 	 * Attributo che rappresenta il mazzo contenente le carte iniziali.
 	 */
@@ -18,6 +19,10 @@ public class Model {
 	
 	/**
 	 * Costruttore della classe.
+	 * @throws JsonSyntaxException: quando il file json non rispetta
+	 * la sintassi json
+	 * @throws IOException: quando non viene trovato il file sul 
+	 * percorso indicato
 	 */
 	public Model() throws JsonSyntaxException, IOException {
 		this.campo = null;
@@ -26,7 +31,8 @@ public class Model {
 	
 	/**
 	 * Metodo che ritorna il campo di gioco.
-	 * @return
+	 * @return campo di gioco in cui si sta giocando la partita
+	 * contenente tutti gli oggetti che servono
 	 */
 	public CampoDiGioco getCampo() {
 		return this.campo;
@@ -41,10 +47,9 @@ public class Model {
 	
 	/**
 	 * Metodo che ritorna il il mazzo iniziale.
-	 * @return
+	 * @return mazzo della carte iniziali presente sul campo di gioco
 	 */
 	public MazzoIniziale getMazzoIniziale() {
 		return this.mazzoI;
 	}
-	
 }

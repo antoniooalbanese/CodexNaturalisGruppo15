@@ -14,10 +14,12 @@ public class MazzoOro {
 	 * Lista di carte oro mostrate sul fronte.
 	 */
 	private ArrayList<CartaOro> mazzoFronte;
+	
 	/**
 	 * Lista di carte oro mostrate sul retro.
 	 */
 	private ArrayList<CartaOro> mazzoRetro;
+	
 	/**
 	 * Numero di carte rimamenti nel mazzo oro.
 	 */
@@ -32,10 +34,12 @@ public class MazzoOro {
 		this.rimanenti = 40;
 	}
 	/**
-	 * Metodo che carica il contenuto del file json contenente le carte oro
-	 * nel mazzo delle carte oro.
-	 * @throws JsonSyntaxException
-	 * @throws IOException
+	 * Metodo che carica il contenuto del file json contenente le carte
+	 * oro nel rispettivo mazzo.
+	 * @throws JsonSyntaxException: quando il file json non rispetta
+	 * la sintassi json
+	 * @throws IOException: quando non viene trovato il file sul 
+	 * percorso indicato
 	 */
 	public void load() throws JsonSyntaxException, IOException{
 		ArrayList<CartaOro> mazzo = JsonHelper.loadJson("MazzoOro.json",  new TypeToken<List<CartaOro>>(){}.getType());
@@ -52,50 +56,55 @@ public class MazzoOro {
 	}
 	
 	/**
-	 * Metodo che ritorna il mazzo oro visto sul fronte.
-	 * @return
+	 * Metodo che ritorna il mazzo delle carte oro visto sul fronte.
+	 * @return lista delle carte presenti nel mazzo oro viste sul
+	 * fronte
 	 */
 	public ArrayList<CartaOro> getMazzoFronte() {
 		return this.mazzoFronte;
 	}
 	
 	/**
-	 * Metodo che ritorna il mazzo oro visto sul retro.
-	 * @return
+	 * Metodo che ritorna il mazzo delle carte oro visto sul retro.
+	 * @return lista delle carte presenti nel mazzo oro viste sul
+	 * retro
 	 */
 	public ArrayList<CartaOro> getMazzoRetro() {
 		return this.mazzoRetro;
 	}
 	
 	/**
-	 * Metodo che ritorna una determinata carta del mazzo retro delle carte oro 
-	 * che appartiene al regno preso come parametro.
-	 * @param risorsa
-	 * @return
+	 * Metodo che ritorna una determinata carta del mazzo retro delle 
+	 * carte oro che appartiene al regno preso come parametro.
+	 * @param risorsa: regno a cui appartiene la carta oro di cui si
+	 * prende il retro
+	 * @return retro della carta con il regno corrispondente
 	 */
 	public CartaOro getCartaRetroByRegno(Regno risorsa) {
+		
 		for(int i = 0; i < this.getMazzoRetro().size(); i++) {
 			if(this.getMazzoRetro().get(i).getRegno().equals(risorsa)) {
 				return this.getMazzoRetro().get(i);
 			}
 		}
+		
 		return null;
 	}
 	
 	/**
-	 * Metodo che ritorna il retro di una carta in posizione i del mazzo fronte 
-	 * delle carte oro.
-	 * @param i
-	 * @return
+	 * Metodo che ritorna il retro di una carta in posizione i del
+	 * mazzo fronte delle carte oro.
+	 * @param i: posizione della carta nel mazzo
+	 * @return carta vista sul retro in posizione i nel mazzo 
 	 */
 	public CartaOro showRetro(int i) {
 		return this.getCartaRetroByRegno(this.mazzoFronte.get(i).getRegno());	
 	}
 	
 	/**
-	 * Metodo che ritorna la il retro di una carta.
-	 * @param carta
-	 * @return
+	 * Metodo che ritorna il retro di una carta.
+	 * @param carta: carta di cui si vuole mostrare il retro
+	 * @return retro della carta inserita come parametro
 	 */
 	public CartaOro getRetroCarta(CartaOro carta) {
 		Regno risorsa = carta.getRegno();
@@ -105,12 +114,8 @@ public class MazzoOro {
 				return this.mazzoRetro.get(i);
 			}
 		}
+		
 		return null;
 	}
-
-	/**
-	 * BISOGNA RICORDARE CHE IL MAZZO E' DA VISUALIZZARE MOSTRANDO IL RETRO
-	 * DELLE CARTE.
-	 */
 }
 	
