@@ -1,12 +1,11 @@
 package application.controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import com.google.gson.JsonSyntaxException;
 import application.model.Angolo;
 import application.model.Board;
@@ -3623,7 +3622,7 @@ public class Controller  {
 		            
 		            break;
 		        case DISPOSIZIONE:
-		        	int puntiDisposizione = countDisposition(g, obiettivo) * punto;
+		        	int puntiDisposizione = conteggioDisp(g, obiettivo, cartaObiettivo) * punto;
 		            board.setPunteggio(board.getPunteggio() + puntiDisposizione);    
 		            break;
 			    }
@@ -3661,7 +3660,7 @@ public class Controller  {
 		            
 		            break;
 		        case DISPOSIZIONE:
-		        	int puntiDisposizione = countDisposition(g, obiettivo) * punto;
+		        	int puntiDisposizione = conteggioDisp(g, obiettivo, cartaObiettivo) * punto;
 		            board.setPunteggio(board.getPunteggio() + puntiDisposizione);    
 		            break;
 			    }
@@ -3698,7 +3697,7 @@ public class Controller  {
 		            
 		            break;
 		        case DISPOSIZIONE:
-		        	int puntiDisposizione = countDisposition(g, obiettivo) * punto;
+		        	int puntiDisposizione = conteggioDisp(g, obiettivo, cartaObiettivo) * punto;
 		            board.setPunteggio(board.getPunteggio() + puntiDisposizione);    
 		            break;
 			    }
@@ -3811,157 +3810,454 @@ public class Controller  {
 	}
 	
 	/**
-	 * Metodo che controlla il numero di disposizioni indicate sulla
-	 * carta obiettivo che sono presenti sulla board.
-	 * @param g: giocatore di cui si controllano le disposizioni
-	 * presenti sulla board
-	 * @param obiettivo: obiettivo che contiene la disposizione 
-	 * che deve essere controllata sulla board del giocatore
-	 * @return numero di disposizioni del tipo indicato sulla 
-	 * carta obiettivo presenti sulla board
+	 * Metodo che ritorna il numero di volte in cui la disposizione
+	 * richiesta dall'obiettivo viene conseguita.
+	 * @param g: giocatore di cui si controlla la disposizione delle
+	 * carte sulla board
+	 * @param obiettivo: obiettivo da conseguire per ottenere i punti
+	 * @param cartaObiettivo: carta dalla quale viene preso l' id
+	 * @return numero delle volte in cui la disposizione richiesta 
+	 * dalla cartaObiettivo viene conseguita
 	 */
-	public int countDisposition(Giocatore g, Obiettivo obiettivo) {
-		int counter = 0;
-		Set<String> checked = new HashSet<>();
-		Regno[][] disposizione = obiettivo.getDisposizione();
-		int disposizioneSize = 3;
+	public int conteggioDisp(Giocatore g, Obiettivo obiettivo, Carta cartaObiettivo) {
 		
-		if(disposizione[0][2] == null && disposizione[1][2] == null && disposizione[2][2] == null && disposizione[3][2] == null) {
-			disposizione = new Regno[4][2];
-			
-			disposizione[0][0] = obiettivo.getDisposizione()[0][0];
-			disposizione[0][1] = obiettivo.getDisposizione()[0][1];
-			disposizione[1][0] = obiettivo.getDisposizione()[1][0];
-			disposizione[1][1] = obiettivo.getDisposizione()[1][1];
-			disposizione[2][0] = obiettivo.getDisposizione()[2][0];
-			disposizione[2][1] = obiettivo.getDisposizione()[2][1];
-			disposizione[3][0] = obiettivo.getDisposizione()[3][0];
-			disposizione[3][1] = obiettivo.getDisposizione()[3][1];
-			disposizioneSize = 2;
-		}else {
-			disposizione = new Regno[3][3];
-			
-			disposizione[0][0] = obiettivo.getDisposizione()[0][0];
-			disposizione[0][1] = obiettivo.getDisposizione()[0][1];
-			disposizione[0][2] = obiettivo.getDisposizione()[0][2];
-			disposizione[1][0] = obiettivo.getDisposizione()[1][0];
-			disposizione[1][1] = obiettivo.getDisposizione()[1][1];
-			disposizione[1][2] = obiettivo.getDisposizione()[1][2];
-			disposizione[2][0] = obiettivo.getDisposizione()[2][0];
-			disposizione[2][1] = obiettivo.getDisposizione()[2][1];
-			disposizione[2][2] = obiettivo.getDisposizione()[2][2];
-			disposizioneSize = 3;
+		String mat[][] = g.getBoard().getMatrix();
+		Regno matriceColore [][] = new Regno [mat.length][mat[0].length];
+		String regno = null;
+		int count = 0;
+		int tipoObiettivo = 0;
+		
+		
+		String tipo = cartaObiettivo.getId().substring(2,5).toUpperCase();
+		
+		switch(tipo) {
+		case "FUN":
+			tipoObiettivo = 0;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "RS":
+							matriceColore [i][j] = Regno.FUNGHI;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
+		case "ANI":
+			tipoObiettivo = 1;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "BL":
+							matriceColore [i][j] = Regno.ANIMALE;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
+		case "VEG":
+			tipoObiettivo = 2;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "VR":
+							matriceColore [i][j] = Regno.VEGETALE;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
+		case "INS":
+			tipoObiettivo = 3;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "VL":
+							matriceColore [i][j] = Regno.INSETTI;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
+		case "FV1":
+			tipoObiettivo = 4;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "RS":
+							matriceColore [i][j] = Regno.FUNGHI;
+							break;
+						case "VR":
+							matriceColore [i][j] = Regno.VEGETALE;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
+		case "VI1":
+			tipoObiettivo = 5;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "VL":
+							matriceColore [i][j] = Regno.INSETTI;
+							break;
+						case "VR":
+							matriceColore [i][j] = Regno.VEGETALE;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
+		case "AF1":
+			tipoObiettivo = 6;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "RS":
+							matriceColore [i][j] = Regno.FUNGHI;
+							break;
+						case "BL":
+							matriceColore [i][j] = Regno.ANIMALE;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
+		case "IA1":
+			tipoObiettivo = 7;
+			for(int i = 0; i <mat.length; i++) {
+				for(int j=0; j <mat.length; j++) {
+					if (mat[i][j]!=null) {
+						regno = g.getBoard().getMatrix()[i][j].substring(1,3).toUpperCase();
+						switch(regno) {
+						case "VL":
+							matriceColore [i][j] = Regno.INSETTI;
+							break;
+						case "BL":
+							matriceColore [i][j] = Regno.ANIMALE;
+							break;
+						default:
+	                        matriceColore[i][j] = null;
+	                        break;
+						}
+					} else 
+						matriceColore[i][j] = null;
+					}
+			}
+			break;
 		}
+			    		
+			if(tipoObiettivo == 4 || tipoObiettivo == 5 || tipoObiettivo == 6 || tipoObiettivo == 7) {
+				Regno [][] matriceL = new Regno[4][2];
+				
+				matriceL[0][0] = obiettivo.getDisposizione()[0][0];
+				matriceL[0][1] = obiettivo.getDisposizione()[0][1];
+				matriceL[1][0] = obiettivo.getDisposizione()[1][0];
+				matriceL[1][1] = obiettivo.getDisposizione()[1][1];
+				matriceL[2][0] = obiettivo.getDisposizione()[2][0];
+				matriceL[2][1] = obiettivo.getDisposizione()[2][1];
+				matriceL[3][0] = obiettivo.getDisposizione()[3][0];
+				matriceL[3][1] = obiettivo.getDisposizione()[3][1];
+				
+				count = contaMatrice(matriceColore, matriceL, tipoObiettivo);
+				
+			}else {
+				Regno [][] matriceL = new Regno[3][3];
+				
+				matriceL[0][0] = obiettivo.getDisposizione()[0][0];
+				matriceL[0][1] = obiettivo.getDisposizione()[0][1];
+				matriceL[0][2] = obiettivo.getDisposizione()[0][2];
+				matriceL[1][0] = obiettivo.getDisposizione()[1][0];
+				matriceL[1][1] = obiettivo.getDisposizione()[1][1];
+				matriceL[1][2] = obiettivo.getDisposizione()[1][2];
+				matriceL[2][0] = obiettivo.getDisposizione()[2][0];
+				matriceL[2][1] = obiettivo.getDisposizione()[2][1];
+				matriceL[2][2] = obiettivo.getDisposizione()[2][2];
+				
+				count = contaMatrice(matriceColore, matriceL, tipoObiettivo);
+			}
 		
-		int boardSize = g.getBoard().getMatrix().length;
-		List<Regno[][]> disposizioni = new ArrayList<>();
+		return count;
 		
-		if(disposizioneSize == 3) {
-			for(int i = 0; i < boardSize - disposizione.length; i++) {
-                for(int j = 0; j < boardSize - disposizione[0].length; j++) {
-                    Regno[][] disp = new Regno[boardSize][boardSize];
-
-                    disp[i][j] = disposizione[0][0];
-                    disp[i][j + 1] = disposizione[0][1];
-                    disp[i][j + 2] = disposizione[0][2];
-
-                    disp[i + 1][j] = disposizione[1][0];
-                    disp[i + 1][j + 1] = disposizione[1][1];
-                    disp[i + 1][j + 2] = disposizione[1][2];
-
-                    disp[i + 2][j] = disposizione[2][0];
-                    disp[i + 2][j + 1] = disposizione[2][1];
-                    disp[i + 2][j + 2] = disposizione[2][2];
-
-                    disposizioni.add(disp);
-                }
-            }
-		}else {
-			 for(int i = 0; i < boardSize - disposizione.length; i++) {
-	                for(int j = 0; j < boardSize - disposizione[0].length; j++) {
-	                    Regno[][] disp = new Regno[boardSize][boardSize];
-
-	                    disp[i][j] = disposizione[0][0];
-	                    disp[i][j + 1] = disposizione[0][1];
-
-	                    disp[i + 1][j] = disposizione[1][0];
-	                    disp[i + 1][j + 1] = disposizione[1][1];
-
-	                    disp[i + 2][j] = disposizione[2][0];
-	                    disp[i + 2][j + 1] = disposizione[2][1];
-	                    
-	                    disp[i + 3][j] = disposizione[3][0];
-	                    disp[i + 3][j + 1] = disposizione[3][1];
-	                    
-	                    disposizioni.add(disp);
-	                }
-	            }
-		}
-		
-		for(Regno[][] disp : disposizioni) {
-            int puntiDisposizione = scanDisposition(g.getBoard().getMatrix(), disp, checked);
-            counter = counter + puntiDisposizione;
-        }
-		
-		g.getBoard().addObj(counter);
-		return counter;
 	}
 	
 	/**
-	 * Metodo che controlla, data la matrice della board di un 
-	 * giocatore e una disposizione, se questa matrice rispetta la 
-	 * disposizione data.
-	 * @param mat: matrice che rappresenta la board del giocatore
-	 * @param disp: disposizione che deve essere controllato sulla 
-	 * matrice che rappresenta la board
-	 * @param c: set contenente le celle della matrice che sono già 
-	 * state contate per una precedente disposizione
-	 * @return 1 se la disposzione è rispettata, altrimenti 0
+	 * Metodo che scorre la matrice e conta quante volte la 
+	 * disposizione è rispettata.
+	 * @param matriceColore: matrice copia della board contente
+	 * solamente i regni richiesti dalla carta obiettivo
+	 * @param matriceL: matrice copia dell disposizione indicata 
+	 * sulla carta obiettivo
+	 * @param tipoObiettivo: numero intero che indica la tipologia 
+	 * di disposizione da controllare
+	 * @return numero di volte in cui la disposizione è rispettata
 	 */
-	public int scanDisposition (String [][] mat, Regno [][] disp, Set<String> c) {
+	public int contaMatrice (Regno matriceColore[][], Regno[][] matriceL, int tipoObiettivo) {
 		
-		List<String> celle = new ArrayList<>();
+		int count = 0;
 		
-			for(int i = 0; i < mat.length; i++) {
-	            for(int j = 0; j < mat.length; j++) {
-	            	
-	                String matCellId = mat[i][j];
-	                Regno matCell = null;
-	                
-	                if(c != null && matCellId != null) {
-	                	if(c.contains(matCellId)) {
-	                		return 0;
-	                	}
-	                }
-
-	                if (matCellId != null) {
-	                    if (matCellId.contains("VR")) matCell = Regno.VEGETALE;
-	                    else if (matCellId.contains("BL")) matCell = Regno.ANIMALE;
-	                    else if (matCellId.contains("RS")) matCell = Regno.FUNGHI;
-	                    else if (matCellId.contains("VL")) matCell = Regno.INSETTI;
-	                    else {
-	                    	matCell = null;
-	                    	matCellId = null;
-	                    }
-	                }
-
-	                Regno dispCell = disp[i][j];
-
-	                if (dispCell != null && matCell == null) return 0;
-	               
-	                if (dispCell != null && dispCell != matCell) return 0;
-	                
-	                if(matCellId != null && dispCell == matCell) {
-	                	celle.add(matCellId);
-	                }
-	            }
-	        }
-			
-		 if(celle != null) {
-			 c.addAll(celle);
-		 }
+		for(int i = 0; i < matriceColore.length - matriceL.length ; i++) {
+			for(int j = 0; j < matriceColore[i].length - matriceL[0].length; j++) {
+				if(scanDisposition(matriceColore, matriceL, i, j, tipoObiettivo)) {
+					count++;
+					
+                        }
+					}
+				}
+		
+		return count;
+	}
+	
+	/**
+	 * Metodo che controlla che una sottomatrice contenente 
+	 * la disposizione obiettivo sia contenuta nella matrice
+	 * copia della board
+	 * @param mat: matrice copia della board
+	 * @param disp: sottomatrice della disposizione
+	 * @param i: riga della matrice mat
+	 * @param j: colonna della matrice mat
+	 * @param tipoObiettivo: numero intero che indica la tipologia 
+	 * di disposizione da controllare
+	 * @return TRUE se la corrispondenza è verifcata, 
+	 * altrimenti FALSE
+	 */
+	public boolean scanDisposition (Regno [][] mat, Regno [][] disp, int i, int j, int tipoObiettivo) {
+		
+		
+		boolean check1 = false;
+		boolean check2 = false;
+		boolean check3 = false;
+		boolean check4 = false;
+		
+		if(tipoObiettivo==0 || tipoObiettivo==1 || tipoObiettivo==2 || tipoObiettivo==3) {
+			   if (mat != null) {
+		        	  if(tipoObiettivo==0 || tipoObiettivo==1) {
+		        		  if(mat[i][j] == disp[0][0] || mat[i][j] != disp[0][0]) {
+		        			  if(mat[i][j + 1] == disp[0][1] || mat[i][j + 1] != disp[0][1]) {
+		        				  if(mat[i][j + 2] == disp[0][2]) {
+		  		          			check1 = true; 
+		  		          			if(mat[i + 1][j] == disp[0][1] || mat[i + 1][j] != disp[0][1]) {
+		  		          				if(mat[i + 1][j + 1] == disp[1][1]) {
+		  		          					if(mat[i + 1][j + 2] == disp [1][2] || mat[i + 1][j + 2] != disp [1][2]) {
+		  		          						check2= true;
+			  		          					if(mat[i + 2][j] == disp[2][0]) {
+			  		          						if (mat[i + 2][j + 1] == disp[2][1] || mat[i + 2][j + 1] != disp[2][1]) {
+			  		          							if (mat[i + 2][j + 2] == disp[2][2] || mat[i + 2][j + 2] != disp[2][2]) {
+			  		          							check3 =true;
+			  		        							}
+			  		          						}
+			  		          					}
+			  		          				}
+		  		          				}
+		  		          			}
+		  		          		}
+		        			}
+		        		}
+		          	} else if (tipoObiettivo==2 || tipoObiettivo==3) {
+		          	  if(mat[i][j] == disp[0][0]) {
+	        			  if(mat[i][j + 1] == disp[0][1] || mat[i][j + 1] != disp[0][1]) {
+	        				  if(mat[i][j + 2] == disp[0][2] || mat[i][j + 2] != disp[0][2]) {
+	  		          			check1 = true; 
+	  		          			if(mat[i + 1][j] == disp[0][1] || mat[i + 1][j] != disp[0][1]) {
+	  		          				if(mat[i + 1][j + 1] == disp[1][1]) {
+	  		          					if(mat[i + 1][j + 2] == disp [1][2] || mat[i + 1][j + 2] != disp [1][2]) {
+	  		          						check2= true;
+		  		          					if(mat[i + 2][j] == disp[2][0] || mat[i + 2][j] != disp[2][0]) {
+		  		          						if (mat[i + 2][j + 1] == disp[2][1] || mat[i + 2][j + 1] != disp[2][1]) {
+		  		          							if (mat[i + 2][j + 2] == disp[2][2]) {
+		  		          							check3 =true;
+		  		          							}
+		  		          						}
+		  		          					}
+		  		          				}
+	  		          				}
+	  		          			}
+	  		          		}
+	        			}
+	        		}
+	        	}
+		        if(check1 && check2 && check3) {
+		        	if(tipoObiettivo==0 || tipoObiettivo==1) {
+		        		mat[i][j + 2] = null;
+		        		mat[i + 1][j + 1] = null;
+		        		mat[i + 2][j] = null;
+		        	} else if (tipoObiettivo==2 || tipoObiettivo==3) {
+		        		mat[i][j]= null;
+		        		mat[i + 1][j + 1] = null;
+		        		mat[i + 2][j + 2] = null;
+		        	}
+		    		return true;
+		    	} else {
+		    		return false;
+		    	}
+			}
+		}
+		        
+		if(tipoObiettivo==4 || tipoObiettivo==5 || tipoObiettivo==6 || tipoObiettivo==7) {
+			   if (mat != null) {
+		        	  if(tipoObiettivo==4) {
+		        		  if(mat[i][j] == disp[0][0]) {
+		        			  if(mat[i][j + 1] == disp[0][1] || mat[i][j + 1] != disp[0][1]) {
+		        				  check1 = true;
+		        				  if(mat[i + 1][j] == disp[1][0] || mat[i + 1][j] != disp[1][0]) {
+				        			  if(mat[i + 1][j + 1] == disp[1][1] || mat[i + 1][j + 1] != disp[1][1]) {
+				        				  check2 = true;
+				        				  if(mat[i + 2][j] == disp[2][0]) {
+						        			  if(mat[i + 2][j + 1] == disp[2][1] || mat[i + 2][j + 1] != disp[2][1]) {
+						        				  check3 = true;
+						        				  if(mat[i + 3][j] == disp[3][0] || mat[i + 3][j] != disp[3][0]) {
+								        			  if(mat[i + 3][j + 1] == disp[3][1]) {
+								        				  check4 = true; 
+								        			  }
+						        				  }
+						        			  }
+				        				  }
+				        			  }
+		        				  }
+		        			  }
+		        		  }
+		        	  } else if (tipoObiettivo==5) {
+		        		  if(mat[i][j] == disp[0][0] || mat[i][j] != disp[0][0]) {
+		        			  if(mat[i][j + 1] == disp[0][1]) {
+		        				  check1 = true;
+		        				  if(mat[i + 1][j] == disp[1][0] || mat[i + 1][j] != disp[1][0]) {
+				        			  if(mat[i + 1][j + 1] == disp[1][1] || mat[i + 1][j + 1] != disp[1][1]) {
+				        				  check2 = true;
+				        				  if(mat[i + 2][j] == disp[2][0] || mat[i + 2][j] != disp[2][0]) {
+						        			  if(mat[i + 2][j + 1] == disp[2][1]) {
+						        				  check3 = true;
+						        				  if(mat[i + 3][j] == disp[3][0]) {
+								        			  if(mat[i + 3][j + 1] == disp[3][1] || mat[i + 3][j + 1] != disp[3][1]) {
+								        				  check4 = true; 
+								        			  }
+						        				  }
+						        			  }
+				        				  }
+				        			  }
+		        				  }
+		        			  }
+		        		  }
+		        	  } else if (tipoObiettivo==6) {
+		        		  if(mat[i][j] == disp[0][0] || mat[i][j] != disp[0][0]) {
+		        			  if(mat[i][j + 1] == disp[0][1]) {
+		        				  check1 = true;
+		        				  if(mat[i + 1][j] == disp[1][0]) {
+				        			  if(mat[i + 1][j + 1] == disp[1][1] || mat[i + 1][j + 1] != disp[1][1]) {
+				        				  check2 = true;
+				        				  if(mat[i + 2][j] == disp[2][0] || mat[i + 2][j] != disp[2][0]) {
+						        			  if(mat[i + 2][j + 1] == disp[2][1] || mat[i + 2][j + 1] != disp[2][1]) {
+						        				  check3 = true;
+						        				  if(mat[i + 3][j] == disp[3][0]) {
+								        			  if(mat[i + 3][j + 1] == disp[3][1] || mat[i + 3][j + 1] != disp[3][1]) {
+								        				  check4 = true; 
+								        			  }
+						        				  }
+						        			  }
+				        				  }
+				        			  }
+		        				  }
+		        			  }
+		        		  }
+		        	  } else if (tipoObiettivo==7) {
+		        		  if(mat[i][j] == disp[0][0]) {
+		        			  if(mat[i][j + 1] == disp[0][1] || mat[i][j + 1] != disp[0][1]) {
+		        				  check1 = true;
+		        				  if(mat[i + 1][j] == disp[1][0] || mat[i + 1][j] != disp[1][0]) {
+				        			  if(mat[i + 1][j + 1] == disp[1][1]) {
+				        				  check2 = true;
+				        				  if(mat[i + 2][j] == disp[2][0] || mat[i + 2][j] != disp[2][0]) {
+						        			  if(mat[i + 2][j + 1] == disp[2][1] || mat[i + 2][j + 1] != disp[2][1]) {
+						        				  check3 = true;
+						        				  if(mat[i + 3][j] == disp[3][0] || mat[i + 3][j] != disp[3][0]) {
+								        			  if(mat[i + 3][j + 1] == disp[3][1]) {
+								        				  check4 = true; 
+								        			  }
+						        				  }
+						        			  }
+				        				  }
+				        			  }
+		        				  }
+		        			  }
+		        		  }
+		        	  } 
+		        	  
+		        if(check1 && check2 && check3 && check4) {
+		        	if(tipoObiettivo==4) {
+		        		mat[i][j] = null;
+		        		mat[i + 2][j] = null;
+		        		mat[i + 3][j + 1] = null;
+		        	} else if (tipoObiettivo==5) {
+		        		mat[i + 3][j] = null;
+		        		mat[i + 2][j + 1] = null;
+		        		mat[i + 0][j + 1] = null;
+		        	} else if (tipoObiettivo==6) {
+		        		mat[i][j + 1] = null;
+		        		mat[i + 1][j] = null;
+		        		mat[i + 3][j] = null;
+		        	} else if (tipoObiettivo==7) {
+		        		mat[i][j] = null;
+		        		mat[i + 1][j + 1] = null;
+		        		mat[i + 3][j + 1] = null;
+		        	}
+		    		return true;
+		    	} else {
+		    		return false;
+		    	}
+			}
+		}
+		
+     return false;
 		 
-		 return 1;
 	}
 	
 	/**
