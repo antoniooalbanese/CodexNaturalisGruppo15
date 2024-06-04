@@ -259,24 +259,26 @@ public class Controller  {
 			
 			for(int i = 0; i < this.num; i++) {
 				
-				if(view.showDecksAreOverMessage(areDecksFinished())) {
-					break;
-				}
+				if(!view.showDecksAreOverMessage(areDecksFinished())) {
 				
-				view.tellLastTurn(last); 
-				view.tellWhoseTurn(this.model.getCampo().getGiocatore().get(i).getNick());
-				view.showAllBoards(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getGiocatore());
-				view.showField(this.model.getCampo());
-				this.posiziona(this.model.getCampo().getGiocatore().get(i));
-				view.showBoard(this.model.getCampo().getGiocatore().get(i));
-				this.pesca(this.model.getCampo().getGiocatore().get(i));
-				
-				while(!view.passaMano()) {
+					view.tellLastTurn(last); 
+					view.tellWhoseTurn(this.model.getCampo().getGiocatore().get(i).getNick());
+					view.showAllBoards(this.model.getCampo().getGiocatore().get(i), this.model.getCampo().getGiocatore());
+					view.showField(this.model.getCampo());
+					this.posiziona(this.model.getCampo().getGiocatore().get(i));
+					view.showBoard(this.model.getCampo().getGiocatore().get(i));
+					this.pesca(this.model.getCampo().getGiocatore().get(i));
 					
-				}
+					while(!view.passaMano()) {
+						
+					}
+					
+					this.model.getCampo().getGiocatore().get(i).getBoard().setTurno(this.model.getCampo().getGiocatore().get(i).getBoard().getTurno()+1);
+					last = this.checkLastTurn(this.model.getCampo().getGiocatore().get(i));
 				
-				this.model.getCampo().getGiocatore().get(i).getBoard().setTurno(this.model.getCampo().getGiocatore().get(i).getBoard().getTurno()+1);
-				last = this.checkLastTurn(this.model.getCampo().getGiocatore().get(i));
+				} else {
+					finish = true;
+				}
 				
 				if (last) {
 					finish = last;

@@ -600,20 +600,28 @@ public class View {
 	public void showField(CampoDiGioco campo) {
 		System.out.println("\nSUL CAMPO DA GIOCO CI SONO QUESTE CARTE:");
 		System.out.println("\n\nCIMA DEI MAZZI RISORSA E ORO:");
-		System.out.println(campo.getMazzoR().getRetroCarta(campo.getMazzoR().getMazzoFronte().get(0)).showCard());
+		if(!campo.getMazzoR().getMazzoFronte().isEmpty()) {
+			System.out.println(campo.getMazzoR().getRetroCarta(campo.getMazzoR().getMazzoFronte().get(0)).showCard());
+		}
 		System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
-		System.out.println(campo.getMazzoO().getRetroCarta(campo.getMazzoO().getMazzoFronte().get(0)).showCard());
+		if(!campo.getMazzoO().getMazzoFronte().isEmpty()) {
+			System.out.println(campo.getMazzoO().getRetroCarta(campo.getMazzoO().getMazzoFronte().get(0)).showCard());
+		}
 		System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
 		System.out.println("\n\nCARTE SCOPERTE:");
 	
-		for (CartaRisorsa r : campo.getRisorsa()) {
-			System.out.println(r.showCard());
-			System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+		if(!campo.getRisorsa().isEmpty()) {
+			for (CartaRisorsa r : campo.getRisorsa()) {
+				System.out.println(r.showCard());
+				System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+			}
 		}
 		
-		for (CartaOro o : campo.getOro()) {
-			System.out.println(o.showCard());
-			System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+		if(!campo.getOro().isEmpty()) {
+			for (CartaOro o : campo.getOro()) {
+				System.out.println(o.showCard());
+				System.out.println("｡☆✼★━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━★✼☆｡");
+			}
 		}
 		
 		System.out.println("\n\nOBIETTIVI COMUNI:");
